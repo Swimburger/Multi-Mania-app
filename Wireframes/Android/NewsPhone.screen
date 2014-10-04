@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
   <widgets xsi:type="model:Master" id="163" x="173" y="275" measuredWidth="360" measuredHeight="50">
-    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Action%20Bar%20Drawer"/>
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Action%20Bar%20Drawer"/>
     <overrides>
       <widgetChanges xsi:type="o:Delete" ref="43"/>
       <widgetChanges xsi:type="o:Delete" ref="37"/>
@@ -36,7 +36,7 @@
     </widgets>
   </widgets>
   <widgets xsi:type="model:Master" id="178" x="584" y="183" measuredWidth="794" measuredHeight="406">
-    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Devices.screen#Phone%20Landscape"/>
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Devices.screen#Phone%20Landscape"/>
   </widgets>
   <widgets xsi:type="model:WidgetGroup" id="179" x="661" y="292" width="578" measuredWidth="578" measuredHeight="225">
     <widgets xsi:type="model:Panel" id="180" width="578" height="225" measuredWidth="578" measuredHeight="225"/>
@@ -49,7 +49,7 @@
     </widgets>
   </widgets>
   <widgets xsi:type="model:Master" id="184" x="651" y="231" width="598" measuredWidth="598" measuredHeight="50">
-    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Action%20Bar%20Drawer"/>
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Action%20Bar%20Drawer"/>
     <overrides>
       <widgetChanges xsi:type="o:Delete" ref="43"/>
       <widgetChanges xsi:type="o:Delete" ref="37"/>
@@ -95,19 +95,19 @@
     </widgets>
   </widgets>
   <widgets xsi:type="model:Master" id="204" x="1239" y="287" height="274" measuredWidth="8" measuredHeight="274">
-    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Scrollbar"/>
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Controls.screen#Scrollbar"/>
     <overrides>
       <widgets ref="20" height="274"/>
     </overrides>
   </widgets>
   <widgets xsi:type="model:Master" id="205" x="523" y="339" measuredWidth="8" measuredHeight="497">
-    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Scrollbar"/>
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Controls.screen#Scrollbar"/>
     <overrides>
       <widgets ref="20" height="497"/>
     </overrides>
   </widgets>
   <widgets xsi:type="model:Master" id="162" x="150" y="183" measuredWidth="406" measuredHeight="794">
-    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Devices.screen#Phone"/>
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Devices.screen#Phone"/>
   </widgets>
   <hRuler>
     <guides position="131"/>

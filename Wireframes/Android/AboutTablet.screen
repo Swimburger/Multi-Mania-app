@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
   <widgets xsi:type="model:Master" id="65" x="254" y="992" width="1280" measuredWidth="1280" measuredHeight="50">
-    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Action%20Bar"/>
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Action%20Bar"/>
     <overrides>
       <widgetChanges xsi:type="o:Delete" ref="11"/>
       <widgetChanges xsi:type="o:Delete" ref="6"/>
@@ -14,14 +14,14 @@
     </overrides>
   </widgets>
   <widgets xsi:type="model:Master" id="344" x="1522" y="1050" height="662" measuredWidth="8" measuredHeight="662">
-    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Scrollbar"/>
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Controls.screen#Scrollbar"/>
     <overrides>
       <widgets ref="20" height="662"/>
     </overrides>
   </widgets>
   <widgets xsi:type="model:WidgetGroup" id="494" x="269" y="1048" measuredWidth="287" measuredHeight="675">
     <widgets xsi:type="model:Master" id="67" height="675" measuredWidth="287" measuredHeight="675">
-      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Navigation%20Drawer"/>
+      <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Navigation%20Drawer"/>
       <overrides>
         <widgets ref="47" width="287" height="675" text="{calendar} Schedule&#xA;{image} My Schedule&#xA;{image} Map&#xA;{image} News&#xA;{image} About&#xA;{image} Settings&#xA;">
           <items ref="@items.0" text="{calendar} Schedule"/>
@@ -54,7 +54,7 @@
       <font/>
     </widgets>
     <widgets xsi:type="model:Master" id="524" x="9" y="1" measuredWidth="313" measuredHeight="36">
-      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Typography.screen#Text%20Medium"/>
+      <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Medium"/>
       <overrides>
         <widgets ref="4" width="313" text="Location">
           <font size="20px"/>
@@ -69,7 +69,7 @@
       <font/>
     </widgets>
     <widgets xsi:type="model:Master" id="523" x="10" y="101" measuredWidth="307" measuredHeight="33">
-      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Typography.screen#Text%20Medium"/>
+      <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Medium"/>
       <overrides>
         <widgets ref="4" width="307" text="Event Title"/>
       </overrides>
@@ -85,7 +85,7 @@
   <widgets xsi:type="model:Placeholder" id="521" x="1216" y="1535" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
   <widgets xsi:type="model:Placeholder" id="525" x="1215" y="1696" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
   <widgets xsi:type="model:Master" id="64" x="168" y="880" measuredWidth="1452" measuredHeight="975">
-    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Devices.screen#Tablet"/>
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Devices.screen#Tablet"/>
   </widgets>
   <hRuler/>
   <vRuler/>
