@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Master" id="162" x="150" y="183" measuredWidth="406" measuredHeight="794">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Devices.screen#Phone"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="163" x="173" y="275" measuredWidth="360" measuredHeight="50">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Action%20Bar%20Drawer"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="43"/>
+      <widgetChanges xsi:type="o:Delete" ref="37"/>
+      <widgets ref="41">
+        <attributes key="icon" value="stop-media (xlarge)"/>
+      </widgets>
+      <widgets ref="42" text="Map"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="178" x="584" y="183" measuredWidth="794" measuredHeight="406">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Devices.screen#Phone%20Landscape"/>
+  </widgets>
+  <widgets xsi:type="model:Placeholder" id="206" x="173" y="397" width="360" height="356" measuredWidth="360" measuredHeight="356"/>
+  <widgets xsi:type="model:Placeholder" id="207" x="757" y="231" width="388" height="335" measuredWidth="388" measuredHeight="335"/>
+  <widgets xsi:type="model:Master" id="184" x="651" y="231" width="598" measuredWidth="598" measuredHeight="50">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Action%20Bar%20Drawer"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="43"/>
+      <widgetChanges xsi:type="o:Delete" ref="37"/>
+      <widgets ref="41">
+        <attributes key="icon" value="stop-media (xlarge)"/>
+      </widgets>
+      <widgets ref="42" text="Map"/>
+      <widgets ref="36" width="598"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Note" id="208" x="784" y="241" text="Transparent actionbar" measuredWidth="133" measuredHeight="29">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Note" id="209" x="312" y="286" text="Transparent actionbar" measuredWidth="133" measuredHeight="29">
+    <font/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

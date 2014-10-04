@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Master" id="5" x="223" y="151" width="360" measuredWidth="360" measuredHeight="45">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Tabs"/>
+    <overrides>
+      <widgets ref="76" width="360" text="DAY 1, DAY 2">
+        <items ref="@items.1" text="DAY 1"/>
+        <items ref="@items.2" text="DAY 2"/>
+        <itemChanges xsi:type="o:Delete" ref="@items.0"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="15" x="233" y="237" measuredWidth="340" measuredHeight="100">
+    <widgets xsi:type="model:Panel" id="6" width="340" measuredWidth="340" measuredHeight="100"/>
+    <widgets xsi:type="model:Label" id="7" x="15" y="10" text="Keynote day one" measuredWidth="153" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="10" x="15" y="67" text="Main room" measuredWidth="65" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="11" x="294" y="67" text="tag 1" measuredWidth="32" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="12" x="255" y="67" text="tag 2" measuredWidth="32" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="13" x="294" y="10" measuredWidth="32" measuredHeight="32" icon="assets/ai-not-important (large)"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="17" x="231" y="200" measuredWidth="342" measuredHeight="33">
+    <widgets xsi:type="model:Panel" id="14" width="342" height="33" measuredWidth="342" measuredHeight="33"/>
+    <widgets xsi:type="model:Label" id="16" x="121" text="9:30 - 10:30" measuredWidth="101" measuredHeight="33">
+      <font size="18px"/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="18" x="231" y="344" measuredWidth="342" measuredHeight="33">
+    <widgets xsi:type="model:Panel" id="19" width="342" height="33" measuredWidth="342" measuredHeight="33"/>
+    <widgets xsi:type="model:Label" id="20" x="121" text="10:45 - 11:30" measuredWidth="111" measuredHeight="33">
+      <font size="18px"/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="21" x="233" y="384" width="168" measuredWidth="168" measuredHeight="100">
+    <widgets xsi:type="model:Panel" id="22" width="168" measuredWidth="168" measuredHeight="100"/>
+    <widgets xsi:type="model:Label" id="23" x="15" y="7" width="75" text="Talk 1" measuredWidth="75" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="24" x="15" y="67" width="51" text="Room 2" measuredWidth="51" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="25" x="126" y="67" width="34" text="tag 1" measuredWidth="34" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="26" x="90" y="67" width="33" text="tag 2" measuredWidth="33" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="27" x="126" y="10" width="34" height="30" measuredWidth="34" measuredHeight="30" icon="assets/ai-important (custom)"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="28" x="408" y="384" width="165" measuredWidth="165" measuredHeight="100">
+    <widgets xsi:type="model:Panel" id="29" width="165" measuredWidth="165" measuredHeight="100"/>
+    <widgets xsi:type="model:Label" id="30" x="15" y="7" width="74" text="Talk 2" measuredWidth="74" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="31" x="15" y="67" width="50" text="Room 2" measuredWidth="50" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="32" x="123" y="67" width="34" text="tag 1" measuredWidth="34" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="33" x="88" y="67" width="33" text="tag 2" measuredWidth="33" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="34" x="123" y="10" width="34" height="30" measuredWidth="34" measuredHeight="30" icon="assets/ai-important (custom)"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="35" x="233" y="488" measuredWidth="168" measuredHeight="100">
+    <widgets xsi:type="model:Panel" id="36" width="168" measuredWidth="168" measuredHeight="100"/>
+    <widgets xsi:type="model:Label" id="37" x="15" y="7" width="75" text="Talk 3" measuredWidth="75" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="38" x="15" y="67" width="51" text="Room 2" measuredWidth="51" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="39" x="126" y="67" width="34" text="tag 1" measuredWidth="34" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="40" x="90" y="67" width="33" text="tag 2" measuredWidth="33" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="41" x="126" y="10" width="34" height="30" measuredWidth="34" measuredHeight="30" icon="assets/ai-important (custom)"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="42" x="408" y="488" measuredWidth="165" measuredHeight="100">
+    <widgets xsi:type="model:Panel" id="43" width="165" measuredWidth="165" measuredHeight="100"/>
+    <widgets xsi:type="model:Label" id="44" x="15" y="7" width="74" text="Talk 4" measuredWidth="74" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="45" x="15" y="67" width="50" text="Room 2" measuredWidth="50" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="46" x="123" y="67" width="34" text="tag 1" measuredWidth="34" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="47" x="88" y="67" width="33" text="tag 2" measuredWidth="33" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="48" x="123" y="10" width="34" height="30" measuredWidth="34" measuredHeight="30" icon="assets/ai-important (custom)"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="49" x="231" y="600" measuredWidth="342" measuredHeight="33">
+    <widgets xsi:type="model:Panel" id="50" width="342" height="33" measuredWidth="342" measuredHeight="33"/>
+    <widgets xsi:type="model:Label" id="51" x="121" text="11:45 - 12:30" measuredWidth="111" measuredHeight="33">
+      <font size="18px"/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="52" x="233" y="640" measuredWidth="168" measuredHeight="100">
+    <widgets xsi:type="model:Panel" id="53" width="168" measuredWidth="168" measuredHeight="100"/>
+    <widgets xsi:type="model:Label" id="54" x="15" y="7" width="75" text="Talk 1" measuredWidth="75" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="55" x="15" y="67" width="51" text="Room 2" measuredWidth="51" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="56" x="126" y="67" width="34" text="tag 1" measuredWidth="34" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="57" x="90" y="67" width="33" text="tag 2" measuredWidth="33" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="58" x="126" y="10" width="34" height="30" measuredWidth="34" measuredHeight="30" icon="assets/ai-important (custom)"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="59" x="408" y="640" measuredWidth="165" measuredHeight="100">
+    <widgets xsi:type="model:Panel" id="60" width="165" measuredWidth="165" measuredHeight="100"/>
+    <widgets xsi:type="model:Label" id="61" x="15" y="7" width="74" text="Talk 2" measuredWidth="74" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="62" x="15" y="67" width="50" text="Room 2" measuredWidth="50" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="63" x="123" y="67" width="34" text="tag 1" measuredWidth="34" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="64" x="88" y="67" width="33" text="tag 2" measuredWidth="33" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="65" x="123" y="10" width="34" height="30" measuredWidth="34" measuredHeight="30" icon="assets/ai-important (custom)"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="111" x="640" y="14" measuredWidth="794" measuredHeight="406">
+    <widgets xsi:type="model:Master" id="66" measuredWidth="794" measuredHeight="406">
+      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Devices.screen#Phone%20Landscape"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="110" x="67" y="48" measuredWidth="598" measuredHeight="336">
+      <widgets xsi:type="model:Master" id="67" width="598" measuredWidth="598" measuredHeight="50">
+        <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Action%20Bar%20Drawer"/>
+        <overrides>
+          <widgetChanges xsi:type="o:Delete" ref="43"/>
+          <widgetChanges xsi:type="o:Delete" ref="42"/>
+          <widgetChanges xsi:type="o:Delete" ref="37"/>
+          <widgets ref="36" width="598"/>
+          <widgets ref="41">
+            <attributes key="icon" value="stop-media (xlarge)"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="68" x="157" y="5" measuredWidth="265" measuredHeight="45">
+        <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Tabs"/>
+        <overrides>
+          <widgets ref="76" width="265" text="DAY 1, DAY 2">
+            <items ref="@items.1" text="DAY 1"/>
+            <items ref="@items.2" text="DAY 2"/>
+            <itemChanges xsi:type="o:Delete" ref="@items.0"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="69" x="10" y="89" width="579" measuredWidth="579" measuredHeight="100">
+        <widgets xsi:type="model:Panel" id="70" width="579" measuredWidth="579" measuredHeight="100"/>
+        <widgets xsi:type="model:Label" id="71" x="18" y="8" width="259" text="Keynote day one" measuredWidth="259" measuredHeight="36">
+          <font size="20px"/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="72" x="18" y="67" width="110" text="Main room" measuredWidth="110" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="73" x="538" y="67" width="30" text="tag 1" measuredWidth="30" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="74" x="491" y="67" width="38" text="tag 2" measuredWidth="38" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Icon" id="75" x="528" y="10" width="40" measuredWidth="40" measuredHeight="32" icon="assets/ai-not-important (large)"/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="76" x="8" y="52" width="580" measuredWidth="580" measuredHeight="33">
+        <widgets xsi:type="model:Panel" id="77" width="580" height="33" measuredWidth="580" measuredHeight="33"/>
+        <widgets xsi:type="model:Label" id="78" x="204" width="171" text="9:30 - 10:30" measuredWidth="171" measuredHeight="33" textAlignment="Center">
+          <font size="18px"/>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="79" x="8" y="196" width="581" measuredWidth="581" measuredHeight="33">
+        <widgets xsi:type="model:Panel" id="80" width="581" height="33" measuredWidth="581" measuredHeight="33"/>
+        <widgets xsi:type="model:Label" id="81" x="204" width="187" text="10:45 - 11:30" measuredWidth="187" measuredHeight="33" textAlignment="Center">
+          <font size="18px"/>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="82" x="10" y="236" width="176" measuredWidth="176" measuredHeight="100">
+        <widgets xsi:type="model:Panel" id="83" width="176" measuredWidth="176" measuredHeight="100"/>
+        <widgets xsi:type="model:Label" id="84" x="15" y="7" width="78" text="Talk 1" measuredWidth="78" measuredHeight="36">
+          <font size="20px"/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="85" x="15" y="67" width="53" text="Room 2" measuredWidth="53" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="86" x="132" y="67" width="35" text="tag 1" measuredWidth="35" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="87" x="94" y="67" width="34" text="tag 2" measuredWidth="34" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Icon" id="88" x="132" y="10" width="35" height="30" measuredWidth="35" measuredHeight="30" icon="assets/ai-important (custom)"/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="89" x="197" y="236" width="193" measuredWidth="193" measuredHeight="100">
+        <widgets xsi:type="model:Panel" id="90" width="193" measuredWidth="193" measuredHeight="100"/>
+        <widgets xsi:type="model:Label" id="91" x="16" y="7" width="85" text="Talk 2" measuredWidth="85" measuredHeight="36">
+          <font size="20px"/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="92" x="16" y="67" width="58" text="Room 2" measuredWidth="58" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="93" x="142" y="67" width="39" text="tag 1" measuredWidth="39" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="94" x="102" y="67" width="38" text="tag 2" measuredWidth="38" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Icon" id="95" x="142" y="10" width="39" height="30" measuredWidth="39" measuredHeight="30" icon="assets/ai-important (custom)"/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="96" x="397" y="236" width="192" measuredWidth="192" measuredHeight="100">
+        <widgets xsi:type="model:Panel" id="97" width="192" measuredWidth="192" measuredHeight="100"/>
+        <widgets xsi:type="model:Label" id="98" x="17" y="7" width="85" text="Talk 3" measuredWidth="85" measuredHeight="36">
+          <font size="20px"/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="99" x="17" y="67" width="58" text="Room 2" measuredWidth="58" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="100" x="144" y="67" width="38" text="tag 1" measuredWidth="38" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="101" x="102" y="67" width="37" text="tag 2" measuredWidth="37" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Icon" id="102" x="144" y="10" width="38" height="30" measuredWidth="38" measuredHeight="30" icon="assets/ai-important (custom)"/>
+      </widgets>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="113" x="223" y="102" measuredWidth="360" measuredHeight="50">
+    <widgets xsi:type="model:Master" id="2" measuredWidth="360" measuredHeight="50">
+      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Action%20Bar%20Drawer"/>
+      <overrides>
+        <widgetChanges xsi:type="o:Delete" ref="43"/>
+        <widgetChanges xsi:type="o:Delete" ref="42"/>
+        <widgets ref="37">
+          <widgetChanges xsi:type="o:Delete" ref="38"/>
+        </widgets>
+        <widgets ref="41">
+          <attributes key="icon" value="stop-media (xlarge)"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Master" id="112" x="64" measuredWidth="78" measuredHeight="43">
+      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Spinner"/>
+      <overrides>
+        <widgets ref="6" text="All talks"/>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Master" id="114" x="771" y="64" measuredWidth="78" measuredHeight="43">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Spinner"/>
+    <overrides>
+      <widgets ref="6" text="All talks"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="158" x="648" y="456" measuredWidth="794" measuredHeight="406">
+    <widgets xsi:type="model:WidgetGroup" id="115" measuredWidth="794" measuredHeight="406">
+      <widgets xsi:type="model:Master" id="116" measuredWidth="794" measuredHeight="406">
+        <screen xsi:type="model:WidgetGroup" href="assets/Android44/Devices.screen#Phone%20Landscape"/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="117" x="67" y="48" measuredWidth="598" measuredHeight="336">
+        <widgets xsi:type="model:Master" id="118" width="598" measuredWidth="598" measuredHeight="50">
+          <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Action%20Bar%20Drawer"/>
+          <overrides>
+            <widgetChanges xsi:type="o:Delete" ref="43"/>
+            <widgetChanges xsi:type="o:Delete" ref="42"/>
+            <widgetChanges xsi:type="o:Delete" ref="37"/>
+            <widgets ref="36" width="598"/>
+            <widgets ref="41">
+              <attributes key="icon" value="stop-media (xlarge)"/>
+            </widgets>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="119" x="125" y="5" measuredWidth="265" measuredHeight="45">
+          <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Tabs"/>
+          <overrides>
+            <widgets ref="76" width="265" text="DAY 1, DAY 2">
+              <items ref="@items.1" text="DAY 1"/>
+              <items ref="@items.2" text="DAY 2"/>
+              <itemChanges xsi:type="o:Delete" ref="@items.0"/>
+            </widgets>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:WidgetGroup" id="120" x="10" y="89" width="579" measuredWidth="579" measuredHeight="100">
+          <widgets xsi:type="model:Panel" id="121" width="579" measuredWidth="579" measuredHeight="100"/>
+          <widgets xsi:type="model:Label" id="122" x="18" y="8" width="259" text="Keynote day one" measuredWidth="259" measuredHeight="36">
+            <font size="20px"/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="123" x="18" y="67" width="110" text="Main room" measuredWidth="110" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="124" x="538" y="67" width="30" text="tag 1" measuredWidth="30" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="125" x="491" y="67" width="38" text="tag 2" measuredWidth="38" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Icon" id="126" x="528" y="10" width="40" measuredWidth="40" measuredHeight="32" icon="assets/ai-not-important (large)"/>
+        </widgets>
+        <widgets xsi:type="model:WidgetGroup" id="127" x="8" y="52" width="580" measuredWidth="580" measuredHeight="33">
+          <widgets xsi:type="model:Panel" id="128" width="580" height="33" measuredWidth="580" measuredHeight="33"/>
+          <widgets xsi:type="model:Label" id="129" x="204" width="171" text="9:30 - 10:30" measuredWidth="171" measuredHeight="33" textAlignment="Center">
+            <font size="18px"/>
+          </widgets>
+        </widgets>
+        <widgets xsi:type="model:WidgetGroup" id="130" x="8" y="196" width="581" measuredWidth="581" measuredHeight="33">
+          <widgets xsi:type="model:Panel" id="131" width="581" height="33" measuredWidth="581" measuredHeight="33"/>
+          <widgets xsi:type="model:Label" id="132" x="204" width="187" text="10:45 - 11:30" measuredWidth="187" measuredHeight="33" textAlignment="Center">
+            <font size="18px"/>
+          </widgets>
+        </widgets>
+        <widgets xsi:type="model:WidgetGroup" id="133" x="10" y="236" width="176" measuredWidth="176" measuredHeight="100">
+          <widgets xsi:type="model:Panel" id="134" width="176" measuredWidth="176" measuredHeight="100"/>
+          <widgets xsi:type="model:Label" id="135" x="15" y="7" width="78" text="Talk 1" measuredWidth="78" measuredHeight="36">
+            <font size="20px"/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="136" x="15" y="67" width="53" text="Room 2" measuredWidth="53" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="137" x="132" y="67" width="35" text="tag 1" measuredWidth="35" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="138" x="94" y="67" width="34" text="tag 2" measuredWidth="34" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Icon" id="139" x="132" y="10" width="35" height="30" measuredWidth="35" measuredHeight="30" icon="assets/ai-important (custom)"/>
+        </widgets>
+        <widgets xsi:type="model:WidgetGroup" id="140" x="197" y="236" width="193" measuredWidth="193" measuredHeight="100">
+          <widgets xsi:type="model:Panel" id="141" width="193" measuredWidth="193" measuredHeight="100"/>
+          <widgets xsi:type="model:Label" id="142" x="16" y="7" width="85" text="Talk 2" measuredWidth="85" measuredHeight="36">
+            <font size="20px"/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="143" x="16" y="67" width="58" text="Room 2" measuredWidth="58" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="144" x="142" y="67" width="39" text="tag 1" measuredWidth="39" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="145" x="102" y="67" width="38" text="tag 2" measuredWidth="38" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Icon" id="146" x="142" y="10" width="39" height="30" measuredWidth="39" measuredHeight="30" icon="assets/ai-important (custom)"/>
+        </widgets>
+        <widgets xsi:type="model:WidgetGroup" id="147" x="397" y="236" width="192" measuredWidth="192" measuredHeight="100">
+          <widgets xsi:type="model:Panel" id="148" width="192" measuredWidth="192" measuredHeight="100"/>
+          <widgets xsi:type="model:Label" id="149" x="17" y="7" width="85" text="Talk 3" measuredWidth="85" measuredHeight="36">
+            <font size="20px"/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="150" x="17" y="67" width="58" text="Room 2" measuredWidth="58" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="151" x="144" y="67" width="38" text="tag 1" measuredWidth="38" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Label" id="152" x="102" y="67" width="37" text="tag 2" measuredWidth="37" measuredHeight="23">
+            <font/>
+          </widgets>
+          <widgets xsi:type="model:Icon" id="153" x="144" y="10" width="38" height="30" measuredWidth="38" measuredHeight="30" icon="assets/ai-important (custom)"/>
+        </widgets>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:Master" id="154" x="131" y="50" measuredWidth="54" measuredHeight="43">
+      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Spinner"/>
+      <overrides>
+        <widgets ref="6" text="Web"/>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Note" id="157" x="720" y="559" text="Talks who don't have the tag, become half transluscent&#xD;&#xA;" measuredWidth="308" measuredHeight="29">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="159" x="572" y="200" height="465" measuredWidth="8" measuredHeight="465">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Scrollbar"/>
+    <overrides>
+      <widgets ref="20" height="465"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="160" x="1296" y="120" height="273" measuredWidth="8" measuredHeight="273">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Scrollbar"/>
+    <overrides>
+      <widgets ref="20" height="273"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="161" x="1306" y="561" measuredWidth="8" measuredHeight="273">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Scrollbar"/>
+    <overrides>
+      <widgets ref="20" height="273"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="1" x="200" y="10" measuredWidth="406" measuredHeight="794">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Devices.screen#Phone"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

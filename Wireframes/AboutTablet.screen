@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Master" id="65" x="254" y="992" width="1280" measuredWidth="1280" measuredHeight="50">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Action%20Bar"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="11"/>
+      <widgetChanges xsi:type="o:Delete" ref="6"/>
+      <widgetChanges xsi:type="o:Delete" ref="7"/>
+      <widgets ref="2" width="1280"/>
+      <widgets ref="8">
+        <attributes key="icon" value="stop-media (xlarge)"/>
+      </widgets>
+      <widgets ref="9" text="Event name"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="344" x="1522" y="1050" height="662" measuredWidth="8" measuredHeight="662">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Scrollbar"/>
+    <overrides>
+      <widgets ref="20" height="662"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="494" x="269" y="1048" measuredWidth="287" measuredHeight="675">
+    <widgets xsi:type="model:Master" id="67" height="675" measuredWidth="287" measuredHeight="675">
+      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Navigation%20Drawer"/>
+      <overrides>
+        <widgets ref="47" width="287" height="675" text="{calendar} Schedule&#xA;{image} My Schedule&#xA;{image} Map&#xA;{image} News&#xA;{image} About&#xA;{image} Settings&#xA;">
+          <items ref="@items.0" text="{calendar} Schedule"/>
+          <items ref="@items.1" text="{image} My Schedule"/>
+          <items ref="@items.2" text="{image} News"/>
+          <itemChanges xsi:type="o:Insert" newIndex="3">
+            <object xsi:type="model:Item" text="{image} Settings"/>
+          </itemChanges>
+          <itemChanges xsi:type="o:Insert" newIndex="3">
+            <object xsi:type="model:Item" text="{image} About"/>
+          </itemChanges>
+          <itemChanges xsi:type="o:Insert" newIndex="2">
+            <object xsi:type="model:Item" text="{image} Map"/>
+          </itemChanges>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="490" x="59" y="543" measuredWidth="32" measuredHeight="32" icon="twitter (large)"/>
+    <widgets xsi:type="model:Icon" id="491" x="123" y="544" measuredWidth="32" measuredHeight="32" icon="facebook (large)"/>
+    <widgets xsi:type="model:Icon" id="492" x="179" y="537" width="48" height="48" measuredWidth="48" measuredHeight="48" icon="assets/ai-email (large)"/>
+    <widgets xsi:type="model:Placeholder" id="493" x="59" y="608" width="169" height="56" text="Main sponsor" measuredWidth="169" measuredHeight="56"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="500" x="894" y="1050" measuredWidth="322" measuredHeight="336">
+    <widgets xsi:type="model:Panel" id="496" width="313" height="336" measuredWidth="313" measuredHeight="336"/>
+    <widgets xsi:type="model:Text" id="497" x="10" y="39" width="293" height="79" text="Name Venue&#xD;&#xA;Street Venue 13&#xD;&#xA;8500 City&#xD;&#xA;Country&#xD;&#xA;" measuredWidth="293" measuredHeight="79">
+      <font size="15px"/>
+    </widgets>
+    <widgets xsi:type="model:Map" id="498" y="128" width="311" height="208" measuredWidth="311" measuredHeight="208"/>
+    <widgets xsi:type="model:Note" id="499" y="300" width="155" height="26" text="Without controls" measuredWidth="155" measuredHeight="26">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Master" id="524" x="9" y="1" measuredWidth="313" measuredHeight="36">
+      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Typography.screen#Text%20Medium"/>
+      <overrides>
+        <widgets ref="4" width="313" text="Location">
+          <font size="20px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="510" x="563" y="1050" height="390" measuredWidth="324" measuredHeight="390">
+    <widgets xsi:type="model:Panel" id="507" width="324" height="390" measuredWidth="324" measuredHeight="390"/>
+    <widgets xsi:type="model:Placeholder" id="508" width="324" height="137" measuredWidth="324" measuredHeight="137"/>
+    <widgets xsi:type="model:Text" id="509" x="7" y="143" width="304" height="237" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="304" measuredHeight="237">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Master" id="523" x="10" y="101" measuredWidth="307" measuredHeight="33">
+      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Typography.screen#Text%20Medium"/>
+      <overrides>
+        <widgets ref="4" width="307" text="Event Title"/>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Placeholder" id="511" x="1216" y="1052" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="512" x="1216" y="1212" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="514" x="896" y="1400" width="312" height="152" text="Sponsor" measuredWidth="312" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="517" x="1216" y="1372" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="518" x="566" y="1452" width="320" height="152" text="Sponsor" measuredWidth="320" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="519" x="896" y="1564" width="312" height="152" text="Sponsor" measuredWidth="312" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="520" x="566" y="1612" width="320" height="152" text="Sponsor" measuredWidth="320" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="521" x="1216" y="1535" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="525" x="1215" y="1696" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
+  <widgets xsi:type="model:Master" id="64" x="168" y="880" measuredWidth="1452" measuredHeight="975">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Devices.screen#Tablet"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Master" id="65" x="254" y="992" width="1280" measuredWidth="1280" measuredHeight="50">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Action%20Bar"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="11"/>
+      <widgetChanges xsi:type="o:Delete" ref="6"/>
+      <widgetChanges xsi:type="o:Delete" ref="7"/>
+      <widgets ref="2" width="1280"/>
+      <widgets ref="8">
+        <attributes key="icon" value="stop-media (xlarge)"/>
+      </widgets>
+      <widgets ref="9" text="Event name"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="342" x="576" y="1048" width="457" measuredWidth="457" measuredHeight="33">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Typography.screen#Text%20Medium"/>
+    <overrides>
+      <widgets ref="4" width="457" text="Day 1">
+        <attributes key="textAlignment" value="Center"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="343" x="1056" y="1048" width="458" measuredWidth="458" measuredHeight="33">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Typography.screen#Text%20Medium"/>
+    <overrides>
+      <widgets ref="4" width="458" text="Day 2">
+        <attributes key="textAlignment" value="Center"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="344" x="1522" y="1050" height="662" measuredWidth="8" measuredHeight="662">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Controls.screen#Scrollbar"/>
+    <overrides>
+      <widgets ref="20" height="662"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="345" x="576" y="1083" height="158" measuredWidth="449" measuredHeight="158">
+    <widgets xsi:type="model:Panel" id="346" width="449" height="158" measuredWidth="449" measuredHeight="158"/>
+    <widgets xsi:type="model:Label" id="347" x="11" y="8" width="200" text="Talk 1" measuredWidth="200" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="348" x="13" y="44" width="66" text="Room 2" measuredWidth="66" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="349" x="395" y="40" width="44" text="tag 1" measuredWidth="44" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="350" x="341" y="40" width="45" text="tag 2" measuredWidth="45" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" id="351" x="13" y="66" width="422" height="78" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="422" measuredHeight="78">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="352" x="340" y="12" width="94" text="10:45 - 11:30" measuredWidth="94" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="377" x="576" y="1248" measuredWidth="449" measuredHeight="158">
+    <widgets xsi:type="model:Panel" id="378" width="449" height="158" measuredWidth="449" measuredHeight="158"/>
+    <widgets xsi:type="model:Label" id="379" x="11" y="8" width="200" text="Talk 2" measuredWidth="200" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="380" x="13" y="44" width="66" text="Room 2" measuredWidth="66" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="381" x="395" y="40" width="44" text="tag 1" measuredWidth="44" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="382" x="341" y="40" width="45" text="tag 2" measuredWidth="45" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" id="383" x="13" y="66" width="422" height="78" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="422" measuredHeight="78">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="384" x="340" y="12" width="94" text="11:45 - 12:30" measuredWidth="94" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="385" x="576" y="1416" measuredWidth="449" measuredHeight="158">
+    <widgets xsi:type="model:Panel" id="386" width="449" height="158" measuredWidth="449" measuredHeight="158"/>
+    <widgets xsi:type="model:Label" id="387" x="11" y="8" width="200" text="Talk 3" measuredWidth="200" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="388" x="13" y="44" width="66" text="Room 2" measuredWidth="66" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="389" x="395" y="40" width="44" text="tag 1" measuredWidth="44" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="390" x="341" y="40" width="45" text="tag 2" measuredWidth="45" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" id="391" x="13" y="66" width="422" height="78" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="422" measuredHeight="78">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="392" x="340" y="12" width="94" text="12:45 - 13:30" measuredWidth="94" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="393" x="576" y="1584" measuredWidth="449" measuredHeight="158">
+    <widgets xsi:type="model:Panel" id="394" width="449" height="158" measuredWidth="449" measuredHeight="158"/>
+    <widgets xsi:type="model:Label" id="395" x="11" y="8" width="200" text="Talk 4" measuredWidth="200" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="396" x="13" y="44" width="66" text="Room 2" measuredWidth="66" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="397" x="395" y="40" width="44" text="tag 1" measuredWidth="44" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="398" x="341" y="40" width="45" text="tag 2" measuredWidth="45" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" id="399" x="13" y="66" width="422" height="78" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="422" measuredHeight="78">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="400" x="340" y="12" width="94" text="13:45 - 14:30" measuredWidth="94" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="401" x="1056" y="1083" measuredWidth="449" measuredHeight="158">
+    <widgets xsi:type="model:Panel" id="402" width="449" height="158" measuredWidth="449" measuredHeight="158"/>
+    <widgets xsi:type="model:Label" id="403" x="11" y="8" width="200" text="Talk 1" measuredWidth="200" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="404" x="13" y="44" width="66" text="Room 2" measuredWidth="66" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="405" x="395" y="40" width="44" text="tag 1" measuredWidth="44" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="406" x="341" y="40" width="45" text="tag 2" measuredWidth="45" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" id="407" x="13" y="66" width="422" height="78" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="422" measuredHeight="78">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="408" x="340" y="12" width="94" text="10:45 - 11:30" measuredWidth="94" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="409" x="1056" y="1248" measuredWidth="449" measuredHeight="158">
+    <widgets xsi:type="model:Panel" id="410" width="449" height="158" measuredWidth="449" measuredHeight="158"/>
+    <widgets xsi:type="model:Label" id="411" x="11" y="8" width="200" text="Talk 2" measuredWidth="200" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="412" x="13" y="44" width="66" text="Room 2" measuredWidth="66" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="413" x="395" y="40" width="44" text="tag 1" measuredWidth="44" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="414" x="341" y="40" width="45" text="tag 2" measuredWidth="45" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" id="415" x="13" y="66" width="422" height="78" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="422" measuredHeight="78">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="416" x="340" y="12" width="94" text="11:45 - 12:30" measuredWidth="94" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="417" x="1056" y="1416" measuredWidth="449" measuredHeight="158">
+    <widgets xsi:type="model:Panel" id="418" width="449" height="158" measuredWidth="449" measuredHeight="158"/>
+    <widgets xsi:type="model:Label" id="419" x="11" y="8" width="200" text="Talk 3" measuredWidth="200" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="420" x="13" y="44" width="66" text="Room 2" measuredWidth="66" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="421" x="395" y="40" width="44" text="tag 1" measuredWidth="44" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="422" x="341" y="40" width="45" text="tag 2" measuredWidth="45" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" id="423" x="13" y="66" width="422" height="78" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="422" measuredHeight="78">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="424" x="340" y="12" width="94" text="12:45 - 13:30" measuredWidth="94" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="425" x="1056" y="1584" measuredWidth="449" measuredHeight="158">
+    <widgets xsi:type="model:Panel" id="426" width="449" height="158" measuredWidth="449" measuredHeight="158"/>
+    <widgets xsi:type="model:Label" id="427" x="11" y="8" width="200" text="Talk 4" measuredWidth="200" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="428" x="13" y="44" width="66" text="Room 2" measuredWidth="66" measuredHeight="23">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="429" x="395" y="40" width="44" text="tag 1" measuredWidth="44" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="430" x="341" y="40" width="45" text="tag 2" measuredWidth="45" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Text" id="431" x="13" y="66" width="422" height="78" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="422" measuredHeight="78">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Label" id="432" x="340" y="12" width="94" text="13:45 - 14:30" measuredWidth="94" measuredHeight="23" textAlignment="Right">
+      <font/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="435" x="269" y="1048" measuredWidth="287" measuredHeight="675">
+    <widgets xsi:type="model:Master" id="436" height="675" measuredWidth="287" measuredHeight="675">
+      <screen xsi:type="model:WidgetGroup" href="assets/Android44/Navigation.screen#Navigation%20Drawer"/>
+      <overrides>
+        <widgets ref="47" width="287" height="675" text="{calendar} Schedule&#xA;{image} My Schedule&#xA;{image} Map&#xA;{image} News&#xA;{image} About&#xA;{image} Settings&#xA;">
+          <items ref="@items.0" text="{calendar} Schedule"/>
+          <items ref="@items.1" text="{image} My Schedule"/>
+          <items ref="@items.2" text="{image} News"/>
+          <itemChanges xsi:type="o:Insert" newIndex="3">
+            <object xsi:type="model:Item" text="{image} Settings"/>
+          </itemChanges>
+          <itemChanges xsi:type="o:Insert" newIndex="3">
+            <object xsi:type="model:Item" text="{image} About"/>
+          </itemChanges>
+          <itemChanges xsi:type="o:Insert" newIndex="2">
+            <object xsi:type="model:Item" text="{image} Map"/>
+          </itemChanges>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="437" x="59" y="543" measuredWidth="32" measuredHeight="32" icon="twitter (large)"/>
+    <widgets xsi:type="model:Icon" id="438" x="123" y="544" measuredWidth="32" measuredHeight="32" icon="facebook (large)"/>
+    <widgets xsi:type="model:Icon" id="439" x="179" y="537" width="48" height="48" measuredWidth="48" measuredHeight="48" icon="assets/ai-email (large)"/>
+    <widgets xsi:type="model:Placeholder" id="440" x="59" y="608" width="169" height="56" text="Main sponsor" measuredWidth="169" measuredHeight="56"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="64" x="168" y="880" measuredWidth="1452" measuredHeight="975">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android44/Devices.screen#Tablet"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
