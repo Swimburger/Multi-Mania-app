@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Master" id="1" x="56" y="16" measuredWidth="576" measuredHeight="1077">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Phone"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="10" x="114" y="103" measuredWidth="465" measuredHeight="130" name="Head">
+    <widgets xsi:type="model:Master" id="2" y="41" measuredWidth="169" measuredHeight="89">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+      <overrides>
+        <widgets ref="225" text="About"/>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Master" id="3" y="18" measuredWidth="102" measuredHeight="28">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+      <overrides>
+        <widgets ref="233" text="MULTI-MANIA">
+          <font size="15px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Master" id="5" x="424" measuredWidth="41" measuredHeight="28">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+      <overrides>
+        <widgets ref="233" text="11:55">
+          <font size="15px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="16" x="114" y="239" width="460" measuredWidth="460" measuredHeight="330">
+    <widgets xsi:type="model:Panel" id="7" width="460" height="330" measuredWidth="460" measuredHeight="330"/>
+    <widgets xsi:type="model:Text" id="8" x="11" y="178" width="429" height="136" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="429" measuredHeight="136">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Image" id="6" width="460" height="169" measuredWidth="460" measuredHeight="169"/>
+    <widgets xsi:type="model:Master" id="9" x="9" y="121" width="434" measuredWidth="434" measuredHeight="33">
+      <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Medium"/>
+      <overrides>
+        <widgets ref="4" width="434" text="Event Title"/>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="15" x="114" y="581" measuredWidth="473" measuredHeight="312">
+    <widgets xsi:type="model:Panel" id="11" width="461" height="312" measuredWidth="461" measuredHeight="312"/>
+    <widgets xsi:type="model:Text" id="12" x="13" y="39" width="433" height="79" text="Name Venue&#xD;&#xA;Street Venue 13&#xD;&#xA;8500 City&#xD;&#xA;Country&#xD;&#xA;" measuredWidth="433" measuredHeight="79">
+      <font size="15px"/>
+    </widgets>
+    <widgets xsi:type="model:Master" id="13" x="12" y="1" width="461" measuredWidth="461" measuredHeight="36">
+      <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Medium"/>
+      <overrides>
+        <widgets ref="4" width="461" text="Location">
+          <font size="20px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Map" id="14" x="3" y="134" width="455" height="173" measuredWidth="455" measuredHeight="173"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="18" x="104" y="832" measuredWidth="480" measuredHeight="71">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="215"/>
+      <widgetChanges xsi:type="o:Delete" ref="212"/>
+      <widgetChanges xsi:type="o:Delete" ref="204"/>
+      <widgets ref="206" x="184"/>
+      <widgets ref="208">
+        <attributes key="icon" value="assets/wp-settings (medium)"/>
+      </widgets>
+      <widgets ref="209" x="272"/>
+      <widgets ref="211">
+        <attributes key="icon" value="pin (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:WidgetGroup" id="1" x="40" y="32" measuredWidth="576" measuredHeight="1077">
+    <widgets xsi:type="model:Master" id="2" measuredWidth="576" measuredHeight="1077">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Phone"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="43" x="48" y="87" measuredWidth="480" measuredHeight="801" name="Head">
+      <widgets xsi:type="model:Master" id="44" x="7" y="41" measuredWidth="268" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Newsitem"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="45" x="7" y="18" measuredWidth="47" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="NEWS">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="46" x="431" measuredWidth="41" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="11:55">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="48" y="730" measuredWidth="480" measuredHeight="71">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+        <overrides>
+          <widgetChanges xsi:type="o:Delete" ref="215"/>
+          <widgetChanges xsi:type="o:Delete" ref="204"/>
+          <widgets ref="206" x="135"/>
+          <widgets ref="208">
+            <attributes key="icon" value="assets/wp-settings (medium)"/>
+          </widgets>
+          <widgets ref="209" x="219"/>
+          <widgets ref="211">
+            <attributes key="icon" value="pin (medium)"/>
+          </widgets>
+          <widgets ref="212" x="303"/>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:Placeholder" id="50" x="58" y="216" width="456" height="257" measuredWidth="456" measuredHeight="257"/>
+    <widgets xsi:type="model:Text" id="51" x="58" y="488" width="424" height="230" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="424" measuredHeight="230">
+      <font size="15px"/>
+    </widgets>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

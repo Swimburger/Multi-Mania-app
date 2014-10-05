@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:WidgetGroup" id="14" x="608" y="24" measuredWidth="576" measuredHeight="1077">
+    <widgets xsi:type="model:Master" id="15" measuredWidth="576" measuredHeight="1077">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Phone"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="66" x="60" y="223" measuredWidth="455" measuredHeight="123">
+      <widgets xsi:type="model:Panel" id="67" width="455" height="123" measuredWidth="455" measuredHeight="123"/>
+      <widgets xsi:type="model:Label" id="68" x="13" y="8" width="203" text="Talk 1" measuredWidth="203" measuredHeight="36">
+        <font size="20px"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="69" x="13" y="46" width="67" text="Room 2" measuredWidth="67" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="70" x="399" y="46" width="44" text="tag 1" measuredWidth="44" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="71" x="345" y="46" width="46" text="tag 2" measuredWidth="46" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="72" x="13" y="75" width="427" height="36" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="427" measuredHeight="36">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="73" x="345" y="14" width="96" text="10:45 - 11:30" measuredWidth="96" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="74" x="60" y="353" measuredWidth="455" measuredHeight="123">
+      <widgets xsi:type="model:Panel" id="75" width="455" height="123" measuredWidth="455" measuredHeight="123"/>
+      <widgets xsi:type="model:Label" id="76" x="13" y="8" width="203" text="Talk 2" measuredWidth="203" measuredHeight="36">
+        <font size="20px"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="77" x="13" y="46" width="67" text="Room 2" measuredWidth="67" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="78" x="399" y="46" width="44" text="tag 1" measuredWidth="44" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="79" x="345" y="46" width="46" text="tag 2" measuredWidth="46" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="80" x="13" y="75" width="427" height="36" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="427" measuredHeight="36">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="81" x="345" y="14" width="96" text="11:45 - 12:30" measuredWidth="96" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="82" x="60" y="482" measuredWidth="455" measuredHeight="123">
+      <widgets xsi:type="model:Panel" id="83" width="455" height="123" measuredWidth="455" measuredHeight="123"/>
+      <widgets xsi:type="model:Label" id="84" x="13" y="8" width="203" text="Talk 1" measuredWidth="203" measuredHeight="36">
+        <font size="20px"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="85" x="13" y="46" width="67" text="Room 2" measuredWidth="67" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="86" x="399" y="46" width="44" text="tag 1" measuredWidth="44" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="87" x="345" y="46" width="46" text="tag 2" measuredWidth="46" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="88" x="13" y="75" width="427" height="36" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="427" measuredHeight="36">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="89" x="345" y="14" width="96" text="10:45 - 11:30" measuredWidth="96" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="98" x="60" y="744" measuredWidth="455" measuredHeight="123">
+      <widgets xsi:type="model:Panel" id="99" width="455" height="123" measuredWidth="455" measuredHeight="123"/>
+      <widgets xsi:type="model:Label" id="100" x="13" y="8" width="203" text="Talk 1" measuredWidth="203" measuredHeight="36">
+        <font size="20px"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="101" x="13" y="46" width="67" text="Room 2" measuredWidth="67" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="102" x="399" y="46" width="44" text="tag 1" measuredWidth="44" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="103" x="345" y="46" width="46" text="tag 2" measuredWidth="46" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="104" x="13" y="75" width="427" height="36" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="427" measuredHeight="36">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="105" x="345" y="14" width="96" text="10:45 - 11:30" measuredWidth="96" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="90" x="60" y="612" measuredWidth="455" measuredHeight="123">
+      <widgets xsi:type="model:Panel" id="91" width="455" height="123" measuredWidth="455" measuredHeight="123"/>
+      <widgets xsi:type="model:Label" id="92" x="13" y="8" width="203" text="Talk 2" measuredWidth="203" measuredHeight="36">
+        <font size="20px"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="93" x="13" y="46" width="67" text="Room 2" measuredWidth="67" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="94" x="399" y="46" width="44" text="tag 1" measuredWidth="44" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="95" x="345" y="46" width="46" text="tag 2" measuredWidth="46" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="96" x="13" y="75" width="427" height="36" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="427" measuredHeight="36">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="97" x="345" y="14" width="96" text="11:45 - 12:30" measuredWidth="96" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="58" x="48" y="87" measuredWidth="486" measuredHeight="801" name="Head">
+      <widgets xsi:type="model:Master" id="59" x="7" y="41" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 1"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="60" x="7" y="18" measuredWidth="103" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="MY SCHEDULE">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="61" x="431" measuredWidth="41" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="11:55">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="62" x="167" y="41" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 2">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="64" y="730" measuredWidth="480" measuredHeight="71">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+        <overrides>
+          <widgetChanges xsi:type="o:Delete" ref="215"/>
+          <widgetChanges xsi:type="o:Delete" ref="204"/>
+          <widgets ref="206" x="135"/>
+          <widgets ref="208">
+            <attributes key="icon" value="assets/wp-settings (medium)"/>
+          </widgets>
+          <widgets ref="209" x="219"/>
+          <widgets ref="211">
+            <attributes key="icon" value="pin (medium)"/>
+          </widgets>
+          <widgets ref="212" x="303"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="65" x="330" y="41" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 3">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="13" x="16" y="24" measuredWidth="576" measuredHeight="1077">
+    <widgets xsi:type="model:Master" id="1" measuredWidth="576" measuredHeight="1077">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Phone"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="2" x="49" y="87" measuredWidth="480" measuredHeight="801" name="Head">
+      <widgets xsi:type="model:Master" id="3" x="7" y="41" measuredWidth="338" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="My schedule"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="4" x="7" y="18" measuredWidth="102" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="MULTI-MANIA">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="5" x="431" measuredWidth="41" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="11:55">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="8" y="730" measuredWidth="480" measuredHeight="71">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+        <overrides>
+          <widgetChanges xsi:type="o:Delete" ref="215"/>
+          <widgetChanges xsi:type="o:Delete" ref="204"/>
+          <widgets ref="206" x="135"/>
+          <widgets ref="208">
+            <attributes key="icon" value="assets/wp-settings (medium)"/>
+          </widgets>
+          <widgets ref="209" x="219"/>
+          <widgets ref="211">
+            <attributes key="icon" value="pin (medium)"/>
+          </widgets>
+          <widgets ref="212" x="303"/>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:Master" id="9" x="58" y="223" measuredWidth="67" measuredHeight="40">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Title"/>
+      <overrides>
+        <widgets ref="227" text="Day 1">
+          <font size="24px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Master" id="10" x="58" y="282" measuredWidth="67" measuredHeight="40">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Title"/>
+      <overrides>
+        <widgets ref="227" text="Day 2">
+          <font size="24px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Master" id="11" x="58" y="343" measuredWidth="67" measuredHeight="40">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Title"/>
+      <overrides>
+        <widgets ref="227" text="Day 3">
+          <font size="24px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="107" x="16" y="1128" measuredWidth="1077" measuredHeight="576">
+    <widgets xsi:type="model:Master" id="108" measuredWidth="1077" measuredHeight="576">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Phone%20Landscape"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="109" x="91" y="52" measuredWidth="521" measuredHeight="140" name="Head">
+      <widgets xsi:type="model:Master" id="110" x="42" y="17" measuredWidth="103" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="MY SCHEDULE">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="111" measuredWidth="41" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="11:55">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="112" x="42" y="51" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 1"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="113" x="202" y="51" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 2">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="114" x="365" y="51" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 3">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:Master" id="115" x="820" y="47" measuredWidth="67" measuredHeight="482">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+      <overrides>
+        <widgetChanges xsi:type="o:Delete" ref="215"/>
+        <widgetChanges xsi:type="o:Insert" newIndex="1">
+          <object xsi:type="model:Shape" width="67" height="482" background="#cccccc" border="false" shapeType="rectangle">
+            <font/>
+          </object>
+        </widgetChanges>
+        <widgetChanges xsi:type="o:Delete" ref="203"/>
+        <widgets ref="204" x="12" y="46"/>
+        <widgets ref="205">
+          <attributes key="iconRotation" value="270"/>
+        </widgets>
+        <widgets ref="206" x="12" y="151"/>
+        <widgets ref="208">
+          <attributes key="icon" value="assets/wp-settings (medium)"/>
+        </widgets>
+        <widgets ref="209" x="12" y="225"/>
+        <widgets ref="211">
+          <attributes key="icon" value="pin (medium)"/>
+        </widgets>
+        <widgets ref="212" x="12" y="297"/>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="130" x="136" y="198" width="331" height="148" measuredWidth="331" measuredHeight="148">
+      <widgets xsi:type="model:Panel" id="131" width="331" height="148" measuredWidth="331" measuredHeight="148"/>
+      <widgets xsi:type="model:Label" id="132" x="12" y="15" width="146" text="Talk 1" measuredWidth="146" measuredHeight="36">
+        <font size="20px"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="133" x="11" y="53" text="Room 2" measuredWidth="47" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="134" x="288" y="54" width="30" text="tag 1" measuredWidth="30" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="135" x="248" y="54" width="31" text="tag 2" measuredWidth="31" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="136" x="11" y="81" width="309" height="54" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="309" measuredHeight="54">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="137" x="243" y="21" width="78" text="10:45 - 11:30" measuredWidth="78" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="138" x="136" y="356" width="331" height="148" measuredWidth="331" measuredHeight="148">
+      <widgets xsi:type="model:Panel" id="139" width="331" height="148" measuredWidth="331" measuredHeight="148"/>
+      <widgets xsi:type="model:Label" id="140" x="12" y="15" width="146" text="Talk 1" measuredWidth="146" measuredHeight="36">
+        <font size="20px"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="141" x="11" y="53" text="Room 2" measuredWidth="47" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="142" x="288" y="54" width="30" text="tag 1" measuredWidth="30" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="143" x="248" y="54" width="31" text="tag 2" measuredWidth="31" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="144" x="11" y="81" width="309" height="54" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="309" measuredHeight="54">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="145" x="243" y="21" width="78" text="10:45 - 11:30" measuredWidth="78" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="146" x="477" y="198" width="331" height="148" measuredWidth="331" measuredHeight="148">
+      <widgets xsi:type="model:Panel" id="147" width="331" height="148" measuredWidth="331" measuredHeight="148"/>
+      <widgets xsi:type="model:Label" id="148" x="12" y="15" width="146" text="Talk 2" measuredWidth="146" measuredHeight="36">
+        <font size="20px"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="149" x="11" y="53" text="Room 2" measuredWidth="47" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="150" x="288" y="54" width="30" text="tag 1" measuredWidth="30" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="151" x="248" y="54" width="31" text="tag 2" measuredWidth="31" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="152" x="11" y="81" width="309" height="54" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="309" measuredHeight="54">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="153" x="243" y="21" width="78" text="11:45 - 11:45" measuredWidth="78" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="154" x="477" y="356" width="331" height="148" measuredWidth="331" measuredHeight="148">
+      <widgets xsi:type="model:Panel" id="155" width="331" height="148" measuredWidth="331" measuredHeight="148"/>
+      <widgets xsi:type="model:Label" id="156" x="12" y="15" width="146" text="Talk 2" measuredWidth="146" measuredHeight="36">
+        <font size="20px"/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="157" x="11" y="53" text="Room 2" measuredWidth="47" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="158" x="288" y="54" width="30" text="tag 1" measuredWidth="30" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="159" x="248" y="54" width="31" text="tag 2" measuredWidth="31" measuredHeight="23">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Text" id="160" x="11" y="81" width="309" height="54" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="309" measuredHeight="54">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Label" id="161" x="243" y="21" width="78" text="11:45 - 11:45" measuredWidth="78" measuredHeight="23">
+        <font/>
+      </widgets>
+    </widgets>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

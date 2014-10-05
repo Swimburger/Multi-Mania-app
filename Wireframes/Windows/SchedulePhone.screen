@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:WidgetGroup" id="203" x="16" y="24" measuredWidth="576" measuredHeight="1077">
+    <widgets xsi:type="model:Master" id="1" measuredWidth="576" measuredHeight="1077">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Phone"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="2" x="49" y="87" measuredWidth="493" measuredHeight="801" name="Head">
+      <widgets xsi:type="model:Master" id="3" x="7" y="41" measuredWidth="246" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Schedule"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="4" x="7" y="18" measuredWidth="102" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="MULTI-MANIA">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="6" x="431" measuredWidth="41" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="11:55">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="7" x="253" y="41" measuredWidth="150" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="News">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="9" y="613" measuredWidth="480" measuredHeight="120">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Menu"/>
+        <overrides>
+          <widgets ref="356" height="120"/>
+          <widgets ref="357" y="8" height="89" text="My schedule&#xD;&#xA;">
+            <items ref="@items.3" text="My schedule"/>
+            <itemChanges xsi:type="o:Delete" ref="@items.4"/>
+            <itemChanges xsi:type="o:Delete" ref="@items.2"/>
+            <itemChanges xsi:type="o:Delete" ref="@items.1"/>
+            <itemChanges xsi:type="o:Delete" ref="@items.0"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="10" y="730" measuredWidth="480" measuredHeight="71">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+        <overrides>
+          <widgetChanges xsi:type="o:Delete" ref="215"/>
+          <widgetChanges xsi:type="o:Delete" ref="204"/>
+          <widgets ref="206" x="135"/>
+          <widgets ref="208">
+            <attributes key="icon" value="assets/wp-settings (medium)"/>
+          </widgets>
+          <widgets ref="209" x="219"/>
+          <widgets ref="211">
+            <attributes key="icon" value="pin (medium)"/>
+          </widgets>
+          <widgets ref="212" x="303"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="206" x="402" y="41" measuredWidth="91" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Ma">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:Master" id="18" x="58" y="223" measuredWidth="67" measuredHeight="40">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Title"/>
+      <overrides>
+        <widgets ref="227" text="Day 1">
+          <font size="24px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Master" id="19" x="58" y="282" measuredWidth="67" measuredHeight="40">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Title"/>
+      <overrides>
+        <widgets ref="227" text="Day 2">
+          <font size="24px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Master" id="20" x="58" y="343" measuredWidth="67" measuredHeight="40">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Title"/>
+      <overrides>
+        <widgets ref="227" text="Day 3">
+          <font size="24px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="204" x="624" y="24" measuredWidth="576" measuredHeight="1077">
+    <widgets xsi:type="model:Master" id="22" measuredWidth="576" measuredHeight="1077">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Phone"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="149" x="58" y="230" measuredWidth="464" measuredHeight="476">
+      <widgets xsi:type="model:WidgetGroup" id="91" y="44" measuredWidth="461" measuredHeight="122">
+        <widgets xsi:type="model:Panel" id="92" width="461" height="122" measuredWidth="461" measuredHeight="122"/>
+        <widgets xsi:type="model:Label" id="93" x="18" y="15" width="205" text="Keynote day one" measuredWidth="205" measuredHeight="36">
+          <font size="20px"/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="94" x="18" y="83" width="85" text="Main room" measuredWidth="85" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="95" x="396" y="83" width="41" text="tag 1" measuredWidth="41" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="96" x="343" y="83" width="41" text="tag 2" measuredWidth="41" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Icon" id="97" x="396" y="12" width="41" height="38" measuredWidth="41" measuredHeight="38" icon="assets/ai-not-important (large)"/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="98" measuredWidth="464" measuredHeight="39">
+        <widgets xsi:type="model:Panel" id="99" width="464" height="39" measuredWidth="464" measuredHeight="39"/>
+        <widgets xsi:type="model:Label" id="100" x="163" y="3" width="136" text="9:30 - 10:30" measuredWidth="136" measuredHeight="33">
+          <font size="18px"/>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="101" y="176" measuredWidth="464" measuredHeight="39">
+        <widgets xsi:type="model:Panel" id="102" width="464" height="39" measuredWidth="464" measuredHeight="39"/>
+        <widgets xsi:type="model:Label" id="103" x="163" y="3" width="149" text="10:45 - 11:30" measuredWidth="149" measuredHeight="33">
+          <font size="18px"/>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="104" y="226" measuredWidth="227" measuredHeight="122">
+        <widgets xsi:type="model:Panel" id="105" width="227" height="122" measuredWidth="227" measuredHeight="122"/>
+        <widgets xsi:type="model:Label" id="106" x="18" y="12" width="98" text="Talk 1" measuredWidth="98" measuredHeight="36">
+          <font size="20px"/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="107" x="18" y="83" width="66" text="Room 2" measuredWidth="66" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="108" x="167" y="83" width="43" text="tag 1" measuredWidth="43" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="109" x="118" y="83" width="42" text="tag 2" measuredWidth="42" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Icon" id="110" x="167" y="12" width="43" height="36" measuredWidth="43" measuredHeight="36" icon="assets/ai-important (custom)"/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="111" x="238" y="226" measuredWidth="221" measuredHeight="122">
+        <widgets xsi:type="model:Panel" id="112" width="221" height="122" measuredWidth="221" measuredHeight="122"/>
+        <widgets xsi:type="model:Label" id="113" x="18" y="12" width="97" text="Talk 2" measuredWidth="97" measuredHeight="36">
+          <font size="20px"/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="114" x="18" y="83" width="64" text="Room 2" measuredWidth="64" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="115" x="162" y="83" width="43" text="tag 1" measuredWidth="43" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="116" x="115" y="83" width="42" text="tag 2" measuredWidth="42" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Icon" id="117" x="162" y="12" width="43" height="36" measuredWidth="43" measuredHeight="36" icon="assets/ai-important (custom)"/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="118" y="354" measuredWidth="227" measuredHeight="122">
+        <widgets xsi:type="model:Panel" id="119" width="227" height="122" measuredWidth="227" measuredHeight="122"/>
+        <widgets xsi:type="model:Label" id="120" x="18" y="12" width="98" text="Talk 3" measuredWidth="98" measuredHeight="36">
+          <font size="20px"/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="121" x="18" y="83" width="66" text="Room 2" measuredWidth="66" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="122" x="167" y="83" width="43" text="tag 1" measuredWidth="43" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="123" x="118" y="83" width="42" text="tag 2" measuredWidth="42" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Icon" id="124" x="167" y="12" width="43" height="36" measuredWidth="43" measuredHeight="36" icon="assets/ai-important (custom)"/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="125" x="238" y="354" measuredWidth="221" measuredHeight="122">
+        <widgets xsi:type="model:Panel" id="126" width="221" height="122" measuredWidth="221" measuredHeight="122"/>
+        <widgets xsi:type="model:Label" id="127" x="18" y="12" width="97" text="Talk 4" measuredWidth="97" measuredHeight="36">
+          <font size="20px"/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="128" x="18" y="83" width="64" text="Room 2" measuredWidth="64" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="129" x="162" y="83" width="43" text="tag 1" measuredWidth="43" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="130" x="115" y="83" width="42" text="tag 2" measuredWidth="42" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Icon" id="131" x="162" y="12" width="43" height="36" measuredWidth="43" measuredHeight="36" icon="assets/ai-important (custom)"/>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="23" x="48" y="87" measuredWidth="486" measuredHeight="801" name="Head">
+      <widgets xsi:type="model:Master" id="24" x="7" y="41" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 1"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="25" x="7" y="18" measuredWidth="78" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="SCHEDULE">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="26" x="431" measuredWidth="41" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="11:55">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="27" x="167" y="41" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 2">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="28" y="613" measuredWidth="480" measuredHeight="120">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Menu"/>
+        <overrides>
+          <widgets ref="356" height="120"/>
+          <widgets ref="357" y="8" height="89" text="My schedule&#xD;&#xA;">
+            <items ref="@items.3" text="My schedule"/>
+            <itemChanges xsi:type="o:Delete" ref="@items.4"/>
+            <itemChanges xsi:type="o:Delete" ref="@items.2"/>
+            <itemChanges xsi:type="o:Delete" ref="@items.1"/>
+            <itemChanges xsi:type="o:Delete" ref="@items.0"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="29" y="730" measuredWidth="480" measuredHeight="71">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+        <overrides>
+          <widgetChanges xsi:type="o:Delete" ref="215"/>
+          <widgetChanges xsi:type="o:Delete" ref="204"/>
+          <widgets ref="206" x="135"/>
+          <widgets ref="208">
+            <attributes key="icon" value="assets/wp-settings (medium)"/>
+          </widgets>
+          <widgets ref="209" x="219"/>
+          <widgets ref="211">
+            <attributes key="icon" value="pin (medium)"/>
+          </widgets>
+          <widgets ref="212" x="303"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="30" x="330" y="41" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 3">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="205" x="16" y="1136" measuredWidth="1077" measuredHeight="576">
+    <widgets xsi:type="model:Master" id="150" measuredWidth="1077" measuredHeight="576">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Phone%20Landscape"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="151" x="91" y="52" measuredWidth="521" measuredHeight="140" name="Head">
+      <widgets xsi:type="model:Master" id="153" x="42" y="17" measuredWidth="78" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="SCHEDULE">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="155" measuredWidth="41" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="11:55">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="158" x="42" y="51" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 1"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="159" x="202" y="51" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 2">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="160" x="365" y="51" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 3">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:Master" id="157" x="820" y="47" measuredWidth="67" measuredHeight="482">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+      <overrides>
+        <widgetChanges xsi:type="o:Delete" ref="215"/>
+        <widgetChanges xsi:type="o:Insert" newIndex="1">
+          <object xsi:type="model:Shape" width="67" height="482" background="#cccccc" border="false" shapeType="rectangle">
+            <font/>
+          </object>
+        </widgetChanges>
+        <widgetChanges xsi:type="o:Delete" ref="203"/>
+        <widgets ref="204" x="12" y="46"/>
+        <widgets ref="205">
+          <attributes key="iconRotation" value="270"/>
+        </widgets>
+        <widgets ref="206" x="12" y="151"/>
+        <widgets ref="208">
+          <attributes key="icon" value="assets/wp-settings (medium)"/>
+        </widgets>
+        <widgets ref="209" x="12" y="225"/>
+        <widgets ref="211">
+          <attributes key="icon" value="pin (medium)"/>
+        </widgets>
+        <widgets ref="212" x="12" y="297"/>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="161" x="139" y="202" measuredWidth="672" measuredHeight="309">
+      <widgets xsi:type="model:WidgetGroup" id="162" y="63" width="667" height="175" measuredWidth="667" measuredHeight="175">
+        <widgets xsi:type="model:Panel" id="163" width="667" height="175" measuredWidth="667" measuredHeight="175"/>
+        <widgets xsi:type="model:Label" id="164" x="26" y="29" width="296" text="Keynote day one" measuredWidth="296" measuredHeight="36">
+          <font size="20px"/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="165" x="26" y="124" width="122" text="Main room" measuredWidth="122" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="166" x="572" y="124" width="59" text="tag 1" measuredWidth="59" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Label" id="167" x="496" y="124" width="59" text="tag 2" measuredWidth="59" measuredHeight="23">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Icon" id="168" x="572" y="17" width="59" height="54" measuredWidth="59" measuredHeight="54" icon="assets/ai-not-important (large)"/>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="169" width="672" height="56" measuredWidth="672" measuredHeight="56">
+        <widgets xsi:type="model:Panel" id="170" width="672" height="56" measuredWidth="672" measuredHeight="56"/>
+        <widgets xsi:type="model:Label" id="171" x="236" y="11" width="196" text="9:30 - 10:30" measuredWidth="196" measuredHeight="33">
+          <font size="18px"/>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:WidgetGroup" id="172" y="253" width="672" height="56" measuredWidth="672" measuredHeight="56">
+        <widgets xsi:type="model:Panel" id="173" width="672" height="56" measuredWidth="672" measuredHeight="56"/>
+        <widgets xsi:type="model:Label" id="174" x="236" y="11" width="215" text="10:45 - 11:30" measuredWidth="215" measuredHeight="33">
+          <font size="18px"/>
+        </widgets>
+      </widgets>
+    </widgets>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
