@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
-  <widgets xsi:type="model:Master" id="65" x="254" y="992" width="1280" measuredWidth="1280" measuredHeight="50">
+  <widgets xsi:type="model:Master" id="65" x="441" y="224" measuredWidth="1280" measuredHeight="50">
     <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Action%20Bar"/>
     <overrides>
       <widgetChanges xsi:type="o:Delete" ref="11"/>
@@ -13,13 +13,13 @@
       <widgets ref="9" text="Event name"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Master" id="344" x="1522" y="1050" height="662" measuredWidth="8" measuredHeight="662">
+  <widgets xsi:type="model:Master" id="344" x="1709" y="282" measuredWidth="8" measuredHeight="662">
     <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Controls.screen#Scrollbar"/>
     <overrides>
       <widgets ref="20" height="662"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="494" x="269" y="1048" measuredWidth="287" measuredHeight="675">
+  <widgets xsi:type="model:WidgetGroup" id="494" x="456" y="280" measuredWidth="287" measuredHeight="675">
     <widgets xsi:type="model:Master" id="67" height="675" measuredWidth="287" measuredHeight="675">
       <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Navigation%20Drawer"/>
       <overrides>
@@ -44,7 +44,7 @@
     <widgets xsi:type="model:Icon" id="492" x="179" y="537" width="48" height="48" measuredWidth="48" measuredHeight="48" icon="assets/ai-email (large)"/>
     <widgets xsi:type="model:Placeholder" id="493" x="59" y="608" width="169" height="56" text="Main sponsor" measuredWidth="169" measuredHeight="56"/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="500" x="894" y="1050" measuredWidth="322" measuredHeight="336">
+  <widgets xsi:type="model:WidgetGroup" id="500" x="1081" y="282" measuredWidth="322" measuredHeight="336">
     <widgets xsi:type="model:Panel" id="496" width="313" height="336" measuredWidth="313" measuredHeight="336"/>
     <widgets xsi:type="model:Text" id="497" x="10" y="39" width="293" height="79" text="Name Venue&#xD;&#xA;Street Venue 13&#xD;&#xA;8500 City&#xD;&#xA;Country&#xD;&#xA;" measuredWidth="293" measuredHeight="79">
       <font size="15px"/>
@@ -62,7 +62,7 @@
       </overrides>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="510" x="563" y="1050" height="390" measuredWidth="324" measuredHeight="390">
+  <widgets xsi:type="model:WidgetGroup" id="510" x="750" y="282" measuredWidth="324" measuredHeight="390">
     <widgets xsi:type="model:Panel" id="507" width="324" height="390" measuredWidth="324" measuredHeight="390"/>
     <widgets xsi:type="model:Placeholder" id="508" width="324" height="137" measuredWidth="324" measuredHeight="137"/>
     <widgets xsi:type="model:Text" id="509" x="7" y="143" width="304" height="237" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="304" measuredHeight="237">
@@ -75,16 +75,16 @@
       </overrides>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:Placeholder" id="511" x="1216" y="1052" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
-  <widgets xsi:type="model:Placeholder" id="512" x="1216" y="1212" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
-  <widgets xsi:type="model:Placeholder" id="514" x="896" y="1400" width="312" height="152" text="Sponsor" measuredWidth="312" measuredHeight="152"/>
-  <widgets xsi:type="model:Placeholder" id="517" x="1216" y="1372" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
-  <widgets xsi:type="model:Placeholder" id="518" x="566" y="1452" width="320" height="152" text="Sponsor" measuredWidth="320" measuredHeight="152"/>
-  <widgets xsi:type="model:Placeholder" id="519" x="896" y="1564" width="312" height="152" text="Sponsor" measuredWidth="312" measuredHeight="152"/>
-  <widgets xsi:type="model:Placeholder" id="520" x="566" y="1612" width="320" height="152" text="Sponsor" measuredWidth="320" measuredHeight="152"/>
-  <widgets xsi:type="model:Placeholder" id="521" x="1216" y="1535" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
-  <widgets xsi:type="model:Placeholder" id="525" x="1215" y="1696" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
-  <widgets xsi:type="model:Master" id="64" x="168" y="880" measuredWidth="1452" measuredHeight="975">
+  <widgets xsi:type="model:Placeholder" id="511" x="1403" y="284" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="512" x="1403" y="444" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="514" x="1083" y="632" width="312" height="152" text="Sponsor" measuredWidth="312" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="517" x="1403" y="604" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="518" x="753" y="684" width="320" height="152" text="Sponsor" measuredWidth="320" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="519" x="1083" y="796" width="312" height="152" text="Sponsor" measuredWidth="312" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="520" x="753" y="844" width="320" height="152" text="Sponsor" measuredWidth="320" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="521" x="1403" y="767" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="525" x="1402" y="928" width="296" height="152" text="Sponsor" measuredWidth="296" measuredHeight="152"/>
+  <widgets xsi:type="model:Master" id="64" x="355" y="112" measuredWidth="1452" measuredHeight="975">
     <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Devices.screen#Tablet"/>
   </widgets>
   <hRuler/>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
-  <widgets xsi:type="model:Master" id="64" x="168" y="880" measuredWidth="1452" measuredHeight="975">
+  <widgets xsi:type="model:Master" id="64" x="360" y="96" measuredWidth="1452" measuredHeight="975">
     <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Devices.screen#Tablet"/>
   </widgets>
-  <widgets xsi:type="model:Master" id="65" x="254" y="992" width="1280" measuredWidth="1280" measuredHeight="50">
+  <widgets xsi:type="model:Master" id="65" x="446" y="208" measuredWidth="1280" measuredHeight="50">
     <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Action%20Bar"/>
     <overrides>
       <widgetChanges xsi:type="o:Delete" ref="11"/>
@@ -16,8 +16,8 @@
       <widgets ref="9" text="Event name"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Placeholder" id="492" x="576" y="1050" width="948" height="662" measuredWidth="948" measuredHeight="662"/>
-  <widgets xsi:type="model:WidgetGroup" id="493" x="269" y="1048" measuredWidth="287" measuredHeight="675">
+  <widgets xsi:type="model:Placeholder" id="492" x="768" y="266" width="948" height="662" measuredWidth="948" measuredHeight="662"/>
+  <widgets xsi:type="model:WidgetGroup" id="493" x="461" y="264" measuredWidth="287" measuredHeight="675">
     <widgets xsi:type="model:Master" id="494" height="675" measuredWidth="287" measuredHeight="675">
       <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Navigation%20Drawer"/>
       <overrides>

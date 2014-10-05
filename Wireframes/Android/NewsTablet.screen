@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
-  <widgets xsi:type="model:Master" id="64" x="168" y="880" measuredWidth="1452" measuredHeight="975">
-    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Devices.screen#Tablet"/>
-  </widgets>
-  <widgets xsi:type="model:Master" id="65" x="254" y="992" width="1280" measuredWidth="1280" measuredHeight="50">
+  <widgets xsi:type="model:Master" id="65" x="374" y="184" measuredWidth="1280" measuredHeight="50">
     <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Action%20Bar"/>
     <overrides>
       <widgetChanges xsi:type="o:Delete" ref="11"/>
@@ -16,13 +13,13 @@
       <widgets ref="9" text="Event name"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Master" id="344" x="1522" y="1050" height="662" measuredWidth="8" measuredHeight="662">
+  <widgets xsi:type="model:Master" id="344" x="1642" y="242" measuredWidth="8" measuredHeight="662">
     <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Controls.screen#Scrollbar"/>
     <overrides>
       <widgets ref="20" height="662"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="489" x="576" y="1050" width="936" measuredWidth="935" measuredHeight="869">
+  <widgets xsi:type="model:WidgetGroup" id="489" x="696" y="242" measuredWidth="935" measuredHeight="805">
     <widgets xsi:type="model:WidgetGroup" id="433" width="617" measuredWidth="617" measuredHeight="225">
       <widgets xsi:type="model:Panel" id="434" width="617" height="225" measuredWidth="617" measuredHeight="225"/>
       <widgets xsi:type="model:Image" id="435" width="617" height="161" measuredWidth="617" measuredHeight="161"/>
@@ -94,13 +91,13 @@
         <font/>
       </widgets>
     </widgets>
-    <widgets xsi:type="model:WidgetGroup" id="475" y="644" width="303" measuredWidth="303" measuredHeight="225">
-      <widgets xsi:type="model:Panel" id="476" width="303" height="225" measuredWidth="303" measuredHeight="225"/>
-      <widgets xsi:type="model:Image" id="477" width="303" height="161" measuredWidth="303" measuredHeight="161"/>
-      <widgets xsi:type="model:Label" id="478" x="8" y="94" width="294" text="Title" measuredWidth="294" measuredHeight="67">
+    <widgets xsi:type="model:WidgetGroup" id="475" y="644" height="147" measuredWidth="303" measuredHeight="147">
+      <widgets xsi:type="model:Panel" id="476" width="303" height="147" measuredWidth="303" measuredHeight="147"/>
+      <widgets xsi:type="model:Image" id="477" width="303" height="105" measuredWidth="303" measuredHeight="105"/>
+      <widgets xsi:type="model:Label" id="478" x="8" y="49" width="294" text="Title" measuredWidth="294" measuredHeight="67">
         <font size="43px"/>
       </widgets>
-      <widgets xsi:type="model:Text" id="479" x="8" y="168" width="284" height="47" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="284" measuredHeight="47">
+      <widgets xsi:type="model:Text" id="479" x="8" y="109" width="284" height="30" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="284" measuredHeight="30">
         <font/>
       </widgets>
     </widgets>
@@ -111,18 +108,18 @@
         <font size="43px"/>
       </widgets>
     </widgets>
-    <widgets xsi:type="model:WidgetGroup" id="484" x="632" y="644" width="303" measuredWidth="303" measuredHeight="225">
-      <widgets xsi:type="model:Panel" id="485" width="303" height="225" measuredWidth="303" measuredHeight="225"/>
-      <widgets xsi:type="model:Image" id="486" width="303" height="161" measuredWidth="303" measuredHeight="161"/>
-      <widgets xsi:type="model:Label" id="487" x="8" y="94" width="294" text="Title" measuredWidth="294" measuredHeight="67">
+    <widgets xsi:type="model:WidgetGroup" id="484" x="632" y="644" height="147" measuredWidth="303" measuredHeight="147">
+      <widgets xsi:type="model:Panel" id="485" width="303" height="147" measuredWidth="303" measuredHeight="147"/>
+      <widgets xsi:type="model:Image" id="486" width="303" height="105" measuredWidth="303" measuredHeight="105"/>
+      <widgets xsi:type="model:Label" id="487" x="8" y="49" width="294" text="Title" measuredWidth="294" measuredHeight="67">
         <font size="43px"/>
       </widgets>
-      <widgets xsi:type="model:Text" id="488" x="8" y="168" width="284" height="47" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="284" measuredHeight="47">
+      <widgets xsi:type="model:Text" id="488" x="8" y="109" width="284" height="30" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="284" measuredHeight="30">
         <font/>
       </widgets>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="494" x="269" y="1048" measuredWidth="287" measuredHeight="675">
+  <widgets xsi:type="model:WidgetGroup" id="494" x="389" y="240" measuredWidth="287" measuredHeight="675">
     <widgets xsi:type="model:Master" id="67" height="675" measuredWidth="287" measuredHeight="675">
       <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Navigation%20Drawer"/>
       <overrides>
@@ -146,6 +143,9 @@
     <widgets xsi:type="model:Icon" id="491" x="123" y="544" measuredWidth="32" measuredHeight="32" icon="facebook (large)"/>
     <widgets xsi:type="model:Icon" id="492" x="179" y="537" width="48" height="48" measuredWidth="48" measuredHeight="48" icon="assets/ai-email (large)"/>
     <widgets xsi:type="model:Placeholder" id="493" x="59" y="608" width="169" height="56" text="Main sponsor" measuredWidth="169" measuredHeight="56"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="64" x="288" y="72" measuredWidth="1452" measuredHeight="975">
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Devices.screen#Tablet"/>
   </widgets>
   <hRuler/>
   <vRuler/>
