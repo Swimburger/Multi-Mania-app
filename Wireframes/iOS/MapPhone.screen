@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" id="1" x="96" y="16" measuredWidth="375" measuredHeight="795">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/iPhone.screen#iPhone"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="2" x="125" y="651" measuredWidth="320" measuredHeight="50">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Bars.screen#Tab%20Bar"/>
+    <overrides>
+      <widgets ref="30" text="Map"/>
+      <widgets ref="38">
+        <attributes key="icon" value="assets/ios7-info (large)"/>
+      </widgets>
+      <widgets ref="39" text="About"/>
+      <widgets ref="35">
+        <attributes key="icon" value="calendar2 (large)"/>
+      </widgets>
+      <widgets ref="36" text="Schedule"/>
+      <widgets ref="32">
+        <attributes key="icon" value="book (large)"/>
+      </widgets>
+      <widgets ref="33" text="News"/>
+      <widgets ref="29">
+        <attributes key="icon" value="assets/ai-map (large)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="3" x="258" y="163" measuredWidth="40" measuredHeight="31">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Forms.screen#Fieldset%20Header"/>
+    <overrides>
+      <widgets ref="5" text="Map"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Icon" id="4" x="403" y="163" measuredWidth="32" measuredHeight="32" layoutParams="anchor-left|anchor-top" icon="options (large)"/>
+  <widgets xsi:type="model:Placeholder" id="11" x="135" y="200" width="300" height="433" measuredWidth="300" measuredHeight="433"/>
+  <widgets xsi:type="model:Master" id="12" x="528" y="258" measuredWidth="795" measuredHeight="375">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/iPhone.screen#iPhone%20Landscape"/>
+  </widgets>
+  <widgets xsi:type="model:Placeholder" id="13" x="655" y="342" width="549" height="252" measuredWidth="549" measuredHeight="252"/>
+  <widgets xsi:type="model:Master" id="14" x="904" y="307" measuredWidth="40" measuredHeight="31">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Forms.screen#Fieldset%20Header"/>
+    <overrides>
+      <widgets ref="5" text="Map"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Icon" id="15" x="1171" y="309" measuredWidth="32" measuredHeight="32" layoutParams="anchor-left|anchor-top" icon="options (large)"/>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
