@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Master" id="1" x="88" measuredWidth="375" measuredHeight="795">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/iPhone.screen#iPhone"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="14" x="117" y="635" measuredWidth="320" measuredHeight="50">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Bars.screen#Tab%20Bar"/>
+    <overrides>
+      <widgets ref="30" text="Map"/>
+      <widgets ref="38">
+        <attributes key="icon" value="assets/ios7-more (large)"/>
+      </widgets>
+      <widgets ref="39" text="More"/>
+      <widgets ref="35">
+        <attributes key="icon" value="calendar2 (large)"/>
+      </widgets>
+      <widgets ref="36" text="Schedule"/>
+      <widgets ref="32">
+        <attributes key="icon" value="book (large)"/>
+      </widgets>
+      <widgets ref="33" text="News"/>
+      <widgets ref="29">
+        <attributes key="icon" value="assets/ai-map (large)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="15" x="247" y="136" measuredWidth="67" measuredHeight="31">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Forms.screen#Fieldset%20Header"/>
+    <overrides>
+      <widgets ref="5" text="Settings"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="16" x="127" y="166" width="300" measuredWidth="300" measuredHeight="98">
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Lists.screen#List%20Checks"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="44"/>
+      <widgetChanges xsi:type="o:Delete" ref="43"/>
+      <widgetChanges xsi:type="o:Delete" ref="42"/>
+      <widgetChanges xsi:type="o:Delete" ref="37"/>
+      <widgetChanges xsi:type="o:Delete" ref="35"/>
+      <widgets ref="36" y="0" width="300" text="Sync my schedule with iCalendar&#xA;Notify me before my favorite talks">
+        <attributes key="alpha" value="0"/>
+        <font size="15px"/>
+        <items ref="@items.0" text="Sync my schedule with iCalendar"/>
+        <items ref="@items.2" text="Notify me before my favorite talks"/>
+        <itemChanges xsi:type="o:Delete" ref="@items.1"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="17" x="377" y="176" measuredWidth="52" measuredHeight="31">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Controls.screen#Switch"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="18" x="377" y="224" measuredWidth="52" measuredHeight="31">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Controls.screen#Switch"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

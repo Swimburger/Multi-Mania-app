@@ -39,9 +39,9 @@
     <overrides>
       <widgets ref="30" text="Map"/>
       <widgets ref="38">
-        <attributes key="icon" value="assets/ios7-info (large)"/>
+        <attributes key="icon" value="assets/ios7-more (large)"/>
       </widgets>
-      <widgets ref="39" text="About"/>
+      <widgets ref="39" text="More"/>
       <widgets ref="35">
         <attributes key="icon" value="calendar2 (large)"/>
       </widgets>
@@ -61,7 +61,6 @@
       <widgets ref="5" text="About"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Icon" id="23" x="393" y="136" measuredWidth="32" measuredHeight="32" layoutParams="anchor-left|anchor-top" icon="options (large)"/>
   <hRuler/>
   <vRuler/>
   <font size="12px"/>

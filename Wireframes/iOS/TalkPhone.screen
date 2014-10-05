@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Master" id="1" x="48" y="14" measuredWidth="375" measuredHeight="795">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/iPhone.screen#iPhone"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="2" x="77" y="651" measuredWidth="320" measuredHeight="50">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Bars.screen#Tab%20Bar"/>
+    <overrides>
+      <widgets ref="30" text="Map"/>
+      <widgets ref="38">
+        <attributes key="icon" value="assets/ios7-more (large)"/>
+      </widgets>
+      <widgets ref="39" text="More"/>
+      <widgets ref="35">
+        <attributes key="icon" value="calendar2 (large)"/>
+      </widgets>
+      <widgets ref="36" text="Schedule"/>
+      <widgets ref="32">
+        <attributes key="icon" value="book (large)"/>
+      </widgets>
+      <widgets ref="33" text="News"/>
+      <widgets ref="29">
+        <attributes key="icon" value="assets/ai-map (large)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="3" x="206" y="163" measuredWidth="50" measuredHeight="31">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Forms.screen#Fieldset%20Header"/>
+    <overrides>
+      <widgets ref="5" text="Talk 1"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="8" x="80" y="160" measuredWidth="65" measuredHeight="31">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Controls.screen#Button%20Back"/>
+  </widgets>
+  <widgets xsi:type="model:Text" id="9" x="87" y="354" width="300" height="204" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="300" measuredHeight="204">
+    <font size="15px"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="10" x="86" y="560" measuredWidth="185" measuredHeight="28">
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Small"/>
+    <overrides>
+      <widgets ref="6" text="by speaker 1 and speaker 2"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="11" x="86" y="617" measuredWidth="59" measuredHeight="28">
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Small"/>
+    <overrides>
+      <widgets ref="6" text="Room #"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="12" x="351" y="617" measuredWidth="40" measuredHeight="28">
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Small"/>
+    <overrides>
+      <widgets ref="6" text="tag 1">
+        <attributes key="textAlignment" value="Right"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="13" x="307" y="617" measuredWidth="40" measuredHeight="28">
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Small"/>
+    <overrides>
+      <widgets ref="6" text="tag 2">
+        <attributes key="textAlignment" value="Right"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="14" x="86" y="588" measuredWidth="118" measuredHeight="28">
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Small"/>
+    <overrides>
+      <widgets ref="6" text="from 09:45-10:30"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Placeholder" id="16" x="96" y="193" width="281" height="152" text="image" measuredWidth="281" measuredHeight="152"/>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

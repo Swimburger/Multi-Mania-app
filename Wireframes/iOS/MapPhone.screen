@@ -8,9 +8,9 @@
     <overrides>
       <widgets ref="30" text="Map"/>
       <widgets ref="38">
-        <attributes key="icon" value="assets/ios7-info (large)"/>
+        <attributes key="icon" value="assets/ios7-more (large)"/>
       </widgets>
-      <widgets ref="39" text="About"/>
+      <widgets ref="39" text="More"/>
       <widgets ref="35">
         <attributes key="icon" value="calendar2 (large)"/>
       </widgets>
@@ -30,7 +30,6 @@
       <widgets ref="5" text="Map"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Icon" id="4" x="403" y="163" measuredWidth="32" measuredHeight="32" layoutParams="anchor-left|anchor-top" icon="options (large)"/>
   <widgets xsi:type="model:Placeholder" id="11" x="135" y="200" width="300" height="433" measuredWidth="300" measuredHeight="433"/>
   <widgets xsi:type="model:Master" id="12" x="528" y="258" measuredWidth="795" measuredHeight="375">
     <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/iPhone.screen#iPhone%20Landscape"/>
@@ -42,7 +41,6 @@
       <widgets ref="5" text="Map"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Icon" id="15" x="1171" y="309" measuredWidth="32" measuredHeight="32" layoutParams="anchor-left|anchor-top" icon="options (large)"/>
   <hRuler/>
   <vRuler/>
   <font size="12px"/>

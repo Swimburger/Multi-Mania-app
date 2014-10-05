@@ -8,9 +8,9 @@
     <overrides>
       <widgets ref="30" text="Map"/>
       <widgets ref="38">
-        <attributes key="icon" value="assets/ios7-info (large)"/>
+        <attributes key="icon" value="assets/ios7-more (large)"/>
       </widgets>
-      <widgets ref="39" text="About"/>
+      <widgets ref="39" text="More"/>
       <widgets ref="35">
         <attributes key="icon" value="calendar2 (large)"/>
       </widgets>

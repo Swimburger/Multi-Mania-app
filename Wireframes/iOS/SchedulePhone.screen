@@ -9,7 +9,6 @@
       <widgets ref="5" text="Schedule"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Icon" id="3" x="397" y="136" measuredWidth="32" measuredHeight="32" layoutParams="anchor-left|anchor-top" icon="options (large)"/>
   <widgets xsi:type="model:Master" id="4" x="189" y="167" measuredWidth="188" measuredHeight="31">
     <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Controls.screen#Segmented%20Control"/>
     <overrides>
@@ -25,9 +24,9 @@
     <overrides>
       <widgets ref="30" text="Map"/>
       <widgets ref="38">
-        <attributes key="icon" value="assets/ios7-info (large)"/>
+        <attributes key="icon" value="assets/ios7-more (large)"/>
       </widgets>
-      <widgets ref="39" text="About"/>
+      <widgets ref="39" text="More"/>
       <widgets ref="35">
         <attributes key="icon" value="calendar2 (large)"/>
       </widgets>
@@ -41,7 +40,7 @@
       </widgets>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="8" x="127" y="287" measuredWidth="310" measuredHeight="97">
+  <widgets xsi:type="model:WidgetGroup" id="8" x="127" y="262" measuredWidth="310" measuredHeight="97">
     <widgets xsi:type="model:Panel" id="9" width="310" height="97" measuredWidth="310" measuredHeight="97"/>
     <widgets xsi:type="model:Label" id="10" x="13" y="9" width="165" text="Keynote day one" measuredWidth="165" measuredHeight="36">
       <font size="20px"/>
@@ -57,19 +56,19 @@
     </widgets>
     <widgets xsi:type="model:Icon" id="14" x="268" y="9" width="29" height="31" measuredWidth="29" measuredHeight="31" icon="assets/ai-not-important (large)"/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="15" x="126" y="252" measuredWidth="312" measuredHeight="33">
+  <widgets xsi:type="model:WidgetGroup" id="15" x="126" y="227" measuredWidth="312" measuredHeight="33">
     <widgets xsi:type="model:Panel" id="16" width="312" height="32" measuredWidth="312" measuredHeight="32"/>
     <widgets xsi:type="model:Label" id="17" x="110" width="101" text="9:30 - 10:30" measuredWidth="101" measuredHeight="33">
       <font size="18px"/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="18" x="126" y="392" measuredWidth="312" measuredHeight="33">
+  <widgets xsi:type="model:WidgetGroup" id="18" x="126" y="367" measuredWidth="312" measuredHeight="33">
     <widgets xsi:type="model:Panel" id="19" width="312" height="32" measuredWidth="312" measuredHeight="32"/>
     <widgets xsi:type="model:Label" id="20" x="110" width="109" text="10:45 - 11:30" measuredWidth="109" measuredHeight="33">
       <font size="18px"/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="21" x="127" y="430" measuredWidth="153" measuredHeight="97">
+  <widgets xsi:type="model:WidgetGroup" id="21" x="127" y="405" measuredWidth="153" measuredHeight="97">
     <widgets xsi:type="model:Panel" id="22" width="153" height="97" measuredWidth="153" measuredHeight="97"/>
     <widgets xsi:type="model:Label" id="23" x="13" y="6" width="68" text="Talk 1" measuredWidth="68" measuredHeight="36">
       <font size="20px"/>
@@ -85,7 +84,7 @@
     </widgets>
     <widgets xsi:type="model:Icon" id="27" x="114" y="9" width="30" height="29" measuredWidth="30" measuredHeight="29" icon="assets/ai-important (custom)"/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="28" x="287" y="430" measuredWidth="150" measuredHeight="97">
+  <widgets xsi:type="model:WidgetGroup" id="28" x="287" y="405" measuredWidth="150" measuredHeight="97">
     <widgets xsi:type="model:Panel" id="29" width="150" height="97" measuredWidth="150" measuredHeight="97"/>
     <widgets xsi:type="model:Label" id="30" x="13" y="6" width="67" text="Talk 2" measuredWidth="67" measuredHeight="36">
       <font size="20px"/>
@@ -101,7 +100,7 @@
     </widgets>
     <widgets xsi:type="model:Icon" id="34" x="111" y="9" width="30" height="29" measuredWidth="30" measuredHeight="29" icon="assets/ai-important (custom)"/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="35" x="127" y="532" measuredWidth="153" measuredHeight="97">
+  <widgets xsi:type="model:WidgetGroup" id="35" x="127" y="507" measuredWidth="153" measuredHeight="97">
     <widgets xsi:type="model:Panel" id="36" width="153" height="97" measuredWidth="153" measuredHeight="97"/>
     <widgets xsi:type="model:Label" id="37" x="13" y="6" width="68" text="Talk 3" measuredWidth="68" measuredHeight="36">
       <font size="20px"/>
@@ -117,7 +116,7 @@
     </widgets>
     <widgets xsi:type="model:Icon" id="41" x="114" y="9" width="30" height="29" measuredWidth="30" measuredHeight="29" icon="assets/ai-important (custom)"/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="42" x="287" y="532" measuredWidth="150" measuredHeight="97">
+  <widgets xsi:type="model:WidgetGroup" id="42" x="287" y="507" measuredWidth="150" measuredHeight="97">
     <widgets xsi:type="model:Panel" id="43" width="150" height="97" measuredWidth="150" measuredHeight="97"/>
     <widgets xsi:type="model:Label" id="44" x="13" y="6" width="67" text="Talk 4" measuredWidth="67" measuredHeight="36">
       <font size="20px"/>
@@ -133,17 +132,10 @@
     </widgets>
     <widgets xsi:type="model:Icon" id="48" x="111" y="9" width="30" height="29" measuredWidth="30" measuredHeight="29" icon="assets/ai-important (custom)"/>
   </widgets>
-  <widgets xsi:type="model:Panel" id="67" x="127" y="201" width="311" height="45" measuredWidth="311" measuredHeight="45"/>
-  <widgets xsi:type="model:Master" id="66" x="256" y="208" measuredWidth="49" measuredHeight="31">
-    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Forms.screen#Fieldset%20Header"/>
-    <overrides>
-      <widgets ref="5" text="Day 1"/>
-    </overrides>
-  </widgets>
-  <widgets xsi:type="model:Master" id="89" x="80" y="848" measuredWidth="795" measuredHeight="375">
+  <widgets xsi:type="model:Master" id="89" x="544" y="167" measuredWidth="795" measuredHeight="375">
     <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/iPhone.screen#iPhone%20Landscape"/>
   </widgets>
-  <widgets xsi:type="model:Master" id="85" x="384" y="907" measuredWidth="188" measuredHeight="31">
+  <widgets xsi:type="model:Master" id="85" x="848" y="226" measuredWidth="188" measuredHeight="31">
     <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Controls.screen#Segmented%20Control"/>
     <overrides>
       <widgets ref="6" text="Schedule, My Schedule">
@@ -153,8 +145,7 @@
       </widgets>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Icon" id="84" x="723" y="904" measuredWidth="32" measuredHeight="32" layoutParams="anchor-left|anchor-top" icon="options (large)"/>
-  <widgets xsi:type="model:WidgetGroup" id="90" x="236" y="1037" measuredWidth="488" measuredHeight="97">
+  <widgets xsi:type="model:WidgetGroup" id="90" x="700" y="310" measuredWidth="488" measuredHeight="97">
     <widgets xsi:type="model:Panel" id="91" width="488" height="97" measuredWidth="488" measuredHeight="97"/>
     <widgets xsi:type="model:Label" id="92" x="19" y="9" width="258" text="Keynote day one" measuredWidth="258" measuredHeight="36">
       <font size="20px"/>
@@ -170,24 +161,17 @@
     </widgets>
     <widgets xsi:type="model:Icon" id="96" x="421" y="9" width="45" height="31" measuredWidth="45" measuredHeight="31" icon="assets/ai-not-important (large)"/>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="97" x="235" y="1002" measuredWidth="492" measuredHeight="33">
+  <widgets xsi:type="model:WidgetGroup" id="97" x="699" y="275" measuredWidth="492" measuredHeight="33">
     <widgets xsi:type="model:Panel" id="98" width="492" height="32" measuredWidth="492" measuredHeight="32"/>
     <widgets xsi:type="model:Label" id="99" x="172" width="158" text="9:30 - 10:30" measuredWidth="158" measuredHeight="33">
       <font size="18px"/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="100" x="235" y="1142" measuredWidth="492" measuredHeight="33">
+  <widgets xsi:type="model:WidgetGroup" id="100" x="699" y="415" measuredWidth="492" measuredHeight="33">
     <widgets xsi:type="model:Panel" id="101" width="492" height="32" measuredWidth="492" measuredHeight="32"/>
     <widgets xsi:type="model:Label" id="102" x="172" width="171" text="10:45 - 11:30" measuredWidth="171" measuredHeight="33">
       <font size="18px"/>
     </widgets>
-  </widgets>
-  <widgets xsi:type="model:Panel" id="131" x="236" y="951" width="489" height="45" measuredWidth="489" measuredHeight="45"/>
-  <widgets xsi:type="model:Master" id="132" x="439" y="958" measuredWidth="76" measuredHeight="31">
-    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Forms.screen#Fieldset%20Header"/>
-    <overrides>
-      <widgets ref="5" width="76" text="Day 1"/>
-    </overrides>
   </widgets>
   <widgets xsi:type="model:Master" id="134" x="126" y="136" measuredWidth="73" measuredHeight="31">
     <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Controls.screen#Button%20Back"/>
@@ -195,11 +179,25 @@
       <widgets ref="36" text="Day 1"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Master" id="136" x="197" y="893" measuredWidth="73" measuredHeight="31">
+  <widgets xsi:type="model:Master" id="136" x="661" y="212" measuredWidth="73" measuredHeight="31">
     <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Controls.screen#Button%20Back"/>
     <overrides>
       <widgets ref="36" text="Day 1"/>
     </overrides>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="137" x="704" y="456" width="245" measuredWidth="245" measuredHeight="57">
+    <widgets xsi:type="model:Panel" id="138" width="245" height="57" measuredWidth="245" measuredHeight="57"/>
+    <widgets xsi:type="model:Label" id="139" x="20" y="6" width="108" text="Talk 1" measuredWidth="108" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="143" x="182" y="9" width="34" height="29" measuredWidth="34" measuredHeight="29" icon="assets/ai-important (custom)"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="144" x="960" y="456" width="240" measuredWidth="240" measuredHeight="57">
+    <widgets xsi:type="model:Panel" id="145" width="240" height="57" measuredWidth="240" measuredHeight="57"/>
+    <widgets xsi:type="model:Label" id="146" x="20" y="6" width="107" text="Talk 2" measuredWidth="107" measuredHeight="36">
+      <font size="20px"/>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="150" x="177" y="9" width="32" height="29" measuredWidth="32" measuredHeight="29" icon="assets/ai-important (custom)"/>
   </widgets>
   <hRuler/>
   <vRuler/>
