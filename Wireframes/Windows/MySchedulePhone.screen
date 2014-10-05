@@ -389,6 +389,75 @@
       </widgets>
     </widgets>
   </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="162" x="1224" y="32" measuredWidth="576" measuredHeight="1077">
+    <widgets xsi:type="model:Master" id="163" measuredWidth="576" measuredHeight="1077">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Phone"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="204" x="48" y="87" measuredWidth="486" measuredHeight="801" name="Head">
+      <widgets xsi:type="model:Master" id="205" x="7" y="41" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 1"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="206" x="7" y="18" measuredWidth="103" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="MY SCHEDULE">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="207" x="431" measuredWidth="41" measuredHeight="28">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="11:55">
+            <font size="15px"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="208" x="167" y="41" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 2">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="209" y="730" measuredWidth="480" measuredHeight="71">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+        <overrides>
+          <widgetChanges xsi:type="o:Delete" ref="215"/>
+          <widgetChanges xsi:type="o:Delete" ref="204"/>
+          <widgets ref="206" x="135"/>
+          <widgets ref="208">
+            <attributes key="icon" value="assets/wp-settings (medium)"/>
+          </widgets>
+          <widgets ref="209" x="219"/>
+          <widgets ref="211">
+            <attributes key="icon" value="pin (medium)"/>
+          </widgets>
+          <widgets ref="212" x="303"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="210" x="330" y="41" measuredWidth="156" measuredHeight="89">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Day 3">
+            <attributes key="foreground" value="#cccccc"/>
+          </widgets>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:Master" id="211" x="208" y="471" measuredWidth="196" measuredHeight="40">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+      <overrides>
+        <widgets ref="233" text="Nothing here yet!">
+          <font size="24px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+  </widgets>
   <hRuler/>
   <vRuler/>
   <font size="12px"/>

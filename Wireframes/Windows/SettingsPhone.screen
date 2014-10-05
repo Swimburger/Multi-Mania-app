@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Master" id="1" x="56" y="16" measuredWidth="576" measuredHeight="1077">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Phone"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="2" x="114" y="103" measuredWidth="465" measuredHeight="130" name="Head">
+    <widgets xsi:type="model:Master" id="3" y="41" measuredWidth="218" measuredHeight="89">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+      <overrides>
+        <widgets ref="225" text="Settings"/>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Master" id="4" y="18" measuredWidth="102" measuredHeight="28">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+      <overrides>
+        <widgets ref="233" text="MULTI-MANIA">
+          <font size="15px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Master" id="5" x="424" measuredWidth="41" measuredHeight="28">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+      <overrides>
+        <widgets ref="233" text="11:55">
+          <font size="15px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Master" id="16" x="104" y="832" measuredWidth="480" measuredHeight="71">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="215"/>
+      <widgetChanges xsi:type="o:Delete" ref="212"/>
+      <widgetChanges xsi:type="o:Delete" ref="204"/>
+      <widgets ref="206" x="184"/>
+      <widgets ref="208">
+        <attributes key="icon" value="pin (medium)"/>
+      </widgets>
+      <widgets ref="209" x="272"/>
+      <widgets ref="211">
+        <attributes key="icon" value="assets/wp-question (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="17" x="120" y="248" measuredWidth="281" measuredHeight="36">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Checkbox%20Selected"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="290"/>
+      <widgets ref="291" x="0" text="Sync my schedule with calendar">
+        <font bold="false"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="18" x="120" y="308" measuredWidth="304" measuredHeight="36">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Checkbox"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="293"/>
+      <widgets ref="294" x="0" text="Notify me before my favorite talks"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="19" x="456" y="244" measuredWidth="90" measuredHeight="40">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Switch%20On"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="20" x="456" y="303" measuredWidth="90" measuredHeight="40">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Switch%20Off"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
