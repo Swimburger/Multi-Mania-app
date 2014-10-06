@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
-  <widgets xsi:type="model:Master" id="2" x="94" measuredWidth="375" measuredHeight="795">
+  <widgets xsi:type="model:Master" id="2" x="94" y="56" measuredWidth="375" measuredHeight="795">
     <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/iPhone.screen#iPhone"/>
   </widgets>
-  <widgets xsi:type="model:Master" id="3" x="123" y="136" height="549" measuredWidth="320" measuredHeight="549">
+  <widgets xsi:type="model:Master" id="3" x="123" y="192" measuredWidth="320" measuredHeight="549">
     <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Views.screen#Scroll%20View"/>
     <overrides>
       <widgets ref="1" height="549"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Master" id="15" x="123" y="635" measuredWidth="320" measuredHeight="50">
+  <widgets xsi:type="model:Master" id="15" x="123" y="691" measuredWidth="320" measuredHeight="50">
     <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Bars.screen#Tab%20Bar"/>
     <overrides>
       <widgets ref="30" text="Map"/>
@@ -30,13 +30,13 @@
       </widgets>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:Master" id="16" x="253" y="136" measuredWidth="47" measuredHeight="31">
+  <widgets xsi:type="model:Master" id="16" x="253" y="192" measuredWidth="47" measuredHeight="31">
     <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Forms.screen#Fieldset%20Header"/>
     <overrides>
       <widgets ref="5" text="News"/>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="17" x="133" y="166" width="292" measuredWidth="292" measuredHeight="225">
+  <widgets xsi:type="model:WidgetGroup" id="17" x="133" y="222" measuredWidth="292" measuredHeight="225">
     <widgets xsi:type="model:Panel" id="18" width="292" height="225" measuredWidth="292" measuredHeight="225"/>
     <widgets xsi:type="model:Image" id="19" width="292" height="161" measuredWidth="292" measuredHeight="161"/>
     <widgets xsi:type="model:Label" id="20" x="8" y="94" width="84" text="Title" measuredWidth="84" measuredHeight="67">
@@ -46,14 +46,14 @@
       <font/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="22" x="133" y="406" width="292" measuredWidth="292" measuredHeight="161">
+  <widgets xsi:type="model:WidgetGroup" id="22" x="133" y="462" measuredWidth="292" measuredHeight="161">
     <widgets xsi:type="model:Panel" id="23" width="292" height="161" measuredWidth="292" measuredHeight="161"/>
     <widgets xsi:type="model:Image" id="24" width="292" height="161" measuredWidth="292" measuredHeight="161"/>
     <widgets xsi:type="model:Label" id="25" x="8" y="94" width="92" text="Title" measuredWidth="92" measuredHeight="67">
       <font size="43px"/>
     </widgets>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="26" x="133" y="582" width="292" measuredWidth="292" measuredHeight="51">
+  <widgets xsi:type="model:WidgetGroup" id="26" x="133" y="638" measuredWidth="292" measuredHeight="51">
     <widgets xsi:type="model:Image" id="28" width="292" height="51" measuredWidth="292" measuredHeight="51"/>
   </widgets>
   <widgets xsi:type="model:Master" id="30" x="624" y="166" measuredWidth="795" measuredHeight="375">
