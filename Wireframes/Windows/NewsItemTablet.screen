@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Image" id="88" x="80" y="144" measuredWidth="1579" measuredHeight="1024" src="../assets/Android44/windowsSurface.png"/>
+  <widgets xsi:type="model:Master" id="89" x="284" y="328" measuredWidth="150" measuredHeight="89">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+    <overrides>
+      <widgets ref="225" text="News"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="90" x="284" y="424" measuredWidth="739" measuredHeight="336">
+    <widgets xsi:type="model:Master" id="91" measuredWidth="213" measuredHeight="53">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+      <overrides>
+        <widgets ref="225" text="NewsItem title">
+          <font size="32px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="117" y="64" measuredWidth="739" measuredHeight="272">
+      <widgets xsi:type="model:WidgetGroup" id="118" measuredWidth="0" measuredHeight="0"/>
+      <widgets xsi:type="model:Placeholder" id="122" width="316" height="272" text="image" measuredWidth="316" measuredHeight="272"/>
+      <widgets xsi:type="model:Text" id="177" x="339" width="400" height="272" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&#xD;&#xA;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." measuredWidth="400" measuredHeight="272">
+        <font size="14px"/>
+      </widgets>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Master" id="176" x="211" y="353" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+    <overrides>
+      <widgets ref="22">
+        <attributes key="icon" value="assets/wp-back (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="182" x="201" y="664" width="72" measuredWidth="72" measuredHeight="46">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#List%20Icon"/>
+    <overrides>
+      <widgets ref="172" width="72" height="46">
+        <attributes key="icon" value="assets/wp-next (medium)"/>
+        <attributes key="background" value="#cccccc"/>
+        <attributes key="iconRotation" value="180"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="183" x="1472" y="674" measuredWidth="72" measuredHeight="46">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#List%20Icon"/>
+    <overrides>
+      <widgets ref="172" width="72" height="46">
+        <attributes key="icon" value="assets/wp-next (medium)"/>
+        <attributes key="background" value="#cccccc"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

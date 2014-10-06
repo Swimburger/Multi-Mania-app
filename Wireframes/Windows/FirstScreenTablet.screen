@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Image" id="5" x="80" y="144" measuredWidth="1579" measuredHeight="1024" src="../assets/Android44/windowsSurface.png"/>
+  <widgets xsi:type="model:Master" id="7" x="283" y="328" measuredWidth="331" measuredHeight="89">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+    <overrides>
+      <widgets ref="225" text="Multi-mania"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="41" x="283" y="424" measuredWidth="392" measuredHeight="560">
+    <widgets xsi:type="model:Master" id="8" measuredWidth="115" measuredHeight="53">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+      <overrides>
+        <widgets ref="225" text="News >">
+          <font size="32px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="13" x="200" y="64" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:Shape" id="14" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Master" id="15" x="7" y="117" measuredWidth="181" measuredHeight="40">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+        <overrides>
+          <widgets ref="222" width="181" height="40"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="16" x="17" y="121" measuredWidth="95" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Newsitem 2"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Placeholder" id="35" width="192" height="120" text="image" measuredWidth="192" measuredHeight="120"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="17" y="232" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:Shape" id="18" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Master" id="19" x="7" y="117" measuredWidth="181" measuredHeight="40">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+        <overrides>
+          <widgets ref="222" width="181" height="40"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="20" x="17" y="121" measuredWidth="95" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Newsitem 3"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Placeholder" id="36" width="192" height="120" text="image" measuredWidth="192" measuredHeight="120"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="21" x="200" y="232" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:Shape" id="22" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Master" id="23" x="7" y="117" measuredWidth="181" measuredHeight="40">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+        <overrides>
+          <widgets ref="222" width="181" height="40"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="24" x="17" y="121" measuredWidth="95" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Newsitem 4"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Placeholder" id="38" width="192" height="120" text="image" measuredWidth="192" measuredHeight="120"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="25" y="400" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:Shape" id="26" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Master" id="27" x="7" y="117" measuredWidth="181" measuredHeight="40">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+        <overrides>
+          <widgets ref="222" width="181" height="40"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="28" x="17" y="121" measuredWidth="95" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Newsitem 5"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Placeholder" id="39" width="192" height="120" text="image" measuredWidth="192" measuredHeight="120"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="29" x="200" y="400" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:Shape" id="30" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+        <font/>
+      </widgets>
+      <widgets xsi:type="model:Master" id="31" x="7" y="117" measuredWidth="181" measuredHeight="40">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+        <overrides>
+          <widgets ref="222" width="181" height="40"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="32" x="17" y="121" measuredWidth="95" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Newsitem 6"/>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Placeholder" id="40" width="192" height="120" text="image" measuredWidth="192" measuredHeight="120"/>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="34" y="64" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:WidgetGroup" id="12" measuredWidth="192" measuredHeight="160">
+        <widgets xsi:type="model:Shape" id="9" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Master" id="10" x="7" y="117" measuredWidth="181" measuredHeight="40">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+          <overrides>
+            <widgets ref="222" width="181" height="40"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="11" x="17" y="121" measuredWidth="95" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="Newsitem 1"/>
+          </overrides>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:Placeholder" id="33" width="192" height="120" text="image" measuredWidth="192" measuredHeight="120"/>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="42" x="733" y="423" measuredWidth="392" measuredHeight="561">
+    <widgets xsi:type="model:Master" id="43" measuredWidth="166" measuredHeight="53">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+      <overrides>
+        <widgets ref="225" text="Schedule >">
+          <font size="32px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="69" y="64" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:WidgetGroup" id="70" measuredWidth="192" measuredHeight="160">
+        <widgets xsi:type="model:Shape" id="71" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Master" id="72" x="7" y="117" measuredWidth="181" measuredHeight="40">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+          <overrides>
+            <widgets ref="222" width="181" height="40"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="73" x="17" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 2"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="77" x="78" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 1"/>
+          </overrides>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:Master" id="75" x="14" y="17" measuredWidth="62" measuredHeight="36">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Talk 1">
+            <font size="20px" bold="true"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="76" x="14" y="52" measuredWidth="60" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Room2"/>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="78" x="200" y="64" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:WidgetGroup" id="79" measuredWidth="192" measuredHeight="160">
+        <widgets xsi:type="model:Shape" id="80" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Master" id="81" x="7" y="117" measuredWidth="181" measuredHeight="40">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+          <overrides>
+            <widgets ref="222" width="181" height="40"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="82" x="17" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 2"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="83" x="78" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 1"/>
+          </overrides>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:Master" id="84" x="14" y="17" measuredWidth="62" measuredHeight="36">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Talk 1">
+            <font size="20px" bold="true"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="85" x="14" y="52" measuredWidth="60" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Room2"/>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="86" y="233" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:WidgetGroup" id="87" measuredWidth="192" measuredHeight="160">
+        <widgets xsi:type="model:Shape" id="88" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Master" id="89" x="7" y="117" measuredWidth="181" measuredHeight="40">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+          <overrides>
+            <widgets ref="222" width="181" height="40"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="90" x="17" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 2"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="91" x="78" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 1"/>
+          </overrides>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:Master" id="92" x="14" y="17" measuredWidth="62" measuredHeight="36">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Talk 1">
+            <font size="20px" bold="true"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="93" x="14" y="52" measuredWidth="60" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Room2"/>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="94" x="200" y="233" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:WidgetGroup" id="95" measuredWidth="192" measuredHeight="160">
+        <widgets xsi:type="model:Shape" id="96" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Master" id="97" x="7" y="117" measuredWidth="181" measuredHeight="40">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+          <overrides>
+            <widgets ref="222" width="181" height="40"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="98" x="17" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 2"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="99" x="78" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 1"/>
+          </overrides>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:Master" id="100" x="14" y="17" measuredWidth="62" measuredHeight="36">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Talk 1">
+            <font size="20px" bold="true"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="101" x="14" y="52" measuredWidth="60" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Room2"/>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="102" y="401" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:WidgetGroup" id="103" measuredWidth="192" measuredHeight="160">
+        <widgets xsi:type="model:Shape" id="104" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Master" id="105" x="7" y="117" measuredWidth="181" measuredHeight="40">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+          <overrides>
+            <widgets ref="222" width="181" height="40"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="106" x="17" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 2"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="107" x="78" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 1"/>
+          </overrides>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:Master" id="108" x="14" y="17" measuredWidth="62" measuredHeight="36">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Talk 1">
+            <font size="20px" bold="true"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="109" x="14" y="52" measuredWidth="60" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Room2"/>
+        </overrides>
+      </widgets>
+    </widgets>
+    <widgets xsi:type="model:WidgetGroup" id="110" x="200" y="401" measuredWidth="192" measuredHeight="160">
+      <widgets xsi:type="model:WidgetGroup" id="111" measuredWidth="192" measuredHeight="160">
+        <widgets xsi:type="model:Shape" id="112" width="192" height="160" measuredWidth="192" measuredHeight="160" shapeType="rectangle">
+          <font/>
+        </widgets>
+        <widgets xsi:type="model:Master" id="113" x="7" y="117" measuredWidth="181" measuredHeight="40">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Panorama"/>
+          <overrides>
+            <widgets ref="222" width="181" height="40"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="114" x="17" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 2"/>
+          </overrides>
+        </widgets>
+        <widgets xsi:type="model:Master" id="115" x="78" y="121" measuredWidth="45" measuredHeight="31">
+          <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+          <overrides>
+            <widgets ref="233" text="tag 1"/>
+          </overrides>
+        </widgets>
+      </widgets>
+      <widgets xsi:type="model:Master" id="116" x="14" y="17" measuredWidth="62" measuredHeight="36">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+        <overrides>
+          <widgets ref="225" text="Talk 1">
+            <font size="20px" bold="true"/>
+          </widgets>
+        </overrides>
+      </widgets>
+      <widgets xsi:type="model:Master" id="117" x="14" y="52" measuredWidth="60" measuredHeight="31">
+        <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Field%20Label"/>
+        <overrides>
+          <widgets ref="233" text="Room2"/>
+        </overrides>
+      </widgets>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="118" x="1179" y="421" measuredWidth="384" measuredHeight="555">
+    <widgets xsi:type="model:Master" id="119" measuredWidth="115" measuredHeight="53">
+      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+      <overrides>
+        <widgets ref="225" text="Maps >">
+          <font size="32px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Placeholder" id="151" y="67" width="384" height="488" measuredWidth="384" measuredHeight="488"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="154" x="184" y="963" measuredWidth="1376" measuredHeight="100">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="215"/>
+      <widgetChanges xsi:type="o:Delete" ref="212"/>
+      <widgetChanges xsi:type="o:Delete" ref="209"/>
+      <widgetChanges xsi:type="o:Delete" ref="206"/>
+      <widgetChanges xsi:type="o:Delete" ref="204"/>
+      <widgets ref="203" width="1376"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="155" x="1474" y="992" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+    <overrides>
+      <widgets ref="22">
+        <attributes key="icon" value="assets/wp-question (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="156" x="1397" y="993" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+    <overrides>
+      <widgets ref="22">
+        <attributes key="icon" value="assets/wp-settings (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
