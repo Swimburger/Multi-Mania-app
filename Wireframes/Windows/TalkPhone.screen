@@ -91,6 +91,9 @@
     </widgets>
     <widgets xsi:type="model:Placeholder" id="20" x="63" y="225" width="452" height="152" text="image" measuredWidth="452" measuredHeight="152"/>
   </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="21" x="528" y="864" measuredWidth="32" measuredHeight="32" name="Overflow Button">
+    <widgets xsi:type="model:Icon" id="22" measuredWidth="32" measuredHeight="32" icon="assets/wp-overflow (large)"/>
+  </widgets>
   <hRuler/>
   <vRuler/>
   <font size="12px"/>

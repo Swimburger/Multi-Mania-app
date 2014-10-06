@@ -72,6 +72,7 @@
           </widgets>
         </overrides>
       </widgets>
+      <widgets xsi:type="model:Icon" id="207" x="431" y="633" measuredWidth="32" measuredHeight="32" icon="assets/wp-overflow (large)"/>
     </widgets>
     <widgets xsi:type="model:Master" id="18" x="58" y="223" measuredWidth="67" measuredHeight="40">
       <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Title"/>
@@ -265,6 +266,7 @@
         </overrides>
       </widgets>
     </widgets>
+    <widgets xsi:type="model:Icon" id="208" x="486" y="720" measuredWidth="32" measuredHeight="32" icon="assets/wp-overflow (large)"/>
   </widgets>
   <widgets xsi:type="model:WidgetGroup" id="205" x="16" y="1136" measuredWidth="1077" measuredHeight="576">
     <widgets xsi:type="model:Master" id="150" measuredWidth="1077" measuredHeight="576">

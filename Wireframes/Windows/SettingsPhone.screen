@@ -65,6 +65,9 @@
   <widgets xsi:type="model:Master" id="20" x="456" y="303" measuredWidth="90" measuredHeight="40">
     <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Switch%20Off"/>
   </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="21" x="542" y="847" measuredWidth="32" measuredHeight="32" name="Overflow Button">
+    <widgets xsi:type="model:Icon" id="22" measuredWidth="32" measuredHeight="32" icon="assets/wp-overflow (large)"/>
+  </widgets>
   <hRuler/>
   <vRuler/>
   <font size="12px"/>
