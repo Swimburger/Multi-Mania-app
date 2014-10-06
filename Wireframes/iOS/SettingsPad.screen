@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Master" id="1" x="32" y="32" measuredWidth="1242" measuredHeight="870">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/iPad.screen#iPad"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="2" x="528" y="146" width="616" measuredWidth="616" measuredHeight="51">
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Lists.screen#List%20Checks"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="44"/>
+      <widgetChanges xsi:type="o:Delete" ref="43"/>
+      <widgetChanges xsi:type="o:Delete" ref="42"/>
+      <widgetChanges xsi:type="o:Delete" ref="37"/>
+      <widgetChanges xsi:type="o:Delete" ref="35"/>
+      <widgets ref="36" y="0" width="616" text="Sync my schedule with iCalendar&#xA;">
+        <attributes key="alpha" value="0"/>
+        <font size="19px"/>
+        <items ref="@items.0" text="Sync my schedule with iCalendar"/>
+        <itemChanges xsi:type="o:Delete" ref="@items.2"/>
+        <itemChanges xsi:type="o:Delete" ref="@items.1"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="3" x="448" y="160" measuredWidth="52" measuredHeight="31">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Controls.screen#Switch"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="4" x="448" y="200" measuredWidth="52" measuredHeight="31">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Controls.screen#Switch"/>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="5" x="147" y="146" measuredWidth="223" measuredHeight="697">
+    <widgets xsi:type="model:Master" id="6" height="697" measuredWidth="223" measuredHeight="697">
+      <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Navigation.screen#Navigation%20Drawer"/>
+      <overrides>
+        <widgets ref="47" width="223" height="697" text="{calendar} Schedule&#xA;{image} Map&#xA;{image} News&#xA;{image} About&#xA;{image} Settings&#xA;">
+          <items ref="@items.0" text="{calendar} Schedule"/>
+          <items ref="@items.2" text="{image} News"/>
+          <itemChanges xsi:type="o:Insert" newIndex="3">
+            <object xsi:type="model:Item" text="{image} Settings"/>
+          </itemChanges>
+          <itemChanges xsi:type="o:Insert" newIndex="3">
+            <object xsi:type="model:Item" text="{image} About"/>
+          </itemChanges>
+          <itemChanges xsi:type="o:Insert" newIndex="2">
+            <object xsi:type="model:Item" text="{image} Map"/>
+          </itemChanges>
+          <itemChanges xsi:type="o:Delete" ref="@items.1"/>
+        </widgets>
+      </overrides>
+    </widgets>
+    <widgets xsi:type="model:Icon" id="7" x="45" y="560" width="24" measuredWidth="24" measuredHeight="32" icon="twitter (large)"/>
+    <widgets xsi:type="model:Icon" id="8" x="95" y="561" width="24" measuredWidth="24" measuredHeight="32" icon="facebook (large)"/>
+    <widgets xsi:type="model:Icon" id="9" x="139" y="553" width="36" height="48" measuredWidth="36" measuredHeight="48" icon="assets/ai-email (large)"/>
+    <widgets xsi:type="model:Placeholder" id="10" x="45" y="627" width="131" height="57" text="Main sponsor" measuredWidth="131" measuredHeight="57"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="11" x="610" y="107" measuredWidth="92" measuredHeight="40">
+    <screen xsi:type="model:WidgetGroup" href="../assets/iOS7/Controls.screen#Label"/>
+    <overrides>
+      <widgets ref="64" text="Settings">
+        <font size="24px"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="12" x="528" y="190" measuredWidth="616" measuredHeight="51">
+    <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Lists.screen#List%20Checks"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="44"/>
+      <widgetChanges xsi:type="o:Delete" ref="43"/>
+      <widgetChanges xsi:type="o:Delete" ref="42"/>
+      <widgetChanges xsi:type="o:Delete" ref="37"/>
+      <widgetChanges xsi:type="o:Delete" ref="35"/>
+      <widgets ref="36" y="0" width="616" text="Notify me before my favorite talks">
+        <attributes key="alpha" value="0"/>
+        <font size="19px"/>
+        <items ref="@items.0" text="Notify me before my favorite talks"/>
+        <itemChanges xsi:type="o:Delete" ref="@items.2"/>
+        <itemChanges xsi:type="o:Delete" ref="@items.1"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
