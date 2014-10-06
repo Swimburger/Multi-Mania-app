@@ -15,16 +15,8 @@
       </widgets>
     </overrides>
   </widgets>
-  <widgets xsi:type="model:WidgetGroup" id="12" x="284" y="375" measuredWidth="1284" measuredHeight="636">
-    <widgets xsi:type="model:Master" id="13" measuredWidth="6" measuredHeight="53">
-      <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
-      <overrides>
-        <widgets ref="225">
-          <font size="32px"/>
-        </widgets>
-      </overrides>
-    </widgets>
-    <widgets xsi:type="model:WidgetGroup" id="115" y="52" measuredWidth="397" measuredHeight="584">
+  <widgets xsi:type="model:WidgetGroup" id="12" x="284" y="427" measuredWidth="1284" measuredHeight="584">
+    <widgets xsi:type="model:WidgetGroup" id="115" measuredWidth="397" measuredHeight="584">
       <widgets xsi:type="model:Master" id="116" measuredWidth="116" measuredHeight="53">
         <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
         <overrides>
@@ -241,7 +233,7 @@
         </widgets>
       </widgets>
     </widgets>
-    <widgets xsi:type="model:WidgetGroup" id="223" x="444" y="52" measuredWidth="397" measuredHeight="584">
+    <widgets xsi:type="model:WidgetGroup" id="223" x="444" measuredWidth="397" measuredHeight="584">
       <widgets xsi:type="model:Master" id="224" measuredWidth="116" measuredHeight="53">
         <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
         <overrides>
@@ -458,7 +450,7 @@
         </widgets>
       </widgets>
     </widgets>
-    <widgets xsi:type="model:WidgetGroup" id="271" x="887" y="52" measuredWidth="397" measuredHeight="584">
+    <widgets xsi:type="model:WidgetGroup" id="271" x="887" measuredWidth="397" measuredHeight="584">
       <widgets xsi:type="model:Master" id="272" measuredWidth="116" measuredHeight="53">
         <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
         <overrides>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Image" id="1" x="80" y="144" measuredWidth="1579" measuredHeight="1024" src="../assets/Android44/windowsSurface.png"/>
+  <widgets xsi:type="model:Master" id="2" x="284" y="328" measuredWidth="126" measuredHeight="89">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+    <overrides>
+      <widgets ref="225" text="Map"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="3" x="211" y="353" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+    <overrides>
+      <widgets ref="22">
+        <attributes key="icon" value="assets/wp-back (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Placeholder" id="4" x="284" y="432" width="1220" height="576" measuredWidth="1220" measuredHeight="576"/>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

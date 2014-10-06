@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Image" id="1" x="80" y="144" measuredWidth="1579" measuredHeight="1024" src="../assets/Android44/windowsSurface.png"/>
+  <widgets xsi:type="model:Master" id="2" x="284" y="328" measuredWidth="169" measuredHeight="89">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+    <overrides>
+      <widgets ref="225" text="About"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="3" x="211" y="353" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+    <overrides>
+      <widgets ref="22">
+        <attributes key="icon" value="assets/wp-back (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:WidgetGroup" id="4" x="284" y="508" measuredWidth="351" measuredHeight="473">
+    <widgets xsi:type="model:Placeholder" id="6" width="351" height="185" measuredWidth="351" measuredHeight="185"/>
+    <widgets xsi:type="model:Text" id="7" x="4" y="200" width="347" height="273" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. " measuredWidth="347" measuredHeight="273">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Master" id="8" x="10" y="91" width="332" measuredWidth="332" measuredHeight="33">
+      <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Medium"/>
+      <overrides>
+        <widgets ref="4" width="332" text="Event Title"/>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Placeholder" id="9" x="1040" y="508" width="168" height="152" text="Sponsor" measuredWidth="168" measuredHeight="152"/>
+  <widgets xsi:type="model:WidgetGroup" id="16" x="672" y="508" measuredWidth="322" measuredHeight="472">
+    <widgets xsi:type="model:Panel" id="17" width="313" height="472" measuredWidth="313" measuredHeight="472"/>
+    <widgets xsi:type="model:Text" id="18" x="10" y="54" width="293" height="110" text="Name Venue&#xD;&#xA;Street Venue 13&#xD;&#xA;8500 City&#xD;&#xA;Country&#xD;&#xA;" measuredWidth="293" measuredHeight="110">
+      <font size="15px"/>
+    </widgets>
+    <widgets xsi:type="model:Map" id="19" y="179" width="311" height="291" measuredWidth="311" measuredHeight="291"/>
+    <widgets xsi:type="model:Note" id="20" y="420" width="155" height="36" text="Without controls" measuredWidth="155" measuredHeight="36">
+      <font/>
+    </widgets>
+    <widgets xsi:type="model:Master" id="21" x="9" y="8" measuredWidth="313" measuredHeight="36">
+      <screen xsi:type="model:WidgetGroup" href="../assets/Android44/Typography.screen#Text%20Medium"/>
+      <overrides>
+        <widgets ref="4" width="313" text="Location">
+          <font size="20px"/>
+        </widgets>
+      </overrides>
+    </widgets>
+  </widgets>
+  <widgets xsi:type="model:Master" id="22" x="1040" y="448" measuredWidth="137" measuredHeight="53">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+    <overrides>
+      <widgets ref="225" text="Sponsors">
+        <font size="32px"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="23" x="672" y="448" measuredWidth="127" measuredHeight="53">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+    <overrides>
+      <widgets ref="225" text="Location">
+        <font size="32px"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="24" x="284" y="448" measuredWidth="62" measuredHeight="53">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Header"/>
+    <overrides>
+      <widgets ref="225" text="Info">
+        <font size="32px"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Placeholder" id="25" x="1040" y="669" width="168" height="152" text="Sponsor" measuredWidth="168" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="26" x="1040" y="829" width="168" height="152" text="Sponsor" measuredWidth="168" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="27" x="1216" y="508" width="168" height="152" text="Sponsor" measuredWidth="168" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="28" x="1216" y="669" width="168" height="152" text="Sponsor" measuredWidth="168" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="29" x="1216" y="829" width="168" height="152" text="Sponsor" measuredWidth="168" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="30" x="1392" y="508" width="168" height="152" text="Sponsor" measuredWidth="168" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="31" x="1392" y="669" width="168" height="152" text="Sponsor" measuredWidth="168" measuredHeight="152"/>
+  <widgets xsi:type="model:Placeholder" id="32" x="1392" y="829" width="168" height="152" text="Sponsor" measuredWidth="168" measuredHeight="152"/>
+  <widgets xsi:type="model:Master" id="33" x="184" y="992" measuredWidth="1376" measuredHeight="71">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Application%20Bar"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="215"/>
+      <widgetChanges xsi:type="o:Delete" ref="212"/>
+      <widgetChanges xsi:type="o:Delete" ref="209"/>
+      <widgetChanges xsi:type="o:Delete" ref="206"/>
+      <widgetChanges xsi:type="o:Delete" ref="204"/>
+      <widgets ref="203" width="1376"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="34" x="1472" y="1003" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+    <overrides>
+      <widgets ref="22">
+        <attributes key="icon" value="assets/wp-settings (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="35" x="211" y="1003" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+    <overrides>
+      <widgets ref="22">
+        <attributes key="icon" value="twitter (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="36" x="268" y="1004" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+    <overrides>
+      <widgets ref="22">
+        <attributes key="icon" value="facebook (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="37" x="328" y="1004" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>

@@ -120,6 +120,22 @@
       </widgets>
     </overrides>
   </widgets>
+  <widgets xsi:type="model:Master" id="22" x="211" y="1003" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+    <overrides>
+      <widgets ref="22">
+        <attributes key="icon" value="twitter (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="23" x="268" y="1004" measuredWidth="48" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="../assets/WindowsPhone/WindowsPhone.screen#Round%20Button"/>
+    <overrides>
+      <widgets ref="22">
+        <attributes key="icon" value="facebook (medium)"/>
+      </widgets>
+    </overrides>
+  </widgets>
   <hRuler/>
   <vRuler/>
   <font size="12px"/>
