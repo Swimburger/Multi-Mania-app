@@ -1,4 +1,4 @@
-package be.ana.nmct.multimania;
+package be.ana.nmct.multimania.ui;
 
 
 import android.app.Activity;
@@ -21,6 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import be.ana.nmct.multimania.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
