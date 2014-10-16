@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<<<<<<< HEAD
     <string name="app_name">Multi-Mania</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
+=======
+    <string name="app_name">MultiMania</string>
+    <string name="title_schedule">Schedule</string>
+    <string name="title_myschedule">My Schedule</string>
+    <string name="title_map">Map</string>
+    <string name="title_news">News</string>
+    <string name="title_about">About</string>
+    <string name="title_settings">Settings</string>
+>>>>>>> a6ec9c868763b163fc2ec92440b6b5a4bbf2d11f
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
