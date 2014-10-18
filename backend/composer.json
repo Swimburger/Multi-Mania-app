@@ -19,6 +19,8 @@
         "ext-mcrypt": "Required for HTTP cookie encryption"
     },
     "autoload": {
-        "psr-0": { "Slim": "." }
+        "psr-0": { "Slim": "." },
+        "psr-1": { "Repositories\\": "Repositories" },
+        "psr-2": { "Utilities\\": "Utilities" }
     }
 }
