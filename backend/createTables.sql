@@ -1,10 +1,8 @@
-CREATE DATABASE multimania;
-
-USE multimania;
+USE axeljonckheere
 
 CREATE TABLE `user` (
   `id` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY ('id'));
 
 CREATE TABLE `room` (
   `id` INT NOT NULL AUTO_INCREMENT,
