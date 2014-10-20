@@ -1,4 +1,6 @@
-USE axeljonckheere
+CREATE DATABASE multimania;
+
+USE multimania;
 
 CREATE TABLE `user` (
   `id` VARCHAR(255) NOT NULL,
