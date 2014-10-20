@@ -10,7 +10,7 @@ namespace Utilities;
 
 
 class Params {
-    const PRODUCTION=true;
+    const PRODUCTION=false;
     public static function getConnectionParams(){
         if(Params::PRODUCTION){
             return array("string"=>"mysql:host=student.howest.be/axel.jonckheere/mysqlstudent;dbname=axeljonckheere",
