@@ -12,11 +12,14 @@ namespace Repositories;
 use Utilities\Utitilies;
 
 class NewsRepository {
+    /**
+     * @return array
+     */
     public static function  getNews()
     {
         $sql_query = "SELECT * FROM news";
         $con=Utitilies::getConnection();
         $stmt   = $con->query($sql_query);
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 } 

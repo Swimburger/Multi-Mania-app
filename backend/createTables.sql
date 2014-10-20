@@ -4,7 +4,7 @@ USE multimania;
 
 CREATE TABLE `user` (
   `id` VARCHAR(255) NOT NULL,
-  PRIMARY KEY ('id'));
+  PRIMARY KEY (`id`));
 
 CREATE TABLE `room` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -27,7 +27,7 @@ CREATE TABLE `talk` (
   PRIMARY KEY (`id`),
   INDEX `id_idx` (`id` ASC),
   CONSTRAINT `id`
-    FOREIGN KEY (`id`)
+    FOREIGN KEY (`room_id`)
     REFERENCES `room` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
