@@ -12,11 +12,14 @@ use Utilities\Utitilies;
 
 class TagRepository{
 
-public static function getTags(){
+    /**
+     * @return array
+     */
+    public static function getTags(){
     $sql_query = "SELECT * FROM tag";
     $con=Utitilies::getConnection();
     $stmt   = $con->query($sql_query);
-    return $stmt->fetchAll();
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
 }

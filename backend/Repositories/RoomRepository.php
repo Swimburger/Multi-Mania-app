@@ -12,11 +12,14 @@ use Utilities\Utitilies;
 
 class RoomRepository{
 
+    /**
+     * @return array
+     */
     public static function getTalks(){
         $sql_query = "SELECT * FROM room";
         $con=Utitilies::getConnection();
         $stmt   = $con->query($sql_query);
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 }
