@@ -1,0 +1,106 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="be.ana.nmct.multimania.ui.AboutFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="left|top">
+
+        <ImageView
+            android:id="@+id/imgAbout"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Multi-Mania"
+            android:id="@+id/txtAboutTitle"
+            android:layout_alignBottom="@+id/imgAbout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/txtAboutInfo"
+            android:layout_below="@+id/imgAbout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Location"
+            android:id="@+id/txtLocation"
+            android:paddingTop="20dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/txtAboutInfo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name venue"
+            android:id="@+id/txtNameVenue"
+            android:layout_below="@+id/txtLocation"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Street"
+            android:id="@+id/txtStreet"
+            android:layout_below="@+id/txtNameVenue"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City"
+            android:id="@+id/txtCity"
+            android:layout_below="@+id/txtStreet"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Country"
+            android:id="@+id/txtCountry"
+            android:layout_below="@+id/txtCity"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp" />
+
+
+    </RelativeLayout>
+</FrameLayout>
