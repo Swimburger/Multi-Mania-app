@@ -2,16 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="be.ana.nmct.multimania.ui.ScheduleFragment">
+    tools:context="be.ana.nmct.multimania.ui.MapFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
 
-    <GridView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/gridViewSchedule"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
         android:layout_gravity="left|top"
-        android:numColumns="2"/>
-
+        />
 </FrameLayout>
