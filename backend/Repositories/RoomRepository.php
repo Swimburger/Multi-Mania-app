@@ -15,7 +15,7 @@ class RoomRepository{
     /**
      * @return array
      */
-    public static function getTalks(){
+    public static function getRooms(){
         $sql_query = "SELECT * FROM room";
         $con=Utitilies::getConnection();
         $stmt   = $con->query($sql_query);

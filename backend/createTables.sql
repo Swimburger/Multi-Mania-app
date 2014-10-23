@@ -27,8 +27,8 @@ CREATE TABLE `talk` (
   PRIMARY KEY (`id`),
   INDEX `id_idx` (`id` ASC),
   CONSTRAINT `id`
-    FOREIGN KEY (`room_id`)
-    REFERENCES `room` (`id`)
+  FOREIGN KEY (`room_id`)
+  REFERENCES `room` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -38,13 +38,13 @@ CREATE TABLE `talk_tag` (
   INDEX `id_idx` (`talk_id` ASC),
   INDEX `id_idx1` (`tag_id` ASC),
   CONSTRAINT `idtalk`
-    FOREIGN KEY (`talk_id`)
-    REFERENCES `talk` (`id`)
+  FOREIGN KEY (`talk_id`)
+  REFERENCES `talk` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `idtag`
-    FOREIGN KEY (`tag_id`)
-    REFERENCES `tag` (`id`)
+  FOREIGN KEY (`tag_id`)
+  REFERENCES `tag` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -54,13 +54,13 @@ CREATE TABLE `user_talk` (
   INDEX `talkid_idx` (`talk_id` ASC),
   INDEX `userid_idx` (`user_id` ASC),
   CONSTRAINT `userid`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
+  FOREIGN KEY (`user_id`)
+  REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `talkid`
-    FOREIGN KEY (`talk_id`)
-    REFERENCES `talk` (`id`)
+  FOREIGN KEY (`talk_id`)
+  REFERENCES `talk` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -74,3 +74,23 @@ CREATE TABLE `news` (
   `order` INT NULL DEFAULT 0,
   PRIMARY KEY (`id`));
 
+CREATE TABLE `speaker` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `talk_speaker` (
+  `talk_id` INT NOT NULL,
+  `speaker_id` INT NOT NULL,
+  PRIMARY KEY (`talk_id`, `speaker_id`),
+  INDEX `speaker_id_idx` (`speaker_id` ASC),
+  CONSTRAINT `talk_id`
+  FOREIGN KEY (`talk_id`)
+  REFERENCES `talk` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `speaker_id`
+  FOREIGN KEY (`speaker_id`)
+  REFERENCES `speaker` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);

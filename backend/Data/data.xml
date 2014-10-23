@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <rooms>
+        <room id="1" name="ROOM 1"/>
+        <room id="2" name="ROOM 2"/>
+        <room id="3" name="ROOM 3"/>
+        <room id="4" name="ROOM 4"/>
+    </rooms>
+    <tags>
+        <tag id="1" name="INSP" />
+        <tag id="2" name="ADOBE" />
+        <tag id="3" name="ENTRE" />
+        <tag id="4" name="DEV" />
+        <tag id="5" name="VIDEO" />
+        <tag id="6" name="MEDIA" />
+        <tag id="7" name="3DGAME" />
+        <tag id="8" name="COM" />
+        <tag id="9" name="MOBILE" />
+        <tag id="10" name="DESIGN" />
+        <tag id="11" name="AUG" />
+        <tag id="12" name="WEB" />
+    </tags>
+    <speakers>
+        <speaker id="1" name="Mihai Corlan" />
+        <speaker id="2" name="Michael Chaize" />
+        <speaker id="3" name="Seb Lee-Delisle" />
+        <speaker id="4" name="Geert Coppens" />
+        <speaker id="5" name="Maarten Balliauw" />
+        <speaker id="6" name="Joost van der Hoeven" />
+    </speakers>
+    <talks>
+        <talk id="1" room-id="1" isKeynote="1">
+            <title>Adobe Keynote: The new creative #part I</title>
+            <from>2014-05-19T09:30:00</from>
+            <to>2014-05-19T10:30:00</to>
+            <content>
+                Discover how the new creatives start to reinvent themselves from a traditional designer to a modern web designer, how they become an object designer thanks to 3D printing in Photoshop and experience how Adobe innovates for webdesigners.
+            </content>
+        </talk>
+        <talk id="2" room-id="1" isKeynote="0">
+            <title>CreativeJS – getting artistic with code</title>
+            <from>2014-05-19T10:45:00</from>
+            <to>2014-05-19T11:30:00</to>
+            <content>
+                Venturing into the unknown is scary, but fun things happen when you try new things. Seb will show you that it’s rewarding to get out of your comfort zone and blur the boundaries between artist and coder. He’ll be talking about his recent experiments with lasers for his digital fireworks display, PixelPyros, and of course, expect some dangerous live demos.
+            </content>
+        </talk>
+        <talk id="2" room-id="1" isKeynote="0">
+            <title>Moovly: how to create an online animation platform for dummies</title>
+            <from>2014-05-19T10:45:00</from>
+            <to>2014-05-19T11:30:00</to>
+            <content>
+                Moovly is a startup that aims to democratize the creation of animated videos. The company offers a SaaS platform that allows anyone to easily create multimedia content using a library of media objects: animations, sounds, video clips… For this library, Moovly relies on a community of multimedia experts, designers and artists. This session tells the story of a multimedia startup from idea to a platform daily used by thousands of users. We’ll also zoom in on the business and technical challenges encountered, as well as the big usability question: how do you get an inexperienced crowd to create great animated content they’re proud enough about to share?
+            </content>
+        </talk>
+        <talk id="3" room-id="2" isKeynote="0">
+            <title>A deep-dive into Windows Azure Web Sites and Project Kudu</title>
+            <from>2014-05-19T10:45:00</from>
+            <to>2014-05-19T11:30:00</to>
+            <content>
+                Microsoft has a cloud platform which runs .NET, NodeJS and PHP. All 101 talks out there will show you the same: it’s easy to deploy, it scales out on demand and it runs WordPress. Great! But what about doing real things? In this session, we’ll explore the things they don’t teach kids in school. How about trying to find out the architecture of this platform? What’s with Project Kudu? What about the different deployment options for Windows Azure Web Sites, the development flow and some awesome things you can do with the command line tools? Did you know you can modify the automated build process? Running background jobs in a website? Join me in this deep-dive exploration of some known and some lesser known features of the platform.
+            </content>
+        </talk>
+        <talk id="2" room-id="3" isKeynote="0">
+            <title>Adobe Video Pro Bootcamp</title>
+            <from>2014-05-19T10:45:00</from>
+            <to>2014-05-19T11:30:00</to>
+            <content>
+                Use all kinds of video and graphics to create a stunning video.
+            </content>
+        </talk>
+    </talks>
+    <talk_tags>
+
+    </talk_tags>
+    <user_talks>
+
+    </user_talks>
+    <news>
+        <newsitem importance="0" order="0">
+            <title>AFTERPARTY @ HOOCHIE COOCHIE</title>
+            <short_description>
+                The Official Afterparty of the Multi-Mania conference will take place on May 20th, 2014 starting from 20:30 at Hoochie Coochie (Jan Persijnstraat 12, 8500 Kortrijk). Meet some of the Multi-Mania speakers, enjoy your free drink and show us your party moves.
+            </short_description>
+            <long_description>
+                <p>The Official Afterparty of the Multi-Mania conference will take place on May 20th, 2014 starting from 20:30 at Hoochie Coochie (Jan Persijnstraat 12, 8500 Kortrijk). Meet some of the Multi-Mania speakers, enjoy your free drink and show us your party moves.</p><p>Go with our Multi-Mania pixel logo on the picture and get a personalized Vedett bottle.</p><p>Bring your badge to have more fun and a free drink ;-)</p><p><a href="https://www.facebook.com/events/239572906236619/?context=create&amp;source=49"> &gt;&gt; See Facebook Event</a></p>
+            </long_description>
+        </newsitem>
+    </news>
+</data>
