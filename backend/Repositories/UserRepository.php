@@ -28,4 +28,11 @@ class UserRepository{
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':userid'=>$userid,':talkid'=>$talkid));
     }
+
+    public static function removeFavorite($userid,$talkid){
+        $sql_query = "DELETE FROM user_talk WHERE user_id=:userid AND talk_id=:talkid";
+        $con=Utitilies::getConnection();
+        $stmt = $con->prepare($sql_query);
+        return $stmt->execute(array(':userid'=>$userid,':talkid'=>$talkid));
+    }
 }

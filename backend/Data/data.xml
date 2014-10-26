@@ -29,6 +29,10 @@
         <speaker id="6" name="Joost van der Hoeven" />
     </speakers>
     <talks>
+        <!-- Day 1 -->
+        <!-- 8:45 -->
+        <!-- Doors open -->
+        <!-- 9:30 - 10:30 -->
         <talk id="1" room-id="1" isKeynote="1">
             <title>Adobe Keynote: The new creative #part I</title>
             <from>2014-05-19T09:30:00</from>
@@ -37,6 +41,7 @@
                 Discover how the new creatives start to reinvent themselves from a traditional designer to a modern web designer, how they become an object designer thanks to 3D printing in Photoshop and experience how Adobe innovates for webdesigners.
             </content>
         </talk>
+        <!-- 10:45 - 11:30 -->
         <talk id="2" room-id="1" isKeynote="0">
             <title>CreativeJS – getting artistic with code</title>
             <from>2014-05-19T10:45:00</from>
@@ -45,7 +50,7 @@
                 Venturing into the unknown is scary, but fun things happen when you try new things. Seb will show you that it’s rewarding to get out of your comfort zone and blur the boundaries between artist and coder. He’ll be talking about his recent experiments with lasers for his digital fireworks display, PixelPyros, and of course, expect some dangerous live demos.
             </content>
         </talk>
-        <talk id="2" room-id="1" isKeynote="0">
+        <talk id="3" room-id="2" isKeynote="0">
             <title>Moovly: how to create an online animation platform for dummies</title>
             <from>2014-05-19T10:45:00</from>
             <to>2014-05-19T11:30:00</to>
@@ -53,7 +58,7 @@
                 Moovly is a startup that aims to democratize the creation of animated videos. The company offers a SaaS platform that allows anyone to easily create multimedia content using a library of media objects: animations, sounds, video clips… For this library, Moovly relies on a community of multimedia experts, designers and artists. This session tells the story of a multimedia startup from idea to a platform daily used by thousands of users. We’ll also zoom in on the business and technical challenges encountered, as well as the big usability question: how do you get an inexperienced crowd to create great animated content they’re proud enough about to share?
             </content>
         </talk>
-        <talk id="3" room-id="2" isKeynote="0">
+        <talk id="4" room-id="3" isKeynote="0">
             <title>A deep-dive into Windows Azure Web Sites and Project Kudu</title>
             <from>2014-05-19T10:45:00</from>
             <to>2014-05-19T11:30:00</to>
@@ -61,7 +66,7 @@
                 Microsoft has a cloud platform which runs .NET, NodeJS and PHP. All 101 talks out there will show you the same: it’s easy to deploy, it scales out on demand and it runs WordPress. Great! But what about doing real things? In this session, we’ll explore the things they don’t teach kids in school. How about trying to find out the architecture of this platform? What’s with Project Kudu? What about the different deployment options for Windows Azure Web Sites, the development flow and some awesome things you can do with the command line tools? Did you know you can modify the automated build process? Running background jobs in a website? Join me in this deep-dive exploration of some known and some lesser known features of the platform.
             </content>
         </talk>
-        <talk id="2" room-id="3" isKeynote="0">
+        <talk id="5" room-id="4" isKeynote="0">
             <title>Adobe Video Pro Bootcamp</title>
             <from>2014-05-19T10:45:00</from>
             <to>2014-05-19T11:30:00</to>
@@ -69,13 +74,515 @@
                 Use all kinds of video and graphics to create a stunning video.
             </content>
         </talk>
+        <!-- 11:45 - 12:30 -->
+        <talk id="6" room-id="1" isKeynote="0">
+            <title>Become the new creative!</title>
+            <from>2014-05-19T11:45:00</from>
+            <to>2014-05-19T12:30:00</to>
+            <content>
+                Bert Dries was recognized by Adobe as one of THE new creatives. Pieter and Bert will share how to use today’s communities and technology: Get inspired, create and get noticed.
+            </content>
+        </talk>
+        <talk id="7" room-id="2" isKeynote="0">
+            <title>JavaScript ♥ Unicode</title>
+            <from>2014-05-19T11:45:00</from>
+            <to>2014-05-19T12:30:00</to>
+            <content>
+                In this talk we’ll take a look at the various ways JavaScript relies on Unicode, what the consequences are for JavaScript developers wishing to support full Unicode, and how the upcoming ECMAScript 6 will improve this.
+            </content>
+        </talk>
+        <talk id="8" room-id="3" isKeynote="0">
+            <title>Behind the code</title>
+            <from>2014-05-19T11:45:00</from>
+            <to>2014-05-19T12:30:00</to>
+            <content>
+                In this talk Gwen will take you through some of his latest creative coding experiments. He will take you behind the code of FWA Award winning Chrome Experiments like Code::Brush and Mirror. Prepare yourself for inspiring insights on tech setup, creative coding techniques and workflow. And on top of that some personal strategies to have really great fun while creating awesome useless stuff. After this talk you’ll agree that ‘If only I had the time’ is just another lame excuse. Let’s start coding for fun!
+            </content>
+        </talk>
+        <talk id="9" room-id="4" isKeynote="0">
+            <title>Virtuality can do for art what hypothesis does for science</title>
+            <from>2014-05-19T11:45:00</from>
+            <to>2014-05-19T12:30:00</to>
+            <content>
+                The imagination of the creative artist goes often beyond ‘realistic’ laws. Crossroads need to be discovered, tools to be implemented for the artist to let them penetrate to the ‘real’. The trans-disciplinary interface between the artistic research domains (architecture – music – nature) creates on one hand the realisation that liberated design conditions are crucial and on the other hand the intention to jointly labor an artistic design in response to this realisation.
+                In a trans-discipline set-up, a synaesthesia between spatial and temporal experiences is created. This condition bring us to the virtuality (‘illusion’) as a useful factor in artistic research. Virtuality can do for art what hypothesis does for science.
+            </content>
+        </talk>
+        <!-- 12:30 - 14:00 -->
+        <!-- lunch -->
+        <!-- 14:00 - 14:45 -->
+        <talk id="10" room-id="1" isKeynote="0">
+            <title>How do you raise a Robot ?</title>
+            <from>2014-05-19T14:00:00</from>
+            <to>2014-05-19T14:45:00</to>
+            <content>
+                The number of publications about Robots has been growing exponentially over the last years. The focus used to be on the technical side, but lately people are wondering about the social implications of having Robots around. We are right to do so. The way we interact with each other and the way we surrender our lives to technology right now, will define the way we look at Robots in the future, and even more important: it will define how Robots will look back at us. Right now, we are all raising tomorrow’s Robots.
+            </content>
+        </talk>
+        <talk id="11" room-id="2" isKeynote="0">
+            <title>How MPC built a zombie apocalypse for world war z</title>
+            <from>2014-05-19T14:00:00</from>
+            <to>2014-05-19T14:45:00</to>
+            <content>
+                MPC Lead Crowd TD Jo Plaete breaks down the creative and technical processes behind the studios award winning work in Marc Forster’s World War Z. MPC’s main areas of work included creating the massive CG Zombie hordes in Jerusalem, including the Zombie Pyramid; the plane crash sequence; Wales sequence and the epilogue.
+            </content>
+        </talk>
+        <talk id="12" room-id="3" isKeynote="0">
+            <title>The human face</title>
+            <from>2014-05-19T14:00:00</from>
+            <to>2014-05-19T14:45:00</to>
+            <content>
+                The truth is on your face but you need a language to read it!
+            </content>
+        </talk>
+        <talk id="13" room-id="4" isKeynote="0">
+            <title>Responsive Design for E-commerce</title>
+            <from>2014-05-19T14:00:00</from>
+            <to>2014-05-19T14:45:00</to>
+            <content>
+                You’ve read how to make a responsive design for a single page start-up site, you’ve seen how a multi-million dollar company does it, but how can you do it in your normal project? We created this webshop with a budget, not with a load of money, and without good enough examples. We’ve bumped into a lot of problems/challenges and we want to share it with you, giving our view on design and front-end code.
+            </content>
+        </talk>
+        <!-- 15:00 - 15:45 -->
+        <talk id="14" room-id="1" isKeynote="0">
+            <title>All The Right Moves: Putting Your UI In Motion</title>
+            <from>2014-05-19T15:00:00</from>
+            <to>2014-05-19T15:45:00</to>
+            <content>
+                CSS animations are a powerful option to add design details to your work. When used well, motion can bring delightful moments to a user interface and improve interactions. In this session we’ll look at CSS in a whole new light and use it, plus a little JavaScript, to craft interactions that bring our web-based work to life.
+            </content>
+        </talk>
+        <talk id="15" room-id="2" isKeynote="0">
+            <title>Brain Computer Interfaces for Games and Entertainment</title>
+            <from>2014-05-19T15:00:00</from>
+            <to>2014-05-19T15:45:00</to>
+            <content>
+                Brain Computer Interfaces (BCI) allow users to interact with games or other software applications by measuring and analyzing EEG activity.  In this session we will explore the current potential and limitations of BCI technology and present some design guidelines for interactive applications. Interested participants can try out some demo applications afterwards.
+            </content>
+        </talk>
+        <talk id="16" room-id="3" isKeynote="0">
+            <title>Start-up Entrepreneurship</title>
+            <from>2014-05-19T15:00:00</from>
+            <to>2014-05-19T15:45:00</to>
+            <content>
+                The message of the session is to inspire young creatives to set up their idea, and create a structured business out of it. A good idea isn’t enough.<br />
+                Through a couple learnings from our start-up, we would like to inform about the challenges, great moments, fucked-up moments and things they should be careful with.<br />
+                An example is the relation with potential investors, and how to manage it.<br />
+                From a great idea to an unknown market, our start-up story can be visualised as a realistic view of a great, fun, dynamic mini-company.
+            </content>
+        </talk>
+        <talk id="17" room-id="4" isKeynote="0">
+            <title>All text tricks in the book with Javascript and Canvas</title>
+            <from>2014-05-19T15:00:00</from>
+            <to>2014-05-19T15:45:00</to>
+            <content>
+                Sakri has put together a collection of what can be done with text on the HTML5 Canvas using JavaScript. Drawing from nearly 15 years of coding visual effects, the bag of tricks is heavy. This session will start with the basics and move on with increasing complexity; each demo will be accompanied with key concepts, snippets of code and ideas for further exploration. To avoid any confusion or prerequisites, the demos are all built from scratch with minimal use of external libraries or frameworks. While the talk is centered around text effects, the techniques presented are certainly applicable outside the world of text effects and Canvas.
+            </content>
+        </talk>
+        <!-- 16:00 - 16:45 -->
+        <talk id="18" room-id="1" isKeynote="0">
+            <title>Rizon Parein / 3D Designer</title>
+            <from>2014-05-19T16:00:00</from>
+            <to>2014-05-19T16:45:00</to>
+            <content>
+                Rizon Parein has been working for top ad agencies across the globe doing mainly 3d illustrations. The keynote will cover the following:
+                <ul>
+                    <li>Background as a graffiti writer, flyer-designer &amp; motiongraphic artist.</li>
+                    <li>Neon hype triggered by the Drive poster that went viral</li>
+                    <li>Inspiration</li>
+                    <li>A typical client case and its frustrations</li>
+                    <li>Last work</li>
+                </ul>
+            </content>
+        </talk>
+        <talk id="19" room-id="2" isKeynote="0">
+            <title>Crafting for the internet of things – the tale of an interactive foosball table</title>
+            <from>2014-05-19T16:00:00</from>
+            <to>2014-05-19T16:45:00</to>
+            <content>
+                In this talk, Anner will give you insights into what it means to design and actually make internet-connected everyday products.
+                With the example of an interactive foosball table, meant to survive the jungle of Flemish youth houses, we have an excellent case on our hands.
+                We’ll look at why it is important to always put the user experience first and how to properly start from an ecosystem perspective but also at how to deal with small production runs and what NOT to do when sourcing parts from China.
+            </content>
+        </talk>
+        <talk id="20" room-id="3" isKeynote="0">
+            <title>Closing the loop</title>
+            <from>2014-05-19T16:00:00</from>
+            <to>2014-05-19T16:45:00</to>
+            <content>
+                Closing the loop – turning consumer engagements into shopper transactions
+            </content>
+        </talk>
+        <talk id="21" room-id="4" isKeynote="0">
+            <title>Web Design Trends : the Why and the How</title>
+            <from>2014-05-19T16:00:00</from>
+            <to>2014-05-19T16:45:00</to>
+            <content>
+                Web designers are having a great time. Over the last year, a lot of web design patterns took off: more simplicity, more cleanliness and more focus. This energy can translate into Flat Design, RWD, web fonts, parallax… Michaël has worked in the Web Design industry since the 90’s. In this session, he will list the current web design trends. Then he will explain WHY they took off, and HOW to achieve them. Get inspired and join the conversation about our Web Design industry.
+            </content>
+        </talk>
+        <!-- 17:00 - 17:45 -->
+        <talk id="22" room-id="1" isKeynote="0">
+            <title>Artistic Expression in Game Audio Design</title>
+            <from>2014-05-19T17:00:00</from>
+            <to>2014-05-19T17:45:00</to>
+            <content>
+                <p>
+                    Game audio has come a long way when measured by quality and advancements in technology, but still trails other art forms when it comes to artistic expression. Modern technology now makes it easier than ever to create high-quality production audio but does nothing to advance the greater goals of high artistry and meaningful work.
+                </p>
+                <p>
+                    In order to progress artistically as an expressive medium, game audio will take cues from other aesthetic points of reference such as film, theatre, performance art, Musique Concrete, etc., while finding its own unique identity derived from the fact that in a game, unlike those other art forms, events rarely unfold the same way every time the game is played.
+                </p>
+                <p>
+                    This presentation will take an in-depth examination of how we can drive deeper emotional resonance into our creations and push into new musical and sonic territories by focusing on the principles of audio aesthetics and artistic techniques from other media. How might we apply those devices to game audio design? How might we focus in on sound as a strong storytelling agent? Most importantly, how do we start thinking outside of the box and exploring unorthodox paths in order to create truly remarkable works of art?
+                </p>
+            </content>
+        </talk>
+        <talk id="23" room-id="2" isKeynote="0">
+            <title>Print in a digital age: have you changed your password yet?</title>
+            <from>2014-05-19T17:00:00</from>
+            <to>2014-05-19T17:45:00</to>
+            <content>
+                There is no one-way street from analogue to digital. Rather, there are transitions between the two, in both directions. But what makes a print magazine stand out? And how does it fit within this new digital reality? An inside view in how we make magazines, from wireframes to coffee table.
+            </content>
+        </talk>
+        <talk id="24" room-id="3" isKeynote="0">
+            <title>The Internet of Things: Explore a new world</title>
+            <from>2014-05-19T17:00:00</from>
+            <to>2014-05-19T17:45:00</to>
+            <content>
+                The Belgian Internet of Things Usergroup IoTBE brings you an inspring view into the fascinating future of the Internet of Things. How could a day in your life unroll when IoT technologies become ubiquitous? Let’s look into a chrystal ball and discover a future not so far off. Ultimately we show you how you may develop IoT devices and solutions yourself (DIY): off the shelf components like the sensortag allow everyone to prototype IoT solutions. You will see the APIs in action.
+                <br />
+                Website: <a href="http://www.iotbe.org">http://www.iotbe.org</a>
+            </content>
+        </talk>
+        <talk id="25" room-id="4" isKeynote="0">
+            <title>Cordova: write once, deploy (almost) everywhere</title>
+            <from>2014-05-19T17:00:00</from>
+            <to>2014-05-19T17:45:00</to>
+            <content>
+                Cordova is a platform that converts HTML, CSS and JavaScript into native mobile applications. The best known distribution of Cordova is probably PhoneGap.<br />
+                During this session, we will start with the installation of Cordova and a quick overview of the requirements. The main part will be the development of a small demo web application that requires some native functionality of the device such as the camera or the GPS. This web application will be deployed to several platforms using the rich feature set of Cordova.
+            </content>
+        </talk>
+
+        <!-- Day 2 -->
+        <!-- 8:45 -->
+        <!-- Doors open -->
+        <!-- 9:30 - 10:30 -->
+        <talk id="26" room-id="1" isKeynote="1">
+            <title>Adobe Keynote: The new creative #part II</title>
+            <from>2014-05-19T09:30:00</from>
+            <to>2014-05-19T10:30:00</to>
+            <content>
+                See how the new creatives work together, share their work with the community, create new visual designs using the latest Photoshop, Illustrator and discover the new features for videographers.
+            </content>
+        </talk>
+        <!-- 10:45 - 11:30 -->
+        <talk id="27" room-id="1" isKeynote="0">
+            <title>Life in the age of new body parts and extra senses</title>
+            <from>2014-05-19T10:45:00</from>
+            <to>2014-05-19T11:30:00</to>
+            <content>
+                Neil Harbisson is the co-founder of the Cyborg Foundation, an organization that promotes the use of cybernetics as a body part to extend human senses and perception. Harbisson has an antenna implanted in his skull that allows him to perceive the spectrum beyond human vision. Neil will talk about how becoming a cyborg has brought him closer to nature and to animals.
+            </content>
+        </talk>
+        <talk id="28" room-id="2" isKeynote="0">
+            <title>The magnetism of motion graphics: the attractive force linking art and technology</title>
+            <from>2014-05-19T10:45:00</from>
+            <to>2014-05-19T11:30:00</to>
+            <content>
+                <p>
+                    As motion graphics is becoming ever more accessible in terms of skill requirement and budget, creatives now have the power to unleash their inner geek and break out from classic animation techniques. Designers and animators have the opportunity to not only find alternative ways to execute projects, but new ways of presenting visuals and motion.
+                </p>
+                <p>
+                    While motion graphics has always been a mash-up of creativity and technology, Fred Huergo, Motion Graphics Lead and VFX Supervisor at international creative agency SuperHeroes, argues that the future lies in the marriage of these two disciplines and will even reveal his recipe to generate 3D pasta using mathematical formulas.
+                </p>
+            </content>
+        </talk>
+        <talk id="29" room-id="3" isKeynote="0">
+            <title>Bringing one Windows to developers (Level 200)</title>
+            <from>2014-05-19T10:45:00</from>
+            <to>2014-05-19T11:30:00</to>
+            <content>
+                <p>
+                    For developers, the key feature of Windows 8.1 &amp; Windows Phone 8.1 is that it delivers on the promise of one Windows for developers.<br />
+                    There are many exciting new features, such as new Live Tiles formats, Action Center programmability, Bluetooth LE support … But the best thing is that it delivers a converged developer platform where you use the same APIs and techniques on both Windows &amp; Windows Phone.
+                </p>
+                <p>
+                    This session will be an introduction on how to choose the right development technology and what’s new for you.
+                </p>
+            </content>
+        </talk>
+        <talk id="30" room-id="4" isKeynote="0">
+            <title>The Sum Is Greater Than The Parts</title>
+            <from>2014-05-19T10:45:00</from>
+            <to>2014-05-19T11:30:00</to>
+            <content>
+                Different tools bring in different capabilities and workflows; when you combine them you can get to an extra gear and build great things easier and faster.
+            </content>
+        </talk>
+        <!-- 11:45 - 12:30 -->
+        <talk id="31" room-id="1" isKeynote="0">
+            <title>Web Components – Building Blocks for the Web</title>
+            <from>2014-05-19T11:45:00</from>
+            <to>2014-05-19T12:30:00</to>
+            <content>
+                <p>
+                    The web platform has never been more exciting with new technologies and features introduced that make us fundamentally rethink the way we’re building apps. This session is a practical guide walking you through how to use these technologies across browsers today, learn about custom elements, HTML imports, Shadow DOM and much more.
+                </p>
+                <p>
+                    You’ll walk away with a good understanding of where web development is heading and how you can jump on board right now.
+                </p>
+            </content>
+        </talk>
+        <talk id="32" room-id="2" isKeynote="0">
+            <title>From Flash to HTML5… and back – a look behind the scene</title>
+            <from>2014-05-19T11:45:00</from>
+            <to>2014-05-19T12:30:00</to>
+            <content>
+                Till recently our product CHILI Publisher – an online document editor – was only available as a Flash application. Transitioning to HTML5 seemed like an impossible task, especially with specifics like text layout, font rendering and 3D visuals. After biting the bullet, and little less than 2 years later, CHILI Publisher’s HTML5 version integrated seamlessly and transparently into any web-to-print solution. Come and have a look behind the scene on how we successfully tackled this challenge; What problems did we have to overcome? Which decisions did we make, and why? And… what is our strategy for the future development of our software?
+            </content>
+        </talk>
+        <talk id="33" room-id="3" isKeynote="0">
+            <title>Off road thinking: reshaping creative production</title>
+            <from>2014-05-19T11:45:00</from>
+            <to>2014-05-19T12:30:00</to>
+            <content>
+                <p>
+                    The creative landscape is an ever-transforming terrain, continuously developing new paths that shape creative production. However, in order take the role of a pioneer, and not simply follow the well-worn path, Diederik Veelo, co-founder of The Ambassadors LAB, argues it is absolutely vital to challenge conventional roadmaps and hack your own.
+                </p>
+                <p>
+                    As founder of the innovation ‘lab’ for creative production agency The Ambassadors, and a self-confessed tech-geek, Diederik guides us through the worlds of visual effects, animation, music and technology. During his session he will persuade you to leave the safer roads behind and rethink, reshape and innovate every step on the journey, without losing sight of craft and sublime execution
+                </p>
+            </content>
+        </talk>
+        <talk id="34" room-id="4" isKeynote="0">
+            <title>Showing is not Explaining</title>
+            <from>2014-05-19T11:45:00</from>
+            <to>2014-05-19T12:30:00</to>
+            <content>
+                We started with an introduction to data visualization during MM13.<br />
+                For MM14 we continue with a more in depth look of data visualizations in many fields. We explore the ”power of interactive explaining” in Education, Sports, Journalism and Corporate PR.<br />
+                We will learn that Data isn’t always beautiful..
+            </content>
+        </talk>
+        <!-- 12:30 - 14:00 -->
+        <!-- lunch -->
+        <!-- 14:00 - 14:45 -->
+        <talk id="35" room-id="1" isKeynote="0">
+            <title>The story behind HKI</title>
+            <from>2014-05-19T14:00:00</from>
+            <to>2014-05-19T14:45:00</to>
+            <content>
+                David and Nathalie will take you behind the scenes of HKI. The all story until now, and their new reel. Be inspired!
+            </content>
+        </talk>
+        <talk id="36" room-id="2" isKeynote="0">
+            <title>Create your own cloud/home security system for only 60$</title>
+            <from>2014-05-19T14:00:00</from>
+            <to>2014-05-19T14:45:00</to>
+            <content>
+                <p>
+                    In this session you will learn to build a small motion detection system using a Netduino Plus 2 together with the Microsoft Azure Cloud and your Windows Phone 8.1.
+                </p>
+                <p>
+                    Difficult? As a .NET developer you already have the skills to step into the world of Internet Of Things, you just need that one push to get started. We will help you take that step.
+                </p>
+            </content>
+        </talk>
+        <talk id="37" room-id="3" isKeynote="0">
+            <title>FLEGA – GAMEiN: From gatekeepers to guns for hire: the new role of publishers?</title>
+            <from>2014-05-19T14:00:00</from>
+            <to>2014-05-19T14:45:00</to>
+            <content>
+                <p>
+                    FLEGA, the Flemish Games Association, and GAME IN, the Northern French &amp; Walloon games association, join hands for one business meeting bringing together international game publishers and our own game developers.
+                    FLEGA and GAME IN invited amongst others: Benoît Clerc (Head of Software @ BigBen Interactive), Rik Skews (Sony Europe) and Francis Ingrand (CEO @ Plug In Digital).
+                </p>
+                <p>
+                    A round table with representatives from game publishers featuring burning topics in the new delicate relationship between publishers and developers such as business models, marketing, distribution…
+                </p>
+                <p>
+                    Speakers:
+                </p>
+                <p>
+                    Benoït Clerc, BigBen Interactive
+                    Francis Ingrand, Plug In Digital
+                    Rik Skews, Sony Europe
+                    Marc Lavigne, Game In
+                    David Verbruggen, FLEGA
+                </p>
+            </content>
+        </talk>
+        <talk id="38" room-id="4" isKeynote="0">
+            <title>Design for Complexity</title>
+            <from>2014-05-19T14:00:00</from>
+            <to>2014-05-19T14:45:00</to>
+            <content>
+                During this presentation Thomas Clever presents cases and background information on how CLEVER°FRANKE approaches their (design) process for complexity.
+            </content>
+        </talk>
+        <!-- 15:00 - 15:45 -->
+        <talk id="39" room-id="1" isKeynote="0">
+            <title>The latest news on video from NAB, Las Vegas</title>
+            <from>2014-05-19T15:00:00</from>
+            <to>2014-05-19T15:45:00</to>
+        </talk>
+        <talk id="40" room-id="2" isKeynote="0">
+            <title>The Future of Extreme Web Browsing</title>
+            <from>2014-05-19T15:00:00</from>
+            <to>2014-05-19T15:45:00</to>
+            <content>
+                <p>
+                    Only a handful of people will get to climb Mt. Everest during their lifetime and even fewer will land backflips over 25 meter canyons on a mountain bike. In fact, you probably shouldn’t try that. And yet, growing support for WebGL and other immersive web technologies bring more of us closer to that reality than we’ve ever been before.
+                </p>
+                <p>
+                    In this talk, we’ll explore the future of interactive story telling and what it means to some of the world’s most passionate explorers. We’ll show you how these pioneers are using technology to bring some of the world’s most extreme moments into the living rooms of fans and enthusiasts. Come see how 3D, audio, video, gigapixel photography and compelling new hardware combine to create a brand new kind of narrative and experience.
+                </p>
+            </content>
+        </talk>
+        <talk id="41" room-id="3" isKeynote="0">
+            <title>Introducing AwayJS</title>
+            <from>2014-05-19T15:00:00</from>
+            <to>2014-05-19T15:45:00</to>
+            <content>
+                <p>
+                    Deep dive into the latest library from The Away Foundation with project founder Rob Bateman. AwayJS is a new graphics engine for the native web, simplifying the development of rich interactive content and games in both 2D and 3D.
+                </p>
+                <p>
+                    Rob will take a tour of key AwayJS features, with accompanying demos. AwayJS uses Typescript for its codebase, allowing developers the option of coding in a typed environment – something more suitable for complex games and application development. The session will end with a demonstration of an entire asset workflow from design assets to finished game, making use of the existing open source tool Away Builder.
+                </p>
+            </content>
+        </talk>
+        <talk id="42" room-id="4" isKeynote="0">
+            <title>Social Entrepreneurship, Inspiring Leadership, Business models for digital publishing and app commerce</title>
+            <from>2014-05-19T15:00:00</from>
+            <to>2014-05-19T15:45:00</to>
+            <content>
+                Phuong will give from her experiences tips about building and expanding a successful startup. She will provide tips about creative and innovative entrepreneurship. In addition how to bring together a good core team for your company. And of course her opinion about To App Or Not To App?<br />
+                About LayerGloss: LayerGloss provides an online platform with which you can create your own high-end native apps with. No coding skills needed on the concept of Drag, Drop &amp; Publish. For creatives by creatives. LayerGloss has won the StartupBootcamp accelerator program 2012. In addition LayerGloss was chosen by Wired UK as one of the 100 most hottest startups in Europe and number 1 of the Netherlands.
+            </content>
+        </talk>
+        <!-- 16:00 - 16:45 -->
+        <talk id="43" room-id="1" isKeynote="0">
+            <title>Where to find ideas</title>
+            <from>2014-05-19T16:00:00</from>
+            <to>2014-05-19T16:45:00</to>
+            <content>
+                <p>
+                    “If I knew where the good songs came from, I’d go there more often.” Leonard Cohen
+                </p>
+                <p>
+                    What can we do to be more innovative? How can we find those ‘aha!’ ideas that make us excited to start making new, creative things?
+                </p>
+                <p>
+                    This talk takes a speedy journey through my ideas and the stories of how I found them, including the methods I use to defeat that nasty creative block virus that is going around. <br />
+                    I spend most of my life attempting to find creative innovations wherever they may be hidden. I’ve convinced myself that within everything that surrounds us there are hundreds of brilliant ideas waiting to be found, we just have to look hard enough.
+                </p>
+                <p>
+                    Experimentation, self imposed potential public humiliation, bathing and the usefulness of bad eyesight are just some of the things I use in my obsessive and desperate search for inspiration.
+                </p>
+            </content>
+        </talk>
+        <talk id="44" room-id="2" isKeynote="0">
+            <title>Creating apps that run on your watch and talk to your cloud</title>
+            <from>2014-05-19T16:00:00</from>
+            <to>2014-05-19T16:45:00</to>
+            <content>
+                With smartphones becoming bigger and bigger in size each year, there’s a new market opening – a portable device to fit in your hand :)))<br />
+                Pebble is by far the best pretender for the position of the original smart watch – with it’s long battery life, e-paper screen, and flexible developer SDK for 3rd party apps, Pebble is truly the champion in its category.<br />
+                In this session I am going to walk the audience trough what Pebble is and does, and more interestingly – what can you make it do for you. Prepare for some Pebble C code coming your way. That topped with some Javascript, which allows your watch-app to connect to your server in the cloud!
+            </content>
+        </talk>
+        <talk id="45" room-id="3" isKeynote="0">
+            <title>Data driven marketing</title>
+            <from>2014-05-19T16:00:00</from>
+            <to>2014-05-19T16:45:00</to>
+            <content>
+                Talking about data, big data and how to make it into a good business. Predictive targeting, re-targeting, profiling and the use within e-commerce. Including Augmented Reality tools.
+            </content>
+        </talk>
+        <talk id="46" room-id="4" isKeynote="0">
+            <title>Brand yourself with Adobe Behance</title>
+            <from>2014-05-19T16:00:00</from>
+            <to>2014-05-19T16:45:00</to>
+            <content>
+                Adobe Behance, the LinkeIn for creatives across industries, is a platform for creative pro’s to showcase your latest work to the world. In this workshop you will learn how to set up your online portfolio step by step.
+            </content>
+        </talk>
+        <!-- 17:00 - 17:45 -->
+        <talk id="47" room-id="1" isKeynote="0">
+            <title>Trends 2014-2018</title>
+            <from>2014-05-19T17:00:00</from>
+            <to>2014-05-19T17:45:00</to>
+        </talk>
+        <talk id="48" room-id="2" isKeynote="0">
+            <title>Lightroom: the digital darkroom and more</title>
+            <from>2014-05-19T17:00:00</from>
+            <to>2014-05-19T17:45:00</to>
+            <content>
+                An introduction to Adobe Lightroom as an image database workflow. See how to import, organize, select and edit photo’s. Get valuable tips on how to improve your photo’s. Also learn how you can export your images directly to social media, a web gallery or a slideshow. Print, publish a book or just save your images is also possible. Lightroom saves your changes as metadata files. This enables you to quickly apply selected presets to make changes to large collections of pictures. The possibilities are endless.
+            </content>
+        </talk>
+        <talk id="49" room-id="3" isKeynote="0">
+            <title>The Future Of Interaction Design</title>
+            <from>2014-05-19T17:00:00</from>
+            <to>2014-05-19T17:45:00</to>
+            <content>
+                <p>
+                    After the rise and shine of smartphones, tablets and smart TV’s there is another game changer coming up.<br />
+                    Wearable devices like Nike’s Fuelband, Fitbit or Moov are finding their way to people all around us.<br />
+                    With hardware becoming so mainstream, even home automation (Nest) is finally innovating.<br />
+                    All of the sudden, these digital interactions seem to have no screen at all.
+                </p>
+                <p>
+                    In this talk, Wim Vanhenden will take you on an inspiring trip to the future of interaction design. From human input and body behaviour, enablers, hardware and software interfaces to creative output, meaningful machine learning and back.<br />
+                    Wim will show you a glimpse of what 2020 has to offer. After this talk, website will seem really boring, promised!
+                </p>
+            </content>
+        </talk>
+        <talk id="50" room-id="4" isKeynote="0">
+            <title>Gotta code them all, a Pokémon and HTML5 love story</title>
+            <from>2014-05-19T17:00:00</from>
+            <to>2014-05-19T17:45:00</to>
+            <content>
+                How do you make an original GameBoy adventure available on mobile and desktop? In this session Bert explains how he made it happen using just HTML5 and Javascript, and which challenges he encountered. Who needs a girlfriend when there’s JavaScript?
+            </content>
+        </talk>
     </talks>
     <talk_tags>
-
+        <!-- Keynote 1 -->
+        <talk_tag talk-id="1" tag-id="1" />
+        <talk_tag talk-id="1" tag-id="2" />
+        <!-- CreativeJs -->
+        <talk_tag talk-id="2" tag-id="1" />
+        <!-- Moovly -->
+        <talk_tag talk-id="3" tag-id="3" />
+        <!-- Azure -->
+        <talk_tag talk-id="4" tag-id="4" />
+        <!-- Video boot -->
+        <talk_tag talk-id="5" tag-id="5" />
+        <talk_tag talk-id="5" tag-id="2" />
+        <!-- New Creative -->
+        <talk_tag talk-id="6" tag-id="2" />
+        <talk_tag talk-id="6" tag-id="6" />
+        <!-- Unicode bah -->
+        <talk_tag talk-id="7" tag-id="4" />
+        <!-- Behind the code -->
+        <talk_tag talk-id="8" tag-id="1" />
+        <!-- blabla -->
+        <talk_tag talk-id="9" tag-id="6" />
+        <!-- lunch -->
+        <!-- raise robot -->
+        <talk_tag talk-id="10" tag-id="1" />
+        <!-- Zombie -->
+        <talk_tag talk-id="11" tag-id="7" />
+        <!-- The human face -->
+        <talk_tag talk-id="12" tag-id="8" />
+        <!--E-commerce -->
+        <talk_tag talk-id="13" tag-id="9" />
     </talk_tags>
-    <user_talks>
-
-    </user_talks>
     <news>
         <newsitem importance="0" order="0">
             <title>AFTERPARTY @ HOOCHIE COOCHIE</title>
@@ -85,6 +592,23 @@
             <long_description>
                 <p>The Official Afterparty of the Multi-Mania conference will take place on May 20th, 2014 starting from 20:30 at Hoochie Coochie (Jan Persijnstraat 12, 8500 Kortrijk). Meet some of the Multi-Mania speakers, enjoy your free drink and show us your party moves.</p><p>Go with our Multi-Mania pixel logo on the picture and get a personalized Vedett bottle.</p><p>Bring your badge to have more fun and a free drink ;-)</p><p><a href="https://www.facebook.com/events/239572906236619/?context=create&amp;source=49"> &gt;&gt; See Facebook Event</a></p>
             </long_description>
+            <image>http://multi-mania.be/14/wp-content/uploads/hoochie-coochie-3-470x470.jpg</image>
+        </newsitem>
+        <newsitem importance="0" order="1">
+            <title>AFTERPARTY @ HOOCHIE COOCHIE</title>
+            <short_description>
+                The Official Afterparty of the Multi-Mania conference will take place on May 20th, 2014 starting from 20:30 at Hoochie Coochie (Jan Persijnstraat 12, 8500 Kortrijk). Meet some of the Multi-Mania speakers, enjoy your free drink and show us your party moves.
+            </short_description>
+            <long_description>
+                    <h2>CONTEST: I am the new creative</h2>
+                    <p>More than ever before, creatives are defying labels, breaking new ground, and experimenting with new tools and mediums…</p>
+                    <p>Now it’s up to you to demonstrate that you are the true new creative of the Netherlands, Belgium and Luxembourg.</p>
+                    <p><strong>Adobe will showcase the most creative and beautiful work during Multi-Mania 2014</strong>.</p>
+                    <p><span id="more-1269"></span></p>
+                    <p>But that’s not all, Adobe will be rewarding the best entries with <strong>a free 1-year Creative Cloud membership</strong>!</p>
+                    <p><a title="THE NEW CREATIVE CONTEST" href="https://www.facebook.com/AdobeBenelux/app_1410437615895123" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.facebook.com']);">More information on the Adobe Facebook page</a></p>
+            </long_description>
+            <image>http://multi-mania.be/14/wp-content/uploads/TheNewCreative1-470x376.jpg</image>
         </newsitem>
     </news>
 </data>

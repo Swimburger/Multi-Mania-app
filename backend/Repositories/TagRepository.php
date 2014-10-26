@@ -22,4 +22,12 @@ class TagRepository{
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
 }
 
+    public static function insertTag($id, $name)
+    {
+        $sql_query = "INSERT INTO tag VALUES (:id,:name);";
+        $con=Utitilies::getConnection();
+        $stmt = $con->prepare($sql_query);
+        return $stmt->execute(array(':id'=>$id,':name'=>$name));
+    }
+
 }

@@ -1,33 +1,33 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Axel
- * Date: 20/10/2014
- * Time: 11:06
+ * User: Niels
+ * Date: 18/10/2014
+ * Time: 18:00
  */
 
 namespace Repositories;
 
+
 use Utilities\Utitilies;
 
-class RoomRepository{
-
+class SpeakerRepository {
     /**
      * @return array
      */
-    public static function getRooms(){
-        $sql_query = "SELECT * FROM room;";
+    public static function  getSpeakers()
+    {
+        $sql_query = "SELECT * FROM speaker";
         $con=Utitilies::getConnection();
         $stmt   = $con->query($sql_query);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public static function insertRoom($id, $name)
+    public static function insertSpeaker($id, $name)
     {
-        $sql_query = "INSERT INTO room VALUES (:id,:name);";
-        $con=Utitilies::getConnection();
+        $sql_query = "INSERT INTO speaker VALUES (:id,:name);";
+        $con = Utitilies::getConnection();
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':id'=>$id,':name'=>$name));
     }
-
-}
+} 
