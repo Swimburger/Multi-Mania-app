@@ -39,6 +39,8 @@ $app->post('/users/:id',function ($id) use ($app){
     if(UserRepository::insertUser($id)){
         echo $id;
     }else{
+        //check if user already exists and return it's id if so...
+        UserRepository::getUserById($id);//untested
         $app->error();
     }
 });

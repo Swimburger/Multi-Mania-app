@@ -35,4 +35,21 @@ class UserRepository{
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':userid'=>$userid,':talkid'=>$talkid));
     }
+
+    /**
+     * @param $id
+     * @return user|null
+     * Returns a user if there is a user in the db
+     * Untested...
+     */
+    public static function getUserById($id)
+    {
+        $sql_query = "SELECT * FROM user WHERE id=:id;";
+        $con=Utitilies::getConnection();
+        $stmt = $con->prepare($sql_query);
+        if($stmt->execute(array(':id'=>$id))){
+            return $stmt->fetchObject();
+        }
+        return null;
+    }
 }
