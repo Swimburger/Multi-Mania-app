@@ -6,6 +6,7 @@ use Repositories\TagRepository;
 use Repositories\UserRepository;
 use Repositories\TalkTagRepository;
 use Repositories\TalkSpeakerRepository;
+use Repositories\SpeakerRepository;
 use Data\Import;
 use Utilities\Params;
 
@@ -26,6 +27,8 @@ $app->get('/talk_speakers', 'getTalkSpeakers');
 $app->get('/rooms', 'getRooms');
 
 $app->get('/tags', 'getTags');
+
+$app->get('/speakers', 'getSpeakers');
 
 $app->get('/import/:secret','importData');
 
@@ -110,6 +113,10 @@ function getRooms() {
  */
 function getTags() {
     echo json_encode(TagRepository::getTags());
+}
+
+function getSpeakers(){
+    echo json_encode(SpeakerRepository::getSpeakers());
 }
 
 function importData($secret){
