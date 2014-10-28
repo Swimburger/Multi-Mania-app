@@ -19,4 +19,13 @@ public class NewsItem {
     public int order;
 
 
+    public NewsItem(int id, String title, String img, String shortDescription, String longDescription, int importance, int order) {
+        this.id=id;
+        this.title=title;
+        this.image=img;
+        this.shortDescription=shortDescription;
+        this.longDescription=longDescription;
+        this.importance=importance;
+        this.order=order;
+    }
 }

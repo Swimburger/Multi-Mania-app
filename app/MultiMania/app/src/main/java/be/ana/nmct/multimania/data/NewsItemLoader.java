@@ -27,7 +27,7 @@ public class NewsItemLoader extends AsyncTaskLoader<Cursor> {
                             MultimaniaContract.NewsItemEntry.TITLE,
                             MultimaniaContract.NewsItemEntry.IMAGE,
                             MultimaniaContract.NewsItemEntry.SHORT_DESCRIPTION,
-                            MultimaniaContract.NewsItemEntry.DESCRIPTION,
+                            MultimaniaContract.NewsItemEntry.LONG_DESCRIPTION,
                             MultimaniaContract.NewsItemEntry.IMPORTANCE,
                             MultimaniaContract.NewsItemEntry.ORDER},
                 null,

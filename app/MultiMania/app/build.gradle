@@ -10,11 +10,13 @@ android {
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
     }
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
         }
     }
 }

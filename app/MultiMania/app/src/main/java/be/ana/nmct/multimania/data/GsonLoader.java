@@ -2,7 +2,6 @@ package be.ana.nmct.multimania.data;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.database.Cursor;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,7 +20,7 @@ import java.util.List;
  */
 public class GsonLoader<T> extends AsyncTaskLoader<List<T>> {
 
-    private static final String BASE_URL = "http://student.howest.be/niels.swimberghe/multimania/";
+    private static final String BASE_URL = be.ana.nmct.multimania.BuildConfig.API_URL;
     private String apiPath;
     private Object lock = new Object();
 

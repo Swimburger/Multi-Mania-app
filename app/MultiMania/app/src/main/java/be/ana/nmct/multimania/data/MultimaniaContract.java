@@ -1,6 +1,5 @@
 package be.ana.nmct.multimania.data;
 
-import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -25,9 +24,9 @@ public class MultimaniaContract {
         public static final String TITLE = "title";
         public static final String IMAGE = "image";
         public static final String SHORT_DESCRIPTION = "short_description";
-        public static final String DESCRIPTION = "description";
+        public static final String LONG_DESCRIPTION = "long_description";
         public static final String IMPORTANCE  = "importance";
-        public static final String ORDER  = "order";
+        public static final String ORDER  = "news_order";
     }
 
 
@@ -44,11 +43,32 @@ public class MultimaniaContract {
         public static final String IS_KEYNOTE = "is_keynote";
     }
 
+    public static final class TalkTagEntry implements BaseColumns{
+        public static final String TABLE_NAME = "talk_tag";
+        public static final String TALK_TAG_ID = "talk_tag_id";
+        public static final String TALK_ID = "talk_id";
+        public static final String TAG_ID ="tag_id";
+    }
+
     public static final class RoomEntry implements BaseColumns{
         public static final String TABLE_NAME = "room";
 
         public static final String ROOM_ID = "room_id";
         public static final String NAME = "name";
+    }
+
+    public static final class SpeakerEntry implements BaseColumns{
+        public static final String TABLE_NAME = "speaker";
+
+        public static final String SPEAKER_ID = "speaker_id";
+        public static final String NAME = "name";
+    }
+
+    public static final class TalkSpeakerEntry implements BaseColumns{
+        public static final String TABLE_NAME = "talk_speaker";
+        public static final String TALK_TAG_ID = "talk_speaker_id";
+        public static final String TALK_ID = "talk_id";
+        public static final String SPEAKER_ID ="speaker_id";
     }
 
     public static final class UserEntry implements BaseColumns{

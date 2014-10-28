@@ -1,14 +1,13 @@
 package be.ana.nmct.multimania.model;
 
 /**
- * Created by Axel on 22/10/2014.
+ * Created by Niels on 28/10/2014.
  */
-public class Room {
-
+public class Speaker {
     public int id;
     public String name;
 
-    public Room(int id, String name) {
+    public Speaker(int id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -23,4 +23,13 @@ public class Talk {
     @Expose
     public List<Tag> tags;
 
+    public Talk(int id, String title, Date from, Date to, String description, int roomId, boolean isKeynote) {
+        this.id = id;
+        this.title = title;
+        this.from = from;
+        this.to = to;
+        this.description = description;
+        this.roomId = roomId;
+        this.isKeynote = isKeynote;
+    }
 }

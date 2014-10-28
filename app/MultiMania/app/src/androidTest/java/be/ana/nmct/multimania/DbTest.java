@@ -1,0 +1,130 @@
+package be.ana.nmct.multimania;
+
+import android.app.Application;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.test.ApplicationTestCase;
+import android.util.Log;
+
+import java.text.ParseException;
+
+import be.ana.nmct.multimania.data.DbHelper;
+import be.ana.nmct.multimania.data.MultimaniaContract.NewsItemEntry;
+import be.ana.nmct.multimania.data.MultimaniaContract.RoomEntry;
+import be.ana.nmct.multimania.data.MultimaniaContract.SpeakerEntry;
+import be.ana.nmct.multimania.data.MultimaniaContract.TagEntry;
+import be.ana.nmct.multimania.data.MultimaniaContract.TalkEntry;
+import be.ana.nmct.multimania.model.NewsItem;
+import be.ana.nmct.multimania.model.Room;
+import be.ana.nmct.multimania.model.Speaker;
+import be.ana.nmct.multimania.model.Tag;
+import be.ana.nmct.multimania.model.Talk;
+import be.ana.nmct.multimania.model.TalkSpeaker;
+import be.ana.nmct.multimania.model.TalkTag;
+import be.ana.nmct.multimania.utils.Utility;
+
+/**
+ * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
+ */
+public class DbTest extends ApplicationTestCase<Application> {
+    public static final String TAG = DbTest.class.getSimpleName();
+    private static NewsItem sNewsItem = new NewsItem(1,"Test","test.png","short description","long description",0,1);
+    private static Room sRoom = new Room(1,"Test room");
+    private static Tag sTag = new Tag(1,"TEST");
+    private static Speaker sSpeaker = new Speaker(1,"Test speaker");
+    private static Talk sTalk = null;
+    private static TalkTag sTalkTag = new TalkTag(1,1);
+    private static TalkSpeaker sTalkSpeaker = new TalkSpeaker(1,1);
+    static{
+        try {
+            sTalk = new Talk(1,"Test talk", Utility.ConvertStringToDate("2014-05-19 10:45:00"),Utility.ConvertStringToDate("2014-05-19 11:30:00"),"TestDescription",1,false);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+    public DbTest() {
+        super(Application.class);
+    }
+
+    public void testCreateDb(){
+        mContext.deleteDatabase(DbHelper.DATABASE_NAME);
+        SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
+        assertTrue(db.isOpen());
+        db.close();
+    }
+
+    public void testInsertNewsItem(){
+        SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
+        long returnedId = DbHelper.InsertNewsItem(db, sNewsItem);
+        assertTrue(-1l != returnedId);
+        Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sNewsItem.id);
+        Cursor cursor = DbHelper.GetNewsItemById(db, sNewsItem.id);
+        cursor.moveToFirst();
+        int idIndex =cursor.getColumnIndex(NewsItemEntry._ID);
+        assertEquals(cursor.getInt(idIndex),sNewsItem.id);
+        db.close();
+    }
+
+    public void testInsertRoom(){
+        SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
+        long returnedId = DbHelper.InsertRoom(db, sRoom);
+        assertTrue(-1l!=returnedId);
+        Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sRoom.id);
+        Cursor cursor = DbHelper.GetRoomById(db, sRoom.id);
+        cursor.moveToFirst();
+        int idIndex =cursor.getColumnIndex(RoomEntry._ID);
+        assertEquals(cursor.getInt(idIndex),sRoom.id);
+        db.close();
+    }
+
+    public void testInsertTag(){
+        SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
+        long returnedId = DbHelper.InsertTag(db, sTag);
+        assertTrue(-1l!=returnedId);
+        Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sTag.id);
+        Cursor cursor = DbHelper.GetTagById(db, sTag.id);
+        cursor.moveToFirst();
+        int idIndex =cursor.getColumnIndex(TagEntry._ID);
+        assertEquals(cursor.getInt(idIndex),sTag.id);
+        db.close();
+    }
+
+    public void testInsertSpeaker(){
+        SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
+        long returnedId = DbHelper.InsertSpeaker(db, sSpeaker);
+        assertTrue(-1l!=returnedId);
+        Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sTag.id);
+        Cursor cursor = DbHelper.GetSpeakerById(db, sTag.id);
+        cursor.moveToFirst();
+        int idIndex =cursor.getColumnIndex(SpeakerEntry._ID);
+        assertEquals(cursor.getInt(idIndex),sTag.id);
+        db.close();
+    }
+
+    public void testInsertTalk(){
+        SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
+        long returnedId = DbHelper.InsertTalk(db, sTalk);
+        assertTrue(-1l!=returnedId);
+        Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sTalk.id);
+        Cursor cursor = DbHelper.GetTalkById(db, sTalk.id);
+        cursor.moveToFirst();
+        int idIndex =cursor.getColumnIndex(TalkEntry._ID);
+        assertEquals(cursor.getInt(idIndex),sTalk.id);
+        db.close();
+    }
+
+    public void testInsertTalkTag(){
+        SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
+        long returnedId = DbHelper.InsertTalkTag(db, sTalkTag);
+        assertTrue(-1l!=returnedId);
+        Log.d(TAG, "Returned id = " + returnedId);
+        db.close();
+    }
+    public void testInsertTalkSpeaker(){
+        SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
+        long returnedId = DbHelper.InsertTalkSpeaker(db, sTalkSpeaker);
+        assertTrue(-1l!=returnedId);
+        Log.d(TAG, "Returned id = " + returnedId);
+        db.close();
+    }
+}
