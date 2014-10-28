@@ -35,6 +35,11 @@ public class GsonLoader<T> extends AsyncTaskLoader<List<T>> {
         return parseJson();
     }
 
+    @Override
+    protected void onStartLoading() {
+        forceLoad();
+    }
+
     public List<T> parseJson() {
         synchronized (lock) {
             List<T> result = new ArrayList<T>();
@@ -54,6 +59,8 @@ public class GsonLoader<T> extends AsyncTaskLoader<List<T>> {
             return result;
         }
     }
+
+
 
 
 }
