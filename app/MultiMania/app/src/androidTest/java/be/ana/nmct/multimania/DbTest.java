@@ -1,12 +1,15 @@
 package be.ana.nmct.multimania;
 
 import android.app.Application;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.test.ApplicationTestCase;
 import android.util.Log;
 
 import java.text.ParseException;
+import java.util.Map;
+import java.util.Set;
 
 import be.ana.nmct.multimania.data.DbHelper;
 import be.ana.nmct.multimania.data.MultimaniaContract.NewsItemEntry;
@@ -120,11 +123,27 @@ public class DbTest extends ApplicationTestCase<Application> {
         Log.d(TAG, "Returned id = " + returnedId);
         db.close();
     }
+
     public void testInsertTalkSpeaker(){
         SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
         long returnedId = DbHelper.InsertTalkSpeaker(db, sTalkSpeaker);
         assertTrue(-1l!=returnedId);
         Log.d(TAG, "Returned id = " + returnedId);
         db.close();
+    }
+
+    static void validateCursor(Cursor valueCursor, ContentValues expectedValues) {
+
+        assertTrue(valueCursor.moveToFirst());
+
+        Set<Map.Entry<String, Object>> valueSet = expectedValues.valueSet();
+        for (Map.Entry<String, Object> entry : valueSet) {
+            String columnName = entry.getKey();
+            int idx = valueCursor.getColumnIndex(columnName);
+            assertFalse(idx == -1);
+            String expectedValue = entry.getValue().toString();
+            assertEquals(expectedValue, valueCursor.getString(idx));
+        }
+        valueCursor.close();
     }
 }

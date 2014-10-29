@@ -167,6 +167,11 @@ public class DbHelper  extends SQLiteOpenHelper{
     }
 
     public static long InsertNewsItem(SQLiteDatabase db, NewsItem newsItem) {
+        ContentValues values = getContentValues(newsItem);
+        return db.insert(NewsItemEntry.TABLE_NAME,null,values);
+    }
+
+    public static ContentValues getContentValues(NewsItem newsItem) {
         ContentValues values = new ContentValues();
         values.put(NewsItemEntry._ID,newsItem.id);
         values.put(NewsItemEntry.TITLE,newsItem.title);
@@ -175,7 +180,7 @@ public class DbHelper  extends SQLiteOpenHelper{
         values.put(NewsItemEntry.LONG_DESCRIPTION,newsItem.longDescription);
         values.put(NewsItemEntry.IMPORTANCE,newsItem.importance);
         values.put(NewsItemEntry.ORDER,newsItem.order);
-        return db.insert(NewsItemEntry.TABLE_NAME,null,values);
+        return values;
     }
 
     public static Cursor GetNewsItemById(SQLiteDatabase db, int id) {
@@ -183,10 +188,15 @@ public class DbHelper  extends SQLiteOpenHelper{
     }
 
     public static long InsertTag(SQLiteDatabase db, Tag tag) {
+        ContentValues values = getContentValues(tag);
+        return db.insert(TagEntry.TABLE_NAME,null,values);
+    }
+
+    public static ContentValues getContentValues(Tag tag) {
         ContentValues values = new ContentValues();
         values.put(TagEntry._ID,tag.id);
         values.put(TagEntry.NAME,tag.name);
-        return db.insert(TagEntry.TABLE_NAME,null,values);
+        return values;
     }
 
     public static Cursor GetTagById(SQLiteDatabase db, int id) {
@@ -194,10 +204,15 @@ public class DbHelper  extends SQLiteOpenHelper{
     }
 
     public static long InsertRoom(SQLiteDatabase db, Room room) {
+        ContentValues values = getContentValues(room);
+        return db.insert(RoomEntry.TABLE_NAME, null, values);
+    }
+
+    public static ContentValues getContentValues(Room room) {
         ContentValues values = new ContentValues();
         values.put(RoomEntry._ID,room.id);
         values.put(RoomEntry.NAME,room.name);
-        return db.insert(RoomEntry.TABLE_NAME, null, values);
+        return values;
     }
 
     public static Cursor GetRoomById(SQLiteDatabase db, int id) {
@@ -205,6 +220,11 @@ public class DbHelper  extends SQLiteOpenHelper{
     }
 
     public static long InsertTalk(SQLiteDatabase db, Talk talk) {
+        ContentValues values = getContentValues(talk);
+        return db.insert(TalkEntry.TABLE_NAME, null, values);
+    }
+
+    public static ContentValues getContentValues(Talk talk) {
         ContentValues values = new ContentValues();
         values.put(TalkEntry._ID,talk.id);
         values.put(TalkEntry.TITLE,talk.title);
@@ -213,7 +233,7 @@ public class DbHelper  extends SQLiteOpenHelper{
         values.put(TalkEntry.DATE_UNTIL,Utility.ConvertDateToString(talk.to));
         values.put(TalkEntry.ROOM_ID,talk.roomId);
         values.put(TalkEntry.IS_KEYNOTE,talk.isKeynote);
-        return db.insert(TalkEntry.TABLE_NAME, null, values);
+        return values;
     }
 
     public static Cursor GetTalkById(SQLiteDatabase db, int id) {
@@ -221,10 +241,15 @@ public class DbHelper  extends SQLiteOpenHelper{
     }
 
     public static long InsertSpeaker(SQLiteDatabase db, Speaker speaker) {
+        ContentValues values = getContentValues(speaker);
+        return db.insert(SpeakerEntry.TABLE_NAME, null, values);
+    }
+
+    public static ContentValues getContentValues(Speaker speaker) {
         ContentValues values = new ContentValues();
         values.put(SpeakerEntry._ID,speaker.id);
         values.put(SpeakerEntry.NAME,speaker.name);
-        return db.insert(SpeakerEntry.TABLE_NAME, null, values);
+        return values;
     }
 
     public static Cursor GetSpeakerById(SQLiteDatabase db, int id) {
@@ -232,16 +257,26 @@ public class DbHelper  extends SQLiteOpenHelper{
     }
 
     public static long InsertTalkTag(SQLiteDatabase db, TalkTag talkTag) {
-        ContentValues values = new ContentValues();
-        values.put(TalkTagEntry.TALK_ID,talkTag.talkId);
-        values.put(TalkTagEntry.TAG_ID,talkTag.tagId);
+        ContentValues values = getContentValues(talkTag);
         return db.insert(TalkTagEntry.TABLE_NAME, null, values);
     }
 
+    public static ContentValues getContentValues(TalkTag talkTag) {
+        ContentValues values = new ContentValues();
+        values.put(TalkTagEntry.TALK_ID,talkTag.talkId);
+        values.put(TalkTagEntry.TAG_ID,talkTag.tagId);
+        return values;
+    }
+
     public static long InsertTalkSpeaker(SQLiteDatabase db, TalkSpeaker talkSpeaker) {
+        ContentValues values = getContentValues(talkSpeaker);
+        return db.insert(TalkSpeakerEntry.TABLE_NAME, null, values);
+    }
+
+    public static ContentValues getContentValues(TalkSpeaker talkSpeaker) {
         ContentValues values = new ContentValues();
         values.put(TalkSpeakerEntry.TALK_ID,talkSpeaker.talkId);
         values.put(TalkSpeakerEntry.SPEAKER_ID,talkSpeaker.speakerId);
-        return db.insert(TalkSpeakerEntry.TABLE_NAME, null, values);
+        return values;
     }
 }

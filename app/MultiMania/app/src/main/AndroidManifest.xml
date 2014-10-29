@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -19,6 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".data.MultimaniaProvider"
+            android:authorities="be.ana.nmct.multimania"
+            android:enabled="true"
+            android:exported="false" >
+        </provider>
     </application>
 
 </manifest>
