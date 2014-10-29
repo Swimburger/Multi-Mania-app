@@ -48,7 +48,7 @@ class UserRepository{
         $con=Utitilies::getConnection();
         $stmt = $con->prepare($sql_query);
         if($stmt->execute(array(':id'=>$id))){
-            return $stmt->fetchObject();
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
         }
         return null;
     }

@@ -15,7 +15,7 @@ require 'Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
 
 $app = new \Slim\Slim();
-$app->config('debug',!Utilities\Params::PRODUCTION);//if in production, debug is false else true
+$app->config('debug',!Params::PRODUCTION);//if in production, debug is false else true
 
 $app->get('/news', 'getNews');
 
@@ -36,12 +36,18 @@ $app->get('/import/:secret','importData');
  * inserts a user with the passed id
  */
 $app->post('/users/:id',function ($id) use ($app){
-    if(UserRepository::insertUser($id)){
-        echo $id;
-    }else{
-        //check if user already exists and return it's id if so...
-        UserRepository::getUserById($id);//untested
-        $app->error();
+    try{
+        if(UserRepository::insertUser($id)){
+            echo $id;
+            return;
+        }
+    }catch(PDOException $ex){
+        $existingUserId = UserRepository::getUserById($id)['id'];
+        if(!empty($existingUserId)){//check if user already exists and return it's id if so...
+            echo $existingUserId;
+        }else{
+            $app->error();
+        }
     }
 });
 
