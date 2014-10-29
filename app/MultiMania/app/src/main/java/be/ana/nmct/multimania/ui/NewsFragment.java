@@ -1,110 +1,98 @@
 package be.ana.nmct.multimania.ui;
 
 import android.app.Activity;
+import android.app.ListFragment;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CursorAdapter;
+import android.widget.SimpleCursorAdapter;
 
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.data.MultimaniaContract;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link NewsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link NewsFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
-public class NewsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class NewsFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private CursorAdapter mAdapter;
+    private static final String ARGS_NEWS = "newsitem";
+    private int mNewsItem;
 
-    private OnFragmentInteractionListener mListener;
+    //default ctor
+    public NewsFragment(){}
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NewsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static NewsFragment newInstance(String param1, String param2) {
+    public static NewsFragment newInstance(int newsitem){
+        Bundle arguments = new Bundle();
+        arguments.putInt(ARGS_NEWS, newsitem);
+
         NewsFragment fragment = new NewsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.setArguments(arguments);
+
         return fragment;
-    }
-    public NewsFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+        if(savedInstanceState == null){
+            Bundle arguments = getArguments();
+            if(arguments != null){
+                int newsitem = arguments.getInt(ARGS_NEWS, 0);
+                if(newsitem != 0){
+                    mNewsItem = newsitem;
+                }
+            }
         }
+
+        String[] columns = new String[]{MultimaniaContract.NewsItemEntry.TITLE};
+        int[] viewIds = new int[] {android.R.id.text1};
+
+        mAdapter = new SimpleCursorAdapter(getActivity(),
+                android.R.layout.simple_list_item_1, null,
+                columns, viewIds, 0);
+
+        setListAdapter(mAdapter);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(getActivity(), MultimaniaContract.NewsItemEntry.CONTENT_URI, new String[]{
+                MultimaniaContract.NewsItemEntry.NEWSITEM_ID,
+                MultimaniaContract.NewsItemEntry.TITLE,
+                MultimaniaContract.NewsItemEntry.IMAGE,
+                MultimaniaContract.NewsItemEntry.SHORT_DESCRIPTION,
+                MultimaniaContract.NewsItemEntry.LONG_DESCRIPTION,
+                MultimaniaContract.NewsItemEntry.IMPORTANCE,
+                MultimaniaContract.NewsItemEntry.ORDER},
+                "(" + MultimaniaContract.NewsItemEntry.NEWSITEM_ID + " = ?)",
+                new String[]{"" + mNewsItem}, null);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mAdapter.swapCursor(data);
     }
 
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mAdapter.swapCursor(null);
+    }
 }
