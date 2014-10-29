@@ -30,28 +30,28 @@ public class ApiTest extends ApplicationTestCase<Application> {
     }
 
     public void testRooms(){
-        List<Room> tags = new GsonLoader<Room>(mContext,"rooms").loadInBackground();
-        assertNotNull(tags);
+        List<Room> rooms = new GsonLoader<Room>(mContext,"rooms").loadInBackground();
+        assertNotNull(rooms);
     }
 
     public void testSpeakers(){
-        List<Speaker> tags = new GsonLoader<Speaker>(mContext,"speakers").loadInBackground();
-        assertNotNull(tags);
+        List<Speaker> speakers = new GsonLoader<Speaker>(mContext,"speakers").loadInBackground();
+        assertNotNull(speakers);
     }
 
     public void testTalks(){
-        List<Talk> tags = new GsonLoader<Talk>(mContext,"talks").loadInBackground();
-        assertNotNull(tags);
+        List<Talk> talks = new GsonLoader<Talk>(mContext,"talks").loadInBackground();
+        assertNotNull(talks);
     }
 
     public void testTalkTags(){
-        List<TalkTag> tags = new GsonLoader<TalkTag>(mContext,"talk_tags").loadInBackground();
-        assertNotNull(tags);
+        List<TalkTag> talktags = new GsonLoader<TalkTag>(mContext,"talk_tags").loadInBackground();
+        assertNotNull(talktags);
     }
 
     public void testTalkSpeakers(){
-        List<TalkSpeaker> tags = new GsonLoader<TalkSpeaker>(mContext,"talk_speakers").loadInBackground();
-        assertNotNull(tags);
+        List<TalkSpeaker> talkspeakers = new GsonLoader<TalkSpeaker>(mContext,"talk_speakers").loadInBackground();
+        assertNotNull(talkspeakers);
     }
 
     public void testPostUser(){
