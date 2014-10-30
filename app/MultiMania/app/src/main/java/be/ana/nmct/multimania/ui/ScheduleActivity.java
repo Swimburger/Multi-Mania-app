@@ -60,19 +60,19 @@ public class ScheduleActivity extends Activity implements NavigationDrawerFragme
 
                 break;
             case 1:
-
+                fragmentManager.beginTransaction().replace(R.id.container, new MyScheduleFragment()).commit();
                 break;
             case 2:
-
+                fragmentManager.beginTransaction().replace(R.id.container, new MapFragment()).commit();
                 break;
             case 3:
                 fragmentManager.beginTransaction().replace(R.id.container, new NewsFragment()).commit();
                 break;
             case 4:
-
+                fragmentManager.beginTransaction().replace(R.id.container, new AboutFragment()).commit();
                 break;
             case 5:
-
+                fragmentManager.beginTransaction().replace(R.id.container, new SettingsFragment()).commit();
                 break;
         }
     }

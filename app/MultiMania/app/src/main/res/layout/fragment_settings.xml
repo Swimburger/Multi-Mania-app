@@ -15,15 +15,23 @@
 
         <CheckBox android:id="@+id/checkbox_sync"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:onClick="onCheckboxClicked"
+            android:layout_height="55dp"
             android:text="@string/settings_sync" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
         <CheckBox android:id="@+id/checkbox_notify"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:onClick="onCheckboxClicked"
+            android:layout_height="55dp"
             android:text="@string/settings_notify" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
         </LinearLayout>
 </FrameLayout>
