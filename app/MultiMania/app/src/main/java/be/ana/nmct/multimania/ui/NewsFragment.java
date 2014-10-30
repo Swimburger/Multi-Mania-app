@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
@@ -35,13 +36,23 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(getActivity(), null, new String[]{MultimaniaContract.NewsItemEntry.TITLE},null, null, null){
+        return new CursorLoader(getActivity(), null, new String[]{MultimaniaContract.NewsItemEntry._ID, MultimaniaContract.NewsItemEntry.TITLE}, null, null, null){
 
             @Override
             public Cursor loadInBackground() {
 
-                MultimaniaProvider prov = new MultimaniaProvider();
-                return prov.query(MultimaniaContract.NewsItemEntry.CONTENT_URI, getProjection(), getSelection(), getSelectionArgs(),getSortOrder());
+                MultimaniaProvider prov = new MultimaniaProvider(this.getContext());
+
+                Cursor providerQuery = prov.query(MultimaniaContract.NewsItemEntry.CONTENT_URI, getProjection(), getSelection(), getSelectionArgs(),getSortOrder());
+
+                if(providerQuery != null) {
+
+                    return providerQuery;
+                }else{
+                    Toast toast = Toast.makeText(getContext(), "Error getting data!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                return null;
             }
         };
     }
@@ -49,6 +60,7 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if(mAdapter == null){
+
             mAdapter = new CustomCursorAdapter(getActivity(), data, 0);
             setListAdapter(mAdapter);
         }
@@ -68,16 +80,18 @@ class CustomCursorAdapter extends CursorAdapter{
 
     public CustomCursorAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
-
-        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mInflater = LayoutInflater.from(context);
+        //mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
 
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-
-        return mInflater.inflate(R.layout.row_news, parent, false);
+        final View view = mInflater.inflate(R.layout.row_news, parent, false);
+        bindView(view,context,cursor);
+        return view;
+        //return mInflater.inflate(R.layout.row_news, parent, false);
 
     }
 

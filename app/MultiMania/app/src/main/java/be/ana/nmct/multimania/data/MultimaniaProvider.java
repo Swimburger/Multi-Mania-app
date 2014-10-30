@@ -3,6 +3,7 @@ package be.ana.nmct.multimania.data;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -23,6 +24,7 @@ import be.ana.nmct.multimania.data.MultimaniaContract.TalkTagEntry;
 public class MultimaniaProvider extends ContentProvider {
     public static final UriMatcher sUriMatcher = buildUriMatcher();
     private DbHelper mDbHelper;
+    private static Context context;
 
     public static final int NEWS                    = 100;
     public static final int NEWS_ID                 = 101;
@@ -109,6 +111,12 @@ public class MultimaniaProvider extends ContentProvider {
         );
     }
 
+    public MultimaniaProvider() {}
+
+    public MultimaniaProvider(Context context){
+        this.context = context;
+        mDbHelper = new DbHelper(context);
+    }
 
     private static UriMatcher buildUriMatcher() {
         // I know what you're thinking.  Why create a UriMatcher when you can use regular
@@ -146,7 +154,7 @@ public class MultimaniaProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        mDbHelper = new DbHelper(getContext());
+        mDbHelper = new DbHelper(context);
         return true;
     }
 
@@ -323,7 +331,7 @@ public class MultimaniaProvider extends ContentProvider {
             default:
                 throw new UnsupportedOperationException("Unknown uri:"+uri);
         }
-        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        retCursor.setNotificationUri(context.getContentResolver(), uri);
         return retCursor;
     }
 
@@ -448,7 +456,7 @@ public class MultimaniaProvider extends ContentProvider {
             default:
                 throw  new UnsupportedOperationException("Unknown uri: "+uri);
         }
-        getContext().getContentResolver().notifyChange(returnUri,null);
+        context.getContentResolver().notifyChange(returnUri,null);
         return returnUri;
     }
 
@@ -495,7 +503,7 @@ public class MultimaniaProvider extends ContentProvider {
         }finally{
             db.endTransaction();
         }
-        getContext().getContentResolver().notifyChange(uri,null);
+        context.getContentResolver().notifyChange(uri,null);
         return returnCount;
     }
 
@@ -538,7 +546,7 @@ public class MultimaniaProvider extends ContentProvider {
                 throw  new UnsupportedOperationException("Unknown uri: "+uri);
         }
         if(0!=rowsUpdated){
-            getContext().getContentResolver().notifyChange(uri,null);
+            context.getContentResolver().notifyChange(uri,null);
         }
         return rowsUpdated;
     }
@@ -583,7 +591,7 @@ public class MultimaniaProvider extends ContentProvider {
         }
 
         if(null == selection || rowsDeleted!=0){
-            getContext().getContentResolver().notifyChange(uri,null);
+            context.getContentResolver().notifyChange(uri,null);
         }
         return rowsDeleted;
     }
