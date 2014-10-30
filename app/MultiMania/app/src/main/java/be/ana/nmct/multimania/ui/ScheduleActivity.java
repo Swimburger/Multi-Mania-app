@@ -18,6 +18,8 @@ import android.widget.TextView;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiService;
 import be.ana.nmct.multimania.model.NewsItem;
+import be.ana.nmct.multimania.model.Talk;
+import be.ana.nmct.multimania.utils.GoogleCalUtil;
 
 
 public class ScheduleActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -45,8 +47,9 @@ public class ScheduleActivity extends Activity implements NavigationDrawerFragme
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-    }
 
+    }
+    
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
