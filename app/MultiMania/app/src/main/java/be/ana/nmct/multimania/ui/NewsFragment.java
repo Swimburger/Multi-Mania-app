@@ -7,17 +7,14 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
-import be.ana.nmct.multimania.data.MultimaniaProvider;
 
 public class NewsFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -31,46 +28,24 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAdapter=new CustomCursorAdapter(getActivity(),null,0);
+        setListAdapter(mAdapter);
         loader = getLoaderManager().initLoader(0,null,this);
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        CursorLoader cursor = new CursorLoader(getActivity(),MultimaniaContract.NewsItemEntry.CONTENT_URI,null,null,null,null)
-        {
-            @Override
-            public Cursor loadInBackground() {
-
-                MultimaniaProvider prov = new MultimaniaProvider();
-                Cursor providerQuery = prov.query(MultimaniaContract.NewsItemEntry.CONTENT_URI, getProjection(), getSelection(), getSelectionArgs(),getSortOrder());
-
-                if(providerQuery != null) {
-                    return providerQuery;
-                }else{
-                    Toast toast = Toast.makeText(getContext(), "Error getting data!", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                return null;
-            }
-        };
-        return cursor;
+        return new CursorLoader(getActivity(),MultimaniaContract.NewsItemEntry.CONTENT_URI,null,null,null,null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if(mAdapter == null){
-
-            mAdapter = new CustomCursorAdapter(getActivity(), data, 0);
-            setListAdapter(mAdapter);
-        }
         mAdapter.swapCursor(data);
-        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
-        mAdapter.notifyDataSetChanged();
     }
 }
 
