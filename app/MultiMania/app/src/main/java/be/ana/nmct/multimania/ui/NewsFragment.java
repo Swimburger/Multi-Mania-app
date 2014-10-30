@@ -6,18 +6,15 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import be.ana.nmct.multimania.R;
-import be.ana.nmct.multimania.data.DbHelper;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.data.MultimaniaProvider;
 
@@ -25,19 +22,16 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
 
     private CustomCursorAdapter mAdapter;
     private static final String ARGS_NEWS = "newsitem";
+    private static Loader loader;
 
     //default ctor
     public NewsFragment(){}
 
-    public static NewsFragment newInstance(int newsitem){
-        Bundle arguments = new Bundle();
-        arguments.putInt(ARGS_NEWS, newsitem);
-        NewsFragment fragment = new NewsFragment();
-        fragment.setArguments(arguments);
-
-        return fragment;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        loader = getLoaderManager().initLoader(0,null,this);
     }
-
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -54,6 +48,10 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if(mAdapter == null){
+            mAdapter = new CustomCursorAdapter(getActivity(), data, 0);
+            setListAdapter(mAdapter);
+        }
         mAdapter.swapCursor(data);
         mAdapter.notifyDataSetChanged();
     }
@@ -73,6 +71,8 @@ class CustomCursorAdapter extends CursorAdapter{
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
+
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
