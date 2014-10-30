@@ -36,17 +36,15 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(getActivity(), null, new String[]{MultimaniaContract.NewsItemEntry._ID, MultimaniaContract.NewsItemEntry.TITLE}, null, null, null){
-
+        CursorLoader cursor = new CursorLoader(getActivity(),MultimaniaContract.NewsItemEntry.CONTENT_URI,null,null,null,null)
+        {
             @Override
             public Cursor loadInBackground() {
 
-                MultimaniaProvider prov = new MultimaniaProvider(this.getContext());
-
+                MultimaniaProvider prov = new MultimaniaProvider();
                 Cursor providerQuery = prov.query(MultimaniaContract.NewsItemEntry.CONTENT_URI, getProjection(), getSelection(), getSelectionArgs(),getSortOrder());
 
                 if(providerQuery != null) {
-
                     return providerQuery;
                 }else{
                     Toast toast = Toast.makeText(getContext(), "Error getting data!", Toast.LENGTH_SHORT);
@@ -55,6 +53,7 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
                 return null;
             }
         };
+        return cursor;
     }
 
     @Override
