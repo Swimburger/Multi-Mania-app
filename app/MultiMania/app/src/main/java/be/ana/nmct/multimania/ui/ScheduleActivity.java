@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,14 +13,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.TextView;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiService;
 import be.ana.nmct.multimania.model.NewsItem;
 
 
-public class ScheduleActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class ScheduleActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -44,9 +45,6 @@ public class ScheduleActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-        ApiService<NewsItem> newsItems = new ApiService<NewsItem>(this, "news", getLoaderManager());
-
     }
 
     @Override
@@ -56,9 +54,30 @@ public class ScheduleActivity extends Activity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
-    }
 
+        switch (position) {
+            case 0:
+
+                break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+                fragmentManager.beginTransaction().replace(R.id.container, NewsFragment.newInstance(position + 1)).commit();
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                break;
+        }
+    }
     public void onSectionAttached(int number) {
+
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_schedule);
@@ -69,9 +88,18 @@ public class ScheduleActivity extends Activity
             case 3:
                 mTitle = getString(R.string.title_map);
                 break;
+            case 4:
+                mTitle = getString(R.string.title_news);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_about);
+                break;
+            case 6:
+                mTitle = getString(R.string.title_settings);
+                break;
             //add more cases here
-        }
     }
+}
 
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();

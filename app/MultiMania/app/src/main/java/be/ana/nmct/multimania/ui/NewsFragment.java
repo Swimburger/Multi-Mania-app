@@ -1,28 +1,30 @@
 package be.ana.nmct.multimania.ui;
 
-import android.app.Activity;
 import android.app.ListFragment;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.data.DbHelper;
 import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.data.MultimaniaProvider;
 
 public class NewsFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private CursorAdapter mAdapter;
+    private CustomCursorAdapter mAdapter;
     private static final String ARGS_NEWS = "newsitem";
-    private int mNewsItem;
 
     //default ctor
     public NewsFragment(){}
@@ -30,69 +32,60 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
     public static NewsFragment newInstance(int newsitem){
         Bundle arguments = new Bundle();
         arguments.putInt(ARGS_NEWS, newsitem);
-
         NewsFragment fragment = new NewsFragment();
         fragment.setArguments(arguments);
 
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if(savedInstanceState == null){
-            Bundle arguments = getArguments();
-            if(arguments != null){
-                int newsitem = arguments.getInt(ARGS_NEWS, 0);
-                if(newsitem != 0){
-                    mNewsItem = newsitem;
-                }
-            }
-        }
-
-        String[] columns = new String[]{MultimaniaContract.NewsItemEntry.TITLE};
-        int[] viewIds = new int[] {android.R.id.text1};
-
-        mAdapter = new SimpleCursorAdapter(getActivity(),
-                android.R.layout.simple_list_item_1, null,
-                columns, viewIds, 0);
-
-        setListAdapter(mAdapter);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(getActivity(), MultimaniaContract.NewsItemEntry.CONTENT_URI, new String[]{
-                MultimaniaContract.NewsItemEntry.NEWSITEM_ID,
-                MultimaniaContract.NewsItemEntry.TITLE,
-                MultimaniaContract.NewsItemEntry.IMAGE,
-                MultimaniaContract.NewsItemEntry.SHORT_DESCRIPTION,
-                MultimaniaContract.NewsItemEntry.LONG_DESCRIPTION,
-                MultimaniaContract.NewsItemEntry.IMPORTANCE,
-                MultimaniaContract.NewsItemEntry.ORDER},
-                "(" + MultimaniaContract.NewsItemEntry.NEWSITEM_ID + " = ?)",
-                new String[]{"" + mNewsItem}, null);
+        return new CursorLoader(getActivity(), null, new String[]{MultimaniaContract.NewsItemEntry.TITLE},null, null, null){
+
+            @Override
+            public Cursor loadInBackground() {
+
+                MultimaniaProvider prov = new MultimaniaProvider();
+                return prov.query(MultimaniaContract.NewsItemEntry.CONTENT_URI, getProjection(), getSelection(), getSelectionArgs(),getSortOrder());
+            }
+        };
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mAdapter.swapCursor(data);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
+        mAdapter.notifyDataSetChanged();
+    }
+}
+
+class CustomCursorAdapter extends CursorAdapter{
+    private LayoutInflater mInflater;
+
+    public CustomCursorAdapter(Context context, Cursor c, int flags) {
+        super(context, c, flags);
+
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+
+        return mInflater.inflate(R.layout.row_news, parent, false);
+
+    }
+
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        TextView mTitle = (TextView)view.findViewById(R.id.txtNewsTitle);
+
+        System.out.println(cursor.getColumnIndex(MultimaniaContract.NewsItemEntry.TITLE));
+        mTitle.setText(cursor.getColumnIndex(MultimaniaContract.NewsItemEntry.TITLE));
     }
 }
