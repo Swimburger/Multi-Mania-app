@@ -25,5 +25,7 @@
     <string name="settings_sync">Sync my schedule with calendar</string>
     <string name="settings_notify">Notify me before my favorite talks</string>
     <string name="talk_title">Talk</string>
+    <string name="calendar_name">Multi-Mania 2015</string>
+    <string name="calendar_account_name">Calendar</string>
 
 </resources>

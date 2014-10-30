@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiService;
 import be.ana.nmct.multimania.model.NewsItem;
+import be.ana.nmct.multimania.utils.GoogleCalUtil;
 
 
 public class ScheduleActivity extends Activity
@@ -45,8 +46,12 @@ public class ScheduleActivity extends Activity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        /*
+        //Axel's test paradise
         ApiService<NewsItem> newsItems = new ApiService<NewsItem>(this, "news", getLoaderManager());
-
+        GoogleCalUtil cal = new GoogleCalUtil(this);
+        cal.createCalendar();
+        */
     }
 
     @Override
