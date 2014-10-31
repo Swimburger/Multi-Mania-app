@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import be.ana.nmct.multimania.R;
@@ -51,10 +53,12 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
 
 class CustomCursorAdapter extends CursorAdapter{
     private LayoutInflater mInflater;
+    private final Context context;
 
     public CustomCursorAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
-        mInflater = LayoutInflater.from(context);
+        this.context = context;
+       // mInflater = LayoutInflater.from(context);
         //mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -62,18 +66,38 @@ class CustomCursorAdapter extends CursorAdapter{
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        final View view = mInflater.inflate(R.layout.row_news, parent, false);
-        bindView(view,context,cursor);
-        return view;
-        //return mInflater.inflate(R.layout.row_news, parent, false);
+        mInflater = LayoutInflater.from(context);
+
+        View v  = mInflater.inflate(R.layout.row_news, parent, false);
+
+        ViewHolder holder = new ViewHolder();
+        holder.txtTitle = (TextView) v.findViewById(R.id.txtNewsTitle);
+        holder.txtShortDescription = (TextView) v.findViewById(R.id.txtNewsText);
+        holder.imgNews = (ImageView)v.findViewById(R.id.imgNews);
+        v.setTag(holder);
+        return v;
 
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView mTitle = (TextView)view.findViewById(R.id.txtNewsTitle);
+        ViewHolder holder = (ViewHolder)view.getTag();
+        int titleCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.TITLE);
+        int imgCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.IMAGE);
+        int shortDescriptionCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.SHORT_DESCRIPTION);
 
-        System.out.println(cursor.getColumnIndex(MultimaniaContract.NewsItemEntry.TITLE));
-        mTitle.setText(cursor.getColumnIndex(MultimaniaContract.NewsItemEntry.TITLE));
+        String title = cursor.getString(titleCol);
+        String shortDescription = cursor.getString(shortDescriptionCol);
+        String img = cursor.getString(imgCol);
+
+        holder.txtTitle.setText(title);
+        holder.txtShortDescription.setText(shortDescription);
+        holder.imgNews.setImageURI(Uri.parse(img));
+    }
+
+    static class ViewHolder{
+        TextView txtTitle;
+        TextView txtShortDescription;
+        ImageView imgNews;
     }
 }
