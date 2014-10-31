@@ -23,14 +23,13 @@ public class GoogleCalUtil {
     private final static Uri EVENT_URI = CalendarContract.Events.CONTENT_URI;
 
     private final static String PREF_CALENDER_ID = "calendar_id";
+    private final static String PREF_ACCOUNTNAME = "calendar_accountname";
 
-    private static String ACCOUNT_NAME;
     private static String CALENDAR_NAME;
     private Context context;
 
     public GoogleCalUtil(Context context) {
         this.context = context;
-        this.ACCOUNT_NAME = context.getResources().getString(R.string.calendar_account_name);
         this.CALENDAR_NAME = context.getResources().getString(R.string.calendar_name);
     }
 
@@ -51,16 +50,16 @@ public class GoogleCalUtil {
         }
     }
 
-    private static ContentValues buildNewCalContentValues() {
+    private ContentValues buildNewCalContentValues() {
         final ContentValues cv = new ContentValues();
 
-        cv.put(CalendarContract.Calendars.ACCOUNT_NAME, ACCOUNT_NAME);
+        cv.put(CalendarContract.Calendars.ACCOUNT_NAME, getAccount());
         cv.put(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL);
         cv.put(CalendarContract.Calendars.NAME, CALENDAR_NAME);
         cv.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, CALENDAR_NAME);
         cv.put(CalendarContract.Calendars.CALENDAR_COLOR, 0xEA8561);
         cv.put(CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, CalendarContract.Calendars.CAL_ACCESS_READ);
-        cv.put(CalendarContract.Calendars.OWNER_ACCOUNT, ACCOUNT_NAME);
+        cv.put(CalendarContract.Calendars.OWNER_ACCOUNT, getAccount());
         cv.put(CalendarContract.Calendars.VISIBLE, 1);
         cv.put(CalendarContract.Calendars.SYNC_EVENTS, 1);
         return cv;
@@ -99,7 +98,7 @@ public class GoogleCalUtil {
         return CAL_URI
                 .buildUpon()
                 .appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, "true")
-                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, ACCOUNT_NAME)
+                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, getAccount())
                 .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE,
                         CalendarContract.ACCOUNT_TYPE_LOCAL)
                 .build();
@@ -109,7 +108,7 @@ public class GoogleCalUtil {
         return EVENT_URI
                 .buildUpon()
                 .appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, "true")
-                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, ACCOUNT_NAME)
+                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, getAccount())
                 .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE,
                         CalendarContract.ACCOUNT_TYPE_LOCAL)
                 .build();
@@ -126,6 +125,18 @@ public class GoogleCalUtil {
         SharedPreferences prefs = context.getSharedPreferences(PREF_CALENDER_ID, Context.MODE_PRIVATE);
         return prefs.getLong(PREF_CALENDER_ID, 0);
     }
+
+    public boolean setAccount(String accountName){
+        SharedPreferences.Editor editor = context.getSharedPreferences(PREF_ACCOUNTNAME, Context.MODE_PRIVATE).edit();
+        editor.putString(PREF_ACCOUNTNAME, accountName);
+        return  editor.commit();
+    }
+
+    public String getAccount(){
+        SharedPreferences prefs = context.getSharedPreferences(PREF_ACCOUNTNAME, Context.MODE_PRIVATE);
+        return prefs.getString(PREF_ACCOUNTNAME, null);
+    }
+
 
 
 }
