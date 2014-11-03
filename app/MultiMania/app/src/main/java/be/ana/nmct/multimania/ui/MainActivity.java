@@ -4,11 +4,18 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.data.ApiService;
+import be.ana.nmct.multimania.data.AsyncResponse;
+import be.ana.nmct.multimania.model.NewsItem;
+
+
 
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -17,7 +24,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -36,6 +42,16 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        AsyncResponse response = new AsyncResponse() {
+            @Override
+            public void onTaskCompleted(Object result) {
+                Log.d("", result.toString());
+            }
+        };
+
+        ApiService<NewsItem> newsService = new ApiService<NewsItem>(this, "news", this.getLoaderManager(), response);
+        newsService.loadData();
 
     }
     
