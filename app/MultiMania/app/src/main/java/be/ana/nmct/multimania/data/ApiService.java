@@ -4,11 +4,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
-<<<<<<< HEAD
-=======
-
 import com.google.gson.reflect.TypeToken;
->>>>>>> 0644150d4819ae86720320c77aa49de511e2ca67
 
 import java.util.List;
 
