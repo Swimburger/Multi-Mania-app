@@ -9,7 +9,8 @@ import java.util.TimeZone;
  * Created by Niels on 28/10/2014.
  */
 public class Utility {
-    private static SimpleDateFormat sFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final String sFormat = "yyyy-MM-dd HH:mm:ss";
+    private static final SimpleDateFormat sFormatter = new SimpleDateFormat(sFormat);
     public static String ConvertDateToString(Date date){
         return sFormatter.format(date);
     }
@@ -28,4 +29,7 @@ public class Utility {
         return l < 0 ? l + 1000 : l;
     }
 
+    public static String getDateFormat() {
+        return sFormat;
+    }
 }

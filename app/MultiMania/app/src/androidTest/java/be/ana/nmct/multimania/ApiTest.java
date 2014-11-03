@@ -3,10 +3,13 @@ package be.ana.nmct.multimania;
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
+import com.google.gson.reflect.TypeToken;
+
 import java.util.List;
 
 import be.ana.nmct.multimania.data.GsonLoader;
 import be.ana.nmct.multimania.data.PostUserTask;
+import be.ana.nmct.multimania.model.NewsItem;
 import be.ana.nmct.multimania.model.Room;
 import be.ana.nmct.multimania.model.Speaker;
 import be.ana.nmct.multimania.model.Tag;
@@ -24,33 +27,38 @@ public class ApiTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
+    public void testNews(){
+        List<NewsItem> news = new GsonLoader<NewsItem>(mContext,"news",new TypeToken<List<NewsItem>>(){}).loadInBackground();
+        assertNotNull(news);
+    }
+
     public void testTags(){
-       List<Tag> tags = new GsonLoader<Tag>(mContext,"tags").loadInBackground();
+       List<Tag> tags = new GsonLoader<Tag>(mContext,"tags",new TypeToken<List<Tag>>(){}).loadInBackground();
        assertNotNull(tags);
     }
 
     public void testRooms(){
-        List<Room> rooms = new GsonLoader<Room>(mContext,"rooms").loadInBackground();
+        List<Room> rooms = new GsonLoader<Room>(mContext,"rooms",new TypeToken<List<Room>>(){}).loadInBackground();
         assertNotNull(rooms);
     }
 
     public void testSpeakers(){
-        List<Speaker> speakers = new GsonLoader<Speaker>(mContext,"speakers").loadInBackground();
+        List<Speaker> speakers = new GsonLoader<Speaker>(mContext,"speakers",new TypeToken<List<Speaker>>(){}).loadInBackground();
         assertNotNull(speakers);
     }
 
     public void testTalks(){
-        List<Talk> talks = new GsonLoader<Talk>(mContext,"talks").loadInBackground();
+        List<Talk> talks = new GsonLoader<Talk>(mContext,"talks",new TypeToken<List<Talk>>(){}).loadInBackground();
         assertNotNull(talks);
     }
 
     public void testTalkTags(){
-        List<TalkTag> talktags = new GsonLoader<TalkTag>(mContext,"talk_tags").loadInBackground();
+        List<TalkTag> talktags = new GsonLoader<TalkTag>(mContext,"talk_tags",new TypeToken<List<TalkTag>>(){}).loadInBackground();
         assertNotNull(talktags);
     }
 
     public void testTalkSpeakers(){
-        List<TalkSpeaker> talkspeakers = new GsonLoader<TalkSpeaker>(mContext,"talk_speakers").loadInBackground();
+        List<TalkSpeaker> talkspeakers = new GsonLoader<TalkSpeaker>(mContext,"talk_speakers",new TypeToken<List<TalkSpeaker>>(){}).loadInBackground();
         assertNotNull(talkspeakers);
     }
 

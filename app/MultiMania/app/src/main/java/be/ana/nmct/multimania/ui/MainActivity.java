@@ -1,28 +1,17 @@
 package be.ana.nmct.multimania.ui;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
-import android.app.Fragment;
+import android.app.Activity;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.TextView;
 
 import be.ana.nmct.multimania.R;
-import be.ana.nmct.multimania.data.ApiService;
-import be.ana.nmct.multimania.model.NewsItem;
-import be.ana.nmct.multimania.model.Talk;
-import be.ana.nmct.multimania.utils.GoogleCalUtil;
 
 
-public class ScheduleActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
