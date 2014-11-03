@@ -4,7 +4,6 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.List;
 
@@ -16,19 +15,19 @@ public class ApiService<T> implements LoaderManager.LoaderCallbacks<List<T>> {
     private Context context;
     private String apiPath;
     private LoaderManager lm;
-    private List<T> dataList;
+    private AsyncResponse mResponse;
 
-    //nog niet helemaal async, nog eens over nadenken ;)
-    public List<T> getData(){
-        return dataList;
-    }
-
-    public ApiService(Context context, String apiPath, LoaderManager lm) {
+    public ApiService(Context context, String apiPath, LoaderManager lm, AsyncResponse response) {
         this.context = context;
         this.apiPath = apiPath;
         this.lm = lm;
-        lm.initLoader(0, null, this);
+        this.mResponse = response;
     }
+
+    public void loadData(){
+        this.lm.initLoader(0, null, this).forceLoad();
+    }
+
 
     @Override
     public Loader<List<T>> onCreateLoader(int i, Bundle bundle) {
@@ -37,7 +36,7 @@ public class ApiService<T> implements LoaderManager.LoaderCallbacks<List<T>> {
 
     @Override
     public void onLoadFinished(Loader<List<T>> listLoader, List<T> objectList) {
-        this.dataList = objectList;
+        mResponse.onTaskCompleted(objectList);
     }
 
     @Override

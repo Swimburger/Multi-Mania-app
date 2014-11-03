@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,9 +16,14 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiService;
+import be.ana.nmct.multimania.data.AsyncResponse;
+import be.ana.nmct.multimania.data.GsonLoader;
 import be.ana.nmct.multimania.model.NewsItem;
+import be.ana.nmct.multimania.model.Speaker;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.utils.GoogleCalUtil;
 
@@ -28,7 +34,6 @@ public class ScheduleActivity extends Activity implements NavigationDrawerFragme
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -47,6 +52,16 @@ public class ScheduleActivity extends Activity implements NavigationDrawerFragme
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        AsyncResponse response = new AsyncResponse() {
+            @Override
+            public void onTaskCompleted(Object result) {
+                Log.d("", result.toString());
+            }
+        };
+
+        ApiService<NewsItem> newsService = new ApiService<NewsItem>(this, "news", this.getLoaderManager(), response);
+        newsService.loadData();
 
     }
     
