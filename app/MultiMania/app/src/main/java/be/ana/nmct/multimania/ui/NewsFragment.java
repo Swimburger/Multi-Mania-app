@@ -1,5 +1,7 @@
 package be.ana.nmct.multimania.ui;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -14,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
@@ -56,6 +59,22 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Fragment fragment = new NewsItemFragment();
+
+        Bundle args = new Bundle();
+        args.putInt(NewsFragment.ARGS_NEWS, position);
+        System.out.println(ARGS_NEWS + " pos: " + position);
+        fragment.setArguments(args);
+
+        FragmentManager manager = getFragmentManager();
+        manager.beginTransaction().replace(R.id.container, fragment).commit();
+
     }
 
     private class NewsCursorAdapter extends CursorAdapter{
