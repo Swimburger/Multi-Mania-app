@@ -4,6 +4,11 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
+<<<<<<< HEAD
+=======
+
+import com.google.gson.reflect.TypeToken;
+>>>>>>> 0644150d4819ae86720320c77aa49de511e2ca67
 
 import java.util.List;
 
@@ -31,7 +36,7 @@ public class ApiService<T> implements LoaderManager.LoaderCallbacks<List<T>> {
 
     @Override
     public Loader<List<T>> onCreateLoader(int i, Bundle bundle) {
-        return new GsonLoader<T>(this.context, this.apiPath);
+        return new GsonLoader<T>(this.context, this.apiPath,new TypeToken<List<T>>(){});
     }
 
     @Override

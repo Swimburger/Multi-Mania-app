@@ -1,24 +1,22 @@
 package be.ana.nmct.multimania.ui;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
-import android.app.Fragment;
+import android.app.Activity;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+<<<<<<< HEAD:app/MultiMania/app/src/main/java/be/ana/nmct/multimania/ui/ScheduleActivity.java
 import android.util.Log;
 import android.view.LayoutInflater;
+=======
+import android.support.v4.widget.DrawerLayout;
+>>>>>>> 0644150d4819ae86720320c77aa49de511e2ca67:app/MultiMania/app/src/main/java/be/ana/nmct/multimania/ui/MainActivity.java
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.TextView;
 
 import java.util.List;
 
 import be.ana.nmct.multimania.R;
+<<<<<<< HEAD:app/MultiMania/app/src/main/java/be/ana/nmct/multimania/ui/ScheduleActivity.java
 import be.ana.nmct.multimania.data.ApiService;
 import be.ana.nmct.multimania.data.AsyncResponse;
 import be.ana.nmct.multimania.data.GsonLoader;
@@ -26,9 +24,11 @@ import be.ana.nmct.multimania.model.NewsItem;
 import be.ana.nmct.multimania.model.Speaker;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.utils.GoogleCalUtil;
+=======
+>>>>>>> 0644150d4819ae86720320c77aa49de511e2ca67:app/MultiMania/app/src/main/java/be/ana/nmct/multimania/ui/MainActivity.java
 
 
-public class ScheduleActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
