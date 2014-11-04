@@ -27,5 +27,10 @@
     <string name="talk_title">Talk</string>
     <string name="calendar_name">Multi-Mania 2015</string>
     <string name="calendar_account_name">Calendar</string>
-
+    <string name="about_info">Get inspired, share knowledge and connect with the creative community!
+The Multi-Mania conference has become the annual event that brings together designers, developers, entrepreneurs and creative new media students. The enthusiasm surrounding this event is exciting and inspiring. Each year the conference grows a little bigger and each year the experience gets a little better.</string>
+    <string name="name_venue">Kortrijk Xpo Meeting Center</string>
+    <string name="street">Doorniksesteenweg 216</string>
+    <string name="city">8500 Kortrijk</string>
+    <string name="country">België</string>
 </resources>
