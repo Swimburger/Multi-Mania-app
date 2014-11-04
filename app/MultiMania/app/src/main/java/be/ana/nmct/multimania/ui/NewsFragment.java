@@ -1,13 +1,13 @@
 package be.ana.nmct.multimania.ui;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,7 +65,21 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        Fragment fragment = new NewsItemFragment();
+        Cursor cursor = mAdapter.getCursor();
+        cursor.moveToPosition(position);
+        Uri uri = MultimaniaContract.NewsItemEntry.buildItemUri(
+                cursor.getLong(
+                    cursor.getColumnIndex(
+                            MultimaniaContract.NewsItemEntry._ID
+                    )
+                )
+        );
+
+        Intent intent = new Intent(getActivity(),NewsItemActivity.class);
+        intent.setData(uri);
+        startActivity(intent);
+
+        /*Fragment fragment = new NewsItemFragment();
 
         Bundle args = new Bundle();
         args.putInt(NewsFragment.ARGS_NEWS, position);
@@ -73,13 +87,15 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
         fragment.setArguments(args);
 
         FragmentManager manager = getFragmentManager();
-        manager.beginTransaction().replace(R.id.container, fragment).commit();
+        manager.beginTransaction().replace(R.id.container, fragment).commit();*/
 
     }
 
     private class NewsCursorAdapter extends CursorAdapter{
         private LayoutInflater mInflater;
         Animation animFadein;
+
+
 
         public NewsCursorAdapter(Context context, Cursor c, int flags) {
             super(context, c, flags);
@@ -109,6 +125,7 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             ViewHolder holder = (ViewHolder)view.getTag();
+            //TODO: Move the getColumnIndex to the constructor so it doesn't get called for every row item
             int titleCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.TITLE);
             int imgCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.IMAGE);
             int shortDescriptionCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.SHORT_DESCRIPTION);

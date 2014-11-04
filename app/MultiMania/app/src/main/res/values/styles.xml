@@ -1,8 +1,18 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="Widget" />
+
+    <style name="Widget.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse" />
+
+    <style name="Widget.Light" />
+
+    <style name="Widget.Light.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid" />
+
+    <style name="Widget.ActionBar.Transparent">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="Widget.Light.ActionBar.Transparent">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 </resources>

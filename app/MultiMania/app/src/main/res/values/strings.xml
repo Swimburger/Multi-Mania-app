@@ -33,4 +33,7 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="street">Doorniksesteenweg 216</string>
     <string name="city">8500 Kortrijk</string>
     <string name="country">België</string>
+    <string name="title_activity_news_item">NewsItemActivity</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
