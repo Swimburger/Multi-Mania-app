@@ -4,9 +4,6 @@
     android:layout_height="match_parent"
     tools:context="be.ana.nmct.multimania.ui.MyScheduleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
     <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

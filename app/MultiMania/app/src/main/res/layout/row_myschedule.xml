@@ -31,14 +31,7 @@
         android:paddingBottom="10dp"
         android:paddingLeft="10dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView6"
-        android:layout_below="@+id/txtRoom"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingBottom="10dp" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -66,12 +59,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/talk_info"
-        android:id="@+id/textView9"
-        android:layout_toRightOf="@+id/textView6"
-        android:layout_toEndOf="@+id/textView6"
-        android:layout_alignTop="@+id/textView6"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:paddingLeft="10dp" />
+        android:id="@+id/txtInfo"
+        android:paddingLeft="10dp"
+        android:layout_below="@+id/txtRoom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
