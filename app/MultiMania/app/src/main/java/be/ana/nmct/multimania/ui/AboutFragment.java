@@ -52,7 +52,7 @@ public class AboutFragment extends Fragment {
         txtCountry = (TextView)v.findViewById(R.id.txtCountry);
 
 
-        txtTitleEvent.setText(R.string.title_about);
+        txtTitleEvent.setText(R.string.about_title);
         txtInfoEvent.setText(R.string.about_info);
         txtVenue.setText(R.string.name_venue);
         txtStreet.setText(R.string.street);
@@ -60,19 +60,8 @@ public class AboutFragment extends Fragment {
         txtCountry.setText(R.string.country);
 
         Drawable drawable = getResources().getDrawable(R.drawable.ic_multimania);
-      //  imgAbout.setImageDrawable(drawable);
         imgAbout.setImageDrawable(drawable);
-        /*
-        Ion.with(imgAbout)
-                //.animateLoad()
 
-                //.resize(view.getMeasuredWidth(),
-                //        holder.imgNews.getHeight())
-                //.centerCrop()
-                .smartSize(true)
-                .animateIn(animFadein)
-                .load(drawable.toString());
-*/
         return v;
     }
 }
