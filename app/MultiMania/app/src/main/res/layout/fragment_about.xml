@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +24,7 @@
             android:src="@drawable/ic_multimania"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Multi-Mania"
@@ -32,7 +32,9 @@
             android:layout_alignBottom="@+id/imgAbout"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="10dp"
+            android:textColor="@color/white"
+            android:background="@color/darkTransparent"
+            android:padding="16dp"
             android:clickable="false" />
 
         <TextView
@@ -45,9 +47,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp" />
+            android:paddingTop="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,8 +57,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Location"
             android:id="@+id/txtLocation"
-            android:paddingTop="20dp"
-            android:paddingLeft="10dp"
+            android:padding="16dp"
             android:layout_below="@+id/txtAboutInfo"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -69,8 +70,7 @@
             android:layout_below="@+id/txtLocation"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp" />
+            android:paddingLeft="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -80,8 +80,7 @@
             android:layout_below="@+id/txtNameVenue"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp" />
+            android:paddingLeft="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -91,8 +90,7 @@
             android:layout_below="@+id/txtStreet"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp" />
+            android:paddingLeft="16dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -102,9 +100,22 @@
             android:layout_below="@+id/txtCity"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp" />
+            android:paddingLeft="16dp"/>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imgAboutMap"
+            android:src="@drawable/ic_aboutmap"
+            android:layout_below="@+id/txtCountry"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"/>
 
 
     </RelativeLayout>
-</FrameLayout>
+</ScrollView>

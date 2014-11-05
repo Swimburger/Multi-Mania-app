@@ -80,6 +80,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                 fragmentManager.beginTransaction().replace(R.id.container, new SettingsFragment()).commit();
                 break;
         }
+        onSectionAttached(position + 1);
     }
     public void onSectionAttached(int number) {
 

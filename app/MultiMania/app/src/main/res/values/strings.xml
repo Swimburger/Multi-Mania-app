@@ -33,7 +33,7 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="name_venue">Kortrijk Xpo Meeting Center</string>
     <string name="street">Doorniksesteenweg 216</string>
     <string name="city">8500 Kortrijk</string>
-    <string name="country">België</string>
+    <string name="country">Belgium</string>
     <string name="title_activity_news_item">NewsItemActivity</string>
     <string name="hello_world">Hello world!</string>
 
