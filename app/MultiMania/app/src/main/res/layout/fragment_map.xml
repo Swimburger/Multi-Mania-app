@@ -4,13 +4,12 @@
     android:layout_height="match_parent"
     tools:context="be.ana.nmct.multimania.ui.MapFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
-
-    <ImageView
+    <uk.co.senab.photoview.PhotoView
+        android:id="@+id/indoormap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/imageView"
-        android:layout_gravity="left|top"
         />
+
+
 </FrameLayout>

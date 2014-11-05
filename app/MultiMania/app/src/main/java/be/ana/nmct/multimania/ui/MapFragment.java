@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import be.ana.nmct.multimania.R;
+import uk.co.senab.photoview.PhotoView;
 
 
 public class MapFragment extends Fragment {
@@ -20,7 +21,12 @@ public class MapFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_map, container, false);
+        View v = inflater.inflate(R.layout.fragment_map, container, false);
+
+        PhotoView photoView = (PhotoView)v.findViewById(R.id.indoormap);
+        photoView.setMaximumScale(16);
+        photoView.setImageDrawable(getResources().getDrawable(R.drawable.ic_map));
+        return v;
     }
 
 
