@@ -68,7 +68,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         if(isNotRetained){
             fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
         }
-        onSectionAttached(position);
+        onSectionAttached(position + 1);
     }
     public void onSectionAttached(int number) {
 
@@ -107,10 +107,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.schedule, menu);
             restoreActionBar();
             return true;
         }

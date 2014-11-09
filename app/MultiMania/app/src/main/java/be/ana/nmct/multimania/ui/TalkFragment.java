@@ -1,110 +1,118 @@
 package be.ana.nmct.multimania.ui;
 
 import android.app.Activity;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.data.MultimaniaContract;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TalkFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TalkFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
-public class TalkFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class TalkFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public static final String URI_KEY = "uri_key";
+    private Uri mUri=null;
+    private TitleLoadListener mTitleLoadListener;
 
-    private OnFragmentInteractionListener mListener;
+    private TextView txtTalkInfo;
+    private TextView txtSpeaker;
+    private TextView txtTalkTime;
+    private TextView txtTalkRoom;
+    private TextView txtTalkTag;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TalkFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TalkFragment newInstance(String param1, String param2) {
-        TalkFragment fragment = new TalkFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-    public TalkFragment() {
-        // Required empty public constructor
-    }
+    public TalkFragment(){}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        if(getArguments() != null){
+            mUri = getArguments().getParcelable(URI_KEY);
         }
+        getLoaderManager().initLoader(0,null,this);
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_talk, container, false);
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_talk, container, false);
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        txtTalkInfo = (TextView) view.findViewById(R.id.txtTalkInfo);
+        txtSpeaker = (TextView) view.findViewById(R.id.txtTalkSpeaker);
+        txtTalkTime = (TextView) view.findViewById(R.id.txtTalkTime);
+        txtTalkRoom = (TextView) view.findViewById(R.id.txtTalkRoom);
+        txtTalkTag = (TextView) view.findViewById(R.id.txtTalkTag);
+
+        return view;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+        LayoutInflater inflater = LayoutInflater.from(activity);
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(getActivity(), mUri, null, null, null, null);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if(data.moveToFirst()){
+            BindData(data);
+        }
     }
 
+    private void BindData(Cursor cursor){
+        int infoCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DESCRIPTION);
+        int speakerCol = cursor.getColumnIndexOrThrow(MultimaniaContract.SpeakerEntry.NAME);
+        int timeFromCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DATE_FROM);
+        int timeUntilCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DATE_UNTIL);
+        int roomCol = cursor.getColumnIndexOrThrow(MultimaniaContract.RoomEntry.NAME);
+        int tagCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TagEntry.NAME);
+
+        int titleCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.TITLE);
+        String title = cursor.getString(titleCol);
+
+        if(mTitleLoadListener != null){
+            mTitleLoadListener.onTitleloaded(title);
+        }
+
+        String info = cursor.getString(infoCol);
+        String speaker = cursor.getString(speakerCol);
+        String from = cursor.getString(timeFromCol);
+        String until = cursor.getString(timeUntilCol);
+        String room = cursor.getString(roomCol);
+        String tag = cursor.getString(tagCol);
+
+        txtTalkInfo.setText(info);
+        txtSpeaker.setText(speaker);
+        txtTalkTime.setText("From: " + from + " Until: " + until);
+        txtTalkRoom.setText(room);
+        txtTalkTag.setText(tag);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+    public void setTitleLoadListener(TitleLoadListener listener){
+        mTitleLoadListener =listener;
+    }
+
+    public interface TitleLoadListener {
+        public void onTitleloaded(String title);
+    }
 }

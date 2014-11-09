@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,9 +19,8 @@
             android:text="@string/talk_info"
             android:id="@+id/txtTalkInfo"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="0dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="0dp" />
+            android:padding="16dp"
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,7 +30,8 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="0dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="33dp" />
+            android:layout_marginTop="33dp"
+            android:padding="16dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,7 +41,8 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="0dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="66dp" />
+            android:layout_marginTop="66dp"
+            android:padding="16dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,7 +52,8 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="0dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="99dp" />
+            android:layout_marginTop="99dp"
+            android:padding="16dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -61,7 +63,8 @@
             android:layout_marginRight="68dp"
             android:layout_alignTop="@+id/txtTalkRoom"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:padding="16dp"/>
 
     </RelativeLayout>
-</FrameLayout>
+</ScrollView>
