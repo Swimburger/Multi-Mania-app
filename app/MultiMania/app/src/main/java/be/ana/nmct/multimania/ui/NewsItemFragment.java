@@ -35,6 +35,7 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
     private WebView mNewsItemInfo;
     private FadingActionBarHelperBase mFadingHelper;
     private TitleLoadListener mTitleLoadListener;
+    private Cursor mData;
 
     public NewsItemFragment() {
     }
@@ -42,6 +43,7 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         if (getArguments() != null) {
             mUri = getArguments().getParcelable(URI_KEY);
         }
@@ -55,13 +57,13 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
         mNewsItemImg = (ImageView) view.findViewById(R.id.img);
         mNewsItemTitle = (TextView) view.findViewById(R.id.title);
         mNewsItemInfo = (WebView) view.findViewById(R.id.txtNewsItemInfo);
+        BindData(mData);
         return view;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        LayoutInflater inflater = LayoutInflater.from(activity);
         mFadingHelper = new FadingActionBarHelper()
                 .parallax(false)
                 .actionBarBackground(R.drawable.ab_background_light)
@@ -78,42 +80,44 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if(data.moveToFirst()){
-            BindData(data);
-        }
+        mData = data;
+        BindData(data);
     }
 
     private void BindData(Cursor cursor) {
-        int titleCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.TITLE);
-        int imgCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.IMAGE);
-        int shortDescriptionCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.SHORT_DESCRIPTION);
-        int longDescriptionCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.LONG_DESCRIPTION);
+        if(cursor==null)return;
+        if(cursor.moveToFirst()) {
+            int titleCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.TITLE);
+            int imgCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.IMAGE);
+            int shortDescriptionCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.SHORT_DESCRIPTION);
+            int longDescriptionCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.LONG_DESCRIPTION);
 
-        Animation animFadein = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),
-                R.anim.fade_in);
+            Animation animFadein = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),
+                    R.anim.fade_in);
 
-        String title = cursor.getString(titleCol);
-        if(mTitleLoadListener!=null){
-            mTitleLoadListener.onTitleloaded(title);
+            String title = cursor.getString(titleCol);
+            if (mTitleLoadListener != null) {
+                mTitleLoadListener.onTitleloaded(title);
+            }
+            String shortDescription = cursor.getString(shortDescriptionCol);
+            String longDescription = cursor.getString(longDescriptionCol);
+            if (TextUtils.isEmpty(longDescription)) {
+                longDescription = shortDescription;
+            }
+            String img = cursor.getString(imgCol);
+
+            mNewsItemTitle.setText(title);
+
+            String mime = "text/html";
+            String encoding = "utf-8";
+            mNewsItemInfo.getSettings().setJavaScriptEnabled(true);
+            mNewsItemInfo.loadDataWithBaseURL(null, longDescription, mime, encoding, null);
+            // holder.imgNews.setImageURI(Uri.parse(img));
+            Ion.with(mNewsItemImg)
+                    .smartSize(true)
+                    .animateIn(animFadein)
+                    .load(img);
         }
-        String shortDescription = cursor.getString(shortDescriptionCol);
-        String longDescription = cursor.getString(longDescriptionCol);
-        if(TextUtils.isEmpty(longDescription)){
-            longDescription=shortDescription;
-        }
-        String img = cursor.getString(imgCol);
-
-        mNewsItemTitle.setText(title);
-
-        String mime = "text/html";
-        String encoding = "utf-8";
-        mNewsItemInfo.getSettings().setJavaScriptEnabled(true);
-        mNewsItemInfo.loadDataWithBaseURL(null, longDescription, mime, encoding, null);
-        // holder.imgNews.setImageURI(Uri.parse(img));
-        Ion.with(mNewsItemImg)
-                .smartSize(true)
-                .animateIn(animFadein)
-                .load(img);
     }
 
     @Override

@@ -2,31 +2,20 @@ package be.ana.nmct.multimania.ui;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 import be.ana.nmct.multimania.R;
-import be.ana.nmct.multimania.data.ApiService;
-import be.ana.nmct.multimania.data.AsyncResponse;
-import be.ana.nmct.multimania.model.NewsItem;
 
 
 
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
 
     @Override
@@ -42,69 +31,70 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-        AsyncResponse response = new AsyncResponse() {
-            @Override
-            public void onTaskCompleted(Object result) {
-                Log.d("", result.toString());
-            }
-        };
-
-        ApiService<NewsItem> newsService = new ApiService<NewsItem>(this, "news", this.getLoaderManager(), response);
-        newsService.loadData();
-
     }
     
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
-
+        Fragment fragment = fragmentManager.findFragmentById(R.id.container);
+        boolean isNull = fragment==null;
+        boolean isNotRetained = true;
         switch (position) {
             case 0:
-
+                /*isNotRetained = (isNull||!(fragment instanceof  ScheduleFragment));
+                if(isNotRetained)*/
+                    fragment = new ScheduleFragment();
                 break;
             case 1:
-                fragmentManager.beginTransaction().replace(R.id.container, new MyScheduleFragment()).commit();
+                fragment = new MyScheduleFragment();
                 break;
             case 2:
-                fragmentManager.beginTransaction().replace(R.id.container, new MapFragment()).commit();
+                fragment = new MapFragment();
                 break;
             case 3:
-                fragmentManager.beginTransaction().replace(R.id.container, new NewsFragment()).commit();
+                isNotRetained=(isNull||!(fragment instanceof NewsFragment));
+                if(isNotRetained){
+                    fragment = new NewsFragment();
+                }
                 break;
             case 4:
-                fragmentManager.beginTransaction().replace(R.id.container, new AboutFragment()).commit();
+                fragment = new AboutFragment();
                 break;
             case 5:
-                fragmentManager.beginTransaction().replace(R.id.container, new SettingsFragment()).commit();
+                fragment = new SettingsFragment();
                 break;
         }
+        if(isNotRetained){
+            fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
+        }
+        onSectionAttached(position);
     }
     public void onSectionAttached(int number) {
 
         switch (number) {
-            case 1:
+            case 0:
                 mTitle = getString(R.string.title_schedule);
                 break;
-            case 2:
+            case 1:
                 mTitle = getString(R.string.title_myschedule);
                 break;
-            case 3:
+            case 2:
                 mTitle = getString(R.string.title_map);
                 break;
-            case 4:
+            case 3:
                 mTitle = getString(R.string.title_news);
                 break;
-            case 5:
+            case 4:
                 mTitle = getString(R.string.title_about);
                 break;
-            case 6:
+            case 5:
                 mTitle = getString(R.string.title_settings);
                 break;
             //add more cases here
+        }
+        getActionBar().setTitle(mTitle);
     }
-}
 
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();

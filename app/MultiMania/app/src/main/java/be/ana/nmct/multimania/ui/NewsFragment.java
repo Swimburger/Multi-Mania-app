@@ -29,6 +29,7 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
     private NewsCursorAdapter mAdapter;
     private static final String ARGS_NEWS = "newsitem";
     private static Loader loader;
+    private Cursor mData;
 
     //default ctor
     public NewsFragment(){}
@@ -36,6 +37,7 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         mAdapter=new NewsCursorAdapter(getActivity(),null,0);
         setListAdapter(mAdapter);
         loader = getLoaderManager().initLoader(0,null,this);
@@ -43,7 +45,9 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_news,container,false);
+        View v = inflater.inflate(R.layout.fragment_news,container,false);
+        mAdapter.swapCursor(mData);
+        return v;
     }
 
     @Override
@@ -53,7 +57,8 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        mAdapter.swapCursor(data);
+        mData=data;
+        mAdapter.swapCursor(mData);
     }
 
     @Override

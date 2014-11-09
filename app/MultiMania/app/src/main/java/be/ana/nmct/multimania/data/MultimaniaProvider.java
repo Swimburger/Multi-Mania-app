@@ -44,18 +44,19 @@ public class MultimaniaProvider extends ContentProvider {
     public static final int TALK_TAG                = 600;
     public static final int TALK_SPEAKER            = 700;
 
-    private static final SQLiteQueryBuilder sTalksWithRoomQueryBuilder;
+    private static final SQLiteQueryBuilder sTalksWithRoomAndTagsQueryBuilder;
     private static final SQLiteQueryBuilder sTalksByRoomIdQueryBuilder;
     private static final SQLiteQueryBuilder sTalksByTagIdQueryBuilder;
     private static final SQLiteQueryBuilder sTagsByTalkIdQueryBuilder;
     private static final SQLiteQueryBuilder sSpeakersByTalkIdQueryBuilder;
 
     static{
-        sTalksWithRoomQueryBuilder      = new SQLiteQueryBuilder();
+        sTalksWithRoomAndTagsQueryBuilder = new SQLiteQueryBuilder();
         sTalksByRoomIdQueryBuilder      = new SQLiteQueryBuilder();
         sTalksByTagIdQueryBuilder       = new SQLiteQueryBuilder();
         sTagsByTalkIdQueryBuilder       = new SQLiteQueryBuilder();
         sSpeakersByTalkIdQueryBuilder   = new SQLiteQueryBuilder();
+
         HashMap<String,String> columnMap = new HashMap<String, String>();
         final String talkTableName = TalkEntry.TABLE_NAME;
         columnMap.put(talkTableName + "." + TalkEntry._ID, talkTableName + "." + TalkEntry._ID+ " as "+ TalkEntry._ID);
@@ -67,14 +68,14 @@ public class MultimaniaProvider extends ContentProvider {
         columnMap.put(talkTableName + "." + TalkEntry.IS_KEYNOTE, talkTableName + "." + TalkEntry.IS_KEYNOTE+ " as "+ TalkEntry.IS_KEYNOTE);
         columnMap.put(RoomEntry.TABLE_NAME + "." + RoomEntry.NAME,RoomEntry.TABLE_NAME + "." + RoomEntry.NAME+ " as "+RoomEntry.ROOM_NAME);
 
-        sTalksWithRoomQueryBuilder.setTables(
+        sTalksWithRoomAndTagsQueryBuilder.setTables(
                 TalkEntry.TABLE_NAME + " INNER JOIN " +
                         RoomEntry.TABLE_NAME + " ON (" +
                         TalkEntry.TABLE_NAME + "." + TalkEntry.ROOM_ID + " = " +
-                        RoomEntry.TABLE_NAME + "." + RoomEntry._ID + ")"
+                        RoomEntry.TABLE_NAME + "." + RoomEntry._ID + ") "
         );
 
-        sTalksWithRoomQueryBuilder.setProjectionMap(columnMap);
+        sTalksWithRoomAndTagsQueryBuilder.setProjectionMap(columnMap);
 
         sTalksByRoomIdQueryBuilder.setTables(
                 TalkEntry.TABLE_NAME + " INNER JOIN " +
@@ -214,7 +215,7 @@ public class MultimaniaProvider extends ContentProvider {
                 );
                 break;
             case TALK:
-                retCursor = sTalksWithRoomQueryBuilder.query(
+                retCursor = sTalksWithRoomAndTagsQueryBuilder.query(
                         mDbHelper.getReadableDatabase(),
                         projection,
                         selection,
@@ -234,7 +235,7 @@ public class MultimaniaProvider extends ContentProvider {
                 );*/
                 break;
             case TALK_ID:
-                retCursor = sTalksWithRoomQueryBuilder.query(
+                retCursor = sTalksWithRoomAndTagsQueryBuilder.query(
                         mDbHelper.getReadableDatabase(),
                         projection,
                         TalkEntry.TABLE_NAME+"."+TalkEntry._ID + " = '" + ContentUris.parseId(uri) + "'",

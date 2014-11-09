@@ -25,6 +25,11 @@ public class NewsItemActivity extends Activity implements NewsItemFragment.Title
                     .add(android.R.id.content,fragment)
                     .commit();
             fragment.setTitleLoadListener(this);
+        }else{
+            NewsItemFragment fragment = (NewsItemFragment) getFragmentManager().findFragmentById(android.R.id.content);
+            if(fragment!=null){
+                fragment.setTitleLoadListener(this);
+            }
         }
     }
 

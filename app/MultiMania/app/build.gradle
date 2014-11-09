@@ -20,6 +20,9 @@ android {
         }
     }
 }
+repositories {
+    maven { url 'https://github.com/felipecsl/m2repository/raw/master/' }
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -29,4 +32,5 @@ dependencies {
     compile 'com.android.support:cardview-v7:21.0.+'
     compile 'com.koushikdutta.ion:ion:1.3.8'
     compile 'com.github.manuelpeinado.fadingactionbar:fadingactionbar:3.1.2'
+    compile 'com.felipecsl:asymmetricgridview:1.1.0'
 }

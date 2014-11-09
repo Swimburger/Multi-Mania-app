@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Talk {
 
-    public int id;
+    public long id;
     public String title;
     public Date from;
     public Date to;
@@ -22,6 +22,8 @@ public class Talk {
     public boolean isKeynote;
     @Expose
     public List<Tag> tags;
+
+    public Talk(){}
 
     public Talk(int id, String title, Date from, Date to, String description, int roomId, boolean isKeynote) {
         this.id = id;

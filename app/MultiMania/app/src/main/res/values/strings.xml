@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Multi-Mania</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
     <string name="title_schedule">Schedule</string>
     <string name="title_myschedule">My Schedule</string>
     <string name="title_map">Map</string>
@@ -33,7 +29,5 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="street">Doorniksesteenweg 216</string>
     <string name="city">8500 Kortrijk</string>
     <string name="country">België</string>
-    <string name="title_activity_news_item">NewsItemActivity</string>
-    <string name="hello_world">Hello world!</string>
 
 </resources>

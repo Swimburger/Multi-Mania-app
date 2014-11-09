@@ -14,12 +14,22 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="be.ana.nmct.multimania.ui.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="be.ana.nmct.multimania.ui.NewsItemActivity"
+            android:label="@string/title_news"
+            android:parentActivityName="be.ana.nmct.multimania.ui.MainActivity"
+            android:theme="@style/AppTheme.TranslucentActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="be.ana.nmct.multimania.ui.MainActivity" />
         </activity>
 
         <provider
@@ -29,15 +39,7 @@
             android:exported="false" >
         </provider>
 
-        <activity
-            android:name="be.ana.nmct.multimania.ui.NewsItemActivity"
-            android:label="@string/title_activity_news_item"
-            android:parentActivityName="be.ana.nmct.multimania.ui.MainActivity"
-            android:theme="@style/AppTheme.TranslucentActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="be.ana.nmct.multimania.ui.MainActivity" />
-        </activity>
+
     </application>
 
 </manifest>

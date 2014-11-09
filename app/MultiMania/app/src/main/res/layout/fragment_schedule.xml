@@ -1,17 +1,13 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scheduleGrid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="be.ana.nmct.multimania.ui.ScheduleFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-
-
-    <GridView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/gridViewSchedule"
-        android:layout_gravity="left|top"
-        android:numColumns="2"/>
-
-</FrameLayout>
+    tools:context="be.ana.nmct.multimania.ui.ScheduleFragment"
+    android:padding="8dp"
+    android:divider="@null"
+    android:dividerHeight="0dp"
+    android:clipToPadding="false"
+    android:scrollbarStyle="outsideOverlay"
+    />
