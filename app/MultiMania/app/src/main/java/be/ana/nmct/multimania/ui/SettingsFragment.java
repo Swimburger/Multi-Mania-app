@@ -19,6 +19,7 @@ import com.google.android.gms.common.AccountPicker;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.utils.GoogleCalUtil;
+import be.ana.nmct.multimania.utils.SettingsUtil;
 
 public class SettingsFragment extends Fragment {
 
@@ -26,8 +27,16 @@ public class SettingsFragment extends Fragment {
 
     private static final int REQUEST_CODE_EMAIL = 1;
 
-    private static CheckBox checkbox_notify;
-    private static CheckBox checkbox_sync;
+    private static String mCalendarName;
+
+    private static final String PREFERENCE_NAME = "setting_values";
+    private static final String PREFERENCE_NOTIFY = "setting_notify";
+    private static final String PREFERENCE_SYNC = "setting_sync";
+
+    private static CheckBox mChkNotify;
+    private static CheckBox mChkSync;
+    private static SettingsUtil mUtil;
+    private static GoogleCalUtil mCalUtil;
 
     public SettingsFragment() {
     }
@@ -35,33 +44,43 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.mCalendarName = this.getActivity().getResources().getString(R.string.calendar_name);
+        this.mUtil = new SettingsUtil(this.getActivity(), PREFERENCE_NAME);
+        this.mCalUtil = new GoogleCalUtil(this.getActivity(), mCalendarName);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        checkbox_notify = (CheckBox) v.findViewById(R.id.checkbox_notify);
-        checkbox_sync = (CheckBox) v.findViewById(R.id.checkbox_sync);
+        //TODO: check notifychk by default on first time app startup
+        mChkNotify = (CheckBox) v.findViewById(R.id.checkbox_notify);
+        mChkNotify.setChecked(mUtil.getBooleanPreference(PREFERENCE_NOTIFY));
 
-        checkbox_notify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mChkSync = (CheckBox) v.findViewById(R.id.checkbox_sync);
+        mChkSync.setChecked(mUtil.getBooleanPreference(PREFERENCE_SYNC));
+
+
+        mChkNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                Log.d(TAG, "checked");
+                mUtil.setPreference(PREFERENCE_NOTIFY, isChecked);
             }
         });
 
-        checkbox_sync.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mChkSync.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+
+                mUtil.setPreference(PREFERENCE_SYNC, isChecked);
 
                 if (isChecked) {
                     Toast.makeText(getActivity(), "Please choose your Google Account", Toast.LENGTH_LONG).show();
                     askUserEmail();
 
                 } else {
-                    GoogleCalUtil cal = new GoogleCalUtil(getActivity());
-                    cal.deleteCalendar();
+                    mCalUtil.deleteCalendar();
                 }
             }
         });
@@ -86,16 +105,16 @@ public class SettingsFragment extends Fragment {
             String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
 
             if (accountName != "") {
-                GoogleCalUtil cal = new GoogleCalUtil(getActivity());
-                cal.setAccount(accountName);
-                cal.createCalendar();
+                SettingsUtil util = new SettingsUtil(getActivity(), GoogleCalUtil.PREFERENCE_NAME);
+                util.setPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME, accountName);
+                mCalUtil.createCalendar();
             } else {
                 Toast.makeText(getActivity(), "No valid account selected", Toast.LENGTH_LONG).show();
-                checkbox_sync.setChecked(false);
+                mChkSync.setChecked(false);
             }
         } else {
             Toast.makeText(getActivity(), "No account selected", Toast.LENGTH_LONG).show();
-            checkbox_sync.setChecked(false);
+            mChkSync.setChecked(false);
         }
     }
 

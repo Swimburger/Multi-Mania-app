@@ -5,7 +5,6 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.util.Log;
@@ -19,18 +18,22 @@ import be.ana.nmct.multimania.model.Talk;
 public class GoogleCalUtil {
 
     private final static String TAG = GoogleCalUtil.class.getCanonicalName();
+
     private final static Uri CAL_URI = CalendarContract.Calendars.CONTENT_URI;
     private final static Uri EVENT_URI = CalendarContract.Events.CONTENT_URI;
 
-    private final static String PREF_CALENDER_ID = "calendar_id";
-    private final static String PREF_ACCOUNTNAME = "calendar_accountname";
+    public final static String PREFERENCE_NAME = "calendar_preferences";
+    private final static String PREFERENCE_CALENDER_ID = "calendar_id";
+    public final static String PREFERENCE_ACCOUNTNAME = "calendar_accountname";
 
-    private static String CALENDAR_NAME;
-    private Context context;
+    private Context mContext;
+    private static String mCalendarName;
+    private SettingsUtil mUtil;
 
-    public GoogleCalUtil(Context context) {
-        this.context = context;
-        this.CALENDAR_NAME = context.getResources().getString(R.string.calendar_name);
+    public GoogleCalUtil(Context context, String calendarName) {
+        this.mContext = context;
+        this.mCalendarName = calendarName;
+        this.mUtil = new SettingsUtil(mContext, PREFERENCE_NAME);
     }
 
     //single insert via intent
@@ -43,7 +46,7 @@ public class GoogleCalUtil {
             intent.putExtra(CalendarContract.Events.DESCRIPTION, talk.description);
             intent.putExtra(CalendarContract.Events.EVENT_LOCATION, talk.roomId);
 
-            this.context.startActivity(intent);
+            this.mContext.startActivity(intent);
 
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
@@ -53,37 +56,41 @@ public class GoogleCalUtil {
     private ContentValues buildNewCalContentValues() {
         final ContentValues cv = new ContentValues();
 
-        cv.put(CalendarContract.Calendars.ACCOUNT_NAME, getAccount());
+        String accountName = mUtil.getStringPreference(PREFERENCE_ACCOUNTNAME);
+        cv.put(CalendarContract.Calendars.ACCOUNT_NAME, accountName);
         cv.put(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL);
-        cv.put(CalendarContract.Calendars.NAME, CALENDAR_NAME);
-        cv.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, CALENDAR_NAME);
+        cv.put(CalendarContract.Calendars.NAME, mCalendarName);
+        cv.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, mCalendarName);
         cv.put(CalendarContract.Calendars.CALENDAR_COLOR, 0xEA8561);
         cv.put(CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, CalendarContract.Calendars.CAL_ACCESS_READ);
-        cv.put(CalendarContract.Calendars.OWNER_ACCOUNT, getAccount());
+        cv.put(CalendarContract.Calendars.OWNER_ACCOUNT, accountName);
         cv.put(CalendarContract.Calendars.VISIBLE, 1);
         cv.put(CalendarContract.Calendars.SYNC_EVENTS, 1);
         return cv;
     }
 
     public void createCalendar() {
-        ContentResolver cr = context.getContentResolver();
+        ContentResolver cr = mContext.getContentResolver();
         final ContentValues cv = buildNewCalContentValues();
         Uri calUri = buildCalUri();
         Uri newUri = cr.insert(buildCalUri(), cv);
-        setCalId(Long.parseLong(newUri.getLastPathSegment()));
+        mUtil.setPreference(PREFERENCE_CALENDER_ID, Long.parseLong(newUri.getLastPathSegment()));
     }
 
     public void deleteCalendar() {
-        ContentResolver cr = context.getContentResolver();
-        Uri calUri = ContentUris.withAppendedId(buildCalUri(), getCalId());
+        ContentResolver cr = mContext.getContentResolver();
+        long calId = mUtil.getLongPreference(PREFERENCE_CALENDER_ID);
+        Uri calUri = ContentUris.withAppendedId(buildCalUri(), calId);
         cr.delete(calUri, null, null);
     }
 
 
     public void addTalk(Talk talk) {
-        ContentResolver cr = context.getContentResolver();
+        ContentResolver cr = mContext.getContentResolver();
         ContentValues cv = new ContentValues();
-        cv.put(CalendarContract.Events.CALENDAR_ID, getCalId());
+
+        long calId = mUtil.getLongPreference(PREFERENCE_CALENDER_ID);
+        cv.put(CalendarContract.Events.CALENDAR_ID, calId);
         cv.put(CalendarContract.Events.TITLE, talk.title);
         cv.put(CalendarContract.Events.DTSTART, Utility.getDateInMillis(talk.from));
         cv.put(CalendarContract.Events.DTEND, Utility.getDateInMillis(talk.to));
@@ -98,7 +105,7 @@ public class GoogleCalUtil {
         return CAL_URI
                 .buildUpon()
                 .appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, "true")
-                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, getAccount())
+                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, mUtil.getStringPreference(PREFERENCE_ACCOUNTNAME))
                 .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE,
                         CalendarContract.ACCOUNT_TYPE_LOCAL)
                 .build();
@@ -108,35 +115,9 @@ public class GoogleCalUtil {
         return EVENT_URI
                 .buildUpon()
                 .appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, "true")
-                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, getAccount())
+                .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_NAME, mUtil.getStringPreference(PREFERENCE_ACCOUNTNAME))
                 .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE,
                         CalendarContract.ACCOUNT_TYPE_LOCAL)
                 .build();
     }
-
-
-    private boolean setCalId(long calId){
-        SharedPreferences.Editor editor = context.getSharedPreferences(PREF_CALENDER_ID, Context.MODE_PRIVATE).edit();
-        editor.putLong(PREF_CALENDER_ID, calId);
-        return  editor.commit();
-    }
-
-    private long getCalId(){
-        SharedPreferences prefs = context.getSharedPreferences(PREF_CALENDER_ID, Context.MODE_PRIVATE);
-        return prefs.getLong(PREF_CALENDER_ID, 0);
-    }
-
-    public boolean setAccount(String accountName){
-        SharedPreferences.Editor editor = context.getSharedPreferences(PREF_ACCOUNTNAME, Context.MODE_PRIVATE).edit();
-        editor.putString(PREF_ACCOUNTNAME, accountName);
-        return  editor.commit();
-    }
-
-    public String getAccount(){
-        SharedPreferences prefs = context.getSharedPreferences(PREF_ACCOUNTNAME, Context.MODE_PRIVATE);
-        return prefs.getString(PREF_ACCOUNTNAME, null);
-    }
-
-
-
 }
