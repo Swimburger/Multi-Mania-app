@@ -236,7 +236,7 @@ public class DbHelper  extends SQLiteOpenHelper{
         return values;
     }
 
-    public static Cursor GetTalkById(SQLiteDatabase db, int id) {
+    public static Cursor GetTalkById(SQLiteDatabase db, long id) {
         return db.query(TalkEntry.TABLE_NAME,null,TalkEntry._ID+"=?",new String[]{""+id},null,null,null);
     }
 

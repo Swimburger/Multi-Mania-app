@@ -260,4 +260,14 @@ public class ProviderTest extends ApplicationTestCase<Application> {
 
 
     //TODO: Write update contentprovider
+
+    public void testGetDates(){
+        Cursor cursor = mContext.getContentResolver().query(
+                MultimaniaContract.TalkEntry.DATE_CONTENT_URI,null,null,null,null
+        );
+        int dayIndex = cursor.getColumnIndex(TalkEntry.DAY);
+        while(cursor.moveToNext()){
+            Log.d(TAG,"Day: "+cursor.getString(dayIndex));
+        }
+    }
 }

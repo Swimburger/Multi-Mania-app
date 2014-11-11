@@ -27,6 +27,7 @@ public class MultimaniaContract {
     public static final String PATH_SPEAKER         = "speakers";
     public static final String PATH_TALK_TAG        = "talk_tags";
     public static final String PATH_TALK_SPEAKER    = "talk_speakers";
+    public static final String PATH_DATE            = "dates";
 
     public static String getDbDateString(Date date){
         return Utility.ConvertDateToString(date);
@@ -73,10 +74,13 @@ public class MultimaniaContract {
         public static final String IS_KEYNOTE   = "is_keynote";
         public static final String ROOM_NAME    = "room_name";
         public static final String TAGS         = "tags";
+        public static final String DAY        = "days";
 
         public static final String CONTENT_TYPE = CURSOR_DIR+CONTENT_AUTHORITY+"/"+PATH_TALK;
         public static final String CONTENT_ITEM_TYPE = CURSOR_ITEM+CONTENT_AUTHORITY+"/"+PATH_TALK;
+        public static final String DATE_CONTENT_TYPE = CURSOR_DIR+CONTENT_AUTHORITY+"/"+PATH_TALK+"/"+PATH_DATE;
         public static final Uri    CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_TALK).build();
+        public static final Uri DATE_CONTENT_URI = CONTENT_URI.buildUpon().appendPath(PATH_DATE).build();
 
         public static Uri buildItemUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI,id);
@@ -87,7 +91,7 @@ public class MultimaniaContract {
         public static final String TABLE_NAME   = "talk_tag";
         public static final String TALK_TAG_ID  = "talk_tag_id";
         public static final String TALK_ID      = "talk_id";
-        public static final String TAG_ID       ="tag_id";
+        public static final String TAG_ID       = "tag_id";
 
         public static final String CONTENT_TYPE = CURSOR_DIR+CONTENT_AUTHORITY+"/"+PATH_TALK_TAG;
         public static final String CONTENT_ITEM_TYPE = CURSOR_ITEM+CONTENT_AUTHORITY+"/"+PATH_TALK_TAG;

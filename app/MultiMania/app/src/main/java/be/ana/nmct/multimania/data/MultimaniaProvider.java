@@ -32,17 +32,19 @@ public class MultimaniaProvider extends ContentProvider {
     public static final int TALK_BY_ROOM_ID         = 202;
     public static final int TALK_BY_TAG_ID          = 203;
 
-    public static final int ROOM                    = 300;
+    public static final int TALK_DATE               = 300;
 
-    public static final int TAG                     = 400;
-    public static final int TAG_BY_TALK_ID          = 401;
+    public static final int ROOM                    = 400;
 
-    public static final int SPEAKER                 = 500;
-    public static final int SPEAKER_BY_TALK_ID      = 501;
+    public static final int TAG                     = 500;
+    public static final int TAG_BY_TALK_ID          = 501;
+
+    public static final int SPEAKER                 = 600;
+    public static final int SPEAKER_BY_TALK_ID      = 601;
 
 
-    public static final int TALK_TAG                = 600;
-    public static final int TALK_SPEAKER            = 700;
+    public static final int TALK_TAG                = 700;
+    public static final int TALK_SPEAKER            = 800;
 
     private static final SQLiteQueryBuilder sTalksWithRoomAndTagsQueryBuilder;
     private static final SQLiteQueryBuilder sTalksByRoomIdQueryBuilder;
@@ -130,6 +132,8 @@ public class MultimaniaProvider extends ContentProvider {
         matcher.addURI(authority, MultimaniaContract.PATH_TALK+"/"+MultimaniaContract.PATH_ROOM+"/#", TALK_BY_ROOM_ID);
         matcher.addURI(authority, MultimaniaContract.PATH_TALK+"/"+MultimaniaContract.PATH_TAG+"/#", TALK_BY_TAG_ID);
 
+        matcher.addURI(authority, MultimaniaContract.PATH_TALK+"/"+MultimaniaContract.PATH_DATE,TALK_DATE);
+
         matcher.addURI(authority, MultimaniaContract.PATH_ROOM, ROOM);
 
         matcher.addURI(authority, MultimaniaContract.PATH_TAG, TAG);
@@ -168,6 +172,8 @@ public class MultimaniaProvider extends ContentProvider {
                 return TalkEntry.CONTENT_TYPE;
             case TALK_BY_TAG_ID:
                 return TalkEntry.CONTENT_TYPE;
+            case TALK_DATE:
+                return TalkEntry.DATE_CONTENT_TYPE;
             case ROOM:
                 return RoomEntry.CONTENT_TYPE;
             case TAG:
@@ -259,6 +265,17 @@ public class MultimaniaProvider extends ContentProvider {
                 break;
             case TALK_BY_TAG_ID:
                 retCursor = getTalksByTagId(uri,projection,sortOrder);
+                break;
+            case TALK_DATE:
+                retCursor = mDbHelper.getReadableDatabase().query(
+                        TalkEntry.TABLE_NAME,
+                        new String[]{"SUBSTR("+TalkEntry.DATE_FROM+",0,11) AS "+TalkEntry.DAY},
+                        null,
+                        null,
+                        TalkEntry.DAY,
+                        null,
+                        sortOrder
+                );
                 break;
             case ROOM:
                 retCursor = mDbHelper.getReadableDatabase().query(

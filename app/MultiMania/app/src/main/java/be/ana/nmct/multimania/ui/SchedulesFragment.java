@@ -3,23 +3,31 @@ package be.ana.nmct.multimania.ui;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.os.Parcelable;
+import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.data.MultimaniaContract;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SchedulesFragment extends Fragment {
+public class SchedulesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final String TAG = SchedulesFragment.class.getSimpleName();
 
-    //TODO: get dates from database group by
-    public String[] mDates = new String[]{"2014-05-19","2014-05-20"};
+    public List<String> mDates = new ArrayList<String>();//[]{"2014-05-19","2014-05-20"};
     private SchedulesPagerAdapter mViewPagerAdapter;
 
     public SchedulesFragment() {}
@@ -27,7 +35,8 @@ public class SchedulesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getLoaderManager().initLoader(MainActivity.LOADER_SCHEDULE_DATES_ID,null,this);
+        setRetainInstance(true);
     }
 
     @Override
@@ -40,7 +49,32 @@ public class SchedulesFragment extends Fragment {
         return v;
     }
 
-    private class SchedulesPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return new CursorLoader(getActivity(),MultimaniaContract.TalkEntry.DATE_CONTENT_URI,null,null,null,null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        AddDates(cursor);
+    }
+
+    private void AddDates(Cursor cursor) {
+        int dayIndex = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DAY);
+        mDates.clear();
+        while(cursor.moveToNext()){
+            String date = cursor.getString(dayIndex);
+            mDates.add(date);
+        }
+        mViewPagerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+    private class SchedulesPagerAdapter extends FragmentStatePagerAdapter {
 
         private final String mDayString;
 
@@ -51,17 +85,31 @@ public class SchedulesFragment extends Fragment {
 
         @Override
         public Fragment getItem(int i) {
-            return ScheduleFragment.newInstance(mDates[i]);
+            return ScheduleFragment.newInstance(mDates.get(i),i);
         }
 
         @Override
         public int getCount() {
-            return mDates.length;
+            return mDates.size();
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             return mDayString+ " "+(position+1);
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            if(object instanceof  ScheduleFragment){
+                getFragmentManager().beginTransaction().remove((Fragment)object).commit();
+                return POSITION_NONE;
+            }
+            return super.getItemPosition(object);
+        }
+
+        @Override
+        public Parcelable saveState() {
+            return null;
         }
     }
 }

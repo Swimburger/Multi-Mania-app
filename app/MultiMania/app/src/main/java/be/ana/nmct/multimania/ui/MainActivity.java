@@ -15,8 +15,14 @@ import be.ana.nmct.multimania.R;
 
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+    public static final int LOADER_SCHEDULE_DATES_ID =0;
+    public static final int LOADER_SCHEDULE_TALK_ID=100;
+    public static final int LOADER_MYSCHEDULE_TALK_ID=2;
+    public static final int LOADER_NEWS_ID=3;
+
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +44,14 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.container);
-        boolean isNull = fragment==null;
+        //boolean isNull = fragment==null;
         boolean isNotRetained = true;
         switch (position) {
             case 0:
-                /*isNotRetained = (isNull||!(fragment instanceof  ScheduleFragment));
-                if(isNotRetained)*/
+                isNotRetained=!(fragment instanceof SchedulesFragment);
+                if(isNotRetained) {
                     fragment = new SchedulesFragment();
+                }
                 break;
             case 1:
                 fragment = new MyScheduleFragment();
@@ -53,7 +60,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                 fragment = new MapFragment();
                 break;
             case 3:
-                isNotRetained=(isNull||!(fragment instanceof NewsFragment));
+                isNotRetained=!(fragment instanceof NewsFragment);
                 if(isNotRetained){
                     fragment = new NewsFragment();
                 }
@@ -68,7 +75,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         if(isNotRetained){
             fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
         }
-        onSectionAttached(position + 1);
+        onSectionAttached(position);
     }
     public void onSectionAttached(int number) {
 
@@ -100,7 +107,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+        //actionBar.setTitle(mTitle);
     }
 
 
