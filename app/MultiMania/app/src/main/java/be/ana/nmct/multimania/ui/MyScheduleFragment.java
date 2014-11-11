@@ -26,6 +26,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
