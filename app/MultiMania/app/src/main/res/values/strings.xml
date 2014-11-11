@@ -32,5 +32,6 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="country">Belgium</string>
     <string name="title_activity_news_item">NewsItemActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="day">day</string>
 
 </resources>

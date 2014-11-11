@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             case 0:
                 /*isNotRetained = (isNull||!(fragment instanceof  ScheduleFragment));
                 if(isNotRetained)*/
-                    fragment = new ScheduleFragment();
+                    fragment = new SchedulesFragment();
                 break;
             case 1:
                 fragment = new MyScheduleFragment();

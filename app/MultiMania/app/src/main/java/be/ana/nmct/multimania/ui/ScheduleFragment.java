@@ -9,6 +9,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,10 @@ import be.ana.nmct.multimania.vm.ScheduleGridItem;
 
 public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final String TAG = ScheduleFragment.class.getSimpleName();
+    public static final String TITLE_KEY = "title_key";
+    public static final String PAGE_KEY = "title_key";
+    public static final String DATE_KEY = "date_key";
+
     private AsymmetricGridView mScheduleGrid;
     private ScheduleAdapter mAdapter;
     private ArrayList<AsymmetricItem> mItems;
@@ -40,14 +45,26 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     private int mAmountOfScheduleItemColums=6;
     private int mAmountofScheduleItemRows=6;
     private Cursor mCursor;
+    private String mDate;
 
     public ScheduleFragment() {}
+
+    public static ScheduleFragment newInstance(String date) {
+        ScheduleFragment fragmentFirst = new ScheduleFragment();
+        Bundle args = new Bundle();
+        args.putString(DATE_KEY, date);
+        fragmentFirst.setArguments(args);
+        return fragmentFirst;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mDate = getArguments().getString(DATE_KEY);
         getLoaderManager().initLoader(0, null, this);
         mItems = new ArrayList<AsymmetricItem>();
+
         //setRetainInstance(true);
     }
 
@@ -77,7 +94,10 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(getActivity(), MultimaniaContract.TalkEntry.CONTENT_URI,null,null,null,null);
+        return new CursorLoader(getActivity(), MultimaniaContract.TalkEntry.CONTENT_URI,null,
+                MultimaniaContract.TalkEntry.TABLE_NAME + "." + MultimaniaContract.TalkEntry.DATE_FROM + " LIKE ?"
+                ,new String[]{mDate+"%"},null);
+        //return new CursorLoader(getActivity(), MultimaniaContract.TalkEntry.CONTENT_URI,null,null,null,null);
     }
 
     @Override
@@ -103,6 +123,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         {
             do{
                 String dateFrom = cursor.getString(dateFromIndex);
+                Log.d(TAG,"Date:"+dateFrom);
                 String dateUntil = cursor.getString(dateUntilIndex);
                 boolean isKeynote = cursor.getInt(isKeynoteIndex)==1; //Boolean.parseBoolean(cursor.getString(isKeynoteIndex));
                 String title = cursor.getString(titleIndex);
@@ -139,7 +160,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
                         item.tags = "";
                         if(data.moveToFirst()){
-                            final int nameIndex = data.getColumnIndex(MultimaniaContract.TagEntry.TABLE_NAME+"."+MultimaniaContract.TagEntry.NAME);
+                            final int nameIndex = data.getColumnIndex(MultimaniaContract.TagEntry.NAME);
                             do{
                                 item.tags +=data.getString(nameIndex)+", ";
                             }while(data.moveToNext());
