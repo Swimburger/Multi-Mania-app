@@ -66,6 +66,7 @@ public class MultimaniaProvider extends ContentProvider {
         columnMap.put(talkTableName + "." + TalkEntry.DATE_UNTIL, talkTableName + "." + TalkEntry.DATE_UNTIL+ " as "+ TalkEntry.DATE_UNTIL);
         columnMap.put(talkTableName + "." + TalkEntry.ROOM_ID, talkTableName + "." + TalkEntry.ROOM_ID+ " as "+ TalkEntry.ROOM_ID);
         columnMap.put(talkTableName + "." + TalkEntry.IS_KEYNOTE, talkTableName + "." + TalkEntry.IS_KEYNOTE+ " as "+ TalkEntry.IS_KEYNOTE);
+        columnMap.put(talkTableName + "." + TalkEntry.CALEVENT_ID, talkTableName + "." + TalkEntry.CALEVENT_ID + " as " + TalkEntry.CALEVENT_ID);
         columnMap.put(RoomEntry.TABLE_NAME + "." + RoomEntry.NAME,RoomEntry.TABLE_NAME + "." + RoomEntry.NAME+ " as "+RoomEntry.ROOM_NAME);
 
         sTalksWithRoomAndTagsQueryBuilder.setTables(

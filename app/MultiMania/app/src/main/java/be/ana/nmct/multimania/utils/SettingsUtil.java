@@ -3,8 +3,6 @@ package be.ana.nmct.multimania.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.lang.reflect.Type;
-
 /**
  * Created by Axel on 10/11/2014.
  */
