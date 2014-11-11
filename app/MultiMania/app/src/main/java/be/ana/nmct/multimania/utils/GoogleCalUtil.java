@@ -4,12 +4,13 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
-import android.util.Log;
 
-import be.ana.nmct.multimania.R;
+import java.util.List;
+
+import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.model.Talk;
 
 /**
@@ -29,6 +30,7 @@ public class GoogleCalUtil {
     private Context mContext;
     private static String mCalendarName;
     private SettingsUtil mUtil;
+    private Cursor mCursor;
 
     public GoogleCalUtil(Context context, String calendarName) {
         this.mContext = context;
@@ -36,7 +38,7 @@ public class GoogleCalUtil {
         this.mUtil = new SettingsUtil(mContext, PREFERENCE_NAME);
     }
 
-    //single insert via intent
+   /* //single insert via intent
     public void saveTalkToGoogleCalendarViaIntent(Talk talk){
         try {
             //set intent data to send to cal
@@ -51,7 +53,7 @@ public class GoogleCalUtil {
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
-    }
+    }*/
 
     private ContentValues buildNewCalContentValues() {
         final ContentValues cv = new ContentValues();
@@ -72,7 +74,6 @@ public class GoogleCalUtil {
     public void createCalendar() {
         ContentResolver cr = mContext.getContentResolver();
         final ContentValues cv = buildNewCalContentValues();
-        Uri calUri = buildCalUri();
         Uri newUri = cr.insert(buildCalUri(), cv);
         mUtil.setPreference(PREFERENCE_CALENDER_ID, Long.parseLong(newUri.getLastPathSegment()));
     }
@@ -84,6 +85,11 @@ public class GoogleCalUtil {
         cr.delete(calUri, null, null);
     }
 
+    public void addTalkList(List<Talk> talks){
+        for(int i = 0; i < talks.size(); i++){
+            addTalk(talks.get(i));
+        }
+    }
 
     public void addTalk(Talk talk) {
         ContentResolver cr = mContext.getContentResolver();
@@ -97,9 +103,29 @@ public class GoogleCalUtil {
         cv.put(CalendarContract.Events.EVENT_LOCATION, talk.roomId);
         cv.put(CalendarContract.Events.DESCRIPTION, talk.description);
         cv.put(CalendarContract.Events.EVENT_TIMEZONE, Utility.getTimeZoneId());
-        cr.insert(buildEventUri(), cv);
+
+        Uri uri = buildEventUri();
+        cr.insert(uri, cv);
+
+        updateEvent(talk,Long.parseLong(uri.getLastPathSegment()));
     }
 
+    private int updateEvent(Talk talk, long eventId) {
+        ContentValues cv = new ContentValues();
+        cv.put(MultimaniaContract.TalkEntry.CALEVENT_ID, eventId);
+        return mContext.getContentResolver().update(
+                MultimaniaContract.TalkEntry.CONTENT_URI,
+                cv,
+                MultimaniaContract.TalkEntry._ID + "WHERE ?",
+                new String[] {String.valueOf(talk.id)}
+        );
+    }
+
+    public void deleteTalk(Talk talk){
+        ContentResolver cr = mContext.getContentResolver();
+        Uri deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, talk.calEventId);
+        cr.delete(deleteUri, null, null);
+    }
 
     private Uri buildCalUri() {
         return CAL_URI
@@ -119,5 +145,15 @@ public class GoogleCalUtil {
                 .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE,
                         CalendarContract.ACCOUNT_TYPE_LOCAL)
                 .build();
+    }
+
+    private Uri talkEntryUri(Cursor cursor){
+        return MultimaniaContract.NewsItemEntry.buildItemUri(
+                cursor.getLong(
+                        cursor.getColumnIndex(
+                                MultimaniaContract.TalkEntry._ID
+                        )
+                )
+        );
     }
 }
