@@ -23,11 +23,30 @@ class SpeakerRepository {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public static function getSpeakerById($id)
+    {
+        $sql_query = "SELECT * FROM speaker WHERE id=:id;";
+        $con = Utitilies::getConnection();
+        $stmt = $con->prepare($sql_query);
+        if($stmt->execute(array(':id'=>$id))){
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        }
+        return null;
+    }
+
     public static function insertSpeaker($id, $name)
     {
         $sql_query = "INSERT INTO speaker VALUES (:id,:name);";
         $con = Utitilies::getConnection();
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':id'=>$id,':name'=>$name));
+    }
+
+    public static function updateSpeaker($id, $name)
+    {
+        $sql_query = "UPDATE speaker SET name=:name WHERE id=:id;";
+        $con = Utitilies::getConnection();
+        $stmt = $con->prepare($sql_query);
+        return $stmt->execute(array(':name'=>$name,':id'=>$id));
     }
 } 

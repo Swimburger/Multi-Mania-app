@@ -131,4 +131,5 @@ function importData($secret){
     if($secret!=Params::SECRET)
         return;
     Import::ImportData();
+    echo "Succes";
 }

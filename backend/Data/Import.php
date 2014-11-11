@@ -40,7 +40,11 @@ class Import {
             $id = $room['id'];
             $name = $room['name'];
             //echo $id.$name;
-            RoomRepository::insertRoom($id,$name);
+            if(RoomRepository::getRoomById($id)){
+                RoomRepository::updateRoom($id,$name);
+            }else{
+                RoomRepository::insertRoom($id,$name);
+            }
         }
     }
 
@@ -50,7 +54,11 @@ class Import {
             $id = $tag['id'];
             $name = $tag['name'];
             //echo $id.$name;
-            TagRepository::insertTag($id,$name);
+            if(TagRepository::getTagById($id)){
+                TagRepository::updateTag($id,$name);
+            }else{
+                TagRepository::insertTag($id,$name);
+            }
         }
     }
 
@@ -60,7 +68,11 @@ class Import {
             $id = $speaker['id'];
             $name = $speaker['name'];
             //echo $id.$name;
-            SpeakerRepository::insertSpeaker($id,$name);
+            if(SpeakerRepository::getSpeakerById($id)){
+                SpeakerRepository::updateSpeaker($id,$name);
+            }else{
+                SpeakerRepository::insertSpeaker($id,$name);
+            }
         }
     }
 
@@ -69,13 +81,17 @@ class Import {
         foreach($talks as $talk){
             $id = $talk['id'];
             $roomId = $talk['room-id'];
-            $isKeynote = $talk['isKeynote'];
+            $isKeynote = intval($talk['isKeynote']);
             $title = $talk->title;
             $from = $talk->from;
             $to = $talk->to;
             $content = Import::GetInnerXml($talk->content);
             //echo $id.$roomId.$isKeynote.$title.$from.$from.$to.$content;
-            TalkRepository::insertTalk($id,$roomId,$isKeynote,$title,$from,$to,$content);
+            if(TalkRepository::getTalkById($id)){
+                TalkRepository::updateTalk($id,$roomId,$isKeynote,$title,$from,$to,$content);
+            }else{
+                TalkRepository::insertTalk($id,$roomId,$isKeynote,$title,$from,$to,$content);
+            }
         }
     }
 

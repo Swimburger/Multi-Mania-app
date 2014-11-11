@@ -25,9 +25,13 @@ class TalkTagRepository {
 
     public static function insertTalkTag($talkId, $tagId)
     {
-        $sql_query = "INSERT INTO talk_tag (talk_id, tag_id) VALUES (:talk_id,:tag_id);";
-        $con=Utitilies::getConnection();
-        $stmt = $con->prepare($sql_query);
-        return $stmt->execute(array(':talk_id'=>$talkId,':tag_id'=>$tagId));
+        try {
+            $sql_query = "INSERT INTO talk_tag (talk_id, tag_id) VALUES (:talk_id,:tag_id);";
+            $con = Utitilies::getConnection();
+            $stmt = $con->prepare($sql_query);
+            return $stmt->execute(array(':talk_id' => $talkId, ':tag_id' => $tagId));
+        }catch (\Exception $ex){
+            return false;
+        }
     }
 } 

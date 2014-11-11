@@ -30,12 +30,47 @@ class TalkRepository{
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public static function getTalkById($id)
+    {
+        $sql_query = "SELECT * FROM talk WHERE id=:id;";
+        $con = Utitilies::getConnection();
+        $stmt = $con->prepare($sql_query);
+        if($stmt->execute(array(':id'=>$id))){
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        }
+        return null;
+    }
+
     public static function insertTalk($id, $roomId, $isKeynote, $title, $from, $to, $content)
     {
         $sql_query = "INSERT INTO talk (id,title,`from`,`to`,content,room_id,isKeynote) VALUES (:id,:title,:from,:to,:content,:room_id,:isKeynote);";
         $con = Utitilies::getConnection();
         $stmt = $con->prepare($sql_query);
-        return $stmt->execute(array(':id'=>$id,':title'=>$title,':from'=>$from,':to'=>$to,':content'=>$content,':room_id'=>$roomId,':isKeynote'=>$isKeynote));
+        $stmt->bindParam(":isKeynote",$isKeynote,\PDO::PARAM_INT);
+        $stmt->bindParam(":title",$title);
+        $stmt->bindParam(":from",$from);
+        $stmt->bindParam(":to",$to);
+        $stmt->bindParam(":content",$content);
+        $stmt->bindParam(":room_id",$roomId);
+        $stmt->bindParam(":id",$id);
+        //return $stmt->execute(array(':id'=>$id,':title'=>$title,':from'=>$from,':to'=>$to,':content'=>$content,':room_id'=>$roomId,':isKeynote'=>$isKeynote));
+        $stmt->execute();
+    }
+
+    public static function updateTalk($id, $roomId, $isKeynote, $title, $from, $to, $content)
+    {
+        $sql_query = "UPDATE talk SET title=:title,`from`=:from,`to`=:to,content=:content,room_id=:room_id,isKeynote=:isKeynote WHERE id=:id;";
+        $con = Utitilies::getConnection();
+        $stmt = $con->prepare($sql_query);
+        $stmt->bindParam(":isKeynote",$isKeynote,\PDO::PARAM_INT);
+        $stmt->bindParam(":title",$title);
+        $stmt->bindParam(":from",$from);
+        $stmt->bindParam(":to",$to);
+        $stmt->bindParam(":content",$content);
+        $stmt->bindParam(":room_id",$roomId);
+        $stmt->bindParam(":id",$id);
+        //return $stmt->execute(array(':title'=>$title,':from'=>$from,':to'=>$to,':content'=>$content,':room_id'=>$roomId,':isKeynote'=>$isKeynote,':id'=>$id));
+        return $stmt->execute();
     }
 
 

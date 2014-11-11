@@ -27,7 +27,26 @@ class RoomRepository{
         $sql_query = "INSERT INTO room VALUES (:id,:name);";
         $con=Utitilies::getConnection();
         $stmt = $con->prepare($sql_query);
-        return $stmt->execute(array(':id'=>$id,':name'=>$name));
+        if($stmt->execute(array(':id'=>$id,':name'=>$name))){
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        }
+        return null;
+    }
+
+    public static function updateRoom($id, $name)
+    {
+        $sql_query = "UPDATE room SET name=:name WHERE id=:id;";
+        $con=Utitilies::getConnection();
+        $stmt = $con->prepare($sql_query);
+        return $stmt->execute(array(':name'=>$name,':id'=>$id));
+    }
+
+    public static function getRoomById($id)
+    {
+        $sql_query = "SELECT * FROM room WHERE id=:id;";
+        $con=Utitilies::getConnection();
+        $stmt = $con->prepare($sql_query);
+        return $stmt->execute(array(':id'=>$id));
     }
 
 }
