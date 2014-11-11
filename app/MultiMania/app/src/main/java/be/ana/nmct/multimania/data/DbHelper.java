@@ -123,6 +123,7 @@ public class DbHelper  extends SQLiteOpenHelper{
                 TalkEntry.DATE_UNTIL + " TEXT NOT NULL, " +
                 TalkEntry.DESCRIPTION + " TEXT NOT NULL, " +
                 TalkEntry.ROOM_ID + " INTEGER, " +
+                TalkEntry.CALEVENT_ID + " INTEGER, " +
                 TalkEntry.IS_KEYNOTE + " INTEGER, " +
                 " FOREIGN KEY (" + TalkEntry.ROOM_ID + ") REFERENCES " +
                 RoomEntry.TABLE_NAME + " ("+RoomEntry._ID+") "+
