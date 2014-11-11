@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Multi-Mania</string>
     <string name="title_schedule">Schedule</string>
     <string name="title_myschedule">My Schedule</string>
@@ -32,5 +33,6 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="country">Belgium</string>
     <string name="title_activity_news_item">NewsItemActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_talk">TalkActivity</string>
 
 </resources>
