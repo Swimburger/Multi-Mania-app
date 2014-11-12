@@ -152,7 +152,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                 item.title=title;
                 item.room=room;
                 item.id=talkId;
-                getLoaderManager().restartLoader(200+(int)talkId,null,new LoaderManager.LoaderCallbacks<Cursor>() {
+                getLoaderManager().restartLoader(1000+(int)talkId,null,new LoaderManager.LoaderCallbacks<Cursor>() {
                     @Override
                     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
                         return new CursorLoader(getActivity(),
@@ -197,7 +197,6 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
         private static final int SCHEDULE_GRID_HEADER_TYPE = 0;
         private static final int SCHEDULE_GRID_ITEM_TYPE = 1;
-        private final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         private final LayoutInflater mInflater;
 
         public ScheduleAdapter(Context context, AsymmetricGridView listView, List<AsymmetricItem> items) {
@@ -251,9 +250,9 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
         private void bindHeaderView(View convertView, ScheduleGridHeader item) {
             ((TextView)convertView).setText(
-                    timeFormat.format(item.getDateFrom())
+                    Utility.sTimeFormat.format(item.getDateFrom())
                     +" - "+
-                    timeFormat.format(item.getDateUntil())
+                    Utility.sTimeFormat.format(item.getDateUntil())
             );
         }
 

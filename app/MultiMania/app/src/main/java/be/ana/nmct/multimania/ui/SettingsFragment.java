@@ -29,9 +29,9 @@ public class SettingsFragment extends Fragment {
 
     private static String mCalendarName;
 
-    private static final String PREFERENCE_NAME = "setting_values";
-    private static final String PREFERENCE_NOTIFY = "setting_notify";
-    private static final String PREFERENCE_SYNC = "setting_sync";
+    public static final String PREFERENCE_NAME = "setting_values";
+    public static final String PREFERENCE_NOTIFY = "setting_notify";
+    public static final String PREFERENCE_SYNC = "setting_sync";
 
     private static CheckBox mChkNotify;
     private static CheckBox mChkSync;

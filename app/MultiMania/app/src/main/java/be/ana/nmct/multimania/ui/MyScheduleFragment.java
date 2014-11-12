@@ -14,19 +14,44 @@ import android.widget.CursorAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.util.Date;
+
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.utils.Utility;
 
 public class MyScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private final String TAG = this.getClass().getCanonicalName();
+
+    public static final String DATE_KEY = "date_key";
+    public static final String POSITION_KEY = "position_key";
+
+    private String mDate;
+    private int mPosition;
     private MyScheduleAdapter mMyScheduleAdapter;
 
     public MyScheduleFragment() {  }
+
+    public static MyScheduleFragment newInstance(String date,int position) {
+        MyScheduleFragment fragmentFirst = new MyScheduleFragment();
+        Bundle args = new Bundle();
+        args.putString(DATE_KEY, date);
+        args.putInt(POSITION_KEY,position);
+        fragmentFirst.setArguments(args);
+        return fragmentFirst;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getLoaderManager().initLoader(MainActivity.LOADER_MYSCHEDULE_TALK_ID, null, this);
+
+        Bundle args = getArguments();
+        mDate = args.getString(DATE_KEY);
+        mPosition = args.getInt(POSITION_KEY);
+
     }
 
     @Override
@@ -59,10 +84,26 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private class MyScheduleAdapter extends CursorAdapter{
 
         private LayoutInflater mInflater;
+        private int mTitleIndex;
+        private int mFromIndex;
+        private int mToIndex;
+        private int mRoomIndex;
+        private int mTagIndex;
 
-        public MyScheduleAdapter(Context context, Cursor c, int flags) {
-            super(context, c, flags);
+        public MyScheduleAdapter(Context context, Cursor cursor, int flags) {
+            super(context, cursor, flags);
             mInflater = LayoutInflater.from(context);
+        }
+
+        @Override
+        public Cursor swapCursor(Cursor newCursor) {
+            if(newCursor != null){
+                mTitleIndex = newCursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.TITLE);
+                mFromIndex = newCursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DATE_FROM);
+                mToIndex = newCursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DATE_UNTIL);
+                mRoomIndex = newCursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.ROOM_NAME);
+            }
+            return super.swapCursor(newCursor);
         }
 
         @Override
@@ -70,7 +111,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             View v = mInflater.inflate(R.layout.row_myschedule, parent, false);
 
             ViewHolder holder = new ViewHolder();
-            holder.txtInfo = (TextView)v.findViewById(R.id.txtInfo);
             holder.txtRoom = (TextView)v.findViewById(R.id.txtRoom);
             holder.txtTag = (TextView)v.findViewById(R.id.txtTag);
             holder.txtTime = (TextView)v.findViewById(R.id.txtTime);
@@ -84,14 +124,23 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         public void bindView(View view, Context context, Cursor cursor) {
             ViewHolder holder = (ViewHolder)view.getTag();
 
-            int titleCol =  cursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.TITLE);
-            int infoCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DESCRIPTION);
+            String title = cursor.getString(mTitleIndex);
+            Date from = new Date();
+            Date to = new Date();
+            String room = cursor.getString(mRoomIndex);
 
-            String title = cursor.getString(titleCol);
-            String info = cursor.getString(infoCol);
+            //parse dates
+            try {
+                from = Utility.ConvertStringToDate(cursor.getString(mFromIndex));
+                to = Utility.ConvertStringToDate(cursor.getString(mToIndex));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
 
             holder.txtTalkTitle.setText(title);
-            holder.txtInfo.setText(info);
+            holder.txtTime.setText(Utility.sTimeFormat.format(from) + " - " + Utility.sTimeFormat.format(to));
+            holder.txtRoom.setText(room);
         }
     }
 
@@ -100,7 +149,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         TextView txtRoom;
         TextView txtTime;
         TextView txtTag;
-        TextView txtInfo;
     }
 
 }

@@ -24,7 +24,7 @@ public class GoogleCalUtil {
     private final static Uri EVENT_URI = CalendarContract.Events.CONTENT_URI;
 
     public final static String PREFERENCE_NAME = "calendar_preferences";
-    private final static String PREFERENCE_CALENDER_ID = "calendar_id";
+    public final static String PREFERENCE_CALENDER_ID = "calendar_id";
     public final static String PREFERENCE_ACCOUNTNAME = "calendar_accountname";
 
     private Context mContext;
