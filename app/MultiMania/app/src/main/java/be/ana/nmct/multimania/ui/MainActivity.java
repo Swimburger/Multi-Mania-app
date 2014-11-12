@@ -16,8 +16,8 @@ import be.ana.nmct.multimania.R;
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     public static final int LOADER_SCHEDULE_DATES_ID =0;
-    public static final int LOADER_SCHEDULE_TALK_ID=100;
-    public static final int LOADER_MYSCHEDULE_TALK_ID=2;
+    public static final int LOADER_SCHEDULE_TALK_ID=10;
+    public static final int LOADER_MYSCHEDULE_TALK_ID=20;
     public static final int LOADER_NEWS_ID=3;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;

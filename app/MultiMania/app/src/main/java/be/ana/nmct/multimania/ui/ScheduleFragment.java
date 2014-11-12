@@ -104,13 +104,19 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         mCursor = cursor;
         createGridItems(mCursor);
-        mScheduleGrid.determineColumns();
-        mAdapter.notifyDataSetChanged();
-        mScheduleGrid.setAdapter(mAdapter);
+        if(mScheduleGrid!=null)
+        {
+            mScheduleGrid.determineColumns();
+            mScheduleGrid.setAdapter(mAdapter);
+        }
+
+        if(mAdapter!=null)
+            mAdapter.notifyDataSetChanged();
+
     }
 
     private void createGridItems(Cursor cursor) {
-        if(cursor==null)return;
+        if(cursor==null||mItems==null)return;
         mItems.clear();
         List<String> dates = new ArrayList<String>();
         final int dateFromIndex     = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DATE_FROM);

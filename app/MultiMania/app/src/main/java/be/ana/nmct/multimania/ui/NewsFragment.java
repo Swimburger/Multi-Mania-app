@@ -27,8 +27,6 @@ import be.ana.nmct.multimania.data.MultimaniaContract;
 public class NewsFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private NewsCursorAdapter mAdapter;
-    private static final String ARGS_NEWS = "newsitem";
-    private static Loader loader;
     private Cursor mData;
 
     //default ctor
@@ -40,7 +38,7 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
         setRetainInstance(true);
         mAdapter=new NewsCursorAdapter(getActivity(),null,0);
         setListAdapter(mAdapter);
-        loader = getLoaderManager().initLoader(0,null,this);
+        getLoaderManager().initLoader(MainActivity.LOADER_NEWS_ID,null,this);
     }
 
     @Override

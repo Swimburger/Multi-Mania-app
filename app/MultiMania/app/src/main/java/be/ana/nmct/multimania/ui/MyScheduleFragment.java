@@ -26,7 +26,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.getLoaderManager().initLoader(0, null, this);
+        this.getLoaderManager().initLoader(MainActivity.LOADER_MYSCHEDULE_TALK_ID, null, this);
     }
 
     @Override
@@ -101,7 +101,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         TextView txtTime;
         TextView txtTag;
         TextView txtInfo;
-
     }
 
 }
