@@ -1,8 +1,9 @@
 package be.ana.nmct.multimania.ui;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -12,23 +13,36 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.utils.Utility;
 
-public class TalkFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class TalkFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
     public static final String URI_KEY = "uri_key";
-    private Uri mUri=null;
-    private TitleLoadListener mTitleLoadListener;
-    private Cursor mData;
+    public static final int LOADER_TALK_ID = 0;
+    public static final int LOADER_SPEAKER_ID = 1;
+    public static final int LOADER_TAGS_ID = 2;
 
-    private TextView txtTalkInfo;
+    private Uri mUri=null;
+    private long mTalkId = -1;
+    private TitleLoadListener mTitleLoadListener;
+    private Cursor mTalkData;
+    private Cursor mSpeakersData;
+    private Cursor mTagsData;
+
+    private WebView webTalkInfo;
     private TextView txtSpeaker;
     private TextView txtTalkTime;
     private TextView txtTalkRoom;
     private TextView txtTalkTag;
+    private Animation mFadeInAnimation;
+    private Animation mFadeInAnimationHtml;
 
     public TalkFragment(){}
 
@@ -37,8 +51,59 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
         super.onCreate(savedInstanceState);
         if(getArguments() != null){
             mUri = getArguments().getParcelable(URI_KEY);
+            mTalkId = ContentUris.parseId(mUri);
         }
-        getLoaderManager().initLoader(0,null,this);
+        //TODO: loader for talk_tags, loader for talk_speakers
+        getLoaderManager().initLoader(LOADER_TALK_ID,null,this);
+        getLoaderManager().initLoader(LOADER_SPEAKER_ID,null,this);
+        getLoaderManager().initLoader(LOADER_TAGS_ID,null,this);
+
+        mFadeInAnimation = getAlphaAnimation(0,1,500,600);
+        mFadeInAnimationHtml = getAlphaAnimation(0, 1, 400, 300);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+       Loader<Cursor> retLoader = null;
+       Context context = getActivity();
+       switch(id){
+           case LOADER_TALK_ID:
+               retLoader = new CursorLoader(context,mUri,null,null,null,null);
+               break;
+           case LOADER_SPEAKER_ID:
+               retLoader = new CursorLoader(context,MultimaniaContract.SpeakerEntry.builtGetSpeakersByTalkIdUri(mTalkId),null,null,null,null);
+               break;
+           case LOADER_TAGS_ID:
+               retLoader = new CursorLoader(context,MultimaniaContract.TagEntry.builtGetTagsByTalkIdUri(mTalkId),null,null,null,null);
+               break;
+       }
+       return retLoader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        switch(loader.getId()){
+            case LOADER_TALK_ID:
+                BindTalkData(data);
+                mTalkData = data;
+                break;
+            case LOADER_SPEAKER_ID:
+                BindSpeakersData(data);
+                mSpeakersData = data;
+                break;
+            case LOADER_TAGS_ID:
+                BindTagsData(data);
+                mTagsData = data;
+                break;
+        }
+    }
+
+    private void BindTagsData(Cursor data) {
+
+    }
+
+    private void BindSpeakersData(Cursor data) {
+
     }
 
     @Nullable
@@ -46,63 +111,64 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_talk, container, false);
 
-        txtTalkInfo = (TextView) view.findViewById(R.id.txtTalkInfo);
+        webTalkInfo = (WebView) view.findViewById(R.id.webTalkInfo);
         txtSpeaker = (TextView) view.findViewById(R.id.txtTalkSpeaker);
         txtTalkTime = (TextView) view.findViewById(R.id.txtTalkTime);
         txtTalkRoom = (TextView) view.findViewById(R.id.txtTalkRoom);
         txtTalkTag = (TextView) view.findViewById(R.id.txtTalkTag);
-        BindData(mData);
+
+        txtSpeaker.setAnimation(mFadeInAnimation);
+        txtTalkTime.setAnimation(mFadeInAnimation);
+        txtTalkRoom.setAnimation(mFadeInAnimation);
+        txtTalkTag.setAnimation(mFadeInAnimation);
+
+        BindData();
         return view;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        LayoutInflater inflater = LayoutInflater.from(activity);
+    private void BindData() {
+        if(mTalkData!=null)
+            BindTalkData(mTalkData);
+        if(mSpeakersData !=null)
+            BindSpeakersData(mSpeakersData);
+        if(mTagsData!=null)
+            BindTagsData(mTagsData);
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(getActivity(), mUri, null, null, null, null);
-    }
 
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        mData = data;
-        BindData(data);
-    }
-
-    private void BindData(Cursor cursor){
+    private void BindTalkData(Cursor cursor){
 
         if(cursor == null)return;
         if(cursor.moveToFirst()){
-            int titleCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.TITLE);
+            int titleCol = cursor.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
+            int infoCol = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DESCRIPTION);
+            int timeFromCol = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DATE_FROM);
+            int timeUntilCol = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DATE_UNTIL);
+            int roomCol = cursor.getColumnIndex(MultimaniaContract.TalkEntry.ROOM_NAME);
+
+
             String title = cursor.getString(titleCol);
+            String info = cursor.getString(infoCol);
+            String from = cursor.getString(timeFromCol);
+            String until = cursor.getString(timeUntilCol);
+            String room = cursor.getString(roomCol);
 
             if(mTitleLoadListener != null) {
                 mTitleLoadListener.onTitleloaded(title);
             }
 
-            int infoCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DESCRIPTION);
-            int speakerCol = cursor.getColumnIndexOrThrow(MultimaniaContract.SpeakerEntry.NAME);
-            int timeFromCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DATE_FROM);
-            int timeUntilCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DATE_UNTIL);
-            int roomCol = cursor.getColumnIndexOrThrow(MultimaniaContract.RoomEntry.NAME);
-            int tagCol = cursor.getColumnIndexOrThrow(MultimaniaContract.TagEntry.NAME);
+            String mime = "text/html";
+            String encoding = "utf-8";
+            String html = Utility.getHtml(info);
+            webTalkInfo.getSettings().setJavaScriptEnabled(true);
+            webTalkInfo.loadDataWithBaseURL("file:///android_asset/", html, mime, encoding, null);
 
+            txtTalkTime.setText("From: " + from + " Until: " + until);
+            txtTalkRoom.setText(room);
 
-            String info = cursor.getString(infoCol);
-            String speaker = cursor.getString(speakerCol);
-            String from = cursor.getString(timeFromCol);
-            String until = cursor.getString(timeUntilCol);
-            String room = cursor.getString(roomCol);
-            String tag = cursor.getString(tagCol);
-
-                txtTalkInfo.setText("test");
-              //  txtSpeaker.setText(speaker);
-             //   txtTalkTime.setText("From: " + from + " Until: " + until);
-              //  txtTalkRoom.setText(room);
-               // txtTalkTag.setText(tag);
+            //mFadeInAnimationHtml.setAnimationListener(this);
+            webTalkInfo.startAnimation(mFadeInAnimationHtml);
+            mFadeInAnimation.start();
         }
     }
 
@@ -117,5 +183,9 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
 
     public interface TitleLoadListener {
         public void onTitleloaded(String title);
+    }
+
+    private AlphaAnimation getAlphaAnimation(float from, float to, long duration,long offset){
+        return Utility.getAlphaAnimation(from,to,duration,offset);
     }
 }

@@ -1,5 +1,7 @@
 package be.ana.nmct.multimania.utils;
 
+import android.view.animation.AlphaAnimation;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,4 +35,17 @@ public class Utility {
         return sFormat;
     }
 
+    public static AlphaAnimation getAlphaAnimation(float from, float to, long duration, long offset) {
+        AlphaAnimation anim = new AlphaAnimation(from,to);
+        anim.setDuration(duration);
+        anim.setStartOffset(offset);
+        anim.setFillAfter(true);
+        return anim;
+    }
+
+    public static String getHtml(String info) {
+        return  "<html><head><link rel=\"stylesheet\" type\"text/css\" href=\"style.css\" /></head><body>" +
+                info +
+                "</body></html>";
+    }
 }

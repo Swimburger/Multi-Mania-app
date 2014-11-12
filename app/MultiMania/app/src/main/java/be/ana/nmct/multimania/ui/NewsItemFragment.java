@@ -25,6 +25,7 @@ import com.manuelpeinado.fadingactionbar.FadingActionBarHelperBase;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.utils.Utility;
 
 public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
@@ -110,8 +111,11 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
 
             String mime = "text/html";
             String encoding = "utf-8";
+            String html = Utility.getHtml(longDescription);
             mNewsItemInfo.getSettings().setJavaScriptEnabled(true);
-            mNewsItemInfo.loadDataWithBaseURL(null, longDescription, mime, encoding, null);
+            mNewsItemInfo.loadDataWithBaseURL("file:///android_asset/", html, mime, encoding, null);
+            mNewsItemInfo.startAnimation(Utility.getAlphaAnimation(0, 1, 400, 300));
+
             // holder.imgNews.setImageURI(Uri.parse(img));
             Ion.with(mNewsItemImg)
                     .smartSize(true)

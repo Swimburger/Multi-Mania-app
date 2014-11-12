@@ -3,15 +3,22 @@ package be.ana.nmct.multimania.ui;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.AsyncQueryHandler;
+import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +38,7 @@ import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.ScheduleGridHeader;
 import be.ana.nmct.multimania.vm.ScheduleGridItem;
 
-public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
     public static final String TAG = ScheduleFragment.class.getSimpleName();
     public static final String DATE_KEY = "date_key";
     public static final String POSITION_KEY = "position_key";
@@ -63,7 +70,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
         mDate = getArguments().getString(DATE_KEY);
         mPosition = getArguments().getInt(POSITION_KEY);
-        getLoaderManager().initLoader(MainActivity.LOADER_SCHEDULE_TALK_ID+mPosition, null, this);
+        Loader loader = getLoaderManager().initLoader(MainActivity.LOADER_SCHEDULE_TALK_ID+mPosition, null, this);
         mItems = new ArrayList<AsymmetricItem>();
 
         //setRetainInstance(true);
@@ -90,6 +97,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         createGridItems(mCursor);
         mScheduleGrid.determineColumns();
         mScheduleGrid.setAdapter(mAdapter);
+        mScheduleGrid.setOnItemClickListener(this);
         return v;
     }
 
@@ -112,7 +120,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
         if(mAdapter!=null)
             mAdapter.notifyDataSetChanged();
-
+        loader.abandon();
     }
 
     private void createGridItems(Cursor cursor) {
@@ -122,15 +130,17 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         final int dateFromIndex     = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DATE_FROM);
         final int dateUntilIndex    = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DATE_UNTIL);
         final int isKeynoteIndex    = cursor.getColumnIndex(MultimaniaContract.TalkEntry.IS_KEYNOTE);
+        final int isFavoriteIndex   = cursor.getColumnIndex(MultimaniaContract.TalkEntry.IS_FAVORITE);
         final int titleIndex        = cursor.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
         final int roomIndex         = cursor.getColumnIndex(MultimaniaContract.TalkEntry.ROOM_NAME);
-        final int idIndex         = cursor.getColumnIndex(MultimaniaContract.TalkEntry._ID);
+        final int idIndex           = cursor.getColumnIndex(MultimaniaContract.TalkEntry._ID);
         if(cursor.moveToFirst())
         {
             do{
                 String dateFrom = cursor.getString(dateFromIndex);
                 String dateUntil = cursor.getString(dateUntilIndex);
                 boolean isKeynote = cursor.getInt(isKeynoteIndex)==1; //Boolean.parseBoolean(cursor.getString(isKeynoteIndex));
+                boolean isFavorite = cursor.getInt(isFavoriteIndex)==1;
                 String title = cursor.getString(titleIndex);
                 String room = cursor.getString(roomIndex);
                 final long talkId = cursor.getLong(idIndex);
@@ -152,6 +162,8 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                 item.title=title;
                 item.room=room;
                 item.id=talkId;
+                item.isKeynote=isKeynote;
+                item.isFavorite=isFavorite;
                 getLoaderManager().restartLoader(200+(int)talkId,null,new LoaderManager.LoaderCallbacks<Cursor>() {
                     @Override
                     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -191,6 +203,18 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         //mScheduleGrid.setAdapter(null);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Object item =  mAdapter.getItem(position);
+        if(item instanceof ScheduleGridItem){
+            ScheduleGridItem gridItem = (ScheduleGridItem) item;
+            Uri uri = MultimaniaContract.TalkEntry.buildItemUri(((ScheduleGridItem) item).id);
+            Intent intent = new Intent(getActivity(),TalkActivity.class);
+            intent.setData(uri);
+            startActivity(intent);
+        }
     }
 
     private class ScheduleAdapter extends AsymmetricGridViewAdapter<AsymmetricItem> {
@@ -242,11 +266,36 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
             }
         }
 
-        private void bindItemView(View view, ScheduleGridItem item) {
+        private void bindItemView(View view,final ScheduleGridItem item) {
             ((TextView)view.findViewById(R.id.txtTitle)).setText(item.title);
-            ImageButton imgButton = (ImageButton) view.findViewById(R.id.imageButton);
+            final ImageButton imgButton = (ImageButton) view.findViewById(R.id.imageButton);
+            imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    item.isFavorite=!item.isFavorite;
+                    int value = item.isFavorite?1:0;
+                    imgButton.setImageResource(getStarDrawabale(item.isFavorite));
+
+                    ContentValues values = new ContentValues();
+                    values.put(MultimaniaContract.TalkEntry.IS_FAVORITE,value);
+                    AsyncQueryHandler handler = new ScheduleAsyncQueryHandler(getActivity().getContentResolver());
+                    handler.startUpdate(
+                            0,
+                            null,
+                            MultimaniaContract.TalkEntry.CONTENT_URI,
+                            values,
+                            MultimaniaContract.TalkEntry._ID+"=?",
+                            new String[]{""+item.id}
+                    );
+                }
+            });
+            imgButton.setImageResource(getStarDrawabale(item.isFavorite));
             ((TextView) view.findViewById(R.id.txtRoom)).setText(item.room);
             ((TextView) view.findViewById(R.id.txtTag)).setText(item.tags);
+        }
+
+        private int getStarDrawabale(boolean isFavorite) {
+            return  isFavorite  ? android.R.drawable.star_on :  android.R.drawable.star_off;
         }
 
         private void bindHeaderView(View convertView, ScheduleGridHeader item) {
@@ -283,6 +332,19 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
             }else{
                 return SCHEDULE_GRID_ITEM_TYPE;
             }
+        }
+    }
+    private class ScheduleAsyncQueryHandler extends AsyncQueryHandler{
+
+        public ScheduleAsyncQueryHandler(ContentResolver cr) {
+            super(cr);
+        }
+
+        @Override
+        protected void onUpdateComplete(int token, Object cookie, int result) {
+            super.onUpdateComplete(token, cookie, result);
+            Log.d(TAG,"update token: "+token);
+            Log.d(TAG,"update result: "+result);
         }
     }
 }

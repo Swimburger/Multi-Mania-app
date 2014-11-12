@@ -20,6 +20,7 @@ public class Talk {
     @SerializedName("room_id")
     public int roomId;
     public boolean isKeynote;
+    public boolean isFavorite;
     public long calEventId;
     @Expose
     public List<Tag> tags;

@@ -67,4 +67,9 @@ public class ApiTest extends ApplicationTestCase<Application> {
         String userId =task.executeSynchronously();
         assertEquals(TESTUSERID,userId);
     }
+
+    public void testUserTalks(){
+        List<Talk> talks = new GsonLoader<Talk>(mContext,"users/"+TESTUSERID+"/talks",new TypeToken<List<Talk>>(){}).loadInBackground();
+        assertNotNull(talks);
+    }
 }

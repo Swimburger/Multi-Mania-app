@@ -68,6 +68,7 @@ public class MultimaniaProvider extends ContentProvider {
         columnMap.put(talkTableName + "." + TalkEntry.DATE_UNTIL, talkTableName + "." + TalkEntry.DATE_UNTIL+ " as "+ TalkEntry.DATE_UNTIL);
         columnMap.put(talkTableName + "." + TalkEntry.ROOM_ID, talkTableName + "." + TalkEntry.ROOM_ID+ " as "+ TalkEntry.ROOM_ID);
         columnMap.put(talkTableName + "." + TalkEntry.IS_KEYNOTE, talkTableName + "." + TalkEntry.IS_KEYNOTE+ " as "+ TalkEntry.IS_KEYNOTE);
+        columnMap.put(talkTableName + "." + TalkEntry.IS_FAVORITE, talkTableName + "." + TalkEntry.IS_FAVORITE+ " as "+ TalkEntry.IS_FAVORITE);
         columnMap.put(talkTableName + "." + TalkEntry.CALEVENT_ID, talkTableName + "." + TalkEntry.CALEVENT_ID + " as " + TalkEntry.CALEVENT_ID);
         columnMap.put(RoomEntry.TABLE_NAME + "." + RoomEntry.NAME,RoomEntry.TABLE_NAME + "." + RoomEntry.NAME+ " as "+RoomEntry.ROOM_NAME);
 
@@ -231,15 +232,6 @@ public class MultimaniaProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-                /*retCursor = mDbHelper.getReadableDatabase().query(
-                        TalkEntry.TABLE_NAME,
-                        projection,
-                        selection,
-                        selectionArgs,
-                        null,
-                        null,
-                        sortOrder
-                );*/
                 break;
             case TALK_ID:
                 retCursor = sTalksWithRoomAndTagsQueryBuilder.query(
@@ -251,15 +243,6 @@ public class MultimaniaProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
-                /*retCursor = mDbHelper.getReadableDatabase().query(
-                        TalkEntry.TABLE_NAME,
-                        projection,
-                        TalkEntry._ID + " = '" + ContentUris.parseId(uri) + "'",
-                        null,
-                        null,
-                        null,
-                        sortOrder
-                );*/
                 break;
             case TALK_BY_ROOM_ID:
                 retCursor = getTalksByRoomId(uri,projection,sortOrder);

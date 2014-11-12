@@ -31,6 +31,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="be.ana.nmct.multimania.ui.MainActivity" />
         </activity>
+        <activity
+            android:name=".ui.TalkActivity"
+            android:label="@string/title_activity_talk"
+            android:parentActivityName=".ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="be.ana.nmct.multimania.ui.MainActivity" />
+        </activity>
 
         <provider
             android:name=".data.MultimaniaProvider"
@@ -38,11 +46,6 @@
             android:enabled="true"
             android:exported="false" >
         </provider>
-
-        <activity
-            android:name=".ui.TalkActivity"
-            android:label="@string/title_activity_talk" >
-        </activity>
     </application>
 
 </manifest>

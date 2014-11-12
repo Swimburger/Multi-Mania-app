@@ -72,10 +72,12 @@ public class MultimaniaContract {
         public static final String DESCRIPTION  = "description";
         public static final String ROOM_ID      = "room_id";
         public static final String IS_KEYNOTE   = "is_keynote";
+        public static final String IS_FAVORITE  = "is_favorite";
         public static final String ROOM_NAME    = "room_name";
         public static final String TAGS         = "tags";
-        public static final String DAY        = "days";
+        public static final String DAY          = "days";
         public static final String CALEVENT_ID  = "calevent_id";
+
 
         public static final String CONTENT_TYPE = CURSOR_DIR+CONTENT_AUTHORITY+"/"+PATH_TALK;
         public static final String CONTENT_ITEM_TYPE = CURSOR_ITEM+CONTENT_AUTHORITY+"/"+PATH_TALK;
@@ -135,6 +137,9 @@ public class MultimaniaContract {
         public static Uri buildItemUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI,id);
         }
+        public static Uri builtGetSpeakersByTalkIdUri(long talkId){
+            return ContentUris.appendId(CONTENT_URI.buildUpon().appendPath(PATH_TALK),talkId).build();
+        }
     }
 
     public static final class TalkSpeakerEntry implements BaseColumns{
@@ -178,6 +183,10 @@ public class MultimaniaContract {
 
         public static Uri buildItemUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI,id);
+        }
+
+        public static Uri builtGetTagsByTalkIdUri(long talkId) {
+            return ContentUris.appendId(CONTENT_URI.buildUpon().appendPath(PATH_TALK),talkId).build();
         }
     }
 }

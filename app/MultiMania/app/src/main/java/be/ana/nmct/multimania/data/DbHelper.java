@@ -125,6 +125,7 @@ public class DbHelper  extends SQLiteOpenHelper{
                 TalkEntry.ROOM_ID + " INTEGER, " +
                 TalkEntry.CALEVENT_ID + " INTEGER, " +
                 TalkEntry.IS_KEYNOTE + " INTEGER, " +
+                TalkEntry.IS_FAVORITE + " INTEGER DEFAULT 0, " +
                 " FOREIGN KEY (" + TalkEntry.ROOM_ID + ") REFERENCES " +
                 RoomEntry.TABLE_NAME + " ("+RoomEntry._ID+") "+
                 ");";

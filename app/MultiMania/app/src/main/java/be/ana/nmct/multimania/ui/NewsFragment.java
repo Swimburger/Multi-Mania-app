@@ -95,20 +95,33 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
     }
 
     private class NewsCursorAdapter extends CursorAdapter{
+        private int mTitleCol;
+        private int mImgCol;
+        private int mShortDescriptionCol;
         private LayoutInflater mInflater;
         Animation animFadein;
 
 
 
-        public NewsCursorAdapter(Context context, Cursor c, int flags) {
-            super(context, c, flags);
+        public NewsCursorAdapter(Context context, Cursor cursor, int flags) {
+            super(context, cursor, flags);
             // mInflater = LayoutInflater.from(context);
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             animFadein = AnimationUtils.loadAnimation(context.getApplicationContext(),
                     R.anim.fade_in);
+
+
         }
 
-
+        @Override
+        public Cursor swapCursor(Cursor newCursor) {
+            if(newCursor!=null){
+                mTitleCol = newCursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.TITLE);
+                mImgCol = newCursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.IMAGE);
+                mShortDescriptionCol = newCursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.SHORT_DESCRIPTION);
+            }
+            return super.swapCursor(newCursor);
+        }
 
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -128,14 +141,10 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
             ViewHolder holder = (ViewHolder)view.getTag();
-            //TODO: Move the getColumnIndex to the constructor so it doesn't get called for every row item
-            int titleCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.TITLE);
-            int imgCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.IMAGE);
-            int shortDescriptionCol = cursor.getColumnIndexOrThrow(MultimaniaContract.NewsItemEntry.SHORT_DESCRIPTION);
 
-            String title = cursor.getString(titleCol);
-            String shortDescription = cursor.getString(shortDescriptionCol);
-            String img = cursor.getString(imgCol);
+            String title = cursor.getString(mTitleCol);
+            String shortDescription = cursor.getString(mShortDescriptionCol);
+            String img = cursor.getString(mImgCol);
 
             holder.txtTitle.setText(title);
             holder.txtShortDescription.setText(shortDescription);

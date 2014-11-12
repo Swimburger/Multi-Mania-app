@@ -100,10 +100,10 @@ public class SchedulesFragment extends Fragment implements LoaderManager.LoaderC
 
         @Override
         public int getItemPosition(Object object) {
-            if(object instanceof  ScheduleFragment){
+            /*if(object instanceof  ScheduleFragment){
                 getFragmentManager().beginTransaction().remove((Fragment)object).commit();
                 return POSITION_NONE;
-            }
+            }*/
             return super.getItemPosition(object);
         }
 
