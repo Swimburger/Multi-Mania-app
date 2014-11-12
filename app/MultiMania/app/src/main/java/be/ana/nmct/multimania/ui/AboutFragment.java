@@ -13,6 +13,8 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.koushikdutta.ion.Ion;
+
 import be.ana.nmct.multimania.R;
 
 
@@ -63,7 +65,16 @@ public class AboutFragment extends Fragment {
         imgAbout.setImageDrawable(drawable);
 
         Drawable drawMap = getResources().getDrawable(R.drawable.ic_aboutmap);
-        imgMaps.setImageDrawable(drawMap);
+       /* Ion.with(drawMap)
+                //.animateLoad()
+
+                //.resize(view.getMeasuredWidth(),
+                //        holder.imgNews.getHeight())
+                //.centerCrop()
+                .smartSize(true)
+                .animateIn(animFadein)
+                .load(drawMap);
+        imgMaps.setImageDrawable(drawMap);*/
 
         imgMaps.setOnClickListener(new View.OnClickListener() {
             @Override
