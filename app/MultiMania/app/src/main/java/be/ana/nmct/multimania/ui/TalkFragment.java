@@ -121,7 +121,7 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
         txtTalkTime.setAnimation(mFadeInAnimation);
         txtTalkRoom.setAnimation(mFadeInAnimation);
         txtTalkTag.setAnimation(mFadeInAnimation);
-
+        webTalkInfo.setAnimation(mFadeInAnimationHtml);
         BindData();
         return view;
     }
@@ -167,7 +167,7 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
             txtTalkRoom.setText(room);
 
             //mFadeInAnimationHtml.setAnimationListener(this);
-            webTalkInfo.startAnimation(mFadeInAnimationHtml);
+            mFadeInAnimationHtml.start();
             mFadeInAnimation.start();
         }
     }

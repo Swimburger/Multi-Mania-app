@@ -85,7 +85,7 @@ class Import {
             $title = $talk->title;
             $from = $talk->from;
             $to = $talk->to;
-            $content = Import::GetInnerXml($talk->content);
+            $content = Import::removeNewLines(Import::GetInnerXml($talk->content));
             //echo $id.$roomId.$isKeynote.$title.$from.$from.$to.$content;
             if(TalkRepository::getTalkById($id)){
                 TalkRepository::updateTalk($id,$roomId,$isKeynote,$title,$from,$to,$content);
@@ -111,8 +111,8 @@ class Import {
             $importance = $newsitem['importance'];
             $order = $newsitem['order'];
             $title = $newsitem->title;
-            $shortDescription = Import::GetInnerXml($newsitem->short_description);
-            $longDescription = Import::GetInnerXml($newsitem->long_description);
+            $shortDescription = Import::removeNewLines(Import::GetInnerXml($newsitem->short_description));
+            $longDescription = Import::removeNewLines(Import::GetInnerXml($newsitem->long_description));
             $image = $newsitem->image;
             //var_dump(array($importance,$order,$title,$shortDescription,$longDescription,$image));
             NewsRepository::insertNewsItem($importance,$order,$title,$shortDescription,$longDescription,$image);
@@ -131,5 +131,9 @@ class Import {
             $innerXML .= $child->ownerDocument->saveXML( $child );
         }
         return $innerXML;
+    }
+
+    private static function removeNewLines($string){
+        return trim(str_replace("\n","",$string));
     }
 } 

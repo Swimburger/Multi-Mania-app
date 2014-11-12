@@ -114,7 +114,9 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
             String html = Utility.getHtml(longDescription);
             mNewsItemInfo.getSettings().setJavaScriptEnabled(true);
             mNewsItemInfo.loadDataWithBaseURL("file:///android_asset/", html, mime, encoding, null);
-            mNewsItemInfo.startAnimation(Utility.getAlphaAnimation(0, 1, 400, 300));
+            Animation anim =Utility.getAlphaAnimation(0, 1, 400, 300);
+            mNewsItemInfo.setAnimation(anim);
+            anim.start();
 
             // holder.imgNews.setImageURI(Uri.parse(img));
             Ion.with(mNewsItemImg)
