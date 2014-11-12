@@ -31,6 +31,7 @@ class Import {
         Import::InsertSpeakers($xml->speakers->speaker);
         Import::InsertTalks($xml->talks->talk);
         Import::InsertTalkTags($xml->talk_tags->talk_tag);
+        Import::InsertTalkSpeakers($xml->talk_speakers->talk_speaker);
         Import::InsertNews($xml->news->newsitem);
     }
 
@@ -39,7 +40,6 @@ class Import {
         foreach($rooms as $room){
             $id = $room['id'];
             $name = $room['name'];
-            //echo $id.$name;
             if(RoomRepository::getRoomById($id)){
                 RoomRepository::updateRoom($id,$name);
             }else{
@@ -86,7 +86,6 @@ class Import {
             $from = $talk->from;
             $to = $talk->to;
             $content = Import::removeNewLines(Import::GetInnerXml($talk->content));
-            //echo $id.$roomId.$isKeynote.$title.$from.$from.$to.$content;
             if(TalkRepository::getTalkById($id)){
                 TalkRepository::updateTalk($id,$roomId,$isKeynote,$title,$from,$to,$content);
             }else{
@@ -102,6 +101,16 @@ class Import {
             $tagId = $talk_tag['tag-id'];
             //echo $talkId.$tagId;
             TalkTagRepository::insertTalkTag($talkId,$tagId);
+        }
+    }
+
+    private static function InsertTalkSpeakers($talk_speakers)
+    {
+        foreach($talk_speakers as $talk_speaker){
+            $talkId = $talk_speaker['talk-id'];
+            $speakerId = $talk_speaker['speaker-id'];
+            //echo $talkId.$tagId;
+            TalkSpeakerRepository::insertTalkSpeaker($talkId,$speakerId);
         }
     }
 

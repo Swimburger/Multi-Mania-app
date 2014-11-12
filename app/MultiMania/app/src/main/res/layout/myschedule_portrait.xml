@@ -10,4 +10,5 @@
         android:id="@+id/gridViewMySchedule"
         android:layout_gravity="left|top"
         android:numColumns="2"/>
+    <!--TODO: remove this view and add an integer to the integer file that is different per device setting -->
 </LinearLayout>

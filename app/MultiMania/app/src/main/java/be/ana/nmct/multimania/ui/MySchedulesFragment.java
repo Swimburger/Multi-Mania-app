@@ -8,9 +8,9 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,15 +66,17 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
             String date = cursor.getString(dayIndex);
             mDates.add(date);
         }
-        mViewPagerAdapter.notifyDataSetChanged();
+        if(mViewPagerAdapter!=null)
+            mViewPagerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        mDates.clear();
+        mViewPagerAdapter.notifyDataSetChanged();
     }
 
-    private class SchedulesPagerAdapter extends FragmentPagerAdapter {
+    private class SchedulesPagerAdapter extends FragmentStatePagerAdapter {
 
         private final String mDayString;
 
@@ -85,6 +87,7 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
 
         @Override
         public Fragment getItem(int i) {
+            Log.d(TAG,"Date in schedules: "+mDates.get(i));
             return MyScheduleFragment.newInstance(mDates.get(i),i);
         }
 
@@ -96,16 +99,6 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
         @Override
         public CharSequence getPageTitle(int position) {
             return mDayString+ " "+(position+1);
-        }
-
-        @Override
-        public int getItemPosition(Object object) {
-            return super.getItemPosition(object);
-        }
-
-        @Override
-        public Parcelable saveState() {
-            return null;
         }
     }
 }

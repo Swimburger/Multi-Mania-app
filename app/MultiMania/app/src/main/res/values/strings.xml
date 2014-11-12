@@ -35,5 +35,8 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="hello_world">Hello world!</string>
     <string name="day">day</string>
     <string name="title_activity_talk">Talk</string>
+    <string name="speakers">Speakers</string>
+    <string name="from">From</string>
+    <string name="time">Time</string>
 
 </resources>

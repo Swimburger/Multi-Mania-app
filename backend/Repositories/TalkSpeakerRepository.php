@@ -22,4 +22,16 @@ class TalkSpeakerRepository {
         $stmt   = $con->query($sql_query);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public static function insertTalkSpeaker($talkId, $speakerId)
+    {
+        try {
+            $sql_query = "INSERT INTO talk_speaker (talk_id, speaker_id) VALUES (:talk_id,:speaker_id);";
+            $con = Utitilies::getConnection();
+            $stmt = $con->prepare($sql_query);
+            return $stmt->execute(array(':talk_id' => $talkId, ':speaker_id' => $speakerId));
+        }catch (\Exception $ex){
+            return false;
+        }
+    }
 } 

@@ -18,6 +18,8 @@ import android.view.animation.Animation;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import java.text.ParseException;
+
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.utils.Utility;
@@ -98,14 +100,6 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
         }
     }
 
-    private void BindTagsData(Cursor data) {
-
-    }
-
-    private void BindSpeakersData(Cursor data) {
-
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -163,13 +157,44 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
             webTalkInfo.getSettings().setJavaScriptEnabled(true);
             webTalkInfo.loadDataWithBaseURL("file:///android_asset/", html, mime, encoding, null);
 
-            txtTalkTime.setText("From: " + from + " Until: " + until);
+            try {
+                txtTalkTime.setText(Utility.getTimeString(from) + " - " + Utility.getTimeString(until));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             txtTalkRoom.setText(room);
 
             //mFadeInAnimationHtml.setAnimationListener(this);
             mFadeInAnimationHtml.start();
             mFadeInAnimation.start();
         }
+    }
+
+    private void BindTagsData(Cursor data) {
+        String tags = "";
+        final int nameIndex = data.getColumnIndex(MultimaniaContract.TagEntry.NAME);
+        if(data.moveToFirst()){
+            do{
+                tags +=data.getString(nameIndex)+", ";
+            }while(data.moveToNext());
+            if(tags.lastIndexOf(", ")>-1)
+                tags=tags.substring(0,tags.length()-2);
+        }
+        txtTalkTag.setText(tags);
+    }
+
+    private void BindSpeakersData(Cursor data) {
+        String speakers = "";
+        final int nameIndex = data.getColumnIndex(MultimaniaContract.SpeakerEntry.NAME);
+        if(data.moveToFirst()){
+            speakers+= getString(R.string.speakers)+": ";
+            do{
+                speakers +=data.getString(nameIndex)+", ";
+            }while(data.moveToNext());
+            if(speakers.lastIndexOf(", ")>-1)
+                speakers=speakers.substring(0,speakers.length()-2);
+        }
+        txtSpeaker.setText(speakers);
     }
 
     @Override

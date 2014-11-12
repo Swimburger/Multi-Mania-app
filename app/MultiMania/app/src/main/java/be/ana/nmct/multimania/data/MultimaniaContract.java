@@ -30,11 +30,11 @@ public class MultimaniaContract {
     public static final String PATH_DATE            = "dates";
 
     public static String getDbDateString(Date date){
-        return Utility.ConvertDateToString(date);
+        return Utility.convertDateToString(date);
     }
 
     public static Date getDateFromDbString(String date) throws ParseException {
-        return Utility.ConvertStringToDate(date);
+        return Utility.convertStringToDate(date);
     }
 
     //inner classes

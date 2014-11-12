@@ -11,15 +11,16 @@ import java.util.TimeZone;
  * Created by Niels on 28/10/2014.
  */
 public class Utility {
-    private static final String sFormat = "yyyy-MM-dd HH:mm:ss";
-    private static final SimpleDateFormat sFormatter = new SimpleDateFormat(sFormat);
-    public static final SimpleDateFormat sTimeFormat = new SimpleDateFormat("HH:mm");
+    private static final String sDateFormat = "yyyy-MM-dd HH:mm:ss";
+    private static final String sTimeFormat = "HH:mm";
+    private static final SimpleDateFormat sFormatter = new SimpleDateFormat(sDateFormat);
+    private static final SimpleDateFormat sTimeFormatter = new SimpleDateFormat(sTimeFormat);
 
-    public static String ConvertDateToString(Date date){
+    public static String convertDateToString(Date date){
         return sFormatter.format(date);
     }
 
-    public static Date ConvertStringToDate(String date) throws ParseException {
+    public static Date convertStringToDate(String date) throws ParseException {
         return sFormatter.parse(date);
     }
 
@@ -34,7 +35,18 @@ public class Utility {
     }
 
     public static String getDateFormat() {
-        return sFormat;
+        return sDateFormat;
+    }
+
+    public static String getTimeFormat() {
+        return sTimeFormat;
+    }
+
+    public static String getTimeString(String date) throws ParseException {
+        return  sTimeFormatter.format(convertStringToDate(date));
+    }
+    public static String getTimeString(Date date) throws ParseException {
+        return  sTimeFormatter.format(date);
     }
 
     public static AlphaAnimation getAlphaAnimation(float from, float to, long duration, long offset) {

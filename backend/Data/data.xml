@@ -583,6 +583,10 @@
         <!--E-commerce -->
         <talk_tag talk-id="13" tag-id="9" />
     </talk_tags>
+    <talk_speakers>
+        <talk_speaker talk-id="1" speaker-id="1" />
+        <talk_speaker talk-id="1" speaker-id="2" />
+    </talk_speakers>
     <news>
         <newsitem importance="0" order="0">
             <title>AFTERPARTY @ HOOCHIE COOCHIE</title>

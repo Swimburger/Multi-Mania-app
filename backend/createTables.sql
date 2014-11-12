@@ -35,6 +35,7 @@ CREATE TABLE `talk` (
 CREATE TABLE `talk_tag` (
   `talk_id` INT NOT NULL,
   `tag_id` INT NOT NULL,
+  CONSTRAINT `talk_tag_constraint` UNIQUE ( `talk_id`,`tag_id`),
   INDEX `id_idx` (`talk_id` ASC),
   INDEX `id_idx1` (`tag_id` ASC),
   CONSTRAINT `idtalk`
@@ -82,6 +83,7 @@ CREATE TABLE `speaker` (
 CREATE TABLE `talk_speaker` (
   `talk_id` INT NOT NULL,
   `speaker_id` INT NOT NULL,
+  CONSTRAINT `talk_speaker_constraint` UNIQUE ( `talk_id`,`speaker_id`),
   PRIMARY KEY (`talk_id`, `speaker_id`),
   INDEX `speaker_id_idx` (`speaker_id` ASC),
   CONSTRAINT `talk_id`
@@ -94,3 +96,5 @@ CREATE TABLE `talk_speaker` (
   REFERENCES `speaker` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+

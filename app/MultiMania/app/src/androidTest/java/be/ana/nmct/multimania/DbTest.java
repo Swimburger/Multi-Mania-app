@@ -40,7 +40,7 @@ public class DbTest extends ApplicationTestCase<Application> {
     private static TalkSpeaker sTalkSpeaker = new TalkSpeaker(1,1);
     static{
         try {
-            sTalk = new Talk(1,"Test talk", Utility.ConvertStringToDate("2014-05-19 10:45:00"),Utility.ConvertStringToDate("2014-05-19 11:30:00"),"TestDescription",1,false);
+            sTalk = new Talk(1,"Test talk", Utility.convertStringToDate("2014-05-19 10:45:00"),Utility.convertStringToDate("2014-05-19 11:30:00"),"TestDescription",1,false);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -109,7 +109,7 @@ public class DbTest extends ApplicationTestCase<Application> {
         long returnedId = DbHelper.InsertTalk(db, sTalk);
         assertTrue(-1l!=returnedId);
         Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sTalk.id);
-        Cursor cursor = DbHelper.GetTalkById(db, (int)sTalk.id);
+        Cursor cursor = DbHelper.GetTalkById(db, sTalk.id);
         cursor.moveToFirst();
         int idIndex =cursor.getColumnIndex(TalkEntry._ID);
         assertEquals(cursor.getInt(idIndex),sTalk.id);

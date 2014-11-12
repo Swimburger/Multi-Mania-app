@@ -54,7 +54,10 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                 }
                 break;
             case 1:
-                fragment = new MySchedulesFragment();
+                isNotRetained=!(fragment instanceof MySchedulesFragment);
+                if(isNotRetained) {
+                    fragment = new MySchedulesFragment();
+                }
                 break;
             case 2:
                 fragment = new MapFragment();

@@ -32,7 +32,7 @@ public class CalendarTest extends ApplicationTestCase<Application> {
 
     static {
         try {
-            sTestTalk = new Talk(1, "Test talk", Utility.ConvertStringToDate("2014-05-19 10:45:00"), Utility.ConvertStringToDate("2014-05-19 11:30:00"), "TestDescription", 1, false);
+            sTestTalk = new Talk(1, "Test talk", Utility.convertStringToDate("2014-05-19 10:45:00"), Utility.convertStringToDate("2014-05-19 11:30:00"), "TestDescription", 1, false);
         } catch (ParseException e) {
             e.printStackTrace();
         }

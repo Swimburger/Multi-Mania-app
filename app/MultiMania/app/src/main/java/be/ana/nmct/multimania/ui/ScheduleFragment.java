@@ -14,7 +14,6 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,8 +102,8 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(getActivity(), MultimaniaContract.TalkEntry.CONTENT_URI,null,
-                MultimaniaContract.TalkEntry.TABLE_NAME + "." + MultimaniaContract.TalkEntry.DATE_FROM + " LIKE ?"
-                ,new String[]{mDate+"%"},null);
+                MultimaniaContract.TalkEntry.DATE_FROM + " LIKE ?"
+                ,new String[]{mDate+"%"}, MultimaniaContract.TalkEntry.DATE_FROM);
     }
 
     @Override
@@ -146,8 +145,8 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                 if(!dates.contains(dateFrom)){
                     try {
                         mItems.add(new ScheduleGridHeader(mAmountOfColumns,mItems.size(),
-                                        Utility.ConvertStringToDate(dateFrom),
-                                        Utility.ConvertStringToDate(dateUntil))
+                                        Utility.convertStringToDate(dateFrom),
+                                        Utility.convertStringToDate(dateUntil))
                         );
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -163,7 +162,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                 item.id=talkId;
                 item.isKeynote=isKeynote;
                 item.isFavorite=isFavorite;
-                getLoaderManager().restartLoader(1000+(int)talkId,null,new LoaderManager.LoaderCallbacks<Cursor>() {
+                getLoaderManager().initLoader(1000+(int)talkId,null,new LoaderManager.LoaderCallbacks<Cursor>() {
                     @Override
                     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
                         return new CursorLoader(getActivity(),
@@ -183,7 +182,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                             if(item.tags.lastIndexOf(", ")>-1)
                                 item.tags=item.tags.substring(0,item.tags.length()-2);
                         }
-
+                        loader.abandon();
                     }
 
                     @Override
@@ -297,11 +296,15 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         }
 
         private void bindHeaderView(View convertView, ScheduleGridHeader item) {
-            ((TextView)convertView).setText(
-                    Utility.sTimeFormat.format(item.getDateFrom())
-                    +" - "+
-                    Utility.sTimeFormat.format(item.getDateUntil())
-            );
+            try {
+                ((TextView)convertView).setText(
+                        Utility.getTimeString(item.getDateFrom())
+                        +" - "+
+                        Utility.getTimeString(item.getDateUntil())
+                );
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
         private View newView(final int viewType) {
@@ -336,13 +339,6 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
         public ScheduleAsyncQueryHandler(ContentResolver cr) {
             super(cr);
-        }
-
-        @Override
-        protected void onUpdateComplete(int token, Object cookie, int result) {
-            super.onUpdateComplete(token, cookie, result);
-            Log.d(TAG,"update token: "+token);
-            Log.d(TAG,"update result: "+result);
         }
     }
 }

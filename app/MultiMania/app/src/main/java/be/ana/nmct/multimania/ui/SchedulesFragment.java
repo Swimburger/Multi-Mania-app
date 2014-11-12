@@ -71,7 +71,8 @@ public class SchedulesFragment extends Fragment implements LoaderManager.LoaderC
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        mDates.clear();
+        mViewPagerAdapter.notifyDataSetChanged();
     }
 
     private class SchedulesPagerAdapter extends FragmentStatePagerAdapter {

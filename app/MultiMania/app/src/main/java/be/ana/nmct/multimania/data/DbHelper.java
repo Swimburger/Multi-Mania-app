@@ -185,7 +185,7 @@ public class DbHelper  extends SQLiteOpenHelper{
         return values;
     }
 
-    public static Cursor GetNewsItemById(SQLiteDatabase db, int id) {
+    public static Cursor GetNewsItemById(SQLiteDatabase db, long id) {
         return db.query(NewsItemEntry.TABLE_NAME,null,NewsItemEntry._ID+"=?",new String[]{""+id},null,null,null);
     }
 
@@ -201,7 +201,7 @@ public class DbHelper  extends SQLiteOpenHelper{
         return values;
     }
 
-    public static Cursor GetTagById(SQLiteDatabase db, int id) {
+    public static Cursor GetTagById(SQLiteDatabase db, long id) {
         return db.query(TagEntry.TABLE_NAME,null,TagEntry._ID+"=?",new String[]{""+id},null,null,null);
     }
 
@@ -217,7 +217,7 @@ public class DbHelper  extends SQLiteOpenHelper{
         return values;
     }
 
-    public static Cursor GetRoomById(SQLiteDatabase db, int id) {
+    public static Cursor GetRoomById(SQLiteDatabase db, long id) {
         return db.query(RoomEntry.TABLE_NAME,null,RoomEntry._ID+"=?",new String[]{""+id},null,null,null);
     }
 
@@ -231,8 +231,8 @@ public class DbHelper  extends SQLiteOpenHelper{
         values.put(TalkEntry._ID,talk.id);
         values.put(TalkEntry.TITLE,talk.title);
         values.put(TalkEntry.DESCRIPTION,talk.description);
-        values.put(TalkEntry.DATE_FROM, Utility.ConvertDateToString(talk.from));
-        values.put(TalkEntry.DATE_UNTIL,Utility.ConvertDateToString(talk.to));
+        values.put(TalkEntry.DATE_FROM, Utility.convertDateToString(talk.from));
+        values.put(TalkEntry.DATE_UNTIL,Utility.convertDateToString(talk.to));
         values.put(TalkEntry.ROOM_ID,talk.roomId);
         values.put(TalkEntry.IS_KEYNOTE,talk.isKeynote);
         return values;
@@ -254,7 +254,7 @@ public class DbHelper  extends SQLiteOpenHelper{
         return values;
     }
 
-    public static Cursor GetSpeakerById(SQLiteDatabase db, int id) {
+    public static Cursor GetSpeakerById(SQLiteDatabase db, long id) {
         return db.query(SpeakerEntry.TABLE_NAME,null,SpeakerEntry._ID+"=?",new String[]{""+id},null,null,null);
     }
 

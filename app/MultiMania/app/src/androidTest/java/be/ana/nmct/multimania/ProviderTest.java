@@ -45,7 +45,7 @@ public class ProviderTest extends ApplicationTestCase<Application> {
     private static TalkSpeaker sTalkSpeaker = new TalkSpeaker(1,1);
     static{
         try {
-            sTalk = new Talk(1,"Test talk", Utility.ConvertStringToDate("2014-05-19 10:45:00"),Utility.ConvertStringToDate("2014-05-19 11:30:00"),"TestDescription",1,false);
+            sTalk = new Talk(1,"Test talk", Utility.convertStringToDate("2014-05-19 10:45:00"),Utility.convertStringToDate("2014-05-19 11:30:00"),"TestDescription",1,false);
         } catch (ParseException e) {
             e.printStackTrace();
         }

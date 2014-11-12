@@ -6,4 +6,7 @@
     android:id="@id/android:list"
     android:divider="@null"
     android:dividerHeight="0dp"
-    tools:listitem="@layout/row_news" />
+    tools:listitem="@layout/row_news"
+    android:clipToPadding="false"
+    android:scrollbarStyle="outsideOverlay"
+    android:padding="8dp"/>
