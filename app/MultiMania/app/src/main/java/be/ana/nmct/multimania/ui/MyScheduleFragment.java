@@ -4,12 +4,14 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -27,6 +29,9 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
     public static final String DATE_KEY = "date_key";
     public static final String POSITION_KEY = "position_key";
+
+    public static final String SELECTED_TALK = "selected_talk";
+
 
     private String mDate;
     private int mPosition;
@@ -62,6 +67,15 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         GridView grid = (GridView)v.findViewById(R.id.gridViewMySchedule);
         grid.setAdapter(mMyScheduleAdapter);
 
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent intent = new Intent(getActivity(), TalkActivity.class);
+                intent.putExtra(SELECTED_TALK, position);
+                startActivity(intent);
+            }
+        });
+
         return v;
     }
 
@@ -73,7 +87,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mMyScheduleAdapter.swapCursor(cursor);
-
     }
 
     @Override
