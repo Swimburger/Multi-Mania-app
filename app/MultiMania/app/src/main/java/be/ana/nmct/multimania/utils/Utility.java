@@ -13,6 +13,8 @@ import java.util.TimeZone;
 public class Utility {
     private static final String sFormat = "yyyy-MM-dd HH:mm:ss";
     private static final SimpleDateFormat sFormatter = new SimpleDateFormat(sFormat);
+    public static final SimpleDateFormat sTimeFormat = new SimpleDateFormat("HH:mm");
+
     public static String ConvertDateToString(Date date){
         return sFormatter.format(date);
     }

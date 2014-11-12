@@ -109,7 +109,7 @@ public class DbTest extends ApplicationTestCase<Application> {
         long returnedId = DbHelper.InsertTalk(db, sTalk);
         assertTrue(-1l!=returnedId);
         Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sTalk.id);
-        Cursor cursor = DbHelper.GetTalkById(db, sTalk.id);
+        Cursor cursor = DbHelper.GetTalkById(db, (int)sTalk.id);
         cursor.moveToFirst();
         int idIndex =cursor.getColumnIndex(TalkEntry._ID);
         assertEquals(cursor.getInt(idIndex),sTalk.id);

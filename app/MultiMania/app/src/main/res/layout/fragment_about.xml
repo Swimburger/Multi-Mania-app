@@ -11,7 +11,16 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="left|top">
-
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardMulti"
+            card_view:cardCornerRadius="3dp">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
         <ImageView
             android:id="@+id/imgAbout"
             android:layout_alignParentRight="true"
@@ -49,73 +58,84 @@
             android:layout_alignParentEnd="true"
             android:paddingTop="16dp"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Location"
-            android:id="@+id/txtLocation"
-            android:padding="16dp"
-            android:layout_below="@+id/txtAboutInfo"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name venue"
-            android:id="@+id/txtNameVenue"
-            android:layout_below="@+id/txtLocation"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:paddingLeft="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Street"
-            android:id="@+id/txtStreet"
-            android:layout_below="@+id/txtNameVenue"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:paddingLeft="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="City"
-            android:id="@+id/txtCity"
-            android:layout_below="@+id/txtStreet"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:paddingLeft="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Country"
-            android:id="@+id/txtCountry"
-            android:layout_below="@+id/txtCity"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:paddingLeft="16dp"/>
-
-        <ImageView
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imgAboutMap"
-            android:src="@drawable/ic_aboutmap"
-            android:layout_below="@+id/txtCountry"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
-            android:scaleType="centerCrop"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardMulti"
+            card_view:cardCornerRadius="3dp">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Location"
+                    android:id="@+id/txtLocation"
+                    android:padding="16dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name venue"
+                    android:id="@+id/txtNameVenue"
+                    android:layout_below="@+id/txtLocation"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:paddingLeft="16dp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Street"
+                    android:id="@+id/txtStreet"
+                    android:layout_below="@+id/txtNameVenue"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:paddingLeft="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="City"
+                    android:id="@+id/txtCity"
+                    android:layout_below="@+id/txtStreet"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:paddingLeft="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Country"
+                    android:id="@+id/txtCountry"
+                    android:layout_below="@+id/txtCity"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:paddingLeft="16dp"/>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imgAboutMap"
+                    android:src="@drawable/ic_aboutmap"
+                    android:layout_below="@+id/txtCountry"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="centerCrop"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>-->
     </RelativeLayout>
 </ScrollView>
