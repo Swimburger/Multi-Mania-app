@@ -90,8 +90,11 @@ public class GoogleCalUtil {
             addTalk(talks.get(i));
         }
     }
-
-    public void addTalk(Talk talk) {
+    /** Adds a talk to the calendar
+     * @param talk The context (e.g. activity)
+     * @return returns the calEventId
+     */
+    public long addTalk(Talk talk) {
         ContentResolver cr = mContext.getContentResolver();
         ContentValues cv = new ContentValues();
 
@@ -106,8 +109,10 @@ public class GoogleCalUtil {
 
         Uri uri = buildEventUri();
         cr.insert(uri, cv);
-
+        String derpyderp = uri.getLastPathSegment();
         updateEvent(talk,Long.parseLong(uri.getLastPathSegment()));
+
+        return Long.parseLong(uri.getLastPathSegment());
     }
 
     private int updateEvent(Talk talk, long eventId) {
@@ -127,7 +132,7 @@ public class GoogleCalUtil {
         cr.delete(deleteUri, null, null);
     }
 
-    private Uri buildCalUri() {
+    public Uri buildCalUri() {
         return CAL_URI
                 .buildUpon()
                 .appendQueryParameter(CalendarContract.CALLER_IS_SYNCADAPTER, "true")
@@ -148,7 +153,7 @@ public class GoogleCalUtil {
     }
 
     private Uri talkEntryUri(Cursor cursor){
-        return MultimaniaContract.NewsItemEntry.buildItemUri(
+        return MultimaniaContract.TalkEntry.buildItemUri(
                 cursor.getLong(
                         cursor.getColumnIndex(
                                 MultimaniaContract.TalkEntry._ID

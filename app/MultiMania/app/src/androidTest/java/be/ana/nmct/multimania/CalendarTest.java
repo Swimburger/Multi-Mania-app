@@ -30,9 +30,9 @@ public class CalendarTest extends ApplicationTestCase<Application> {
 
     private ContentResolver mContentResolver;
 
-    static{
+    static {
         try {
-            sTestTalk = new Talk(1,"Test talk", Utility.ConvertStringToDate("2014-05-19 10:45:00"),Utility.ConvertStringToDate("2014-05-19 11:30:00"),"TestDescription",1,false);
+            sTestTalk = new Talk(1, "Test talk", Utility.ConvertStringToDate("2014-05-19 10:45:00"), Utility.ConvertStringToDate("2014-05-19 11:30:00"), "TestDescription", 1, false);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -57,17 +57,34 @@ public class CalendarTest extends ApplicationTestCase<Application> {
         util.setPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME, ACCOUNT_NAME);
     }
 
-    private Cursor getCalendarCursor(){
+    private Cursor getCalendarCursor() {
         ContentResolver cr = mContentResolver;
         Uri uri = CalendarContract.Calendars.CONTENT_URI;
         String selection = "((" + CalendarContract.Calendars.ACCOUNT_NAME + " = ?) AND ("
                 + CalendarContract.Calendars.ACCOUNT_TYPE + " = ?) AND ("
                 + CalendarContract.Calendars.OWNER_ACCOUNT + " = ?))";
-        String[] selectionArgs = new String[] {ACCOUNT_NAME, CalendarContract.ACCOUNT_TYPE_LOCAL, ACCOUNT_NAME};
+        String[] selectionArgs = new String[]{ACCOUNT_NAME, CalendarContract.ACCOUNT_TYPE_LOCAL, ACCOUNT_NAME};
         return cr.query(uri, null, selection, selectionArgs, null);
     }
 
-    public void testCalendarCreated(){
+    public Cursor getEventByID(long id) {
+        ContentResolver cr = mContentResolver;
+
+        final String[] PROJECTION = new String[]{
+                CalendarContract.Events._ID,
+                CalendarContract.Events.TITLE,
+                CalendarContract.Events.DESCRIPTION,
+                CalendarContract.Events.EVENT_LOCATION,
+                CalendarContract.Events.DTSTART,
+                CalendarContract.Events.DTEND,
+        };
+        final String selection = "(" + CalendarContract.Events.OWNER_ACCOUNT + " = ? AND " + CalendarContract.Events._ID + " = ?)";
+        final String[] selectionArgs = new String[]{ACCOUNT_NAME, id + ""};
+
+        return cr.query(sCalUtil.buildCalUri(), PROJECTION, selection, selectionArgs, null);
+    }
+
+    public void testCalendarCreated() {
 
         //Create the calendar
         sCalUtil = new GoogleCalUtil(this.getContext(), CALENDAR_NAME);
@@ -76,11 +93,41 @@ public class CalendarTest extends ApplicationTestCase<Application> {
         Cursor c = getCalendarCursor();
 
         assertNotNull(c);
+        int calCount = c.getCount();
+        assertTrue(calCount == 1);
 
         c.moveToFirst();
         int nameIndex = c.getColumnIndexOrThrow(CalendarContract.Calendars.ACCOUNT_NAME);
         String accountName = c.getString(nameIndex);
 
         assertTrue(accountName.equals(ACCOUNT_NAME));
+    }
+
+  /*  public void testAddEventToCalendar() {
+
+        //Add talk to calendar
+        sCalUtil = new GoogleCalUtil(this.getContext(), CALENDAR_NAME);
+        sTestTalk.calEventId = sCalUtil.addTalk(sTestTalk);
+
+        //Check if event was added to the calendar
+        Cursor c = getEventByID(sTestTalk.calEventId);
+        final int TITLE_INDEX = 1;
+        String title;
+
+        c.moveToFirst();
+        title = c.getString(TITLE_INDEX);
+
+        assertTrue(title.equals(sTestTalk.title));
+    }
+*/
+    public void testCalendarDeleted() {
+        //Delete the calendar
+        sCalUtil = new GoogleCalUtil(this.getContext(), CALENDAR_NAME);
+        sCalUtil.deleteCalendar();
+
+        //Check if calendar still exists
+        Cursor c = getCalendarCursor();
+        int calCount = c.getCount();
+        assertTrue(calCount == 0);
     }
 }
