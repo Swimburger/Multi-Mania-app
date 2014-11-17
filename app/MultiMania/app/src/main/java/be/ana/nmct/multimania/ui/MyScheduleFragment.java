@@ -38,7 +38,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private Cursor mData;
 
     public MyScheduleFragment() {
-       
+
     }
 
     public static MyScheduleFragment newInstance(String date,int position) {

@@ -1,6 +1,6 @@
 package be.ana.nmct.multimania.ui;
 
-import android.app.ListFragment;
+import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -14,20 +14,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
+import com.etsy.android.grid.StaggeredGridView;
+import com.etsy.android.grid.util.DynamicHeightTextView;
 import com.koushikdutta.ion.Ion;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 
-public class NewsFragment extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class NewsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
 
     private NewsCursorAdapter mAdapter;
     private Cursor mData;
+    private StaggeredGridView mGridView;
 
     //default ctor
     public NewsFragment(){}
@@ -37,13 +39,16 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         mAdapter=new NewsCursorAdapter(getActivity(),null,0);
-        setListAdapter(mAdapter);
+        //setListAdapter(mAdapter);
         getLoaderManager().initLoader(MainActivity.LOADER_NEWS_ID,null,this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_news,container,false);
+        mGridView =(StaggeredGridView) v.findViewById(R.id.news_grid);
+        mGridView.setOnItemClickListener(this);
+        mGridView.setAdapter(mAdapter);
         mAdapter.swapCursor(mData);
         return v;
     }
@@ -65,33 +70,20 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Cursor cursor = mAdapter.getCursor();
         cursor.moveToPosition(position);
         Uri uri = MultimaniaContract.NewsItemEntry.buildItemUri(
                 cursor.getLong(
-                    cursor.getColumnIndex(
-                            MultimaniaContract.NewsItemEntry._ID
-                    )
+                        cursor.getColumnIndex(
+                                MultimaniaContract.NewsItemEntry._ID
+                        )
                 )
         );
 
         Intent intent = new Intent(getActivity(),NewsItemActivity.class);
         intent.setData(uri);
         startActivity(intent);
-
-        /*Fragment fragment = new NewsItemFragment();
-
-        Bundle args = new Bundle();
-        args.putInt(NewsFragment.ARGS_NEWS, position);
-        System.out.println(ARGS_NEWS + " pos: " + position);
-        fragment.setArguments(args);
-
-        FragmentManager manager = getFragmentManager();
-        manager.beginTransaction().replace(R.id.container, fragment).commit();*/
-
     }
 
     private class NewsCursorAdapter extends CursorAdapter{
@@ -130,8 +122,8 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
             View v  = mInflater.inflate(R.layout.row_news, parent, false);
 
             ViewHolder holder = new ViewHolder();
-            holder.txtTitle = (TextView) v.findViewById(R.id.txtNewsTitle);
-            holder.txtShortDescription = (TextView) v.findViewById(R.id.txtNewsText);
+            holder.txtTitle = (DynamicHeightTextView) v.findViewById(R.id.txtNewsTitle);
+            holder.txtShortDescription = (DynamicHeightTextView) v.findViewById(R.id.txtNewsText);
             holder.imgNews = (ImageView)v.findViewById(R.id.imgNews);
             v.setTag(holder);
             return v;
@@ -164,8 +156,8 @@ public class NewsFragment extends ListFragment implements LoaderManager.LoaderCa
     }
 
     static class ViewHolder{
-        TextView txtTitle;
-        TextView txtShortDescription;
+        DynamicHeightTextView txtTitle;
+        DynamicHeightTextView txtShortDescription;
         ImageView imgNews;
     }
 }

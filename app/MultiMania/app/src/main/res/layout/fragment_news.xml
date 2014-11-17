@@ -1,4 +1,13 @@
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.etsy.android.grid.StaggeredGridView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/news_grid"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:item_margin="8dp"
+    app:column_count="@integer/news_column_count" />
+
+    <!--<ListView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="be.ana.nmct.multimania.ui.NewsFragment"
     android:layout_width="match_parent"
@@ -9,4 +18,4 @@
     tools:listitem="@layout/row_news"
     android:clipToPadding="false"
     android:scrollbarStyle="outsideOverlay"
-    android:padding="8dp"/>
+    android:padding="8dp"/>-->

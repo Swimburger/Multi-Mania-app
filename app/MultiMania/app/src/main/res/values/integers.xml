@@ -3,4 +3,5 @@
     <integer name="amount_of_schedule_columns">8</integer>
     <integer name="amount_of_schedule_item_columns">8</integer>
     <integer name="amount_of_schedule_item_rows">4</integer>
+    <integer name="news_column_count">1</integer>
 </resources>
