@@ -5,7 +5,7 @@
     <color name="orange">#ffefaa4e</color>
     <color name="lightgray">#eee</color>
     <color name="primaryColor">#7fc28a</color>
-    <color name="secundaryColor">#9681b2</color>
+    <color name="secondaryColor">#9681b2</color>
     <color name="thirdColor">#413d38</color>
 
 </resources>

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:text="00:00 - 00:00"
     android:gravity="center"
-    android:background="@color/secundaryColor"
+    android:background="@color/secondaryColor"
     android:textColor="@color/white"
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:id="@+id/txtTime"
