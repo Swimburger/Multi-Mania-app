@@ -4,6 +4,7 @@ import android.view.animation.AlphaAnimation;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -48,6 +49,25 @@ public class Utility {
     public static String getTimeString(Date date) throws ParseException {
         return  sTimeFormatter.format(date);
     }
+
+    public static boolean isSameDay(Date date1, Date date2) {
+        if (date1 == null || date2 == null) {
+            throw new IllegalArgumentException("The dates must not be null");
+        }
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(date1);
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(date2);
+        return isSameDay(cal1.getTime(), cal2.getTime());
+    }
+
+    /*public static boolean isBetweenTimeRange(Date toCheck){
+
+        DateTime before = dateToCheck;
+        DateTime after = sdf.parse("07/05/2012 08:30");
+
+        return (before.getTime() < toCheck.getTime()) && after.getTime() > toCheck.getTime();
+    }*/
 
     public static AlphaAnimation getAlphaAnimation(float from, float to, long duration, long offset) {
         AlphaAnimation anim = new AlphaAnimation(from,to);

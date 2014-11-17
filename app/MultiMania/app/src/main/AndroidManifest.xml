@@ -46,6 +46,10 @@
             android:enabled="true"
             android:exported="false" >
         </provider>
+        <service
+            android:name=".service.NotificationService"
+            android:launchMode="singleTask">
+        </service>
     </application>
 
 </manifest>
