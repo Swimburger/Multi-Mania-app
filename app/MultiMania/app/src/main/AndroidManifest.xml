@@ -46,6 +46,24 @@
             android:enabled="true"
             android:exported="false" >
         </provider>
+
+        <service
+            android:name=".service.SyncService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":sync">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/sync_adapter" />
+        </service>
+        <service
+            android:name=".service.NotificationService"
+            android:launchMode="singleTask">
+        </service>
     </application>
 
 </manifest>

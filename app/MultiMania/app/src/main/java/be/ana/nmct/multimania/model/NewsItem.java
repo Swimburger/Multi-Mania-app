@@ -28,4 +28,14 @@ public class NewsItem {
         this.importance=importance;
         this.order=order;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        NewsItem n = (NewsItem)o;
+        if(this.id == n.id && this.title == n.title && this.image == n.image && this.importance == this.importance && this.shortDescription == n.shortDescription && this.longDescription == n.longDescription && this.order == n.order){
+            return true;
+        } else{
+            return  false;
+        }
+    }
 }

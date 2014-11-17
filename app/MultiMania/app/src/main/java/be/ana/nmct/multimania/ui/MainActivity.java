@@ -12,8 +12,6 @@ import android.view.MenuItem;
 import be.ana.nmct.multimania.R;
 
 
-
-
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     public static final int LOADER_SCHEDULE_DATES_ID =0;
     public static final int LOADER_SCHEDULE_TALK_ID=10;
