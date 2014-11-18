@@ -4,18 +4,19 @@ import android.view.animation.AlphaAnimation;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
 /**
  * Created by Niels on 28/10/2014.
  */
-public class Utility {
+public final class Utility {
     private static final String sDateFormat = "yyyy-MM-dd HH:mm:ss";
     private static final String sTimeFormat = "HH:mm";
     private static final SimpleDateFormat sFormatter = new SimpleDateFormat(sDateFormat);
     private static final SimpleDateFormat sTimeFormatter = new SimpleDateFormat(sTimeFormat);
+
+    private Utility(){}
 
     public static String convertDateToString(Date date){
         return sFormatter.format(date);

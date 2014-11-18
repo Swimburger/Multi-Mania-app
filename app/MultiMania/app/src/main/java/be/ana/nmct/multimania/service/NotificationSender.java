@@ -88,7 +88,6 @@ public class NotificationSender {
 
 
         Intent targetIntent = new Intent(sContext, TalkActivity.class);
-        //targetIntent.putExtra(NOTIF_TALKID, talk.id);
         targetIntent.setData(MultimaniaContract.TalkEntry.buildItemUri(talk.id));
         PendingIntent contentIntent = PendingIntent.getActivity(sContext, 0, targetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(contentIntent);

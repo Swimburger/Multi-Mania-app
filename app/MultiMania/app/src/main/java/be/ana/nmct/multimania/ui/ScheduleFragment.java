@@ -31,7 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.utils.GoogleCalUtil;
+import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.ScheduleGridHeader;
 import be.ana.nmct.multimania.vm.ScheduleGridItem;
@@ -50,6 +53,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     private Cursor mCursor;
     private String mDate;
     private int mPosition;
+    private String mAccountName;
 
     public ScheduleFragment() {}
 
@@ -70,7 +74,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         mPosition = getArguments().getInt(POSITION_KEY);
         Loader loader = getLoaderManager().initLoader(MainActivity.LOADER_SCHEDULE_TALK_ID+mPosition, null, this);
         mItems = new ArrayList<AsymmetricItem>();
-
+        mAccountName = new SettingsUtil(getActivity(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
         //setRetainInstance(true);
     }
 
@@ -284,6 +288,9 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                             MultimaniaContract.TalkEntry._ID+"=?",
                             new String[]{""+item.id}
                     );
+                    if(mAccountName!=null){
+                        ApiActions.postFavoriteTalk(getActivity(),mAccountName,item.id);
+                    }
                 }
             });
             imgButton.setImageResource(getStarDrawabale(item.isFavorite));

@@ -5,10 +5,13 @@ import android.test.ApplicationTestCase;
 
 import com.google.gson.reflect.TypeToken;
 
-import java.util.List;
+import junit.framework.Assert;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.GsonLoader;
-import be.ana.nmct.multimania.data.PostUserTask;
 import be.ana.nmct.multimania.model.NewsItem;
 import be.ana.nmct.multimania.model.Room;
 import be.ana.nmct.multimania.model.Speaker;
@@ -62,14 +65,32 @@ public class ApiTest extends ApplicationTestCase<Application> {
         assertNotNull(talkspeakers);
     }
 
-    public void testPostUser(){
-        PostUserTask task = new PostUserTask(TESTUSERID);
-        String userId =task.executeSynchronously();
-        assertEquals(TESTUSERID,userId);
+    public void testPostUser() throws ExecutionException, InterruptedException {
+        String userId = ApiActions.postUser(mContext,TESTUSERID)
+                .get();
+        Assert.assertEquals(userId,TESTUSERID);
+    }
+
+    public void testPostFavoriteTalk() throws ExecutionException, InterruptedException {
+        String status = ApiActions.deleteFavoriteTalk(mContext, TESTUSERID, 1)
+                .get();
+        Assert.assertEquals(status,"success");
     }
 
     public void testUserTalks(){
         List<Talk> talks = new GsonLoader<Talk>(mContext,"users/"+TESTUSERID+"/talks",new TypeToken<List<Talk>>(){}).loadInBackground();
         assertNotNull(talks);
+    }
+
+    public void testDeleteFavoriteTalk() throws ExecutionException, InterruptedException {
+        String status = ApiActions.deleteFavoriteTalk(mContext,TESTUSERID,1)
+                .get();
+        Assert.assertEquals(status,"success");
+    }
+
+    public void testGetLastUpdated() throws ExecutionException, InterruptedException {
+        String datetime = ApiActions.getLastUpdated(mContext,TESTUSERID)
+                .get();
+        Assert.assertNotNull(datetime);
     }
 }
