@@ -19,8 +19,6 @@ public class SyncService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        Log.d("", "ik ben gestart");
-
         synchronized (sSyncAdapterLock){
             if(sSyncAdapter == null){
                 sSyncAdapter = new SyncAdapter(getApplicationContext(), true);

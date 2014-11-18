@@ -15,6 +15,8 @@ import java.util.List;
 import be.ana.nmct.multimania.data.GsonLoader;
 import be.ana.nmct.multimania.model.IData;
 import be.ana.nmct.multimania.model.NewsItem;
+import be.ana.nmct.multimania.model.Talk;
+import be.ana.nmct.multimania.model.TalkSpeaker;
 
 /**
  * Created by Astrid on 16/11/2014.
@@ -37,6 +39,12 @@ public class SyncUtils {
 
     //TODO:sync to server for talks, first check the last update (not implemented yet) and compare it to the last update online GET /users/:id/lastupdated. If droid has a more recent update, sync to server, else sync to device
     //TODO:sync to Android for talks, check if user has chosen a email address, if so use GET /users/:id/talks, else use GET /talks
+
+    public void syncTalks(ContentProviderClient provider)throws Exception{
+        List<IData> talks = new ArrayList<IData>(
+                new GsonLoader<Talk>(mContext, TalkSpeaker.SEGMENT, new TypeToken<List<Talk>>(){}).loadInBackground());
+        syncData(provider , talks);
+    }
 
     public static void syncData(ContentProviderClient provider,List<IData> models) throws RemoteException {
         for(IData model: models){
