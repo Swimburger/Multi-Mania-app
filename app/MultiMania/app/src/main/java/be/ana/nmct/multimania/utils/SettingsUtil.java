@@ -17,9 +17,9 @@ public class SettingsUtil {
     }
 
     //boolean preferences
-    public Boolean getBooleanPreference(String settingName){
+    public Boolean getBooleanPreference(String settingName, boolean defaultValue){
         SharedPreferences prefs = mContext.getSharedPreferences(mPreferenceName, Context.MODE_PRIVATE);
-        return prefs.getBoolean(settingName, false);
+        return prefs.getBoolean(settingName, defaultValue);
     }
 
     public boolean setPreference(String settingName, boolean value){

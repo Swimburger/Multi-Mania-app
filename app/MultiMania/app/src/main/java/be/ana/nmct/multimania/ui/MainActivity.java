@@ -4,15 +4,22 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.service.NotificationSender;
+import be.ana.nmct.multimania.utils.SettingsUtil;
 
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    public static final String PREFERENCE_NAME = "launch_values";
+    public static final String PREFERENCE_FIRSTTIMELAUNCH = "first_time_launch";
+
     public static final int LOADER_SCHEDULE_DATES_ID =0;
     public static final int LOADER_SCHEDULE_TALK_ID=10;
     public static final int LOADER_MYSCHEDULE_TALK_ID=20;
@@ -20,7 +27,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,20 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        //Handle first time launching
+        SettingsUtil launchUtil = new SettingsUtil(this, PREFERENCE_NAME);
+        boolean firstTimeLaunch = launchUtil.getBooleanPreference(PREFERENCE_FIRSTTIMELAUNCH, true);
+
+        if(firstTimeLaunch){
+            SettingsUtil settingsUtil = new SettingsUtil(this, SettingsFragment.PREFERENCE_NAME);
+            settingsUtil.setPreference(SettingsFragment.PREFERENCE_NOTIFY, true);
+            settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
+            launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
+        }
+
+        NotificationSender notUtil = new NotificationSender(this);
+
     }
     
     @Override
@@ -135,4 +155,11 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
 
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Intent newIntent = new Intent(this, TalkActivity.class);
+        long talkId = intent.getLongExtra(NotificationSender.NOTIF_TALKID, 0);
+        newIntent.putExtra(NotificationSender.NOTIF_TALKID, talkId);
+        startActivity(newIntent);
+    }
 }

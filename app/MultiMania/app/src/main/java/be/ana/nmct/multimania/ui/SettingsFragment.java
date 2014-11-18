@@ -54,12 +54,11 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        //TODO: check notifychk by default on first time app startup
         mChkNotify = (CheckBox) v.findViewById(R.id.checkbox_notify);
-        mChkNotify.setChecked(mUtil.getBooleanPreference(PREFERENCE_NOTIFY));
+        mChkNotify.setChecked(mUtil.getBooleanPreference(PREFERENCE_NOTIFY, false));
 
         mChkSync = (CheckBox) v.findViewById(R.id.checkbox_sync);
-        mChkSync.setChecked(mUtil.getBooleanPreference(PREFERENCE_SYNC));
+        mChkSync.setChecked(mUtil.getBooleanPreference(PREFERENCE_SYNC, false));
 
 
         mChkNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
