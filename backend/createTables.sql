@@ -4,6 +4,7 @@ USE multimania;
 
 CREATE TABLE `user` (
   `id` VARCHAR(255) NOT NULL,
+  `last_updated` DATETIME NULL,
   PRIMARY KEY (`id`));
 
 CREATE TABLE `room` (

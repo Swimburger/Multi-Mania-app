@@ -21,6 +21,7 @@ $app->get('/news', 'getNews');
 
 $app->get('/talks', 'getTalks');
 $app->get('/users/:id/talks', 'getTalksWithFavorites');
+$app->get('/users/:id/lastupdated', 'getLastUpdateByUser');
 $app->get('/talk_tags', 'getTalkTags');
 $app->get('/talk_speakers', 'getTalkSpeakers');
 
@@ -31,6 +32,8 @@ $app->get('/tags', 'getTags');
 $app->get('/speakers', 'getSpeakers');
 
 $app->get('/import/:secret','importData');
+
+
 
 /**
  * inserts a user with the passed id
@@ -72,8 +75,9 @@ $app->delete('/users/:userid/talks/:talkid',function ($userid,$talkid) use ($app
         $app->error();
     }
 });
-$app->contentType('application/json');
-$app->run();
+
+
+
 /**
  * Gets news items from the database
  */
@@ -93,6 +97,10 @@ function getTalks() {
  */
 function getTalksWithFavorites($userid){
     echo json_encode(TalkRepository::getTalksWithFavorites($userid));
+}
+
+function getLastUpdateByUser($userid){
+    echo UserRepository::getLastUpdateByUser($userid)['last_updated'];
 }
 
 /**
@@ -133,3 +141,7 @@ function importData($secret){
     Import::ImportData();
     echo "Succes";
 }
+
+
+$app->contentType('application/json');
+$app->run();
