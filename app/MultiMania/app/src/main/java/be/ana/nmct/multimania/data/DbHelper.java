@@ -14,14 +14,7 @@ import be.ana.nmct.multimania.data.MultimaniaContract.TalkEntry;
 import be.ana.nmct.multimania.data.MultimaniaContract.TalkSpeakerEntry;
 import be.ana.nmct.multimania.data.MultimaniaContract.TalkTagEntry;
 import be.ana.nmct.multimania.data.MultimaniaContract.UserEntry;
-import be.ana.nmct.multimania.model.NewsItem;
-import be.ana.nmct.multimania.model.Room;
-import be.ana.nmct.multimania.model.Speaker;
-import be.ana.nmct.multimania.model.Tag;
-import be.ana.nmct.multimania.model.Talk;
-import be.ana.nmct.multimania.model.TalkSpeaker;
-import be.ana.nmct.multimania.model.TalkTag;
-import be.ana.nmct.multimania.utils.Utility;
+import be.ana.nmct.multimania.model.IData;
 
 /**
  * Created by Astrid on 28/10/2014.
@@ -168,117 +161,28 @@ public class DbHelper  extends SQLiteOpenHelper{
         db.execSQL(sql);
     }
 
-    public static long InsertNewsItem(SQLiteDatabase db, NewsItem newsItem) {
-        ContentValues values = getContentValues(newsItem);
-        return db.insert(NewsItemEntry.TABLE_NAME,null,values);
+    public static Cursor getNewsItemById(SQLiteDatabase db, long id) {
+        return db.query(NewsItemEntry.TABLE_NAME, null, NewsItemEntry._ID + "=?", new String[]{"" + id}, null, null, null);
     }
 
-    public static ContentValues getContentValues(NewsItem newsItem) {
-        ContentValues values = new ContentValues();
-        values.put(NewsItemEntry._ID,newsItem.id);
-        values.put(NewsItemEntry.TITLE,newsItem.title);
-        values.put(NewsItemEntry.IMAGE,newsItem.image);
-        values.put(NewsItemEntry.SHORT_DESCRIPTION,newsItem.shortDescription);
-        values.put(NewsItemEntry.LONG_DESCRIPTION,newsItem.longDescription);
-        values.put(NewsItemEntry.IMPORTANCE,newsItem.importance);
-        values.put(NewsItemEntry.ORDER,newsItem.order);
-        return values;
+    public static Cursor getTagById(SQLiteDatabase db, long id) {
+        return db.query(TagEntry.TABLE_NAME, null, TagEntry._ID + "=?", new String[]{"" + id}, null, null, null);
     }
 
-    public static Cursor GetNewsItemById(SQLiteDatabase db, long id) {
-        return db.query(NewsItemEntry.TABLE_NAME,null,NewsItemEntry._ID+"=?",new String[]{""+id},null,null,null);
+    public static Cursor getRoomById(SQLiteDatabase db, long id) {
+        return db.query(RoomEntry.TABLE_NAME, null, RoomEntry._ID + "=?", new String[]{"" + id}, null, null, null);
     }
 
-    public static long InsertTag(SQLiteDatabase db, Tag tag) {
-        ContentValues values = getContentValues(tag);
-        return db.insert(TagEntry.TABLE_NAME,null,values);
+    public static Cursor getTalkById(SQLiteDatabase db, long id) {
+        return db.query(TalkEntry.TABLE_NAME, null, TalkEntry._ID + "=?", new String[]{"" + id}, null, null, null);
     }
 
-    public static ContentValues getContentValues(Tag tag) {
-        ContentValues values = new ContentValues();
-        values.put(TagEntry._ID,tag.id);
-        values.put(TagEntry.NAME,tag.name);
-        return values;
-    }
-
-    public static Cursor GetTagById(SQLiteDatabase db, long id) {
-        return db.query(TagEntry.TABLE_NAME,null,TagEntry._ID+"=?",new String[]{""+id},null,null,null);
-    }
-
-    public static long InsertRoom(SQLiteDatabase db, Room room) {
-        ContentValues values = getContentValues(room);
-        return db.insert(RoomEntry.TABLE_NAME, null, values);
-    }
-
-    public static ContentValues getContentValues(Room room) {
-        ContentValues values = new ContentValues();
-        values.put(RoomEntry._ID,room.id);
-        values.put(RoomEntry.NAME,room.name);
-        return values;
-    }
-
-    public static Cursor GetRoomById(SQLiteDatabase db, long id) {
-        return db.query(RoomEntry.TABLE_NAME,null,RoomEntry._ID+"=?",new String[]{""+id},null,null,null);
-    }
-
-    public static long InsertTalk(SQLiteDatabase db, Talk talk) {
-        ContentValues values = getContentValues(talk);
-        return db.insert(TalkEntry.TABLE_NAME, null, values);
-    }
-
-    public static ContentValues getContentValues(Talk talk) {
-        ContentValues values = new ContentValues();
-        values.put(TalkEntry._ID,talk.id);
-        values.put(TalkEntry.TITLE,talk.title);
-        values.put(TalkEntry.DESCRIPTION,talk.description);
-        values.put(TalkEntry.DATE_FROM, Utility.convertDateToString(talk.from));
-        values.put(TalkEntry.DATE_UNTIL,Utility.convertDateToString(talk.to));
-        values.put(TalkEntry.ROOM_ID,talk.roomId);
-        values.put(TalkEntry.IS_KEYNOTE,talk.isKeynote);
-        return values;
-    }
-
-    public static Cursor GetTalkById(SQLiteDatabase db, long id) {
-        return db.query(TalkEntry.TABLE_NAME,null,TalkEntry._ID+"=?",new String[]{""+id},null,null,null);
-    }
-
-    public static long InsertSpeaker(SQLiteDatabase db, Speaker speaker) {
-        ContentValues values = getContentValues(speaker);
-        return db.insert(SpeakerEntry.TABLE_NAME, null, values);
-    }
-
-    public static ContentValues getContentValues(Speaker speaker) {
-        ContentValues values = new ContentValues();
-        values.put(SpeakerEntry._ID,speaker.id);
-        values.put(SpeakerEntry.NAME,speaker.name);
-        return values;
-    }
-
-    public static Cursor GetSpeakerById(SQLiteDatabase db, long id) {
+    public static Cursor getSpeakerById(SQLiteDatabase db, long id) {
         return db.query(SpeakerEntry.TABLE_NAME,null,SpeakerEntry._ID+"=?",new String[]{""+id},null,null,null);
     }
 
-    public static long InsertTalkTag(SQLiteDatabase db, TalkTag talkTag) {
-        ContentValues values = getContentValues(talkTag);
-        return db.insert(TalkTagEntry.TABLE_NAME, null, values);
-    }
-
-    public static ContentValues getContentValues(TalkTag talkTag) {
-        ContentValues values = new ContentValues();
-        values.put(TalkTagEntry.TALK_ID,talkTag.talkId);
-        values.put(TalkTagEntry.TAG_ID,talkTag.tagId);
-        return values;
-    }
-
-    public static long InsertTalkSpeaker(SQLiteDatabase db, TalkSpeaker talkSpeaker) {
-        ContentValues values = getContentValues(talkSpeaker);
-        return db.insert(TalkSpeakerEntry.TABLE_NAME, null, values);
-    }
-
-    public static ContentValues getContentValues(TalkSpeaker talkSpeaker) {
-        ContentValues values = new ContentValues();
-        values.put(TalkSpeakerEntry.TALK_ID,talkSpeaker.talkId);
-        values.put(TalkSpeakerEntry.SPEAKER_ID,talkSpeaker.speakerId);
-        return values;
+    public static long insertItem(SQLiteDatabase db, IData iData) {
+        ContentValues values = iData.getContentValues();
+        return db.insert(iData.getTableName(), null, values);
     }
 }
