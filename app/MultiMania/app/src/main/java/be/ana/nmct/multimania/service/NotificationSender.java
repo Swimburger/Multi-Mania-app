@@ -16,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.ui.MainActivity;
 import be.ana.nmct.multimania.ui.TalkActivity;
@@ -25,7 +26,7 @@ import be.ana.nmct.multimania.ui.TalkActivity;
  */
 public class NotificationSender {
 
-    private final String TAG = this.getClass().getSimpleName();
+    private static final String TAG = NotificationSender.class.getSimpleName();
 
     public final static int NOTIFICATION_ID = 12345;
     public final static String NOTIF_TALKID = "notification_talkid";
@@ -86,8 +87,9 @@ public class NotificationSender {
                         .setLights(Color.parseColor("#FFFFFF"), 1000, 5000);
 
 
-        Intent targetIntent = new Intent(sContext, MainActivity.class);
-        targetIntent.putExtra(NOTIF_TALKID, talk.id);
+        Intent targetIntent = new Intent(sContext, TalkActivity.class);
+        //targetIntent.putExtra(NOTIF_TALKID, talk.id);
+        targetIntent.setData(MultimaniaContract.TalkEntry.buildItemUri(talk.id));
         PendingIntent contentIntent = PendingIntent.getActivity(sContext, 0, targetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(contentIntent);
 
