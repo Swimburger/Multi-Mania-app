@@ -28,6 +28,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         try{
             SyncUtils utils = new SyncUtils(getContext());
             utils.syncNews(provider);
+            utils.syncTalks(provider);
         }catch(Exception e){
             e.printStackTrace();
         }
