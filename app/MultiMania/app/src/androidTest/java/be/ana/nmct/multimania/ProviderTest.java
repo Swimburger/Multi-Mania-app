@@ -12,7 +12,6 @@ import android.util.Log;
 
 import java.text.ParseException;
 
-import be.ana.nmct.multimania.data.DbHelper;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.data.MultimaniaContract.NewsItemEntry;
 import be.ana.nmct.multimania.data.MultimaniaContract.RoomEntry;
@@ -217,7 +216,7 @@ public class ProviderTest extends ApplicationTestCase<Application> {
     }
 
     public void testInsertNewsItem(){
-        ContentValues values = DbHelper.getContentValues(sNewsItem);
+        ContentValues values = sNewsItem.getContentValues();
         Uri uri = mContentResolver.insert(NewsItemEntry.CONTENT_URI, values);
         Cursor cursor = mContext.getContentResolver().query(uri, null, null, null, null);
         DbTest.validateCursor(cursor,values);
@@ -225,22 +224,22 @@ public class ProviderTest extends ApplicationTestCase<Application> {
     }
 
     public void testInsertRoom(){
-        ContentValues values = DbHelper.getContentValues(sRoom);
+        ContentValues values = sRoom.getContentValues();
         Uri uri = mContentResolver.insert(RoomEntry.CONTENT_URI, values);
     }
 
     public void testInsertTag(){
-        ContentValues values = DbHelper.getContentValues(sTag);
+        ContentValues values = sTag.getContentValues();
         Uri uri = mContentResolver.insert(TagEntry.CONTENT_URI, values);
     }
 
     public void testInsertSpeaker(){
-        ContentValues values = DbHelper.getContentValues(sSpeaker);
+        ContentValues values = sSpeaker.getContentValues();
         Uri uri = mContentResolver.insert(SpeakerEntry.CONTENT_URI, values);
     }
 
     public void testInsertTalk(){
-        ContentValues values = DbHelper.getContentValues(sTalk);
+        ContentValues values = sTalk.getContentValues();
         Uri uri = mContentResolver.insert(TalkEntry.CONTENT_URI, values);
         Cursor cursor = mContext.getContentResolver().query(uri, null, null, null, null);
         Log.d(TAG,cursor.getColumnNames().toString());
@@ -249,12 +248,12 @@ public class ProviderTest extends ApplicationTestCase<Application> {
     }
 
     public void testInsertTalkTag(){
-        ContentValues values = DbHelper.getContentValues(sTalkTag);
+        ContentValues values = sTalkTag.getContentValues();
         Uri uri = mContentResolver.insert(TalkTagEntry.CONTENT_URI, values);
     }
 
     public void testInsertTalkSpeaker(){
-        ContentValues values = DbHelper.getContentValues(sTalkSpeaker);
+        ContentValues values = sTalkSpeaker.getContentValues();
         Uri uri = mContentResolver.insert(TalkSpeakerEntry.CONTENT_URI, values);
     }
 

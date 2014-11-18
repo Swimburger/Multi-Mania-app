@@ -35,12 +35,15 @@ public class MultimaniaProvider extends ContentProvider {
     public static final int TALK_DATE               = 300;
 
     public static final int ROOM                    = 400;
+    public static final int ROOM_ID                 = 401;
 
     public static final int TAG                     = 500;
-    public static final int TAG_BY_TALK_ID          = 501;
+    public static final int TAG_ID                  = 501;
+    public static final int TAG_BY_TALK_ID          = 502;
 
     public static final int SPEAKER                 = 600;
-    public static final int SPEAKER_BY_TALK_ID      = 601;
+    public static final int SPEAKER_ID              = 601;
+    public static final int SPEAKER_BY_TALK_ID      = 602;
 
 
     public static final int TALK_TAG                = 700;
@@ -116,16 +119,10 @@ public class MultimaniaProvider extends ContentProvider {
 
 
     private static UriMatcher buildUriMatcher() {
-        // I know what you're thinking.  Why create a UriMatcher when you can use regular
-        // expressions instead?  Because you're not crazy, that's why.
-
-        // All paths added to the UriMatcher have a corresponding code to return when a match is
-        // found.  The code passed into the constructor represents the code to return for the root
-        // URI.  It's common to use NO_MATCH as the code for this case.
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = MultimaniaContract.CONTENT_AUTHORITY;
 
-        // For each type of URI you want to add, create a corresponding code.
+
         matcher.addURI(authority, MultimaniaContract.PATH_NEWS, NEWS);
         matcher.addURI(authority, MultimaniaContract.PATH_NEWS + "/#", NEWS_ID);
 
@@ -137,11 +134,14 @@ public class MultimaniaProvider extends ContentProvider {
         matcher.addURI(authority, MultimaniaContract.PATH_TALK+"/"+MultimaniaContract.PATH_DATE,TALK_DATE);
 
         matcher.addURI(authority, MultimaniaContract.PATH_ROOM, ROOM);
+        matcher.addURI(authority, MultimaniaContract.PATH_ROOM+"/#", ROOM_ID);
 
         matcher.addURI(authority, MultimaniaContract.PATH_TAG, TAG);
+        matcher.addURI(authority, MultimaniaContract.PATH_TAG+"/#", TAG_ID);
         matcher.addURI(authority, MultimaniaContract.PATH_TAG+"/"+MultimaniaContract.PATH_TALK+"/#", TAG_BY_TALK_ID);
 
         matcher.addURI(authority, MultimaniaContract.PATH_SPEAKER, SPEAKER);
+        matcher.addURI(authority, MultimaniaContract.PATH_SPEAKER+"/#", SPEAKER_ID);
         matcher.addURI(authority, MultimaniaContract.PATH_SPEAKER+"/"+MultimaniaContract.PATH_TALK+"/#", SPEAKER_BY_TALK_ID);
 
         matcher.addURI(authority, MultimaniaContract.PATH_TALK_TAG, TALK_TAG);
@@ -180,10 +180,14 @@ public class MultimaniaProvider extends ContentProvider {
                 return RoomEntry.CONTENT_TYPE;
             case TAG:
                 return TagEntry.CONTENT_TYPE;
+            case TAG_ID:
+                return TagEntry.CONTENT_ITEM_TYPE;
             case TAG_BY_TALK_ID:
                 return TagEntry.CONTENT_TYPE;
             case SPEAKER:
                 return SpeakerEntry.CONTENT_TYPE;
+            case SPEAKER_ID:
+                return SpeakerEntry.CONTENT_ITEM_TYPE;
             case SPEAKER_BY_TALK_ID:
                 return SpeakerEntry.CONTENT_TYPE;
             case TALK_TAG:
@@ -272,6 +276,9 @@ public class MultimaniaProvider extends ContentProvider {
                         sortOrder
                 );
                 break;
+            case ROOM_ID:
+                retCursor = DbHelper.getRoomById(mDbHelper.getReadableDatabase(), ContentUris.parseId(uri));
+                break;
             case TAG:
                 retCursor = mDbHelper.getReadableDatabase().query(
                         TagEntry.TABLE_NAME,
@@ -282,6 +289,9 @@ public class MultimaniaProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
+                break;
+            case TAG_ID:
+                retCursor = DbHelper.getTagById(mDbHelper.getReadableDatabase(), ContentUris.parseId(uri));
                 break;
             case TAG_BY_TALK_ID:
                 retCursor = getTagsByTalkId(uri,projection,sortOrder);
@@ -296,6 +306,9 @@ public class MultimaniaProvider extends ContentProvider {
                         null,
                         sortOrder
                 );
+                break;
+            case SPEAKER_ID:
+                retCursor = DbHelper.getSpeakerById(mDbHelper.getReadableDatabase(), ContentUris.parseId(uri));
                 break;
             case SPEAKER_BY_TALK_ID:
                 retCursor = getSpeakersByTalkId(uri,projection,sortOrder);

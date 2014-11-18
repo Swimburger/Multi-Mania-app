@@ -58,10 +58,10 @@ public class DbTest extends ApplicationTestCase<Application> {
 
     public void testInsertNewsItem(){
         SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
-        long returnedId = DbHelper.InsertNewsItem(db, sNewsItem);
+        long returnedId = DbHelper.insertItem(db, sNewsItem);
         assertTrue(-1l != returnedId);
         Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sNewsItem.id);
-        Cursor cursor = DbHelper.GetNewsItemById(db, sNewsItem.id);
+        Cursor cursor = DbHelper.getNewsItemById(db, sNewsItem.id);
         cursor.moveToFirst();
         int idIndex =cursor.getColumnIndex(NewsItemEntry._ID);
         assertEquals(cursor.getInt(idIndex),sNewsItem.id);
@@ -70,10 +70,10 @@ public class DbTest extends ApplicationTestCase<Application> {
 
     public void testInsertRoom(){
         SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
-        long returnedId = DbHelper.InsertRoom(db, sRoom);
+        long returnedId = DbHelper.insertItem(db, sRoom);
         assertTrue(-1l!=returnedId);
         Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sRoom.id);
-        Cursor cursor = DbHelper.GetRoomById(db, sRoom.id);
+        Cursor cursor = DbHelper.getRoomById(db, sRoom.id);
         cursor.moveToFirst();
         int idIndex =cursor.getColumnIndex(RoomEntry._ID);
         assertEquals(cursor.getInt(idIndex),sRoom.id);
@@ -82,10 +82,10 @@ public class DbTest extends ApplicationTestCase<Application> {
 
     public void testInsertTag(){
         SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
-        long returnedId = DbHelper.InsertTag(db, sTag);
+        long returnedId = DbHelper.insertItem(db, sTag);
         assertTrue(-1l!=returnedId);
         Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sTag.id);
-        Cursor cursor = DbHelper.GetTagById(db, sTag.id);
+        Cursor cursor = DbHelper.getTagById(db, sTag.id);
         cursor.moveToFirst();
         int idIndex =cursor.getColumnIndex(TagEntry._ID);
         assertEquals(cursor.getInt(idIndex),sTag.id);
@@ -94,10 +94,10 @@ public class DbTest extends ApplicationTestCase<Application> {
 
     public void testInsertSpeaker(){
         SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
-        long returnedId = DbHelper.InsertSpeaker(db, sSpeaker);
+        long returnedId = DbHelper.insertItem(db, sSpeaker);
         assertTrue(-1l!=returnedId);
         Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sTag.id);
-        Cursor cursor = DbHelper.GetSpeakerById(db, sTag.id);
+        Cursor cursor = DbHelper.getSpeakerById(db, sTag.id);
         cursor.moveToFirst();
         int idIndex =cursor.getColumnIndex(SpeakerEntry._ID);
         assertEquals(cursor.getInt(idIndex),sTag.id);
@@ -106,10 +106,10 @@ public class DbTest extends ApplicationTestCase<Application> {
 
     public void testInsertTalk(){
         SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
-        long returnedId = DbHelper.InsertTalk(db, sTalk);
+        long returnedId = DbHelper.insertItem(db, sTalk);
         assertTrue(-1l!=returnedId);
         Log.d(TAG,"Returned id = "+ returnedId + " and id that should be inserted = "+sTalk.id);
-        Cursor cursor = DbHelper.GetTalkById(db, sTalk.id);
+        Cursor cursor = DbHelper.getTalkById(db, sTalk.id);
         cursor.moveToFirst();
         int idIndex =cursor.getColumnIndex(TalkEntry._ID);
         assertEquals(cursor.getInt(idIndex),sTalk.id);
@@ -118,7 +118,7 @@ public class DbTest extends ApplicationTestCase<Application> {
 
     public void testInsertTalkTag(){
         SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
-        long returnedId = DbHelper.InsertTalkTag(db, sTalkTag);
+        long returnedId = DbHelper.insertItem(db, sTalkTag);
         assertTrue(-1l!=returnedId);
         Log.d(TAG, "Returned id = " + returnedId);
         db.close();
@@ -126,7 +126,7 @@ public class DbTest extends ApplicationTestCase<Application> {
 
     public void testInsertTalkSpeaker(){
         SQLiteDatabase db = new DbHelper(mContext).getWritableDatabase();
-        long returnedId = DbHelper.InsertTalkSpeaker(db, sTalkSpeaker);
+        long returnedId = DbHelper.insertItem(db, sTalkSpeaker);
         assertTrue(-1l!=returnedId);
         Log.d(TAG, "Returned id = " + returnedId);
         db.close();

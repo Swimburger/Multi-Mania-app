@@ -28,37 +28,37 @@ public class ApiTest extends ApplicationTestCase<Application> {
     }
 
     public void testNews(){
-        List<NewsItem> news = new GsonLoader<NewsItem>(mContext,"news",new TypeToken<List<NewsItem>>(){}).loadInBackground();
+        List<NewsItem> news = new GsonLoader<NewsItem>(mContext,NewsItem.SEGMENT,new TypeToken<List<NewsItem>>(){}).loadInBackground();
         assertNotNull(news);
     }
 
     public void testTags(){
-       List<Tag> tags = new GsonLoader<Tag>(mContext,"tags",new TypeToken<List<Tag>>(){}).loadInBackground();
+       List<Tag> tags = new GsonLoader<Tag>(mContext,Tag.SEGMENT,new TypeToken<List<Tag>>(){}).loadInBackground();
        assertNotNull(tags);
     }
 
     public void testRooms(){
-        List<Room> rooms = new GsonLoader<Room>(mContext,"rooms",new TypeToken<List<Room>>(){}).loadInBackground();
+        List<Room> rooms = new GsonLoader<Room>(mContext,Room.SEGMENT,new TypeToken<List<Room>>(){}).loadInBackground();
         assertNotNull(rooms);
     }
 
     public void testSpeakers(){
-        List<Speaker> speakers = new GsonLoader<Speaker>(mContext,"speakers",new TypeToken<List<Speaker>>(){}).loadInBackground();
+        List<Speaker> speakers = new GsonLoader<Speaker>(mContext,Speaker.SEGMENT,new TypeToken<List<Speaker>>(){}).loadInBackground();
         assertNotNull(speakers);
     }
 
     public void testTalks(){
-        List<Talk> talks = new GsonLoader<Talk>(mContext,"talks",new TypeToken<List<Talk>>(){}).loadInBackground();
+        List<Talk> talks = new GsonLoader<Talk>(mContext,Talk.SEGMENT,new TypeToken<List<Talk>>(){}).loadInBackground();
         assertNotNull(talks);
     }
 
     public void testTalkTags(){
-        List<TalkTag> talktags = new GsonLoader<TalkTag>(mContext,"talk_tags",new TypeToken<List<TalkTag>>(){}).loadInBackground();
+        List<TalkTag> talktags = new GsonLoader<TalkTag>(mContext,TalkTag.SEGMENT,new TypeToken<List<TalkTag>>(){}).loadInBackground();
         assertNotNull(talktags);
     }
 
     public void testTalkSpeakers(){
-        List<TalkSpeaker> talkspeakers = new GsonLoader<TalkSpeaker>(mContext,"talk_speakers",new TypeToken<List<TalkSpeaker>>(){}).loadInBackground();
+        List<TalkSpeaker> talkspeakers = new GsonLoader<TalkSpeaker>(mContext,TalkSpeaker.SEGMENT,new TypeToken<List<TalkSpeaker>>(){}).loadInBackground();
         assertNotNull(talkspeakers);
     }
 
