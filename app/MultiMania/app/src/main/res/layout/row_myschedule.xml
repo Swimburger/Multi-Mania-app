@@ -7,10 +7,9 @@
     card_view:cardCornerRadius="0dp">
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="150dp"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingRight="8dp"
@@ -34,6 +33,16 @@
             android:contentDescription="@string/close"/>
 
         <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/talk_room"
+            android:id="@+id/txtRoom"
+
+            android:layout_above="@+id/txtTime"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
             android:id="@+id/txtTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,14 +50,7 @@
             android:layout_alignParentLeft="true"
             android:text="@string/talk_time" />
 
-        <TextView
-            android:id="@+id/txtRoom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:paddingBottom="25dp"
-            android:text="@string/talk_room" />
+
 
         <TextView
             android:id="@+id/txtTag"
@@ -57,6 +59,8 @@
             android:text="@string/talk_tag"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"/>
+
+
 
 
     </RelativeLayout>
