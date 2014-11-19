@@ -64,6 +64,13 @@ public class SettingsFragment extends Fragment {
         mChkNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+
+                if(isChecked){
+                    //TODO: add all alarms
+                } else {
+                    //TODO: cancel all alarms
+                }
+
                 mUtil.setPreference(PREFERENCE_NOTIFY, isChecked);
             }
         });
