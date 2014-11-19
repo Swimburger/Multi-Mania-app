@@ -37,7 +37,9 @@ public class SyncUtils {
 
     //TODO:other data models, only talks should be different
 
-    //TODO:sync to server for talks, first check the last update (not implemented yet) and compare it to the last update online GET /users/:id/lastupdated. If droid has a more recent update, sync to server, else sync to device
+    //TODO:sync to server for talks, first check the last update (not implemented yet)
+    // and compare it to the last update online GET /users/:id/lastupdated.
+    // If droid has a more recent update, sync to server, else sync to device
     //TODO:sync to Android for talks, check if user has chosen a email address, if so use GET /users/:id/talks, else use GET /talks
 
     public void syncTalks(ContentProviderClient provider)throws Exception{

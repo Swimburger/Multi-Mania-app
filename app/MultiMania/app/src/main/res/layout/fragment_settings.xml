@@ -8,12 +8,17 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_gravity="left|top">
+        android:layout_gravity="left|top"
+        >
 
         <CheckBox android:id="@+id/checkbox_sync"
-            android:layout_width="wrap_content"
+
+            android:layout_width="fill_parent"
             android:layout_height="55dp"
-            android:text="@string/settings_sync" />
+            android:text="@string/settings_sync"
+            android:textColor="@color/white"
+            android:checked="false"
+            android:background="@color/primaryColor"/>
 
         <View
             android:layout_width="fill_parent"
@@ -21,9 +26,11 @@
             android:background="@android:color/darker_gray"/>
 
         <CheckBox android:id="@+id/checkbox_notify"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="55dp"
-            android:text="@string/settings_notify" />
+            android:text="@string/settings_notify"
+            android:textColor="@color/white"
+            android:background="@color/primaryColor"/>
 
         <View
             android:layout_width="fill_parent"

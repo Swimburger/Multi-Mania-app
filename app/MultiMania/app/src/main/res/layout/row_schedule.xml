@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@drawable/mm_card"
+    android:descendantFocusability="blocksDescendants"
     >
     <TextView
         android:textAppearance="?android:textAppearanceMedium"
@@ -50,12 +51,12 @@
         android:layout_alignBaseline="@id/txtRoom"
         android:layout_margin="8dp"
         />
-    <TextView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="8dp"
+        android:layout_height="4dp"
         android:layout_marginTop="8dp"
         android:layout_below="@id/txtRoom"
-        android:background="@color/mm_light_brown"
+        android:background="@color/primaryColor"
         />
 
 </RelativeLayout>

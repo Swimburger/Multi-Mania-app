@@ -9,4 +9,8 @@
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:id="@+id/txtTime"
     android:padding="8dp"
+    android:clickable="false"
+    android:longClickable="false"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
     />

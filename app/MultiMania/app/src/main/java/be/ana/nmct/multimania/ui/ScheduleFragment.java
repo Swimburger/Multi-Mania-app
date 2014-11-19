@@ -14,16 +14,16 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bulletnoid.android.widget.StaggeredGridView.StaggeredGridView;
+import com.bulletnoid.android.widget.StaggeredGridView.BulletStaggeredGridView;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -39,12 +39,12 @@ import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
-public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
+public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, BulletStaggeredGridView.OnItemClickListener {
     public static final String TAG = ScheduleFragment.class.getSimpleName();
     public static final String DATE_KEY = "date_key";
     public static final String POSITION_KEY = "position_key";
 
-    private StaggeredGridView mScheduleGrid;
+    private BulletStaggeredGridView mScheduleGrid;
     private ScheduleAdapter mAdapter;
     private Cursor mCursor;
     private String mDate;
@@ -79,12 +79,13 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_schedule, container, false);
-        mScheduleGrid = (StaggeredGridView) v.findViewById(R.id.scheduleGrid);
-        mScheduleGrid.setItemMargin(Utility.dpToPx(getActivity(),8));
+        mScheduleGrid = (BulletStaggeredGridView) v.findViewById(R.id.scheduleGrid);
+        mScheduleGrid.setItemMargin(Utility.dpToPx(getActivity(), 8));
         // initialize your items array
         mAdapter = new ScheduleAdapter(getActivity(), mItems);
 
         mScheduleGrid.setAdapter(mAdapter);
+        mScheduleGrid.setOnItemClickListener(this);
 
         getLoaderManager().initLoader(MainActivity.LOADER_SCHEDULE_TALK_ID+mPosition, null, this);
         //BuildItems(mCursor);
@@ -102,6 +103,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         mCursor = cursor;
         BuildItems(cursor);
+        loader.abandon();
     }
 
     private void BuildItems(Cursor cursor) {
@@ -191,7 +193,8 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onItemClick(BulletStaggeredGridView parent, View view, int position, long id) {
+        Log.d(TAG,"clicked");
         Object item =  mAdapter.getItem(position);
         if(item instanceof ScheduleTalkVm){
             ScheduleTalkVm vm = (ScheduleTalkVm) item;
@@ -293,7 +296,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
             ((TextView) view.findViewById(R.id.txtRoom)).setText(item.room);
             ((TextView) view.findViewById(R.id.txtTag)).setText(item.tags);
 
-            StaggeredGridView.LayoutParams lp = new StaggeredGridView.LayoutParams(view.getLayoutParams());
+            BulletStaggeredGridView.LayoutParams lp = new BulletStaggeredGridView.LayoutParams(view.getLayoutParams());
             if(item.isKeynote){
                 lp.span = mScheduleGrid.getColumnCount();
             }else{
@@ -308,7 +311,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
         private void bindHeaderView(View convertView, String item) {
             ((TextView)convertView).setText(item);
-            StaggeredGridView.LayoutParams lp = new StaggeredGridView.LayoutParams(convertView.getLayoutParams());
+            BulletStaggeredGridView.LayoutParams lp = new BulletStaggeredGridView.LayoutParams(convertView.getLayoutParams());
             lp.span=mScheduleGrid.getColumnCount();
             convertView.setLayoutParams(lp);
         }

@@ -64,7 +64,7 @@ import be.ana.nmct.multimania.R;
  * The attribute <code>android:layout_span</code> may be used when inflating
  * item views from xml.</p>
  */
-public class StaggeredGridView extends ViewGroup {
+public class BulletStaggeredGridView extends ViewGroup {
     private static final String TAG = "StaggeredGridView";
 
     /*
@@ -312,20 +312,20 @@ public class StaggeredGridView extends ViewGroup {
     private final SparseArrayCompat<LayoutRecord> mLayoutRecords =
             new SparseArrayCompat<LayoutRecord>();
 
-    public StaggeredGridView(Context context) {
+    public BulletStaggeredGridView(Context context) {
         this(context, null);
     }
 
-    public StaggeredGridView(Context context, AttributeSet attrs) {
+    public BulletStaggeredGridView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public StaggeredGridView(Context context, AttributeSet attrs, int defStyle) {
+    public BulletStaggeredGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         if (attrs != null) {
-            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.StaggeredGridView);
-            mColCount = a.getInteger(R.styleable.BulletStaggeredGridView_numColumns, 2);
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.BulletStaggeredGridView);
+            mColCount = a.getInteger(R.styleable.BulletStaggeredGridView_numColumns, 1);
             mDrawSelectorOnTop = a.getBoolean(R.styleable.BulletStaggeredGridView_drawSelectorOnTop, false);
         } else {
             mColCount = 2;
@@ -2660,7 +2660,7 @@ public class StaggeredGridView extends ViewGroup {
          * @param position The position of the view in the adapter.
          * @param id       The row id of the item that was clicked.
          */
-        void onItemClick(StaggeredGridView parent, View view, int position, long id);
+        void onItemClick(BulletStaggeredGridView parent, View view, int position, long id);
     }
 
     /**
@@ -2698,7 +2698,7 @@ public class StaggeredGridView extends ViewGroup {
          * @param id       The row id of the item that was clicked
          * @return true if the callback consumed the long click, false otherwise
          */
-        boolean onItemLongClick(StaggeredGridView parent, View view, int position, long id);
+        boolean onItemLongClick(BulletStaggeredGridView parent, View view, int position, long id);
     }
 
     /**
@@ -2740,7 +2740,7 @@ public class StaggeredGridView extends ViewGroup {
     public void setHeaderView(View v) {
         mHeaderView = v;
 
-        StaggeredGridView.LayoutParams lp = new StaggeredGridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
+        BulletStaggeredGridView.LayoutParams lp = new BulletStaggeredGridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.span = Integer.MAX_VALUE;
         mHeaderView.setLayoutParams(lp);
     }
@@ -2748,7 +2748,7 @@ public class StaggeredGridView extends ViewGroup {
     public void setFooterView(View v) {
         mFooterView = v;
 
-        StaggeredGridView.LayoutParams lp = new StaggeredGridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
+        BulletStaggeredGridView.LayoutParams lp = new BulletStaggeredGridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.span = Integer.MAX_VALUE;
         mFooterView.setLayoutParams(lp);
     }
