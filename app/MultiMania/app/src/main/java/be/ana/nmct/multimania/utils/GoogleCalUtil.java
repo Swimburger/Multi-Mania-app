@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.CalendarContract;
 
 import java.util.List;
@@ -160,5 +161,20 @@ public class GoogleCalUtil {
                         )
                 )
         );
+    }
+
+    private class AddAllTask extends AsyncTask<Void, Void, Void> {
+
+        private List<Talk> mTalks;
+
+        private AddAllTask(List<Talk> talks) {
+            this.mTalks = talks;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            addTalkList(mTalks);
+            return null;
+        }
     }
 }

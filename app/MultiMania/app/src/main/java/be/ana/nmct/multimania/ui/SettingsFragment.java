@@ -85,6 +85,8 @@ public class SettingsFragment extends Fragment {
                     Toast.makeText(getActivity(), "Please choose your Google Account", Toast.LENGTH_LONG).show();
                     askUserEmail();
 
+                    //TODO: add all favorited talks to the calendar (use the asynctask)
+
                 } else {
                     mCalUtil.deleteCalendar();
                 }

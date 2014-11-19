@@ -15,7 +15,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.cocosw.undobar.UndoBarController;
 
 import java.text.ParseException;
 
@@ -71,6 +75,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         GridView grid = (GridView)v.findViewById(R.id.gridViewMySchedule);
         grid.setAdapter(mMyScheduleAdapter);
         grid.setOnItemClickListener(this);
+
         return v;
     }
 
@@ -145,6 +150,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             holder.txtTag = (TextView)v.findViewById(R.id.txtTag);
             holder.txtTime = (TextView)v.findViewById(R.id.txtTime);
             holder.txtTalkTitle = (TextView)v.findViewById(R.id.txtTalkTitle);
+            holder.btnRemoveTalk = (ImageView)v.findViewById(R.id.btnRemoveTalk);
             v.setTag(holder);
 
             return v;
@@ -166,14 +172,28 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                 e.printStackTrace();
             }
             holder.txtRoom.setText(room);
+
+            holder.btnRemoveTalk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+
         }
+
+
     }
+
+
 
     static class ViewHolder{
         TextView txtTalkTitle;
         TextView txtRoom;
         TextView txtTime;
         TextView txtTag;
+        ImageView btnRemoveTalk;
+
     }
 
 }
