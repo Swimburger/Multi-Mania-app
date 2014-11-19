@@ -12,12 +12,13 @@
         >
 
         <CheckBox android:id="@+id/checkbox_sync"
+
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:text="@string/settings_sync"
             android:textColor="@color/white"
             android:checked="false"
-            />
+            android:backgroundColor="@color/primaryColor"/>
 
         <View
             android:layout_width="fill_parent"
