@@ -299,7 +299,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         }
 
         private int getStarDrawabale(boolean isFavorite) {
-            return  isFavorite  ? android.R.drawable.star_on :  android.R.drawable.star_off;
+            return  isFavorite  ? R.drawable.ic_action_important_green :  R.drawable.ic_action_not_important_green;
         }
 
         private void bindHeaderView(View convertView, ScheduleGridHeader item) {

@@ -72,7 +72,7 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
         super.onAttach(activity);
         mFadingHelper = new FadingActionBarHelper()
                 .parallax(false)
-                .actionBarBackground(R.drawable.ab_background_light)
+                .actionBarBackground(R.drawable.ab_background)
                 .headerLayout(R.layout.image_title)
                 .contentLayout(R.layout.fragment_news_item);
 
