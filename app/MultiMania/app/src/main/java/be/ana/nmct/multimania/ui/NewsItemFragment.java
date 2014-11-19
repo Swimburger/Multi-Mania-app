@@ -68,6 +68,11 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mFadingHelper = new FadingActionBarHelper()
@@ -75,8 +80,9 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
                 .actionBarBackground(R.drawable.ab_background)
                 .headerLayout(R.layout.image_title)
                 .contentLayout(R.layout.fragment_news_item);
-
-        mFadingHelper.initActionBar(activity);
+        if(activity.getActionBar()!=null){
+            mFadingHelper.initActionBar(activity);
+        }
     }
 
     @Override

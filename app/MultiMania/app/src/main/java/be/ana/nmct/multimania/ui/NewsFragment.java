@@ -27,6 +27,7 @@ import be.ana.nmct.multimania.data.MultimaniaContract;
 
 public class NewsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
 
+    private static final String TAG = NewsFragment.class.getSimpleName();
     private NewsCursorAdapter mAdapter;
     private Cursor mData;
     private StaggeredGridView mGridView;
@@ -40,7 +41,13 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
         setRetainInstance(true);
         mAdapter=new NewsCursorAdapter(getActivity(),null,0);
         //setListAdapter(mAdapter);
-        getLoaderManager().initLoader(MainActivity.LOADER_NEWS_ID,null,this);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getLoaderManager().initLoader(MainActivity.LOADER_NEWS_ID, null, this);
     }
 
     @Override
@@ -66,6 +73,7 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+        mData=null;
         mAdapter.swapCursor(null);
     }
 
@@ -91,7 +99,7 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
         private int mImgCol;
         private int mShortDescriptionCol;
         private LayoutInflater mInflater;
-        private Animation animFadein;
+        private Animation animFadeIn;
 
 
 
@@ -99,7 +107,7 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
             super(context, cursor, flags);
             // mInflater = LayoutInflater.from(context);
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            animFadein = AnimationUtils.loadAnimation(context.getApplicationContext(),
+            animFadeIn = AnimationUtils.loadAnimation(context.getApplicationContext(),
                     R.anim.fade_in);
 
 
@@ -132,6 +140,7 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
+            if(cursor==null||cursor.isClosed())return;
             ViewHolder holder = (ViewHolder)view.getTag();
 
             String title = cursor.getString(mTitleCol);
@@ -148,7 +157,7 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
                     //        holder.imgNews.getHeight())
                     //.centerCrop()
                     .smartSize(true)
-                    .animateIn(animFadein)
+                    .animateIn(animFadeIn)
                     .load(img);
         }
 

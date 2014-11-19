@@ -26,7 +26,7 @@
             android:name=".ui.NewsItemActivity"
             android:label="@string/title_news"
             android:parentActivityName=".ui.MainActivity"
-            android:theme="@style/AppTheme.TranslucentActionBar">
+            android:theme="@style/DialogThemeOnTabletTranslucentActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="be.ana.nmct.multimania.ui.MainActivity" />
@@ -34,7 +34,8 @@
         <activity
             android:name=".ui.TalkActivity"
             android:label="@string/title_activity_talk"
-            android:parentActivityName=".ui.MainActivity">
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/DialogThemeOnTablet">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="be.ana.nmct.multimania.ui.MainActivity" />

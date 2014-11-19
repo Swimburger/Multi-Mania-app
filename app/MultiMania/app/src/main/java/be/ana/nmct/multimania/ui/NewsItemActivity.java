@@ -1,9 +1,13 @@
 package be.ana.nmct.multimania.ui;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class NewsItemActivity extends Activity implements NewsItemFragment.TitleLoadListener {
 
@@ -11,6 +15,13 @@ public class NewsItemActivity extends Activity implements NewsItemFragment.Title
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        if(dpWidth>=820){
+            showAsPopup(this);
+        }
+
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         mUri=intent.getData();
@@ -35,6 +46,21 @@ public class NewsItemActivity extends Activity implements NewsItemFragment.Title
 
     @Override
     public void onTitleloaded(String title) {
-        getActionBar().setTitle(title);
+        ActionBar bar = getActionBar();
+        if(bar!=null)
+            bar.setTitle(title);
+    }
+
+    public static void showAsPopup(Activity activity) {
+        //To show activity as dialog and dim the background, you need to declare android:theme="@style/PopupTheme" on for the chosen activity on the manifest
+        activity.requestWindowFeature(Window.FEATURE_ACTION_BAR);
+        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
+                WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        WindowManager.LayoutParams params = activity.getWindow().getAttributes();
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.width = 850; //fixed width
+        params.alpha = 1.0f;
+        params.dimAmount = 0.5f;
+        activity.getWindow().setAttributes(params);
     }
 }
