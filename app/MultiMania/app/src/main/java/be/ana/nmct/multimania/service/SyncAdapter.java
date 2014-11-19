@@ -1,8 +1,11 @@
 package be.ana.nmct.multimania.service;
 
 import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerFuture;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncResult;
 import android.os.Bundle;
@@ -29,6 +32,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             SyncUtils utils = new SyncUtils(getContext());
             utils.syncNews(provider);
             utils.syncTalks(provider);
+
         }catch(Exception e){
             e.printStackTrace();
         }
