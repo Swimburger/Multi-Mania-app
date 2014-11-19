@@ -2,8 +2,10 @@ package be.ana.nmct.multimania.ui;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.AsyncQueryHandler;
+import android.content.ContentResolver;
 import android.content.ContentUris;
-import android.content.Context;
+import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -12,14 +14,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.CursorAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.cocosw.undobar.UndoBarController;
 
@@ -28,8 +30,9 @@ import java.text.ParseException;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.utils.Utility;
+import be.ana.nmct.multimania.vm.MyScheduleRowHolder;
 
-public class MyScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
+public class MyScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private final String TAG = this.getClass().getCanonicalName();
 
@@ -37,12 +40,12 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     public static final String POSITION_KEY = "position_key";
     public static final String SELECTED_TALK = "selected_talk";
 
-
     private String mDate;
     private int mPosition;
     private MyScheduleAdapter mMyScheduleAdapter;
     private Cursor mData;
     private UndoBarController mUndoBar;
+    private RecyclerView mRecyclerView;
 
     public MyScheduleFragment() {
 
@@ -65,19 +68,23 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         mDate = args.getString(DATE_KEY);
         mPosition = args.getInt(POSITION_KEY);
 
-        this.getLoaderManager().initLoader(MainActivity.LOADER_MYSCHEDULE_TALK_ID+mPosition, null, this);
+        mMyScheduleAdapter = new MyScheduleAdapter();
         //setRetainInstance(true);//apperently the pageradapter takes care of the retaining//nested fragments cannot retaininstance
+    }
 
-        mMyScheduleAdapter = new MyScheduleAdapter(this.getActivity(), mData, 0);
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.getLoaderManager().initLoader(MainActivity.LOADER_MYSCHEDULE_TALK_ID+mPosition, null, this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_my_schedule, container, false);
 
-        GridView grid = (GridView)v.findViewById(R.id.gridViewMySchedule);
-        grid.setAdapter(mMyScheduleAdapter);
-        grid.setOnItemClickListener(this);
+        mRecyclerView = (RecyclerView)v.findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         return v;
     }
 
@@ -91,9 +98,14 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        mData=cursor;
-        if(mMyScheduleAdapter!=null)
+        mData = cursor;
+        if(mMyScheduleAdapter != null){
             mMyScheduleAdapter.swapCursor(cursor);
+            //Log.d("", DatabaseUtils.dumpCursorToString(mData));
+            mRecyclerView.setAdapter(mMyScheduleAdapter);
+            mMyScheduleAdapter.notifyDataSetChanged();
+
+        }
     }
 
     @Override
@@ -101,21 +113,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         mMyScheduleAdapter.swapCursor(null);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Cursor cursor = (Cursor) mMyScheduleAdapter.getItem(position);
-        final int idIndex = cursor.getColumnIndex(MultimaniaContract.TalkEntry._ID);
-        final long talkId = cursor.getLong(idIndex);
-        Uri uri = MultimaniaContract.TalkEntry.buildItemUri(talkId);
-        Intent intent = new Intent(getActivity(),TalkActivity.class);
-        intent.setData(uri);
-        startActivity(intent);
-    }
+    private class MyScheduleAdapter extends RecyclerView.Adapter<MyScheduleRowHolder>{
 
-
-    private class MyScheduleAdapter extends CursorAdapter{
-
-        private LayoutInflater mInflater;
         private int mTitleIndex;
         private int mFromIndex;
         private int mToIndex;
@@ -123,19 +122,10 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         private int mTagIndex;
         private int mIdIndex;
 
-        public MyScheduleAdapter(Context context, Cursor cursor, int flags) {
-            super(context, cursor, flags);
-            mInflater = LayoutInflater.from(context);
-            getIndexes(cursor);
+        private MyScheduleAdapter() {
         }
 
-        @Override
-        public Cursor swapCursor(Cursor newCursor) {
-            getIndexes(newCursor);
-            return super.swapCursor(newCursor);
-        }
-
-        private void getIndexes(Cursor newCursor) {
+        public void swapCursor(Cursor newCursor){
             if(newCursor != null){
                 mTitleIndex = newCursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.TITLE);
                 mFromIndex = newCursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DATE_FROM);
@@ -146,74 +136,126 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         }
 
         @Override
-        public View newView(Context context, Cursor cursor, ViewGroup parent) {
-            View v = mInflater.inflate(R.layout.row_myschedule, parent, false);
-
-            ViewHolder holder = new ViewHolder();
-            holder.txtRoom = (TextView)v.findViewById(R.id.txtRoom);
-            holder.txtTag = (TextView)v.findViewById(R.id.txtTag);
-            holder.txtTime = (TextView)v.findViewById(R.id.txtTime);
-            holder.txtTalkTitle = (TextView)v.findViewById(R.id.txtTalkTitle);
-            holder.btnRemoveTalk = (ImageView)v.findViewById(R.id.btnRemoveTalk);
-            v.setTag(holder);
-
-            return v;
+        public MyScheduleRowHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_myschedule, null);
+            final MyScheduleRowHolder vh = new MyScheduleRowHolder(v);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Cursor c = mData;
+                    if(c.move(vh.getPosition())){
+                        final int idIndex = mData.getColumnIndex(MultimaniaContract.TalkEntry._ID);
+                        final long talkId = mData.getLong(idIndex);
+                        Uri uri = MultimaniaContract.TalkEntry.buildItemUri(talkId);
+                        Intent intent = new Intent(getActivity(),TalkActivity.class);
+                        intent.setData(uri);
+                        startActivity(intent);
+                    }
+                }
+            });
+            return vh;
         }
 
         @Override
-        public void bindView(View view, Context context, Cursor cursor) {
-            ViewHolder holder = (ViewHolder)view.getTag();
+        public void onBindViewHolder(MyScheduleRowHolder vh, int i) {
 
-            String title = cursor.getString(mTitleIndex);
-            String from = cursor.getString(mFromIndex);
-            String to = cursor.getString(mToIndex);
-            String room = cursor.getString(mRoomIndex);
+            if(mData.move(i)){
 
-            holder.txtTalkTitle.setText(title);
-            try {
-                holder.txtTime.setText(Utility.getTimeString(from) + " - " + Utility.getTimeString(to));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            holder.txtRoom.setText(room);
+                //get values
+                String title = mData.getString(mTitleIndex);
+                String from = mData.getString(mFromIndex);
+                String to = mData.getString(mToIndex);
+                String room = mData.getString(mRoomIndex);
 
-            holder.btnRemoveTalk.setTag(cursor.getLong(mIdIndex));
-            holder.btnRemoveTalk.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                //room + title
+                vh.txtTalkTitle.setText(title);
+                vh.txtRoom.setText(room);
 
-                    ImageView btn = (ImageView)v.findViewById(R.id.btnRemoveTalk);
-                    long id = (Long)btn.getTag();
-
-                    Uri uri = ContentUris.withAppendedId(MultimaniaContract.TalkEntry.CONTENT_URI, id);
-                    Cursor c = getActivity().getContentResolver().query(uri, null, null, null, null);
-
-                    //show undobar
-                    mUndoBar =  new UndoBarController.UndoBar(getActivity())
-                            .message("Removed from favorites")
-                            .listener(new UndoBarController.UndoListener() {
-                                @Override
-                                public void onUndo(@Nullable Parcelable parcelable) {
-                                    //TODO: handle undo
-                                }
-                            }).show();
+                //dates
+                try {
+                    vh.txtTime.setText(Utility.getTimeString(from) + " - " + Utility.getTimeString(to));
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-            });
+
+                //remove button
+                vh.btnRemoveTalk.setTag(new ValueHolder(mData.getLong(mIdIndex), i));
+                vh.btnRemoveTalk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        ImageView btn = (ImageView)v.findViewById(R.id.btnRemoveTalk);
+                        final ValueHolder vh = (ValueHolder)btn.getTag();
+
+                        Uri uri = ContentUris.withAppendedId(MultimaniaContract.TalkEntry.CONTENT_URI, vh.id);
+                        Cursor c = getActivity().getContentResolver().query(uri, null, null, null, null);
+
+                        addItem(vh.position, vh.id);
+
+                        //show undobar
+                        mUndoBar =  new UndoBarController.UndoBar(getActivity())
+                                .message("Removed from favorites")
+                                .listener(new UndoBarController.UndoListener() {
+                                    @Override
+                                    public void onUndo(@Nullable Parcelable parcelable) {
+                                        removeItem(vh.position, vh.id);
+                                    }
+                                }).show();
+                    }
+                });
+            }
 
         }
 
+        public void addItem(int position, long id) {
+            updateItemValue(id, false);
+            notifyItemInserted(position);
+        }
+
+        public void removeItem(int position, long id) {
+            updateItemValue(id, true);
+            notifyItemRemoved(position);
+        }
+
+        @Override
+        public int getItemCount() {
+            int result = mData.getCount();
+            Log.d("mData.getCount: ", "" + result);
+                return result;
+
+        }
+
+        private void updateItemValue(long id, boolean value) {
+            ContentValues values = new ContentValues();
+            values.put(MultimaniaContract.TalkEntry.IS_FAVORITE, value);
+            AsyncQueryHandler handler = new MyScheduleAsyncQueryHandler(getActivity().getContentResolver());
+            handler.startUpdate(
+                    0,
+                    null,
+                    MultimaniaContract.TalkEntry.CONTENT_URI,
+                    values,
+                    MultimaniaContract.TalkEntry._ID+"=?",
+                    new String[]{""+id}
+            );
+        }
 
     }
 
+    private class MyScheduleAsyncQueryHandler extends AsyncQueryHandler{
 
+        public MyScheduleAsyncQueryHandler(ContentResolver cr) {
+            super(cr);
+        }
+    }
 
-    static class ViewHolder{
-        TextView txtTalkTitle;
-        TextView txtRoom;
-        TextView txtTime;
-        TextView txtTag;
-        ImageView btnRemoveTalk;
+    private class ValueHolder{
+        public long id;
+        public int position;
 
+        private ValueHolder(long id, int position) {
+            this.id = id;
+            this.position = position;
+        }
     }
 
 }
