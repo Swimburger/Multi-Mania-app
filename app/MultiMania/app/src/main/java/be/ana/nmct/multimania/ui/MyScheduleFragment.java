@@ -2,6 +2,8 @@ package be.ana.nmct.multimania.ui;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -9,6 +11,8 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +21,6 @@ import android.widget.CursorAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cocosw.undobar.UndoBarController;
 
@@ -40,6 +43,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private int mPosition;
     private MyScheduleAdapter mMyScheduleAdapter;
     private Cursor mData;
+    private UndoBarController mUndoBar;
 
     public MyScheduleFragment() {
 
@@ -75,10 +79,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         GridView grid = (GridView)v.findViewById(R.id.gridViewMySchedule);
         grid.setAdapter(mMyScheduleAdapter);
         grid.setOnItemClickListener(this);
-
         return v;
     }
-
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
@@ -111,6 +113,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         startActivity(intent);
     }
 
+
     private class MyScheduleAdapter extends CursorAdapter{
 
         private LayoutInflater mInflater;
@@ -119,6 +122,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         private int mToIndex;
         private int mRoomIndex;
         private int mTagIndex;
+        private int mIdIndex;
 
         public MyScheduleAdapter(Context context, Cursor cursor, int flags) {
             super(context, cursor, flags);
@@ -138,6 +142,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                 mFromIndex = newCursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DATE_FROM);
                 mToIndex = newCursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.DATE_UNTIL);
                 mRoomIndex = newCursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry.ROOM_NAME);
+                mIdIndex = newCursor.getColumnIndexOrThrow(MultimaniaContract.TalkEntry._ID);
             }
         }
 
@@ -173,10 +178,26 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             }
             holder.txtRoom.setText(room);
 
+            holder.btnRemoveTalk.setTag(cursor.getLong(mIdIndex));
             holder.btnRemoveTalk.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
 
+                    ImageView btn = (ImageView)v.findViewById(R.id.btnRemoveTalk);
+                    long id = (Long)btn.getTag();
+
+                    Uri uri = ContentUris.withAppendedId(MultimaniaContract.TalkEntry.CONTENT_URI, id);
+                    Cursor c = getActivity().getContentResolver().query(uri, null, null, null, null);
+
+                    //show undobar
+                    mUndoBar =  new UndoBarController.UndoBar(getActivity())
+                            .message("Removed from favorites")
+                            .listener(new UndoBarController.UndoListener() {
+                                @Override
+                                public void onUndo(@Nullable Parcelable parcelable) {
+                                    //TODO: handle undo
+                                }
+                            }).show();
                 }
             });
 
