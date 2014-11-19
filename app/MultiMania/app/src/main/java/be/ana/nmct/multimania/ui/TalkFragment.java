@@ -2,7 +2,10 @@ package be.ana.nmct.multimania.ui;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.AsyncQueryHandler;
+import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -12,6 +15,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -22,7 +28,10 @@ import android.widget.TextView;
 import java.text.ParseException;
 
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.utils.GoogleCalUtil;
+import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
 
 public class TalkFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
@@ -38,6 +47,8 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
     private Cursor mTalkData;
     private Cursor mSpeakersData;
     private Cursor mTagsData;
+    private boolean mIsFavorite;
+    private String mAccountName;
 
     private WebView webTalkInfo;
     private TextView txtSpeaker;
@@ -46,6 +57,7 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
     private TextView txtTalkTag;
     private Animation mFadeInAnimation;
     private Animation mFadeInAnimationHtml;
+    private MenuItem mFavoriteMenuItem;
 
     public TalkFragment(){}
 
@@ -63,6 +75,8 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
 
         mFadeInAnimation = getAlphaAnimation(0,1,500,600);
         mFadeInAnimationHtml = getAlphaAnimation(0, 1, 400, 300);
+
+        mAccountName = new SettingsUtil(getActivity(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
     }
 
     @Override
@@ -99,11 +113,29 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
                 mTagsData = data;
                 break;
         }
+        loader.abandon();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        switch(loader.getId()){
+            case LOADER_TALK_ID:
+                mTalkData = null;
+                break;
+            case LOADER_SPEAKER_ID:
+                mSpeakersData = null;
+                break;
+            case LOADER_TAGS_ID:
+                mTagsData = null;
+                break;
+        }
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+
         View view = inflater.inflate(R.layout.fragment_talk, container, false);
 
         webTalkInfo = (WebView) view.findViewById(R.id.webTalkInfo);
@@ -122,6 +154,46 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
         webTalkInfo.setAnimation(mFadeInAnimationHtml);
         BindData();
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_talk,menu);
+        mFavoriteMenuItem = menu.findItem(R.id.action_favorite);
+        setActionIcon();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    private void setActionIcon() {
+        if(mFavoriteMenuItem!=null) {
+            mFavoriteMenuItem.setIcon(getStarDrawabale(mIsFavorite));
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.action_favorite:{
+                mIsFavorite=!mIsFavorite;
+                ContentValues values = new ContentValues();
+                values.put(MultimaniaContract.TalkEntry.IS_FAVORITE,mIsFavorite);
+                AsyncQueryHandler handler = new TalkAsyncQueryHandler(getActivity().getContentResolver());
+                handler.startUpdate(
+                        0,
+                        null,
+                        MultimaniaContract.TalkEntry.CONTENT_URI,
+                        values,
+                        MultimaniaContract.TalkEntry._ID+"=?",
+                        new String[]{""+ mTalkId}
+                );
+                if(mAccountName!=null){
+                    ApiActions.postFavoriteTalk(getActivity(), mAccountName, mTalkId);
+                }
+                setActionIcon();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void BindData() {
@@ -143,6 +215,7 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
             int timeFromCol = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DATE_FROM);
             int timeUntilCol = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DATE_UNTIL);
             int roomCol = cursor.getColumnIndex(MultimaniaContract.TalkEntry.ROOM_NAME);
+            int isFavoriteCol = cursor.getColumnIndex(MultimaniaContract.TalkEntry.IS_FAVORITE);
 
 
             String title = cursor.getString(titleCol);
@@ -150,6 +223,11 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
             String from = cursor.getString(timeFromCol);
             String until = cursor.getString(timeUntilCol);
             String room = cursor.getString(roomCol);
+            mIsFavorite = cursor.getInt(isFavoriteCol)==1;
+
+
+            setActionIcon();
+
 
             if(mTitleLoadListener != null) {
                 mTitleLoadListener.onTitleloaded(title);
@@ -172,6 +250,10 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
             mFadeInAnimationHtml.start();
             mFadeInAnimation.start();
         }
+    }
+
+    private int getStarDrawabale(boolean isFavorite) {
+        return  isFavorite  ? R.drawable.ic_action_important :  R.drawable.ic_action_not_important;
     }
 
     private void BindTagsData(Cursor data) {
@@ -201,11 +283,6 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
         txtSpeaker.setText(speakers);
     }
 
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
-
     public void setTitleLoadListener(TitleLoadListener listener){
         mTitleLoadListener =listener;
     }
@@ -216,5 +293,12 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
 
     private AlphaAnimation getAlphaAnimation(float from, float to, long duration,long offset){
         return Utility.getAlphaAnimation(from,to,duration,offset);
+    }
+
+    private class TalkAsyncQueryHandler extends AsyncQueryHandler{
+
+        public TalkAsyncQueryHandler(ContentResolver cr) {
+            super(cr);
+        }
     }
 }
