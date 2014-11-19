@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import be.ana.nmct.multimania.R;
-import be.ana.nmct.multimania.service.NotificationSender;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 
 
@@ -51,9 +50,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
             launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
         }
-
-        NotificationSender notUtil = new NotificationSender(this);
-
     }
     
     @Override
