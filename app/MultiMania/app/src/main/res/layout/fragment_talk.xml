@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/talk_info"
             android:id="@+id/webTalkInfo"
-            android:layout_margin="8dp" />
+            android:layout_margin="8dp"/>
 
         <TextView
             android:layout_width="wrap_content"

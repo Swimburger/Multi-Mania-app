@@ -59,7 +59,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         mPosition = args.getInt(POSITION_KEY);
 
         this.getLoaderManager().initLoader(MainActivity.LOADER_MYSCHEDULE_TALK_ID+mPosition, null, this);
-        setRetainInstance(true);//apperently the pageradapter takes care of the retaining
+        //setRetainInstance(true);//apperently the pageradapter takes care of the retaining//nested fragments cannot retaininstance
 
         mMyScheduleAdapter = new MyScheduleAdapter(this.getActivity(), mData, 0);
     }

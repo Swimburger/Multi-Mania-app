@@ -7,6 +7,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -58,6 +59,10 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
         mNewsItemImg = (ImageView) view.findViewById(R.id.img);
         mNewsItemTitle = (TextView) view.findViewById(R.id.title);
         mNewsItemInfo = (WebView) view.findViewById(R.id.txtNewsItemInfo);
+
+        mNewsItemInfo.setBackgroundColor(0x00000000);
+        if (Build.VERSION.SDK_INT >= 11) mNewsItemInfo.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+
         BindData(mData);
         return view;
     }

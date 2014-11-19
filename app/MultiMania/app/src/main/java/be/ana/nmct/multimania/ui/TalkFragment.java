@@ -8,6 +8,7 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -106,6 +107,9 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
         View view = inflater.inflate(R.layout.fragment_talk, container, false);
 
         webTalkInfo = (WebView) view.findViewById(R.id.webTalkInfo);
+        webTalkInfo.setBackgroundColor(0x00000000);
+        if (Build.VERSION.SDK_INT >= 11) webTalkInfo.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+
         txtSpeaker = (TextView) view.findViewById(R.id.txtTalkSpeaker);
         txtTalkTime = (TextView) view.findViewById(R.id.txtTalkTime);
         txtTalkRoom = (TextView) view.findViewById(R.id.txtTalkRoom);

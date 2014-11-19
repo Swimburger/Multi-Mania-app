@@ -91,7 +91,7 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
         private int mImgCol;
         private int mShortDescriptionCol;
         private LayoutInflater mInflater;
-        Animation animFadein;
+        private Animation animFadein;
 
 
 

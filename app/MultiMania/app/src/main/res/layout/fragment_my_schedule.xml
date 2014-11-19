@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     tools:context="be.ana.nmct.multimania.ui.MyScheduleFragment"
     android:id="@+id/gridViewMySchedule"
-    android:numColumns="1"
+    android:horizontalSpacing="8dp"
+    android:verticalSpacing="8dp"
+    android:numColumns="@integer/myschedule_column_count"
     android:padding="8dp"
     android:clipToPadding="false"
     android:scrollbarStyle="outsideOverlay"/>
