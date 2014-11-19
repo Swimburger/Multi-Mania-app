@@ -75,7 +75,8 @@ public class NotificationSender {
     }
 
     public void cancelAlarmForTalk(Talk talk){
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(sContext, (int)talk.id, null, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(sContext, NotificationSender.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(sContext, (int)talk.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager)sContext.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
     }

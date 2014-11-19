@@ -33,6 +33,8 @@ import java.util.List;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.model.Talk;
+import be.ana.nmct.multimania.service.NotificationSender;
 import be.ana.nmct.multimania.utils.GoogleCalUtil;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
@@ -291,6 +293,20 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                     if(mAccountName!=null){
                         ApiActions.postFavoriteTalk(getActivity(),mAccountName,item.id);
                     }
+
+                    //add/delete alarm when needed
+                    Uri uri = MultimaniaContract.TalkEntry.buildItemUri(item.id);
+                    SettingsUtil util = new SettingsUtil(getActivity(), SettingsFragment.PREFERENCE_NAME);
+                    Talk talk = Utility.getTalkFromUri(getActivity(), uri);
+                    NotificationSender notSender = new NotificationSender(getActivity());
+                    if(util.getBooleanPreference(SettingsFragment.PREFERENCE_NOTIFY, true)){
+                        if(item.isFavorite){
+                            notSender.setAlarmForTalk(talk);
+                        } else{
+                            notSender.cancelAlarmForTalk(talk);
+                        }
+                    }
+
                 }
             });
             imgButton.setImageResource(getStarDrawabale(item.isFavorite));

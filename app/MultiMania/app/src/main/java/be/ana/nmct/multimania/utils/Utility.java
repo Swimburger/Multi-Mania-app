@@ -1,11 +1,18 @@
 package be.ana.nmct.multimania.utils;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.view.animation.AlphaAnimation;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
+import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.model.Talk;
+import be.ana.nmct.multimania.service.NotificationSender;
 
 /**
  * Created by Niels on 28/10/2014.
@@ -64,5 +71,17 @@ public final class Utility {
         return  "<html><head><link rel=\"stylesheet\" type\"text/css\" href=\"style.css\" /></head><body>" +
                 info +
                 "</body></html>";
+    }
+
+    public static Talk getTalkFromUri(Context context, Uri uri){
+        Cursor c = context.getContentResolver().query(uri, null, null, null, null);
+        if(c.moveToFirst()){
+            int idIndex = c.getColumnIndex(MultimaniaContract.TalkEntry._ID);
+            int titleIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
+
+            return new Talk(c.getInt(idIndex), c.getString(titleIndex), null, null, "", 0, false);
+        } else {
+            return null;
+        }
     }
 }
