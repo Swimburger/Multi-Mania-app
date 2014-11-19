@@ -4,9 +4,6 @@
     android:layout_height="match_parent"
     tools:context="be.ana.nmct.multimania.ui.SettingsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
