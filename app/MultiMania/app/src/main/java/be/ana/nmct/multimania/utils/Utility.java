@@ -3,6 +3,7 @@ package be.ana.nmct.multimania.utils;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.DisplayMetrics;
 import android.view.animation.AlphaAnimation;
 
 import java.text.ParseException;
@@ -12,7 +13,6 @@ import java.util.TimeZone;
 
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.model.Talk;
-import be.ana.nmct.multimania.service.NotificationSender;
 
 /**
  * Created by Niels on 28/10/2014.
@@ -83,5 +83,17 @@ public final class Utility {
         } else {
             return null;
         }
+    }
+
+    public static int dpToPx(Context context,int dp) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return px;
+    }
+
+    public static int pxToDp(Context context,int px) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        int dp = Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+        return dp;
     }
 }

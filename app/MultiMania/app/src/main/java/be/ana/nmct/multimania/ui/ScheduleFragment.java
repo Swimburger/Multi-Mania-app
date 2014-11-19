@@ -18,13 +18,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.felipecsl.asymmetricgridview.library.model.AsymmetricItem;
-import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
-import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridViewAdapter;
+import com.bulletnoid.android.widget.StaggeredGridView.StaggeredGridView;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -38,24 +37,20 @@ import be.ana.nmct.multimania.service.NotificationSender;
 import be.ana.nmct.multimania.utils.GoogleCalUtil;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
-import be.ana.nmct.multimania.vm.ScheduleGridHeader;
-import be.ana.nmct.multimania.vm.ScheduleGridItem;
+import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
 public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
     public static final String TAG = ScheduleFragment.class.getSimpleName();
     public static final String DATE_KEY = "date_key";
     public static final String POSITION_KEY = "position_key";
 
-    private AsymmetricGridView mScheduleGrid;
+    private StaggeredGridView mScheduleGrid;
     private ScheduleAdapter mAdapter;
-    private ArrayList<AsymmetricItem> mItems;
-    private int mAmountOfColumns=6;
-    private int mAmountOfScheduleItemColums=6;
-    private int mAmountofScheduleItemRows=6;
     private Cursor mCursor;
     private String mDate;
     private int mPosition;
     private String mAccountName;
+    private List<Object> mItems;
 
     public ScheduleFragment() {}
 
@@ -74,34 +69,25 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
         mDate = getArguments().getString(DATE_KEY);
         mPosition = getArguments().getInt(POSITION_KEY);
-        Loader loader = getLoaderManager().initLoader(MainActivity.LOADER_SCHEDULE_TALK_ID+mPosition, null, this);
-        mItems = new ArrayList<AsymmetricItem>();
+
         mAccountName = new SettingsUtil(getActivity(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
         //setRetainInstance(true);
+        mItems=new ArrayList<Object>();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_schedule, container, false);
-        mScheduleGrid = (AsymmetricGridView) v.findViewById(R.id.scheduleGrid);
-
-        mAmountOfColumns = getResources().getInteger(R.integer.amount_of_schedule_columns);
-        mAmountOfScheduleItemColums = getResources().getInteger(R.integer.amount_of_schedule_item_columns);
-        mAmountofScheduleItemRows = getResources().getInteger(R.integer.amount_of_schedule_item_rows);
-
-        // Choose your own preferred column width
-        //mScheduleGrid.setRequestedColumnWidth(Utils.dpToPx(getActivity(), 120));
-        mScheduleGrid.setRequestedColumnCount(mAmountOfColumns);
-        mScheduleGrid.setRequestedHorizontalSpacing(8);
-
+        mScheduleGrid = (StaggeredGridView) v.findViewById(R.id.scheduleGrid);
+        mScheduleGrid.setItemMargin(Utility.dpToPx(getActivity(),8));
         // initialize your items array
-        mAdapter = new ScheduleAdapter(getActivity(), mScheduleGrid, mItems);
+        mAdapter = new ScheduleAdapter(getActivity(), mItems);
 
-        createGridItems(mCursor);
-        mScheduleGrid.determineColumns();
         mScheduleGrid.setAdapter(mAdapter);
-        mScheduleGrid.setOnItemClickListener(this);
+
+        getLoaderManager().initLoader(MainActivity.LOADER_SCHEDULE_TALK_ID+mPosition, null, this);
+        //BuildItems(mCursor);
         return v;
     }
 
@@ -115,22 +101,15 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         mCursor = cursor;
-        createGridItems(mCursor);
-        if(mScheduleGrid!=null)
-        {
-            mScheduleGrid.determineColumns();
-            mScheduleGrid.setAdapter(mAdapter);
-        }
-
-        if(mAdapter!=null)
-            mAdapter.notifyDataSetChanged();
-        loader.abandon();
+        BuildItems(cursor);
     }
 
-    private void createGridItems(Cursor cursor) {
+    private void BuildItems(Cursor cursor) {
         if(cursor==null||mItems==null)return;
         mItems.clear();
+
         List<String> dates = new ArrayList<String>();
+
         final int dateFromIndex     = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DATE_FROM);
         final int dateUntilIndex    = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DATE_UNTIL);
         final int isKeynoteIndex    = cursor.getColumnIndex(MultimaniaContract.TalkEntry.IS_KEYNOTE);
@@ -138,55 +117,54 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         final int titleIndex        = cursor.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
         final int roomIndex         = cursor.getColumnIndex(MultimaniaContract.TalkEntry.ROOM_NAME);
         final int idIndex           = cursor.getColumnIndex(MultimaniaContract.TalkEntry._ID);
-        if(cursor.moveToFirst())
-        {
+
+        if(cursor.moveToFirst()){
             do{
+                final ScheduleTalkVm vm = new ScheduleTalkVm();
+
                 String dateFrom = cursor.getString(dateFromIndex);
                 String dateUntil = cursor.getString(dateUntilIndex);
-                boolean isKeynote = cursor.getInt(isKeynoteIndex)==1; //Boolean.parseBoolean(cursor.getString(isKeynoteIndex));
-                boolean isFavorite = cursor.getInt(isFavoriteIndex)==1;
+
+                vm.isKeynote = cursor.getInt(isKeynoteIndex)==1;
+                vm.isFavorite = cursor.getInt(isFavoriteIndex)==1;
                 String title = cursor.getString(titleIndex);
                 String room = cursor.getString(roomIndex);
                 final long talkId = cursor.getLong(idIndex);
                 if(!dates.contains(dateFrom)){
                     try {
-                        mItems.add(new ScheduleGridHeader(mAmountOfColumns,mItems.size(),
-                                        Utility.convertStringToDate(dateFrom),
-                                        Utility.convertStringToDate(dateUntil))
+                        mItems.add(
+                                Utility.getTimeString(dateFrom)
+                                        + " - " +
+                                Utility.getTimeString(dateUntil)
                         );
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     dates.add(dateFrom);
                 }
-                int scheduleGridColumnSpan = mAmountOfScheduleItemColums;
-                if(isKeynote)
-                    scheduleGridColumnSpan = mAmountOfColumns;
-                final ScheduleGridItem item = new ScheduleGridItem(scheduleGridColumnSpan,mAmountofScheduleItemRows, mItems.size());
-                item.title=title;
-                item.room=room;
-                item.id=talkId;
-                item.isKeynote=isKeynote;
-                item.isFavorite=isFavorite;
+                vm.title=title;
+                vm.room=room;
+                vm.id =talkId;
+
                 getLoaderManager().initLoader(1000+(int)talkId,null,new LoaderManager.LoaderCallbacks<Cursor>() {
                     @Override
                     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
                         return new CursorLoader(getActivity(),
                                 ContentUris.appendId(MultimaniaContract.TagEntry.CONTENT_URI.buildUpon()
-                                .appendPath(MultimaniaContract.PATH_TALK),talkId).build()
+                                        .appendPath(MultimaniaContract.PATH_TALK), talkId).build()
                                 ,null,null,null,null);
                     }
 
                     @Override
                     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-                        item.tags = "";
+                        vm.tags = "";
                         if(data.moveToFirst()){
                             final int nameIndex = data.getColumnIndex(MultimaniaContract.TagEntry.NAME);
                             do{
-                                item.tags +=data.getString(nameIndex)+", ";
+                                vm.tags +=data.getString(nameIndex)+", ";
                             }while(data.moveToNext());
-                            if(item.tags.lastIndexOf(", ")>-1)
-                                item.tags=item.tags.substring(0,item.tags.length()-2);
+                            if(vm.tags.lastIndexOf(", ")>-1)
+                                vm.tags=vm.tags.substring(0,vm.tags.length()-2);
                         }
                         loader.abandon();
                     }
@@ -196,49 +174,51 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
                     }
                 });
-
-
-                mItems.add(item);
+                mItems.add(vm);
             }while(cursor.moveToNext());
         }
-
+        if(mAdapter!=null){
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         //mScheduleGrid.setAdapter(null);
+        mCursor=null;
+        mItems.clear();
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Object item =  mAdapter.getItem(position);
-        if(item instanceof ScheduleGridItem){
-            ScheduleGridItem gridItem = (ScheduleGridItem) item;
-            Uri uri = MultimaniaContract.TalkEntry.buildItemUri(((ScheduleGridItem) item).id);
+        if(item instanceof ScheduleTalkVm){
+            ScheduleTalkVm vm = (ScheduleTalkVm) item;
+            Uri uri = MultimaniaContract.TalkEntry.buildItemUri(vm.id);
             Intent intent = new Intent(getActivity(),TalkActivity.class);
             intent.setData(uri);
             startActivity(intent);
         }
     }
 
-    private class ScheduleAdapter extends AsymmetricGridViewAdapter<AsymmetricItem> {
+    private class ScheduleAdapter extends ArrayAdapter<Object> {
 
         private static final int SCHEDULE_GRID_HEADER_TYPE = 0;
         private static final int SCHEDULE_GRID_ITEM_TYPE = 1;
         private final LayoutInflater mInflater;
 
-        public ScheduleAdapter(Context context, AsymmetricGridView listView, List<AsymmetricItem> items) {
-            super(context, listView, items);
+        public ScheduleAdapter(Context context, List<Object> objects) {
+            super(context,0,objects);
             mInflater = LayoutInflater.from(getActivity());
         }
 
         @Override
-        public View getActualView(int position, View convertView, ViewGroup viewGroup) {
-
-            AsymmetricItem item = mItems.get(position);
+        public View getView(int position, View convertView, ViewGroup parent) {
+            Object item = getItem(position);
             final int viewType = getItemViewType(position);
             if (convertView == null||!isCorrectType(viewType,convertView)) {
-                convertView = newView(viewType);
+                convertView = newView(viewType,parent);
             }
             bindView(convertView,item,viewType);
 
@@ -258,20 +238,20 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
         }
 
-        private void bindView(View convertView, AsymmetricItem item,final int viewType) {
+        private void bindView(View convertView, Object item,final int viewType) {
             switch (viewType){
                 case SCHEDULE_GRID_HEADER_TYPE:
-                    bindHeaderView(convertView,(ScheduleGridHeader)item);
+                    bindHeaderView(convertView,(String)item);
                     break;
                 case SCHEDULE_GRID_ITEM_TYPE:
-                    bindItemView(convertView, (ScheduleGridItem) item);
+                    bindItemView(convertView, (ScheduleTalkVm) item);
                     break;
             }
         }
 
-        private void bindItemView(View view,final ScheduleGridItem item) {
+        private void bindItemView(View view,final ScheduleTalkVm item) {
             ((TextView)view.findViewById(R.id.txtTitle)).setText(item.title);
-            final ImageButton imgButton = (ImageButton) view.findViewById(R.id.imageButton);
+            final ImageButton imgButton = (ImageButton) view.findViewById(R.id.btnFavorite);
             imgButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -288,10 +268,10 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                             MultimaniaContract.TalkEntry.CONTENT_URI,
                             values,
                             MultimaniaContract.TalkEntry._ID+"=?",
-                            new String[]{""+item.id}
+                            new String[]{""+ item.id}
                     );
                     if(mAccountName!=null){
-                        ApiActions.postFavoriteTalk(getActivity(),mAccountName,item.id);
+                        ApiActions.postFavoriteTalk(getActivity(),mAccountName, item.id);
                     }
 
                     //add/delete alarm when needed
@@ -312,32 +292,35 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
             imgButton.setImageResource(getStarDrawabale(item.isFavorite));
             ((TextView) view.findViewById(R.id.txtRoom)).setText(item.room);
             ((TextView) view.findViewById(R.id.txtTag)).setText(item.tags);
+
+            StaggeredGridView.LayoutParams lp = new StaggeredGridView.LayoutParams(view.getLayoutParams());
+            if(item.isKeynote){
+                lp.span = mScheduleGrid.getColumnCount();
+            }else{
+                lp.span = 1;
+            }
+            view.setLayoutParams(lp);
         }
 
         private int getStarDrawabale(boolean isFavorite) {
             return  isFavorite  ? R.drawable.ic_action_important_green :  R.drawable.ic_action_not_important_green;
         }
 
-        private void bindHeaderView(View convertView, ScheduleGridHeader item) {
-            try {
-                ((TextView)convertView).setText(
-                        Utility.getTimeString(item.getDateFrom())
-                        +" - "+
-                        Utility.getTimeString(item.getDateUntil())
-                );
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+        private void bindHeaderView(View convertView, String item) {
+            ((TextView)convertView).setText(item);
+            StaggeredGridView.LayoutParams lp = new StaggeredGridView.LayoutParams(convertView.getLayoutParams());
+            lp.span=mScheduleGrid.getColumnCount();
+            convertView.setLayoutParams(lp);
         }
 
-        private View newView(final int viewType) {
+        private View newView(final int viewType,ViewGroup parent) {
             View view = null;
             switch(viewType){
                 case SCHEDULE_GRID_HEADER_TYPE:
-                    view = mInflater.inflate(R.layout.row_schedule_header,null);
+                    view = mInflater.inflate(R.layout.row_schedule_header,parent,false);
                     break;
                 case SCHEDULE_GRID_ITEM_TYPE:
-                    view = mInflater.inflate(R.layout.row_schedule,null);
+                    view = mInflater.inflate(R.layout.row_schedule,parent,false);
                     break;
             }
             return view;
@@ -350,13 +333,15 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
         @Override
         public int getItemViewType(int position) {
-            AsymmetricItem item = getItem(position);
-            if(item instanceof ScheduleGridHeader){
-                return SCHEDULE_GRID_HEADER_TYPE;
-            }else{
+            Object item = getItem(position);
+            if(item instanceof ScheduleTalkVm){
                 return SCHEDULE_GRID_ITEM_TYPE;
+            }else{
+                return SCHEDULE_GRID_HEADER_TYPE;
             }
         }
+
+
     }
     private class ScheduleAsyncQueryHandler extends AsyncQueryHandler{
 

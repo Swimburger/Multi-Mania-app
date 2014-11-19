@@ -110,7 +110,6 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
             animFadeIn = AnimationUtils.loadAnimation(context.getApplicationContext(),
                     R.anim.fade_in);
 
-
         }
 
         @Override

@@ -1,13 +1,12 @@
-<com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView
+<com.bulletnoid.android.widget.StaggeredGridView.StaggeredGridView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:staggered="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scheduleGrid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="be.ana.nmct.multimania.ui.ScheduleFragment"
+    staggered:numColumns="2"
+    staggered:drawSelectorOnTop="true"
     android:padding="8dp"
-    android:divider="@null"
-    android:dividerHeight="0dp"
-    android:clipToPadding="false"
-    android:scrollbarStyle="outsideOverlay"
     />
