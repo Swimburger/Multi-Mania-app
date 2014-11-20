@@ -65,6 +65,7 @@ public class NotificationSender {
         Intent intent = new Intent(sContext, NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(sContext, (int)talk.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager)sContext.getSystemService(Context.ALARM_SERVICE);
+        long millis = alarmDate.getTimeInMillis();
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarmDate.getTimeInMillis(), pendingIntent);
     }
 

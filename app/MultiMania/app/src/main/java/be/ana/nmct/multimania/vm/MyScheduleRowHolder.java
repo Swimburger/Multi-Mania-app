@@ -18,6 +18,8 @@ public class MyScheduleRowHolder extends RecyclerView.ViewHolder{
     public TextView txtTag;
     public ImageView btnRemoveTalk;
 
+    public long TalkId;
+
     public MyScheduleRowHolder(View v) {
         super(v);
         this.txtTalkTitle = (TextView)v.findViewById(R.id.txtTalkTitle);
