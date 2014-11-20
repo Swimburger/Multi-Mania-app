@@ -17,8 +17,7 @@
             android:layout_height="55dp"
             android:text="@string/settings_sync"
             android:textColor="@color/white"
-            android:checked="false"
-            android:background="@color/primaryColor"/>
+            android:checked="false" />
             />
         <View
             android:layout_width="fill_parent"
@@ -29,8 +28,7 @@
             android:layout_width="fill_parent"
             android:layout_height="55dp"
             android:text="@string/settings_notify"
-            android:textColor="@color/white"
-            android:background="@color/primaryColor"/>
+            android:textColor="@color/white" />
 
         <View
             android:layout_width="fill_parent"
