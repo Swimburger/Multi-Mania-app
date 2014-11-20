@@ -6,4 +6,5 @@
     <integer name="news_column_count">1</integer>
     <integer name="schedule_column_count">1</integer>
     <integer name="myschedule_column_count">1</integer>
+    <integer name="about_column_count">1</integer>
 </resources>
