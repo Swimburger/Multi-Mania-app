@@ -9,7 +9,7 @@
 namespace Repositories;
 
 
-use Utilities\Utitilies;
+use Utilities\Utilities;
 
 class TalkTagRepository {
     /**
@@ -18,7 +18,7 @@ class TalkTagRepository {
     public static function  getTalkTags()
     {
         $sql_query = "SELECT * FROM talk_tag";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt   = $con->query($sql_query);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -27,7 +27,7 @@ class TalkTagRepository {
     {
         try {
             $sql_query = "INSERT INTO talk_tag (talk_id, tag_id) VALUES (:talk_id,:tag_id);";
-            $con = Utitilies::getConnection();
+            $con = Utilities::getConnection();
             $stmt = $con->prepare($sql_query);
             return $stmt->execute(array(':talk_id' => $talkId, ':tag_id' => $tagId));
         }catch (\Exception $ex){

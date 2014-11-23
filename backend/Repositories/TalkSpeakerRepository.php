@@ -9,7 +9,7 @@
 namespace Repositories;
 
 
-use Utilities\Utitilies;
+use Utilities\Utilities;
 
 class TalkSpeakerRepository {
     /**
@@ -18,7 +18,7 @@ class TalkSpeakerRepository {
     public static function  getTalkSpeakers()
     {
         $sql_query = "SELECT * FROM talk_speaker";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt   = $con->query($sql_query);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -27,7 +27,7 @@ class TalkSpeakerRepository {
     {
         try {
             $sql_query = "INSERT INTO talk_speaker (talk_id, speaker_id) VALUES (:talk_id,:speaker_id);";
-            $con = Utitilies::getConnection();
+            $con = Utilities::getConnection();
             $stmt = $con->prepare($sql_query);
             return $stmt->execute(array(':talk_id' => $talkId, ':speaker_id' => $speakerId));
         }catch (\Exception $ex){

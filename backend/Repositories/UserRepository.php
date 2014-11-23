@@ -8,7 +8,7 @@
 
 namespace Repositories;
 
-use Utilities\Utitilies;
+use Utilities\Utilities;
 
 class UserRepository{
     /**
@@ -17,7 +17,7 @@ class UserRepository{
      */
     public static function insertUser($id){
         $sql_query = "INSERT INTO user VALUES (:id,NOW());";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':id'=>$id));
     }
@@ -25,7 +25,7 @@ class UserRepository{
     public static function insertFavorite($userid,$talkid){
         $sql_query = "INSERT INTO user_talk VALUES (:userid, :talkid);
                       UPDATE user SET last_updated=NOW() WHERE id=:userid2;";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':userid'=>$userid,':talkid'=>$talkid,':userid2'=>$userid));
     }
@@ -33,7 +33,7 @@ class UserRepository{
     public static function removeFavorite($userid,$talkid){
         $sql_query = "DELETE FROM user_talk WHERE user_id=:userid AND talk_id=:talkid;
                       UPDATE user SET last_updated=NOW() WHERE id=:userid2;";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':userid'=>$userid,':talkid'=>$talkid,':userid2'=>$userid));
     }
@@ -46,7 +46,7 @@ class UserRepository{
     public static function getUserById($id)
     {
         $sql_query = "SELECT * FROM user WHERE id=:id;";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         if($stmt->execute(array(':id'=>$id))){
             return $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -57,7 +57,7 @@ class UserRepository{
     public static function getLastUpdateByUser($id)
     {
         $sql_query = "SELECT last_updated FROM user WHERE id=:id;";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         if($stmt->execute(array(':id'=>$id))){
             return $stmt->fetch(\PDO::FETCH_ASSOC);

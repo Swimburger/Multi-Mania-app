@@ -9,7 +9,7 @@
 namespace Repositories;
 
 
-use Utilities\Utitilies;
+use Utilities\Utilities;
 
 class SpeakerRepository {
     /**
@@ -18,7 +18,7 @@ class SpeakerRepository {
     public static function  getSpeakers()
     {
         $sql_query = "SELECT * FROM speaker";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt   = $con->query($sql_query);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -26,7 +26,7 @@ class SpeakerRepository {
     public static function getSpeakerById($id)
     {
         $sql_query = "SELECT * FROM speaker WHERE id=:id;";
-        $con = Utitilies::getConnection();
+        $con = Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         if($stmt->execute(array(':id'=>$id))){
             return $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -37,7 +37,7 @@ class SpeakerRepository {
     public static function insertSpeaker($id, $name)
     {
         $sql_query = "INSERT INTO speaker VALUES (:id,:name);";
-        $con = Utitilies::getConnection();
+        $con = Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':id'=>$id,':name'=>$name));
     }
@@ -45,7 +45,7 @@ class SpeakerRepository {
     public static function updateSpeaker($id, $name)
     {
         $sql_query = "UPDATE speaker SET name=:name WHERE id=:id;";
-        $con = Utitilies::getConnection();
+        $con = Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':name'=>$name,':id'=>$id));
     }

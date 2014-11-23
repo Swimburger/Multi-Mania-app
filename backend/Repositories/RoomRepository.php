@@ -8,7 +8,7 @@
 
 namespace Repositories;
 
-use Utilities\Utitilies;
+use Utilities\Utilities;
 
 class RoomRepository{
 
@@ -17,7 +17,7 @@ class RoomRepository{
      */
     public static function getRooms(){
         $sql_query = "SELECT * FROM room;";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt   = $con->query($sql_query);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -25,7 +25,7 @@ class RoomRepository{
     public static function getRoomById($id)
     {
         $sql_query = "SELECT * FROM room WHERE id=:id;";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         if($stmt->execute(array(':id'=>$id))){
             return $stmt->fetch(\PDO::FETCH_ASSOC);
@@ -36,7 +36,7 @@ class RoomRepository{
     public static function insertRoom($id, $name)
     {
         $sql_query = "INSERT INTO room VALUES (:id,:name);";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':id'=>$id,':name'=>$name));
     }
@@ -44,7 +44,7 @@ class RoomRepository{
     public static function updateRoom($id, $name)
     {
         $sql_query = "UPDATE room SET name=:name WHERE id=:id;";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':name'=>$name,':id'=>$id));
     }

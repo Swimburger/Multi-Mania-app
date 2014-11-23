@@ -9,10 +9,10 @@
 namespace Utilities;
 
 
-class Utitilies {
+class Utilities {
     public static function getConnection(){
-        $params=  Params::getConnectionParams();
-        return Utitilies::getConnectionFromParams($params['string'],$params['username'],$params['pwd']);
+        $params = Params::getConnectionParams();
+        return Utilities::getConnectionFromParams($params['string'],$params['username'],$params['pwd']);
     }
 
     private static function getConnectionFromParams($connectionString, $userName,$pwd) {

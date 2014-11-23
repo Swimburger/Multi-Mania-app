@@ -9,7 +9,7 @@
 namespace Repositories;
 
 
-use Utilities\Utitilies;
+use Utilities\Utilities;
 
 class NewsRepository {
     /**
@@ -18,7 +18,7 @@ class NewsRepository {
     public static function  getNews()
     {
         $sql_query = "SELECT * FROM news";
-        $con=Utitilies::getConnection();
+        $con=Utilities::getConnection();
         $stmt   = $con->query($sql_query);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -26,7 +26,7 @@ class NewsRepository {
     public static function insertNewsItem($importance, $order, $title, $shortDescription, $longDescription, $image)
     {
         $sql_query = "INSERT INTO news (title,img,short_description,long_description,importance,`order`) VALUES (:title,:img,:short_description,:long_description,:importance,:order);";
-        $con = Utitilies::getConnection();
+        $con = Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         return $stmt->execute(array(':title'=>$title,':img'=>$image,':short_description'=>$shortDescription,':long_description'=>$longDescription,':importance'=>$importance,':order'=>$order));
     }
