@@ -1,4 +1,8 @@
 <?php
+/**
+ * Start point for the application
+ */
+
 use Repositories\NewsRepository;
 use Repositories\TalkRepository;
 use Repositories\RoomRepository;
@@ -92,13 +96,17 @@ function getTalks() {
 }
 
 /**
- * @param $userid id of a user (string)
+ * @param $userid string id of a user (string)
  * returns all talks with a boolean to know if it's a favorite for that user
  */
 function getTalksWithFavorites($userid){
     echo json_encode(TalkRepository::getTalksWithFavorites($userid));
 }
 
+/**
+ * @param $userid string id of the user
+ * return the datetime that the user last favorited or unfavorited
+ */
 function getLastUpdateByUser($userid){
     echo UserRepository::getLastUpdateByUser($userid)['last_updated'];
 }
@@ -131,10 +139,17 @@ function getTags() {
     echo json_encode(TagRepository::getTags());
 }
 
+/**
+ * Gets the speakers for the talks
+ */
 function getSpeakers(){
     echo json_encode(SpeakerRepository::getSpeakers());
 }
 
+/**
+ * Imports the data from the xml file
+ * @param $secret string Quick security
+ */
 function importData($secret){
     if($secret!=Params::SECRET)
         return;

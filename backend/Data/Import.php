@@ -17,8 +17,22 @@ use Repositories\SpeakerRepository;
 use Repositories\TalkRepository;
 use Repositories\NewsRepository;
 
+/**
+ * This class contains methods to import data from xml to the database
+ *
+ * Class Import
+ * @package Data
+ */
 class Import {
+    /**
+     * If set to false, imports will fail be ignored if someone browses to /import
+     * Use this constant to quickly disable the functionality online
+     */
     const IMPORTALLOWED=true;
+
+    /**
+     * Parses the xml found in /Data/data.xml and inserts or updates them in the database
+     */
     public static function ImportData(){
         if(!Import::IMPORTALLOWED)
         {
@@ -35,6 +49,9 @@ class Import {
         Import::InsertNews($xml->news->newsitem);
     }
 
+    /**
+     * @param $rooms Array An array of SimpleXMLElement that holds room data
+     */
     private static function InsertRooms($rooms)
     {
         foreach($rooms as $room){
@@ -48,6 +65,9 @@ class Import {
         }
     }
 
+    /**
+     * @param $tags Array An array of SimpleXMLElement that holds tag data
+     */
     private static function InsertTags($tags)
     {
         foreach($tags as $tag){
@@ -62,6 +82,9 @@ class Import {
         }
     }
 
+    /**
+     * @param $speakers Array An array of SimpleXMLElement that holds speaker data
+     */
     private static function InsertSpeakers($speakers)
     {
         foreach($speakers as $speaker){
@@ -76,6 +99,9 @@ class Import {
         }
     }
 
+    /**
+     * @param $talks Array An array of SimpleXMLElement that holds talk data
+     */
     private static function InsertTalks($talks)
     {
         foreach($talks as $talk){
@@ -94,6 +120,9 @@ class Import {
         }
     }
 
+    /**
+     * @param $talk_tags Array An array of SimpleXMLElement that holds talk_tag data
+     */
     private static function InsertTalkTags($talk_tags)
     {
         foreach($talk_tags as $talk_tag){
@@ -104,6 +133,9 @@ class Import {
         }
     }
 
+    /**
+     * @param $talk_speakers Array An array of SimpleXMLElement that holds talk_speaker data
+     */
     private static function InsertTalkSpeakers($talk_speakers)
     {
         foreach($talk_speakers as $talk_speaker){
@@ -114,6 +146,9 @@ class Import {
         }
     }
 
+    /**
+     * @param $newsitems Array $rooms An array of SimpleXMLElement that holds room data
+     */
     private static function InsertNews($newsitems)
     {
         foreach ($newsitems as $newsitem) {
@@ -129,6 +164,10 @@ class Import {
 
     }
 
+    /**
+     * @param $xml \SimpleXMLElement
+     * @return string returns the inside of the xml as a string
+     */
     private static function GetInnerXml($xml)
     {
         if(empty($xml)){
@@ -142,6 +181,10 @@ class Import {
         return $innerXML;
     }
 
+    /**
+     * @param $string string the string to trim and remove newlines
+     * @return string trimmed and newlines removed string
+     */
     private static function removeNewLines($string){
         return trim(str_replace("\n","",$string));
     }

@@ -11,9 +11,15 @@ namespace Repositories;
 
 use Utilities\Utilities;
 
+/**
+ * The repository contains all methods for interacting with the database for the News model
+ *
+ * Class NewsRepository
+ * @package Repositories
+ */
 class NewsRepository {
     /**
-     * @return array
+     * @return array Returns all news
      */
     public static function  getNews()
     {
@@ -23,6 +29,15 @@ class NewsRepository {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * @param $importance int The importance of the NewsItem
+     * @param $order int The order of the NewsItem
+     * @param $title string The title of the NewsItem
+     * @param $shortDescription string The short description of the NewsItem
+     * @param $longDescription string The long description of the NewsItem
+     * @param $image string The url pointing to the image of the NewsItem
+     * @return bool Returns true if item is inserted, else false
+     */
     public static function insertNewsItem($importance, $order, $title, $shortDescription, $longDescription, $image)
     {
         $sql_query = "INSERT INTO news (title,img,short_description,long_description,importance,`order`) VALUES (:title,:img,:short_description,:long_description,:importance,:order);";
