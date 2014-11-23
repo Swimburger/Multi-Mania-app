@@ -1,7 +1,5 @@
 # Multi-Mania #
 
-[TOC]
-
 ## Introduction ##
 
 The Multi-Mania project is a backend and application for the [Multi-Mania conference](http://multi-mania.be/).
