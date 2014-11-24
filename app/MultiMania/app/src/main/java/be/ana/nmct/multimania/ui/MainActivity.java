@@ -125,6 +125,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             actionBar.setDisplayShowTitleEnabled(true);
         }
         //actionBar.setTitle(mTitle);
+        actionBar.setIcon(R.drawable.ic_actionbar);
     }
 
 
