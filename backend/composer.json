@@ -1,15 +1,19 @@
 {
-    "name": "slim/slim",
-    "type": "library",
-    "description": "Slim Framework, a PHP micro framework",
-    "keywords": ["microframework","rest","router"],
-    "homepage": "http://github.com/codeguy/Slim",
-    "license": "MIT",
+    "name": "Multi-Mania",
+    "type": "project",
+    "description": "This is a json api for the Multi-mania conference",
+    "keywords": ["multi-mania","rest","json"],
+    "homepage": "http://multi-mania.be/",
     "authors": [
         {
-            "name": "Josh Lockhart",
-            "email": "info@joshlockhart.com",
-            "homepage": "http://www.joshlockhart.com/"
+            "name": "Niels Swimberghe",
+            "email": "niels.swimberghe@student.howest.be"
+        },{
+            "name": "Astrid Desmedt",
+            "email": "astrid.desmedt@student.howest.be"
+        },{
+            "name": "Axel Jonckheere",
+            "email": "axel.jonckheere@student.howest.be"
         }
     ],
     "require": {
