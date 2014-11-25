@@ -8,7 +8,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -108,9 +107,9 @@ public class SchedulesFragment extends Fragment implements LoaderManager.LoaderC
             return super.getItemPosition(object);
         }
 
-        @Override
+        /*@Override
         public Parcelable saveState() {
             return null;
-        }
+        }*/
     }
 }

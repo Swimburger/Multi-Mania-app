@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/mm_card"
-    android:paddingBottom="8dp">
+    android:orientation="vertical"
+    android:layout_span="2">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:text="@string/name_venue"
             android:id="@+id/txtNameVenue"
-            android:layout_below="@+id/txtLocation"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"/>
 
@@ -30,7 +29,6 @@
             android:layout_height="wrap_content"
             android:text="@string/street"
             android:id="@+id/txtStreet"
-            android:layout_below="@+id/txtNameVenue"
             android:paddingLeft="8dp"
             android:paddingRight="8dp" />
 
@@ -39,7 +37,6 @@
             android:layout_height="wrap_content"
             android:text="@string/city"
             android:id="@+id/txtCity"
-            android:layout_below="@+id/txtStreet"
             android:paddingLeft="8dp"
             android:paddingRight="8dp" />
 
@@ -48,7 +45,6 @@
             android:layout_height="wrap_content"
             android:text="@string/country"
             android:id="@+id/txtCountry"
-            android:layout_below="@+id/txtCity"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"/>
 
@@ -57,8 +53,15 @@
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
+            android:layout_marginBottom="8dp"
             android:id="@+id/imgAboutMap"
             android:src="@drawable/ic_aboutmap"
-            android:layout_below="@+id/txtCountry"
             android:scaleType="centerCrop"/>
-    </RelativeLayout>
+        <View
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/primaryColor"
+
+            />
+    </LinearLayout>

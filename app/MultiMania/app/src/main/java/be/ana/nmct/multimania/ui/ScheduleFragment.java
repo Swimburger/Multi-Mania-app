@@ -14,7 +14,6 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -179,8 +178,11 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                 mItems.add(vm);
             }while(cursor.moveToNext());
         }
-        if(mAdapter!=null){
-            mAdapter.notifyDataSetChanged();
+        /*if(mAdapter!=null){
+            mAdapter.notifyDataSetChanged();//bug in staggeredgridview with updates
+        }*/
+        if(mScheduleGrid!=null){
+            mScheduleGrid.setAdapter(new ScheduleAdapter(getActivity(),mItems));
         }
     }
 
@@ -194,7 +196,6 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Override
     public void onItemClick(BulletStaggeredGridView parent, View view, int position, long id) {
-        Log.d(TAG,"clicked");
         Object item =  mAdapter.getItem(position);
         if(item instanceof ScheduleTalkVm){
             ScheduleTalkVm vm = (ScheduleTalkVm) item;
@@ -260,7 +261,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                 public void onClick(View v) {
                     item.isFavorite=!item.isFavorite;
                     int value = item.isFavorite?1:0;
-                    imgButton.setImageResource(getStarDrawabale(item.isFavorite));
+                    imgButton.setImageResource(getStarDrawable(item.isFavorite));
 
                     ContentValues values = new ContentValues();
                     values.put(MultimaniaContract.TalkEntry.IS_FAVORITE,value);
@@ -292,7 +293,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
                 }
             });
-            imgButton.setImageResource(getStarDrawabale(item.isFavorite));
+            imgButton.setImageResource(getStarDrawable(item.isFavorite));
             ((TextView) view.findViewById(R.id.txtRoom)).setText(item.room);
             ((TextView) view.findViewById(R.id.txtTag)).setText(item.tags);
 
@@ -305,7 +306,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
             view.setLayoutParams(lp);
         }
 
-        private int getStarDrawabale(boolean isFavorite) {
+        private int getStarDrawable(boolean isFavorite) {
             return  isFavorite  ? R.drawable.ic_action_important_green :  R.drawable.ic_action_not_important_green;
         }
 

@@ -49,6 +49,7 @@ import android.widget.ListAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 import be.ana.nmct.multimania.R;
 
@@ -94,6 +95,12 @@ public class BulletStaggeredGridView extends ViewGroup {
      * of columns it spans changes, all bets for other items in the same direction are off
      * since the cached information no longer applies.
      */
+
+    public static class ScrollDirection {
+        public static final int NONE = 0;
+        public static final int UP = 1;
+        public static final int DOWN = 2;
+    }
 
     private HeaderFooterListAdapter mAdapter;
     private View mHeaderView = null;
@@ -232,7 +239,45 @@ public class BulletStaggeredGridView extends ViewGroup {
      */
     private Rect mTouchFrame;
 
+    /**
+     * Listener if grid view should load more
+     */
     OnLoadmoreListener mLoadListener;
+
+    /**
+     *
+     */
+    boolean mCanJumpToTop;
+
+    /**
+     *
+     */
+    JumpToTopListener mJumpToTopListener;
+
+    /**
+     * Current vertical scroll position
+     */
+    private int mScrollY = 0;
+
+    /**
+     * Vertical bottom scroll position reached
+     */
+    private boolean mScrollBottom;
+
+    /**
+     * Current scroll direction
+     */
+    private int mScrollDirection;
+
+    /**
+     * Timestamp for checking scroll direction
+     */
+    private long mScrollDirectionChangeDate;
+
+    /**
+     * Listener if scroll direction changed
+     */
+    OnChangedScrollDirectionListener mChangedScrollDirectionListener;
 
     public static boolean loadlock = false;
     public static boolean lazyload = false;
@@ -309,6 +354,14 @@ public class BulletStaggeredGridView extends ViewGroup {
         public void onLoadmore();
     }
 
+    public interface JumpToTopListener {
+        public void onJumpToTopStateChanged(boolean canJump);
+    }
+
+    public interface OnChangedScrollDirectionListener {
+        public void onScrollDirectionChanged(int direction);
+    }
+
     private final SparseArrayCompat<LayoutRecord> mLayoutRecords =
             new SparseArrayCompat<LayoutRecord>();
 
@@ -325,7 +378,7 @@ public class BulletStaggeredGridView extends ViewGroup {
 
         if (attrs != null) {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.BulletStaggeredGridView);
-            mColCount = a.getInteger(R.styleable.BulletStaggeredGridView_numColumns, 1);
+            mColCount = a.getInteger(R.styleable.BulletStaggeredGridView_numColumns, 2);
             mDrawSelectorOnTop = a.getBoolean(R.styleable.BulletStaggeredGridView_drawSelectorOnTop, false);
         } else {
             mColCount = 2;
@@ -353,6 +406,14 @@ public class BulletStaggeredGridView extends ViewGroup {
         this.mLoadListener = listener;
     }
 
+    public void setJumpToTopListener(JumpToTopListener jumpToTopListener) {
+        this.mJumpToTopListener = jumpToTopListener;
+    }
+
+    public void setOnChangedScrollDirectionListener(OnChangedScrollDirectionListener changedScrollDirectionListener) {
+        this.mChangedScrollDirectionListener = changedScrollDirectionListener;
+    }
+
     /**
      * Set a fixed number of columns for this grid. Space will be divided evenly
      * among all columns, respecting the item margin between columns.
@@ -370,7 +431,7 @@ public class BulletStaggeredGridView extends ViewGroup {
         final boolean needsPopulate = colCount != mColCount;
         mColCount = mColCountSetting = colCount;
         if (needsPopulate) {
-            populate(false);
+            fillToFirstPosition();
         }
     }
 
@@ -398,18 +459,8 @@ public class BulletStaggeredGridView extends ViewGroup {
         final boolean needsPopulate = marginPixels != mItemMargin;
         mItemMargin = marginPixels;
         if (needsPopulate) {
-            populate(false);
+            fillToFirstPosition();
         }
-    }
-
-    /**
-     * Return the first adapter position with a view currently attached as
-     * a child view of this grid.
-     *
-     * @return the adapter position represented by the view at getChildAt(0).
-     */
-    public int getFirstPosition() {
-        return mFirstPosition;
     }
 
     @Override
@@ -657,12 +708,17 @@ public class BulletStaggeredGridView extends ViewGroup {
         final int overScrolledBy;
         int movedBy;
 
+        // If grid is not initialized / populated, don't handle scrolling
+        if (mItemBottoms == null) {
+            return false;
+        }
+
         if (!contentFits) {
             final int overhang;
             final boolean up;
             mPopulating = true;
             if (deltaY > 0) {
-                overhang = fillUp(mFirstPosition - 1, allowOverhang) + mItemMargin;
+                overhang = fillUp(mFirstPosition - 1, allowOverhang) + getItemMargin(0);
                 up = true;
             } else {
                 overhang = fillDown(mFirstPosition + getChildCount(), allowOverhang) + mItemMargin;
@@ -684,9 +740,25 @@ public class BulletStaggeredGridView extends ViewGroup {
                 mGetToTop = false;
             }
 
-            if (!loadlock && deltaY < 0 && mFirstPosition > (mAdapter.getCount() * 0.75)) {
+            if (mLoadListener != null && !loadlock && deltaY < 0 && (mFirstPosition + getChildCount()) > (mAdapter.getCount() * 0.75)) {
                 mLoadListener.onLoadmore();
                 loadlock = true;
+            }
+
+            boolean canJump = deltaY > 0 && (mFirstPosition / Math.max(1, mColCount)) > 2;
+            if (mJumpToTopListener != null && canJump != mCanJumpToTop) {
+                mJumpToTopListener.onJumpToTopStateChanged(canJump);
+                mCanJumpToTop = canJump;
+            }
+
+            int scrollDirection = deltaY > 0 ? ScrollDirection.UP : ScrollDirection.DOWN;
+            if (Math.abs(deltaY) > 10 && mChangedScrollDirectionListener != null && scrollDirection != mScrollDirection) {
+                long time = new Date().getTime();
+                if (mScrollDirectionChangeDate < time - 1000) {
+                    mChangedScrollDirectionListener.onScrollDirectionChanged(scrollDirection);
+                    mScrollDirection = scrollDirection;
+                    mScrollDirectionChangeDate = time;
+                }
             }
 
             offsetChildren(up ? movedBy : -movedBy);
@@ -695,8 +767,18 @@ public class BulletStaggeredGridView extends ViewGroup {
             }
 
             mPopulating = false;
-            overScrolledBy = allowOverhang - overhang;
+            mScrollBottom = false;
+            if (up) {
+                mScrollY -= movedBy;
+            }
+            else {
+                mScrollY += movedBy;
+                if (movedBy == 0) {
+                    mScrollBottom = true;
+                }
+            }
 
+            overScrolledBy = allowOverhang - overhang;
         } else {
             overScrolledBy = allowOverhang;
             movedBy = 0;
@@ -812,9 +894,8 @@ public class BulletStaggeredGridView extends ViewGroup {
             for (int i = 0; i < childCount; i++) {
                 final View child = getChildAt(i);
                 final LayoutParams lp = (LayoutParams) child.getLayoutParams();
-                final int top = child.getTop() - mItemMargin;
+                final int top = child.getTop() - getItemMargin(lp.position);
                 final int bottom = child.getBottom();
-                final LayoutRecord rec = mLayoutRecords.get(mFirstPosition + i);
 
                 final int colEnd = Math.min(mColCount, lp.column + lp.span);
                 for (int col = lp.column; col < colEnd; col++) {
@@ -938,23 +1019,13 @@ public class BulletStaggeredGridView extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
-        if (widthMode != MeasureSpec.EXACTLY) {
-            widthMode = MeasureSpec.EXACTLY;
-        }
-        if (heightMode != MeasureSpec.EXACTLY) {
-            heightMode = MeasureSpec.EXACTLY;
-        }
 
         setMeasuredDimension(widthSize, heightSize);
 
         if (mColCountSetting == COLUMN_COUNT_AUTO) {
-            final int colCount = widthSize / mMinColWidth;
+            final int colCount = Math.max(1, widthSize / mMinColWidth);
             if (colCount != mColCount) {
                 mColCount = colCount;
             }
@@ -964,7 +1035,13 @@ public class BulletStaggeredGridView extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         mInLayout = true;
-        populate(false);
+        try {
+            populate(false);
+        }
+        // Happens if tile layout (spans) changed, e.g. by deleting tiles
+        catch (IllegalStateException e) {
+            fillToFirstPosition();
+        }
         mInLayout = false;
 
         final int width = r - l;
@@ -974,7 +1051,6 @@ public class BulletStaggeredGridView extends ViewGroup {
     }
 
     private void populate(boolean clearData) {
-
         if (getWidth() == 0 || getHeight() == 0) {
             return;
         }
@@ -984,6 +1060,11 @@ public class BulletStaggeredGridView extends ViewGroup {
             if (colCount != mColCount) {
                 mColCount = colCount;
             }
+        }
+
+        // Clear saved state if column count changed
+        if (mRestoreOffsets != null && mColCount != mRestoreOffsets.length) {
+            mRestoreOffsets = null;
         }
 
         final int colCount = mColCount;
@@ -1043,6 +1124,11 @@ public class BulletStaggeredGridView extends ViewGroup {
         }
     }
 
+    private int getColWidth(int position) {
+        int itemMargin = getItemMargin(position);
+        return (getWidth() - getPaddingLeft() - getPaddingRight() - itemMargin * 2 - itemMargin * (mColCount - 1)) / mColCount;
+    }
+
     /**
      * Measure and layout all currently visible children.
      *
@@ -1050,16 +1136,13 @@ public class BulletStaggeredGridView extends ViewGroup {
      */
     final void layoutChildren(boolean queryAdapter) {
         final int paddingLeft = getPaddingLeft();
-        final int paddingRight = getPaddingRight();
-        final int itemMargin = mItemMargin;
-        final int colWidth = (getWidth() - paddingLeft - paddingRight - itemMargin * (mColCount - 1)) / mColCount;
-        mColWidth = colWidth;
+        mColWidth = getColWidth(1);
         int rebuildLayoutRecordsBefore = -1;
         int rebuildLayoutRecordsAfter = -1;
 
         Arrays.fill(mItemBottoms, Integer.MIN_VALUE);
 
-        final int childCount = getChildCount();
+        int childCount = getChildCount();
         int amountRemoved = 0;
 
         for (int i = 0; i < childCount; i++) {
@@ -1070,23 +1153,52 @@ public class BulletStaggeredGridView extends ViewGroup {
             final boolean needsLayout = queryAdapter || child.isLayoutRequested();
 
             if (queryAdapter) {
-
                 View newView = obtainView(position, child);
                 if (newView == null) {
                     // child has been removed
                     removeViewAt(i);
-                    if (i - 1 >= 0) invalidateLayoutRecordsAfterPosition(i - 1);
+                    if (i - 1 >= 0) {
+                        invalidateLayoutRecordsAfterPosition(i - 1);
+                    }
                     amountRemoved++;
+                    childCount--;
                     continue;
                 } else if (newView != child) {
                     removeViewAt(i);
-                    addView(newView, i);
+                    int newViewIdx = indexOfChild(newView);
+                    // New view is not in current layout
+                    if (newViewIdx == -1) {
+                        addView(newView, i);
+                    }
+                    // New view moved position within layout
+                    else {
+                        if (newViewIdx < i) {
+                            throw new RuntimeException("Cannot recycle child in layout with lower index");
+                        }
+
+                        if (i - 1 >= 0) {
+                            invalidateLayoutRecordsAfterPosition(i - 1);
+                        }
+                        amountRemoved++;
+                        childCount--;
+
+                        if (newViewIdx > i) {
+                            removeViewAt(newViewIdx);
+                            addView(newView, i);
+                        }
+                        else {
+                            // New view already in the right place, do nothing
+                        }
+                    }
+
                     child = newView;
                 }
                 lp = (LayoutParams) child.getLayoutParams(); // Might have changed
             }
 
             final int span = Math.min(mColCount, lp.span);
+            final int itemMargin = getItemMargin(lp.position);
+            final int colWidth = getColWidth(lp.position);
             final int widthSize = colWidth * span + itemMargin * (span - 1);
 
             if (needsLayout) {
@@ -1102,14 +1214,13 @@ public class BulletStaggeredGridView extends ViewGroup {
                 child.measure(widthSpec, heightSpec);
             }
 
-            int childTop = mItemBottoms[col] > Integer.MIN_VALUE ? mItemBottoms[col] + mItemMargin : child.getTop();
+            int childTop = mItemBottoms[col] > Integer.MIN_VALUE ? mItemBottoms[col] + itemMargin : child.getTop();
 
             if (span > 1) {
                 int lowest = childTop;
 
-//                final int colEnd = Math.min(mColCount, col + lp.span);
                 for (int j = 0; j < mColCount; j++) {
-                    final int bottom = mItemBottoms[j] + mItemMargin;
+                    final int bottom = mItemBottoms[j] + itemMargin;
                     if (bottom > lowest) {
                         lowest = bottom;
                     }
@@ -1119,7 +1230,7 @@ public class BulletStaggeredGridView extends ViewGroup {
 
             final int childHeight = child.getMeasuredHeight();
             final int childBottom = childTop + childHeight;
-            final int childLeft = paddingLeft + col * (colWidth + itemMargin);
+            final int childLeft = paddingLeft + itemMargin + col * (colWidth + itemMargin);
             final int childRight = childLeft + child.getMeasuredWidth();
             child.layout(childLeft, childTop, childRight, childBottom);
 
@@ -1149,6 +1260,8 @@ public class BulletStaggeredGridView extends ViewGroup {
             }
         }
 
+        // Max have changed
+        childCount = getChildCount();
         if (rebuildLayoutRecordsBefore >= 0 || rebuildLayoutRecordsAfter >= 0) {
             if (rebuildLayoutRecordsBefore >= 0) {
                 invalidateLayoutRecordsBeforePosition(rebuildLayoutRecordsBefore);
@@ -1200,6 +1313,14 @@ public class BulletStaggeredGridView extends ViewGroup {
         mLayoutRecords.removeAtRange(beginAt + 1, mLayoutRecords.size() - beginAt);
     }
 
+    private int getItemMargin(int position) {
+        if (position == 0 && mHeaderView != null) {
+            return 0;
+        }
+
+        return mItemMargin;
+    }
+
     /**
      * Should be called with mPopulating set to true
      *
@@ -1208,13 +1329,8 @@ public class BulletStaggeredGridView extends ViewGroup {
      * @return the max overhang beyond the beginning of the view of any added items at the top
      */
     final int fillUp(int fromPosition, int overhang) {
-
         final int paddingLeft = getPaddingLeft();
-        final int paddingRight = getPaddingRight();
-        final int itemMargin = mItemMargin;
-        final int colWidth =
-                (getWidth() - paddingLeft - paddingRight - itemMargin * (mColCount - 1)) / mColCount;
-        mColWidth = colWidth;
+        mColWidth = getColWidth(fromPosition);
         final int gridTop = getPaddingTop();
         final int fillTo = gridTop - overhang;
         int nextCol = getNextColumnUp();
@@ -1223,27 +1339,20 @@ public class BulletStaggeredGridView extends ViewGroup {
         while (nextCol >= 0 && mItemTops[nextCol] > fillTo && position >= 0) {
             // make sure the nextCol is correct. check to see if has been mapped
             // otherwise stick to getNextColumnUp()
-            if (!mColMappings.get(nextCol).contains((Integer) position)) {
+            if (!mColMappings.get(nextCol).contains(position)) {
                 for (int i = 0; i < mColMappings.size(); i++) {
-                    if (mColMappings.get(i).contains((Integer) position)) {
+                    if (mColMappings.get(i).contains(position)) {
                         nextCol = i;
                         break;
                     }
                 }
             }
 
-//        	displayMapping();
-
             final View child = obtainView(position, null);
 
             if (child == null) continue;
 
             LayoutParams lp = (LayoutParams) child.getLayoutParams();
-
-            if (lp == null) {
-                lp = this.generateDefaultLayoutParams();
-                child.setLayoutParams(lp);
-            }
 
             if (child.getParent() != this) {
                 if (mInLayout) {
@@ -1253,6 +1362,8 @@ public class BulletStaggeredGridView extends ViewGroup {
                 }
             }
 
+            final int itemMargin = getItemMargin(lp.position);
+            final int colWidth = getColWidth(lp.position);
             final int span = Math.min(mColCount, lp.span);
             final int widthSize = colWidth * span + itemMargin * (span - 1);
             final int widthSpec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY);
@@ -1260,7 +1371,6 @@ public class BulletStaggeredGridView extends ViewGroup {
             LayoutRecord rec;
             if (span > 1) {
                 rec = getNextRecordUp(position, span);
-//                nextCol = rec.column;
                 nextCol = 0;
             } else {
                 rec = mLayoutRecords.get(position);
@@ -1276,8 +1386,6 @@ public class BulletStaggeredGridView extends ViewGroup {
                 rec.span = span;
                 rec.column = nextCol;
                 invalidateBefore = true;
-            } else {
-//                nextCol = rec.column;
             }
 
             if (mHasStableIds) {
@@ -1302,8 +1410,6 @@ public class BulletStaggeredGridView extends ViewGroup {
             }
             rec.height = childHeight;
 
-            int itemTop = mItemTops[nextCol];
-
             final int startFrom;
             if (span > 1) {
                 int lowest = mItemTops[nextCol];
@@ -1321,15 +1427,8 @@ public class BulletStaggeredGridView extends ViewGroup {
 
             int childBottom = startFrom;
             int childTop = childBottom - childHeight;
-            final int childLeft = paddingLeft + nextCol * (colWidth + itemMargin);
+            final int childLeft = paddingLeft + itemMargin + nextCol * (colWidth + itemMargin);
             final int childRight = childLeft + child.getMeasuredWidth();
-
-//            if(position == 0){
-//            	if(this.getChildCount()>1 && this.mColCount>1){
-//            		childTop = this.getChildAt(1).getTop();
-//            		childBottom = childTop + childHeight;
-//            	}
-//            }
 
             child.layout(childLeft, childTop, childRight, childBottom);
 
@@ -1347,7 +1446,6 @@ public class BulletStaggeredGridView extends ViewGroup {
         for (int i = 0; i < getChildCount(); i++) {
             final View child = getChildAt(i);
             if (child == null) {
-//                highestView = 0;
                 break;
             }
             final int top = child.getTop();
@@ -1360,31 +1458,6 @@ public class BulletStaggeredGridView extends ViewGroup {
         return gridTop - highestView;
     }
 
-    // bug here
-    private View getFirstChildAtColumn(int column) {
-
-        if (this.getChildCount() > column) {
-            for (int i = 0; i < this.mColCount; i++) {
-                final View child = getChildAt(i);
-                final int left = child.getLeft();
-
-                if (child != null) {
-                    int col = 0;
-
-                    // determine the column by cycling widths
-                    while (left > col * (this.mColWidth + mItemMargin * 2) + getPaddingLeft()) {
-                        col++;
-                    }
-
-                    if (col == column) {
-                        return child;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
     /**
      * Should be called with mPopulating set to true
      *
@@ -1393,27 +1466,30 @@ public class BulletStaggeredGridView extends ViewGroup {
      * @return the max overhang beyond the end of the view of any added items at the bottom
      */
     final int fillDown(int fromPosition, int overhang) {
-
-        final int paddingLeft = getPaddingLeft();
-        final int paddingRight = getPaddingRight();
-        final int itemMargin = mItemMargin;
-        final int colWidth = (getWidth() - paddingLeft - paddingRight - itemMargin * (mColCount - 1)) / mColCount;
         final int gridBottom = getHeight() - getPaddingBottom();
         final int fillTo = gridBottom + overhang;
-        int nextCol = getNextColumnDown(fromPosition);
-        int position = fromPosition;
+        return fillDownTo(fromPosition, fillTo);
+    }
+
+    /**
+     * Should be called with mPopulating set to true
+     *
+     * @param position
+     * @param fillTo
+     * @return the max overhang beyond the end of the view of any added items at the bottom
+     */
+    final int fillDownTo(int position, int fillTo) {
+        final int gridBottom = getHeight() - getPaddingBottom();
+        final int paddingLeft = getPaddingLeft();
+        int nextCol = getNextColumnDown(position);
 
         while (nextCol >= 0 && mItemBottoms[nextCol] < fillTo && position < mItemCount) {
-
             final View child = obtainView(position, null);
 
             if (child == null) continue;
 
             LayoutParams lp = (LayoutParams) child.getLayoutParams();
-            if (lp == null) {
-                lp = this.generateDefaultLayoutParams();
-                child.setLayoutParams(lp);
-            }
+            final int colWidth = getColWidth(lp.position);
 
             if (child.getParent() != this) {
                 if (mInLayout) {
@@ -1424,13 +1500,12 @@ public class BulletStaggeredGridView extends ViewGroup {
             }
 
             final int span = Math.min(mColCount, lp.span);
-            final int widthSize = colWidth * span + itemMargin * (span - 1);
+            final int widthSize = colWidth * span + getItemMargin(position) * (span - 1);
             final int widthSpec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY);
 
             LayoutRecord rec;
             if (span > 1) {
                 rec = getNextRecordDown(position, span);
-//                nextCol = rec.column;
                 nextCol = 0;
             } else {
                 rec = mLayoutRecords.get(position);
@@ -1446,8 +1521,6 @@ public class BulletStaggeredGridView extends ViewGroup {
                 rec.span = span;
                 rec.column = nextCol;
                 invalidateAfter = true;
-            } else {
-//                nextCol = rec.column;
             }
 
             if (mHasStableIds) {
@@ -1457,11 +1530,6 @@ public class BulletStaggeredGridView extends ViewGroup {
             }
 
             lp.column = nextCol;
-
-            /**
-             * Magic does not exist
-             */
-//            child.measure(MeasureSpec.EXACTLY, MeasureSpec.UNSPECIFIED);
 
             final int heightSpec;
             if (lp.height == LayoutParams.WRAP_CONTENT) {
@@ -1481,7 +1549,6 @@ public class BulletStaggeredGridView extends ViewGroup {
             if (span > 1) {
                 int lowest = mItemBottoms[nextCol];
 
-//                final int colEnd = Math.min(mColCount, nextCol + lp.span);
                 // Only for span = maxCol
                 for (int i = 0; i < mColCount; i++) {
                     final int bottom = mItemBottoms[i];
@@ -1494,13 +1561,14 @@ public class BulletStaggeredGridView extends ViewGroup {
                 startFrom = mItemBottoms[nextCol];
             }
 
+            int itemMargin = getItemMargin(lp.position);
             final int childTop = startFrom + itemMargin;
             final int childBottom = childTop + childHeight;
             final int childLeft;
             if (span > 1) {
-                childLeft = paddingLeft;
+                childLeft = paddingLeft + itemMargin;
             } else {
-                childLeft = paddingLeft + nextCol * (colWidth + itemMargin);
+                childLeft = paddingLeft + itemMargin + nextCol * (colWidth + itemMargin);
             }
             final int childRight = childLeft + child.getMeasuredWidth();
             child.layout(childLeft, childTop, childRight, childBottom);
@@ -1542,6 +1610,28 @@ public class BulletStaggeredGridView extends ViewGroup {
 
         return lowestView - gridBottom;
     }
+
+
+    /**
+     * Should be called with mPopulating set to true
+     *
+     * @return the max overhang beyond the end of the view of any added items at the bottom
+     */
+    final void fillToFirstPosition() {
+        // Clear all layout records and views
+        mLayoutRecords.clear();
+        // Reset mItemTops and mItemBottoms
+        mItemTops = new int[mColCount];
+        mItemBottoms = new int[mColCount];
+
+        if (mRestoreOffsets != null) {
+            Arrays.fill(mRestoreOffsets, 0);
+        }
+
+        fillDownTo(0, mFirstPosition);
+        populate(false);
+    }
+
 
     /**
      * for debug purposes
@@ -1727,6 +1817,7 @@ public class BulletStaggeredGridView extends ViewGroup {
             } else if (!checkLayoutParams(lp)) {
                 lp = generateLayoutParams(lp);
             }
+            view.setLayoutParams(lp);
         }
 
         final LayoutParams sglp = (LayoutParams) lp;
@@ -1749,6 +1840,7 @@ public class BulletStaggeredGridView extends ViewGroup {
         clearAllState();
         mAdapter = new HeaderFooterListAdapter(mHeaderView, mFooterView, adapter);
         mDataChanged = true;
+        mItemCount = mAdapter.getCount();
 
         if (mAdapter != null) {
             mAdapter.registerDataSetObserver(mObserver);
@@ -1783,14 +1875,9 @@ public class BulletStaggeredGridView extends ViewGroup {
      */
     private void resetStateForGridTop() {
         // Reset mItemTops and mItemBottoms
-        final int colCount = mColCount;
-        if (mItemTops == null || mItemTops.length != colCount) {
-            mItemTops = new int[colCount];
-            mItemBottoms = new int[colCount];
-        }
-        final int top = getPaddingTop();
-        Arrays.fill(mItemTops, top);
-        Arrays.fill(mItemBottoms, top);
+        mItemTops = null;
+        mItemBottoms = null;
+        mScrollY = 0;
 
         // Reset the first visible position in the grid to be item 0
         mFirstPosition = 0;
@@ -1845,7 +1932,7 @@ public class BulletStaggeredGridView extends ViewGroup {
         }
 
         if (getChildCount() > 0) {
-
+            int itemMargin = getItemMargin(position);
             int topOffsets[] = new int[this.mColCount];
 
             if (this.mColWidth > 0)
@@ -1857,11 +1944,16 @@ public class BulletStaggeredGridView extends ViewGroup {
                         Log.w("mColWidth", mColWidth + " " + left);
 
                         // determine the column by cycling widths
-                        while (left > col * (this.mColWidth + mItemMargin * 2) + getPaddingLeft()) {
+                        while (left > col * (this.mColWidth + itemMargin * 2) + getPaddingLeft()) {
                             col++;
                         }
 
-                        topOffsets[col] = getChildAt(i).getTop() - mItemMargin - getPaddingTop();
+                        try {
+                            topOffsets[col] = getChildAt(i).getTop() - itemMargin - getPaddingTop();
+                        }
+                        catch (IndexOutOfBoundsException e) {
+                            // Ignore
+                        }
                     }
 
                 }
@@ -2088,9 +2180,8 @@ public class BulletStaggeredGridView extends ViewGroup {
                         for (int i = 0; i < childCount; i++) {
                             final View child = getChildAt(i);
                             final LayoutParams lp = (LayoutParams) child.getLayoutParams();
-                            final int top = child.getTop() - mItemMargin;
+                            final int top = child.getTop() - getItemMargin(lp.position);
                             final int bottom = child.getBottom();
-                            final LayoutRecord rec = mLayoutRecords.get(mFirstPosition + i);
 
                             final int colEnd = Math.min(mColCount, lp.column + lp.span);
                             for (int col = lp.column; col < colEnd; col++) {
@@ -2133,12 +2224,18 @@ public class BulletStaggeredGridView extends ViewGroup {
                         mItemBottoms[i] = mItemTops[i];
                     }
                 }
+                else {
+                    // Footer is not stable anyway
+                    removeView(mFooterView);
+                }
 
                 // reset list if position does not exist or id for position has changed
                 if (mFirstPosition > mItemCount - 1 || mAdapter.getItemId(mFirstPosition) != mFirstAdapterId) {
                     mFirstPosition = 0;
-                    Arrays.fill(mItemTops, 0);
-                    Arrays.fill(mItemBottoms, 0);
+                    if (mItemTops != null)
+                        Arrays.fill(mItemTops, 0);
+                    if (mItemBottoms != null)
+                        Arrays.fill(mItemBottoms, 0);
 
                     if (mRestoreOffsets != null)
                         Arrays.fill(mRestoreOffsets, 0);
@@ -2166,6 +2263,8 @@ public class BulletStaggeredGridView extends ViewGroup {
         }
 
         private ColMap(Parcel in) {
+            int mapSize = in.readInt();
+            tempMap = new int[mapSize];
             in.readIntArray(tempMap);
             values = new ArrayList<Integer>();
             for (int index = 0; index < tempMap.length; index++) {
@@ -2176,6 +2275,7 @@ public class BulletStaggeredGridView extends ViewGroup {
         @Override
         public void writeToParcel(Parcel out, int flags) {
             tempMap = toIntArray(values);
+            out.writeInt(tempMap.length);
             out.writeIntArray(tempMap);
         }
 
@@ -2216,9 +2316,15 @@ public class BulletStaggeredGridView extends ViewGroup {
             super(in);
             firstId = in.readLong();
             position = in.readInt();
-            in.readIntArray(topOffsets);
-            in.readTypedList(mapping, ColMap.CREATOR);
 
+            int isPresent = in.readInt();
+            if (isPresent > 0) {
+                int columnCount = in.readInt();
+                topOffsets = new int[columnCount];
+                in.readIntArray(topOffsets);
+                mapping = new ArrayList<ColMap>();
+                in.readTypedList(mapping, ColMap.CREATOR);
+            }
         }
 
         @Override
@@ -2226,8 +2332,15 @@ public class BulletStaggeredGridView extends ViewGroup {
             super.writeToParcel(out, flags);
             out.writeLong(firstId);
             out.writeInt(position);
-            out.writeIntArray(topOffsets);
-            out.writeTypedList(mapping);
+            if (topOffsets != null) {
+                out.writeInt(1);
+                out.writeInt(topOffsets.length);
+                out.writeIntArray(topOffsets);
+                out.writeTypedList(mapping);
+            }
+            else {
+                out.writeInt(0);
+            }
         }
 
         @Override
@@ -2740,17 +2853,28 @@ public class BulletStaggeredGridView extends ViewGroup {
     public void setHeaderView(View v) {
         mHeaderView = v;
 
-        BulletStaggeredGridView.LayoutParams lp = new BulletStaggeredGridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.span = Integer.MAX_VALUE;
-        mHeaderView.setLayoutParams(lp);
+        if (mHeaderView != null) {
+            BulletStaggeredGridView.LayoutParams lp = new BulletStaggeredGridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.span = Integer.MAX_VALUE;
+            mHeaderView.setLayoutParams(lp);
+        }
     }
 
     public void setFooterView(View v) {
         mFooterView = v;
 
-        BulletStaggeredGridView.LayoutParams lp = new BulletStaggeredGridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp.span = Integer.MAX_VALUE;
-        mFooterView.setLayoutParams(lp);
+        if (mFooterView != null) {
+            BulletStaggeredGridView.LayoutParams lp = new BulletStaggeredGridView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.span = Integer.MAX_VALUE;
+            mFooterView.setLayoutParams(lp);
+        }
     }
 
+    @Override
+    public boolean canScrollVertically(int direction) {
+        if (direction == -1) {
+            return mScrollY > 0;
+        }
+        return !mScrollBottom;
+    }
 }

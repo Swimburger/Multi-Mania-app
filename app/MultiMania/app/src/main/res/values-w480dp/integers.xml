@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="amount_of_schedule_columns">16</integer>
-    <integer name="amount_of_schedule_item_columns">8</integer>
-    <integer name="amount_of_schedule_item_rows">4</integer>
     <integer name="news_column_count">2</integer>
     <integer name="myschedule_column_count">2</integer>
     <integer name="schedule_column_count">2</integer>

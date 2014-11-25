@@ -19,9 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CursorAdapter;
-import android.widget.GridView;
 
 import com.cocosw.undobar.UndoBarController;
+import com.etsy.android.grid.StaggeredGridView;
 
 import java.text.ParseException;
 
@@ -72,7 +72,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_my_schedule, container, false);
-        GridView grid = (GridView) v.findViewById(R.id.gridViewMySchedule);
+        StaggeredGridView grid = (StaggeredGridView) v.findViewById(R.id.gridViewMySchedule);
         grid.setAdapter(mMyScheduleAdapter);
         grid.setOnItemClickListener(this);
 
@@ -110,7 +110,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         Intent intent = new Intent(getActivity(), TalkActivity.class);
         intent.setData(uri);
         startActivity(intent);
-
     }
 
     private class MyScheduleAdapter extends CursorAdapter {
@@ -132,7 +131,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_myschedule, null);
+            View v = mInflater .inflate(R.layout.row_myschedule, null);
             v.setTag(new MyScheduleRowHolder(v));
             return v;
         }
@@ -165,10 +164,11 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             mViewHolder.btnRemoveTalk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     removeItem(id);
                     //show undobar
                     mUndoBar = new UndoBarController.UndoBar(getActivity())
-                            .message("Removed from favorites")
+                            .message("Removed from favorites")//TODO: put this string in strings file, load it trough getString
                             .listener(new UndoBarController.UndoListener() {
                                 @Override
                                 public void onUndo(@Nullable Parcelable parcelable) {
