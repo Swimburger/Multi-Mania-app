@@ -19,4 +19,5 @@
     <style name="Widget.Light.ActionBar.Transparent">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
 </resources>
