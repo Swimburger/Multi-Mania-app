@@ -8,4 +8,6 @@ import be.ana.nmct.multimania.model.Talk;
 public class ScheduleTalkVm extends Talk {
     public String tags;
     public String room;
+    public String fromString;
+    public String untilString;
 }

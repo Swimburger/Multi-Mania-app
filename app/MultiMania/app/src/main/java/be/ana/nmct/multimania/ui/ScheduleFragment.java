@@ -87,7 +87,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         mScheduleGrid.setOnItemClickListener(this);
 
         getLoaderManager().initLoader(MainActivity.LOADER_SCHEDULE_TALK_ID+mPosition, null, this);
-        //BuildItems(mCursor);
+        //buildItems(mCursor);
         return v;
     }
 
@@ -101,11 +101,11 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         mCursor = cursor;
-        BuildItems(cursor);
+        buildItems(cursor);
         loader.abandon();
     }
 
-    private void BuildItems(Cursor cursor) {
+    private void buildItems(Cursor cursor) {
         if(cursor==null||mItems==null)return;
         mItems.clear();
 
