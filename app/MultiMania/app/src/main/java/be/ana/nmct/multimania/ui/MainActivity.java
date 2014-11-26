@@ -21,6 +21,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     public static final int LOADER_SCHEDULE_TALK_ID=10;
     public static final int LOADER_MYSCHEDULE_TALK_ID=20;
     public static final int LOADER_NEWS_ID=3;
+    public static final int LOADER_SETTINGS=5;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;

@@ -3,7 +3,6 @@ package be.ana.nmct.multimania.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
 /**
  * Created by Astrid on 16/11/2014.

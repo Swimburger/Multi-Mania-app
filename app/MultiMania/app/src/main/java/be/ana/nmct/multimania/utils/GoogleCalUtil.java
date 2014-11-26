@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.provider.CalendarContract;
 
 import java.util.List;
@@ -75,6 +74,7 @@ public class GoogleCalUtil {
             addTalk(talks.get(i));
         }
     }
+
     /** Adds a talk to the calendar
      * @param talk The context (e.g. activity)
      * @return returns the calEventId
@@ -135,30 +135,5 @@ public class GoogleCalUtil {
                 .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE,
                         CalendarContract.ACCOUNT_TYPE_LOCAL)
                 .build();
-    }
-
-    private Uri talkEntryUri(Cursor cursor){
-        return MultimaniaContract.TalkEntry.buildItemUri(
-                cursor.getLong(
-                        cursor.getColumnIndex(
-                                MultimaniaContract.TalkEntry._ID
-                        )
-                )
-        );
-    }
-
-    private class AddAllTask extends AsyncTask<Void, Void, Void> {
-
-        private List<ScheduleTalkVm> mTalks;
-
-        private AddAllTask(List<ScheduleTalkVm> talks) {
-            this.mTalks = talks;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            addTalkList(mTalks);
-            return null;
-        }
     }
 }

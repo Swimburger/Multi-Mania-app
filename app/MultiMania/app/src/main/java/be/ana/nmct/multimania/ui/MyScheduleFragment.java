@@ -30,8 +30,6 @@ import java.util.List;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
-import be.ana.nmct.multimania.model.Talk;
-import be.ana.nmct.multimania.utils.GoogleCalUtil;
 import be.ana.nmct.multimania.utils.SettingsHelper;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.MyScheduleRowHolder;
@@ -96,9 +94,10 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(getActivity(), MultimaniaContract.TalkEntry.CONTENT_URI, null,
+        return new CursorLoader(getActivity(), MultimaniaContract.TalkEntry.CONTENT_URI,
+                null,
                 MultimaniaContract.TalkEntry.IS_FAVORITE + "=1 AND " +
-                        MultimaniaContract.TalkEntry.DATE_FROM + " LIKE ?"
+                MultimaniaContract.TalkEntry.DATE_FROM + " LIKE ?"
                 , new String[]{mDate + "%"}, MultimaniaContract.TalkEntry.DATE_FROM);
     }
 

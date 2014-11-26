@@ -1,21 +1,11 @@
 package be.ana.nmct.multimania.service;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.accounts.AccountManagerFuture;
 import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncResult;
 import android.os.Bundle;
-
-import com.google.gson.reflect.TypeToken;
-
-import java.util.List;
-
-import be.ana.nmct.multimania.data.GsonLoader;
-import be.ana.nmct.multimania.model.NewsItem;
 
 /**
  * Created by Astrid on 16/11/2014.
