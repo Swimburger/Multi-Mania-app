@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/mm_card"
     android:descendantFocusability="blocksDescendants"
+    android:id="@+id/scheduleRowRoot"
     >
     <TextView
         android:textAppearance="?android:textAppearanceMedium"

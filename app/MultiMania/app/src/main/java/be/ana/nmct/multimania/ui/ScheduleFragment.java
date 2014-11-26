@@ -256,6 +256,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         private void bindItemView(View view,final ScheduleTalkVm item) {
             ((TextView)view.findViewById(R.id.txtTitle)).setText(item.title);
             final ImageButton imgButton = (ImageButton) view.findViewById(R.id.btnFavorite);
+            Utility.enlargeTouchArea(view.findViewById(R.id.scheduleRowRoot), imgButton, 10);
             imgButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
