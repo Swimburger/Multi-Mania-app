@@ -2,15 +2,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/mm_card"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_span="1"
     >
     <ImageView
         android:id="@+id/imgSponsor"
         android:scaleType="fitCenter"
-        android:src="@drawable/adobe"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"/>
     <View

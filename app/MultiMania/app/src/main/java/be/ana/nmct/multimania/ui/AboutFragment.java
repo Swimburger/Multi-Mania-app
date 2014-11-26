@@ -35,7 +35,8 @@ public class AboutFragment extends Fragment {
             R.drawable.design_express,
             R.drawable.howest,
             R.drawable.wetenschap_maakt_knap,
-            R.drawable.combell
+            R.drawable.combell,
+            R.drawable.microsoft,
 
     };
     private BulletStaggeredGridView mGrid;
@@ -145,15 +146,9 @@ public class AboutFragment extends Fragment {
                     });
                     break;
                 default:
-                    BitmapFactory.Options o = new BitmapFactory.Options();
-                    o.inTargetDensity = DisplayMetrics.DENSITY_DEFAULT;
                     int imgResource =getSponsorImage(position-2);
-                    Bitmap bmp = BitmapFactory.decodeResource(getResources(), imgResource, o);
-                    int w = bmp.getWidth();
-                    int h = bmp.getHeight();
                     ImageView img =   ((SponsorViewHolder) v.getTag()).imgSponsor;
                     img.setImageResource(imgResource);
-                    img.getLayoutParams().height=h;
             }
         }
 
