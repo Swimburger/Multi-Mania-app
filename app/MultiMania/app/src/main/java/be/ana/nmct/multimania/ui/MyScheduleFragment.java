@@ -111,9 +111,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Cursor cursor = (Cursor) mMyScheduleAdapter.getItem(position);
-        final int idIndex = cursor.getColumnIndex(MultimaniaContract.TalkEntry._ID);
-        final long talkId = cursor.getLong(idIndex);
+        final long talkId = mItems.get(position).id;
         Uri uri = MultimaniaContract.TalkEntry.buildItemUri(talkId);
         Intent intent = new Intent(getActivity(), TalkActivity.class);
         intent.setData(uri);
