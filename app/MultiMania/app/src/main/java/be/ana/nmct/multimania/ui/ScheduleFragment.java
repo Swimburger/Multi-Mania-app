@@ -12,7 +12,6 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.media.audiofx.BassBoost;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,9 +31,8 @@ import java.util.List;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.MultimaniaContract;
-import be.ana.nmct.multimania.model.Talk;
-import be.ana.nmct.multimania.service.NotificationSender;
 import be.ana.nmct.multimania.utils.GoogleCalUtil;
+import be.ana.nmct.multimania.utils.SettingsHelper;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
@@ -51,8 +49,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     private int mPosition;
     private String mAccountName;
     private List<Object> mItems;
-    private String mCalendarName;
-    private GoogleCalUtil mCalUtil;
+    private SettingsHelper mSettingsHelper;
 
     public ScheduleFragment() {}
 
@@ -71,12 +68,10 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
         this.mDate = getArguments().getString(DATE_KEY);
         this.mPosition = getArguments().getInt(POSITION_KEY);
-
+        this.mSettingsHelper = new SettingsHelper(getActivity());
         this.mAccountName = new SettingsUtil(getActivity(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
         //setRetainInstance(true);
         this.mItems = new ArrayList<Object>();
-        this.mCalendarName = getActivity().getString(R.string.calendar_name);
-        this.mCalUtil = new GoogleCalUtil(getActivity(),mCalendarName);
     }
 
     @Override
@@ -139,7 +134,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
                 vm.isKeynote = cursor.getInt(isKeynoteIndex)==1;
                 vm.isFavorite = cursor.getInt(isFavoriteIndex)==1;
-                vm.room=cursor.getString(roomIndex);
+                vm.room = cursor.getString(roomIndex);
                 vm.title = cursor.getString(titleIndex);
                 vm.id = cursor.getLong(idIndex);
                 vm.calEventId = cursor.getLong(calEventIdIndex);
@@ -287,7 +282,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                     if(mAccountName!=null){
                         ApiActions.postFavoriteTalk(getActivity(),mAccountName, item.id);
                     }
-                    settingsHandler(item);
+                    mSettingsHelper.settingsHandler(item);
                 }
             });
             imgButton.setImageResource(getStarDrawable(item.isFavorite));
@@ -301,31 +296,6 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                 lp.span = 1;
             }
             view.setLayoutParams(lp);
-        }
-
-        private void settingsHandler(ScheduleTalkVm item) {
-
-            SettingsUtil settings = new SettingsUtil(getActivity(), SettingsFragment.PREFERENCE_NAME);
-
-            //handle alarms
-            if(settings.getBooleanPreference(SettingsFragment.PREFERENCE_NOTIFY, true)){
-
-                Uri uri = MultimaniaContract.TalkEntry.buildItemUri(item.id);
-                Talk talk = Utility.getTalkFromUri(getActivity(), uri);
-                NotificationSender notSender = new NotificationSender(getActivity());
-
-                if(item.isFavorite){
-                    notSender.setAlarmForTalk(talk);
-                } else{
-                    notSender.cancelAlarmForTalk(talk);
-                }
-            }
-
-            //TODO: handle calendar
-            if(settings.getBooleanPreference(SettingsFragment.PREFERENCE_SYNC, false)){
-                
-            }
-
         }
 
         private int getStarDrawable(boolean isFavorite) {

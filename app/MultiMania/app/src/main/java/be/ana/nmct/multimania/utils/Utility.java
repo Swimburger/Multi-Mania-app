@@ -42,8 +42,7 @@ public final class Utility {
     }
 
     public static long getDateInMillis(Date date){
-        long l = (long)date.getTime() % 1000;
-        return l < 0 ? l + 1000 : l;
+        return date.getTime();
     }
 
     public static String getDateFormat() {

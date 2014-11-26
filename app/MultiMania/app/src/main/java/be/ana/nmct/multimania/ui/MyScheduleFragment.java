@@ -32,6 +32,7 @@ import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.utils.GoogleCalUtil;
+import be.ana.nmct.multimania.utils.SettingsHelper;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.MyScheduleRowHolder;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
@@ -46,12 +47,11 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
     private String mDate;
     private int mPosition;
-    private String mCalendarName;
-    private GoogleCalUtil mCalUtil;
 
     private MyScheduleAdapter mMyScheduleAdapter;
     private StaggeredGridView mGridview;
     public UndoBarController.UndoBar mUndoBar;
+    private SettingsHelper mSettingsHelper;
 
     private List<ScheduleTalkVm> mItems;
 
@@ -75,8 +75,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         this.mDate = args.getString(DATE_KEY);
         this.mPosition = args.getInt(POSITION_KEY);
         this.mItems = new ArrayList<ScheduleTalkVm>();
-        this.mCalendarName = getActivity().getString(R.string.calendar_name);
-        this.mCalUtil = new GoogleCalUtil(getActivity(),mCalendarName);
+        this.mSettingsHelper = new SettingsHelper(getActivity());
     }
 
     @Override
@@ -257,12 +256,12 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
         public void addItem(ScheduleTalkVm vm) {
             updateItemValue(vm.id, true);
-            mCalUtil.addTalk(vm);
+            mSettingsHelper.settingsHandler(vm);
         }
 
         public void removeItem(ScheduleTalkVm vm) {
             updateItemValue(vm.id, false);
-            mCalUtil.deleteTalk(vm);
+            mSettingsHelper.settingsHandler(vm);
         }
 
         private void updateItemValue(long id, boolean value) {
