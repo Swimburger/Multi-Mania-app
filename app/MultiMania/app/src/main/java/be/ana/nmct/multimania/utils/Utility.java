@@ -42,7 +42,11 @@ public final class Utility {
     }
 
     public static long getDateInMillis(Date date){
-        return date.getTime();
+        if(date != null){
+            return date.getTime();
+        } else {
+            return -1;
+        }
     }
 
     public static String getDateFormat() {
