@@ -44,5 +44,5 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="facebook_url">https://www.facebook.com/MultiManiaBE</string>
     <string name="site_url">http://multi-mania.be/</string>
     <string name="unfavorite_undobar">Removed from favorites</string>
-    <string name="notification_text">A keynote is about to begin!</string>
+    <string name="notification_text">Will begin in 10 minutes.</string>
 </resources>

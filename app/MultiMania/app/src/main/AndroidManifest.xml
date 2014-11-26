@@ -61,7 +61,11 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/sync_adapter" />
         </service>
-        <receiver android:name=".service.NotificationReceiver" android:enabled="true" android:process=":remote"></receiver>
+        <receiver android:name=".service.NotificationReceiver" android:enabled="true" android:process=":remote">
+            <intent-filter>
+                <action android:name="be.ana.nmct.multimania.ALARMRECEIVER" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

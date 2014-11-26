@@ -9,10 +9,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
-import org.joda.time.DateTime;
-
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import be.ana.nmct.multimania.R;
@@ -30,23 +26,12 @@ public class NotificationSender {
 
     public final static int NOTIFICATION_ID = 12345;
     public final static String NOTIF_TALKID = "notification_talkid";
+    public final static String INTENT_ALARMRECEIVER = "be.ana.nmct.multimania.ALARMRECEIVER";
 
     private static Context sContext;
 
-    private static Talk testTalk;
-
-    static{
-        Calendar start = Calendar.getInstance();
-        start.add(Calendar.SECOND, 10);
-        Date from = start.getTime();
-        start.add(Calendar.HOUR, 1);
-        Date until = start.getTime();
-        testTalk = new Talk(1, "Batman talks about saving Gotham City", from, until, "The Dark Knight returns to tell us about his favorite moments...", 1, false);
-    }
-
     public NotificationSender(Context context) {
         this.sContext = context;
-        setAlarmForTalk(testTalk);
     }
 
     public void setAlarmForTalkList(List<Talk> talks){
@@ -56,16 +41,16 @@ public class NotificationSender {
     }
 
     public void setAlarmForTalk(Talk talk){
-
-        DateTime from = new DateTime(talk.from);
-        Calendar alarmDate = Calendar.getInstance();
-        alarmDate.setTimeInMillis(System.currentTimeMillis());
-        alarmDate.set(from.getYear(), from.getMonthOfYear(), from.getHourOfDay(), from.getMinuteOfDay(), 0);
-
         Intent intent = new Intent(sContext, NotificationReceiver.class);
+        intent.putExtra(NOTIF_TALKID, talk.id);
+        intent.setAction(INTENT_ALARMRECEIVER);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(sContext, (int)talk.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager)sContext.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, Utility.getDateInMillis(alarmDate.getTime()), pendingIntent);
+        long millis = Utility.getDateInMillis(talk.from);       //TODO: subtract 10 minutes
+        if(millis > 0){
+            alarmManager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);
+        }
+
     }
 
     public void cancelAlarmForTalkList(List<Talk> talks){
@@ -75,7 +60,7 @@ public class NotificationSender {
     }
 
     public void cancelAlarmForTalk(Talk talk){
-        Intent intent = new Intent(sContext, NotificationSender.class);
+        Intent intent = new Intent(sContext, NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(sContext, (int)talk.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager)sContext.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
