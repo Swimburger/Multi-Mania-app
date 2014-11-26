@@ -11,6 +11,11 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.View;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.WindowManager;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.utils.SettingsUtil;
@@ -21,11 +26,12 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     public static final String PREFERENCE_NAME = "launch_values";
     public static final String PREFERENCE_FIRSTTIMELAUNCH = "first_time_launch";
 
-    public static final int LOADER_SCHEDULE_DATES_ID = 0;
-    public static final int LOADER_SCHEDULE_TALK_ID = 10;
-    public static final int LOADER_MYSCHEDULE_TALK_ID = 20;
-    public static final int LOADER_NEWS_ID = 3;
-    public static final int LOADER_TAGS_ID = 4;
+    public static final int LOADER_SCHEDULE_DATES_ID    = 0;
+    public static final int LOADER_SCHEDULE_TALK_ID     = 10;
+    public static final int LOADER_MYSCHEDULE_TALK_ID   = 20;
+    public static final int LOADER_NEWS_ID              = 3;
+    public static final int LOADER_TAGS_ID              = 4;
+    public static final int LOADER_SETTINGS             = 5;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
@@ -59,6 +65,13 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
             launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
         }
+
+        //Beautify for Lollipop users
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.primaryColorDark));
+        }
+
     }
     
     @Override

@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -20,6 +19,7 @@ import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.ui.TalkActivity;
+import be.ana.nmct.multimania.utils.Utility;
 
 /**
  * Created by Axel on 18/11/2014.
@@ -65,8 +65,7 @@ public class NotificationSender {
         Intent intent = new Intent(sContext, NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(sContext, (int)talk.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager)sContext.getSystemService(Context.ALARM_SERVICE);
-        long millis = alarmDate.getTimeInMillis();
-        alarmManager.set(AlarmManager.RTC_WAKEUP, alarmDate.getTimeInMillis(), pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, Utility.getDateInMillis(alarmDate.getTime()), pendingIntent);
     }
 
     public void cancelAlarmForTalkList(List<Talk> talks){
@@ -88,9 +87,9 @@ public class NotificationSender {
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.ic_notification)
                         .setContentTitle(talk.title)
-                        .setContentText("A keynote is about to begin!")
+                        .setContentText(context.getString(R.string.notification_text))
                         .setSound(getNotificationSoundUri())
-                        .setLights(Color.parseColor("#FFFFFF"), 1000, 5000);
+                        .setLights(context.getResources().getColor(R.color.primaryColor), 1000, 5000);
 
 
         Intent targetIntent = new Intent(context, TalkActivity.class);

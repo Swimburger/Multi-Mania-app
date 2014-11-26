@@ -43,5 +43,6 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="twitter_url">https://twitter.com/multimania</string>
     <string name="facebook_url">https://www.facebook.com/MultiManiaBE</string>
     <string name="site_url">http://multi-mania.be/</string>
-
+    <string name="unfavorite_undobar">Removed from favorites</string>
+    <string name="notification_text">A keynote is about to begin!</string>
 </resources>

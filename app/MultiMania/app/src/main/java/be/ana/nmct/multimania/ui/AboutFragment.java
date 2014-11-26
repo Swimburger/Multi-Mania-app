@@ -2,12 +2,9 @@ package be.ana.nmct.multimania.ui;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,14 +25,16 @@ public class AboutFragment extends Fragment {
             R.drawable.adobe,
             R.drawable.chili_publish,
             R.drawable.adobe_user_group,
-            R.drawable.howest,
-            R.drawable.kortrijk_xpo,
-            R.drawable.signpost,
-            R.drawable.design_express,
-            R.drawable.wacom,
             R.drawable.richting_morgen,
+            R.drawable.signpost,
+            R.drawable.wacom,
+            R.drawable.kortrijk_xpo,
+            R.drawable.design_express,
+            R.drawable.howest,
             R.drawable.wetenschap_maakt_knap,
-            R.drawable.combell
+            R.drawable.combell,
+            R.drawable.microsoft,
+
     };
     private BulletStaggeredGridView mGrid;
 
@@ -144,15 +143,9 @@ public class AboutFragment extends Fragment {
                     });
                     break;
                 default:
-                    BitmapFactory.Options o = new BitmapFactory.Options();
-                    o.inTargetDensity = DisplayMetrics.DENSITY_DEFAULT;
                     int imgResource =getSponsorImage(position-2);
-                    Bitmap bmp = BitmapFactory.decodeResource(getResources(), imgResource, o);
-                    int w = bmp.getWidth();
-                    int h = bmp.getHeight();
                     ImageView img =   ((SponsorViewHolder) v.getTag()).imgSponsor;
                     img.setImageResource(imgResource);
-                    img.getLayoutParams().height=h;
             }
         }
 

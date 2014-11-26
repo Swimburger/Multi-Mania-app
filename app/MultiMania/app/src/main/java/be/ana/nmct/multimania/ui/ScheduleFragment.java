@@ -33,9 +33,8 @@ import java.util.List;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.MultimaniaContract;
-import be.ana.nmct.multimania.model.Talk;
-import be.ana.nmct.multimania.service.NotificationSender;
 import be.ana.nmct.multimania.utils.GoogleCalUtil;
+import be.ana.nmct.multimania.utils.SettingsHelper;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
@@ -53,6 +52,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     private String mAccountName;
     private List<Object> mItems;
     private String mFilterTag;
+    private SettingsHelper mSettingsHelper;
 
     public ScheduleFragment() {}
 
@@ -69,12 +69,12 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDate = getArguments().getString(DATE_KEY);
-        mPosition = getArguments().getInt(POSITION_KEY);
-
-        mAccountName = new SettingsUtil(getActivity(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
+        this.mDate = getArguments().getString(DATE_KEY);
+        this.mPosition = getArguments().getInt(POSITION_KEY);
+        this.mSettingsHelper = new SettingsHelper(getActivity());
+        this.mAccountName = new SettingsUtil(getActivity(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
         //setRetainInstance(true);
-        mItems=new ArrayList<Object>();
+        this.mItems = new ArrayList<Object>();
     }
 
     @Override
@@ -90,7 +90,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         mScheduleGrid.setOnItemClickListener(this);
 
         getLoaderManager().initLoader(MainActivity.LOADER_SCHEDULE_TALK_ID+mPosition, null, this);
-        //BuildItems(mCursor);
+        //buildItems(mCursor);
         return v;
     }
 
@@ -104,11 +104,15 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         mCursor = cursor;
-        BuildItems(cursor);
+        try {
+            buildItems(cursor);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         loader.abandon();
     }
 
-    private void BuildItems(Cursor cursor) {
+    private void buildItems(Cursor cursor) throws ParseException {
         if(cursor==null||mItems==null)return;
         mItems.clear();
 
@@ -121,6 +125,8 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         final int titleIndex        = cursor.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
         final int roomIndex         = cursor.getColumnIndex(MultimaniaContract.TalkEntry.ROOM_NAME);
         final int idIndex           = cursor.getColumnIndex(MultimaniaContract.TalkEntry._ID);
+        final int calEventIdIndex   = cursor.getColumnIndex(MultimaniaContract.TalkEntry.CALEVENT_ID);
+        final int descriptionIndex  = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DESCRIPTION);
 
         if(cursor.moveToFirst()){
             do{
@@ -131,31 +137,29 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
                 vm.isKeynote = cursor.getInt(isKeynoteIndex)==1;
                 vm.isFavorite = cursor.getInt(isFavoriteIndex)==1;
-                String title = cursor.getString(titleIndex);
-                String room = cursor.getString(roomIndex);
-                final long talkId = cursor.getLong(idIndex);
+                vm.room = cursor.getString(roomIndex);
+                vm.title = cursor.getString(titleIndex);
+                vm.id = cursor.getLong(idIndex);
+                vm.calEventId = cursor.getLong(calEventIdIndex);
+                vm.description = cursor.getString(descriptionIndex);
+                vm.from = Utility.convertStringToDate(dateFrom);
+                vm.to = Utility.convertStringToDate(dateUntil);
+
                 if(!dates.contains(dateFrom)){
-                    try {
                         mItems.add(
                                 Utility.getTimeString(dateFrom)
                                         + " - " +
                                 Utility.getTimeString(dateUntil)
                         );
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
                     dates.add(dateFrom);
                 }
-                vm.title=title;
-                vm.room=room;
-                vm.id =talkId;
 
-                getLoaderManager().initLoader(1000+(int)talkId,null,new LoaderManager.LoaderCallbacks<Cursor>() {
+                getLoaderManager().initLoader(1000+(int)vm.id,null,new LoaderManager.LoaderCallbacks<Cursor>() {
                     @Override
                     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
                         return new CursorLoader(getActivity(),
                                 ContentUris.appendId(MultimaniaContract.TagEntry.CONTENT_URI.buildUpon()
-                                        .appendPath(MultimaniaContract.PATH_TALK), talkId).build()
+                                        .appendPath(MultimaniaContract.PATH_TALK), vm.id).build()
                                 ,null,null,null,null);
                     }
 
@@ -211,7 +215,9 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
 
     public void onFilterChanged(String tag) {
         mFilterTag = tag;
-        mScheduleGrid.setAdapter(mAdapter);
+        if(mScheduleGrid!=null){
+            mScheduleGrid.setAdapter(mAdapter);
+        }
     }
 
     private class ScheduleAdapter extends ArrayAdapter<Object> {
@@ -268,6 +274,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         private void bindItemView(View view,final ScheduleTalkVm item) {
             ((TextView)view.findViewById(R.id.txtTitle)).setText(item.title);
             final ImageButton imgButton = (ImageButton) view.findViewById(R.id.btnFavorite);
+            Utility.enlargeTouchArea(view.findViewById(R.id.scheduleRowRoot), imgButton, 10);
             imgButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -289,20 +296,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                     if(mAccountName!=null){
                         ApiActions.postFavoriteTalk(getActivity(),mAccountName, item.id);
                     }
-
-                    //add/delete alarm when needed
-                    Uri uri = MultimaniaContract.TalkEntry.buildItemUri(item.id);
-                    SettingsUtil util = new SettingsUtil(getActivity(), SettingsFragment.PREFERENCE_NAME);
-                    Talk talk = Utility.getTalkFromUri(getActivity(), uri);
-                    NotificationSender notSender = new NotificationSender(getActivity());
-                    if(util.getBooleanPreference(SettingsFragment.PREFERENCE_NOTIFY, true)){
-                        if(item.isFavorite){
-                            notSender.setAlarmForTalk(talk);
-                        } else{
-                            notSender.cancelAlarmForTalk(talk);
-                        }
-                    }
-
+                    mSettingsHelper.settingsHandler(item);
                 }
             });
             imgButton.setImageResource(getStarDrawable(item.isFavorite));

@@ -6,13 +6,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.provider.CalendarContract;
 
 import java.util.List;
 
+import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.model.Talk;
+import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
 /**
  * Created by Axel on 29/10/2014.
@@ -39,23 +40,6 @@ public class GoogleCalUtil {
         this.mUtil = new SettingsUtil(mContext, PREFERENCE_NAME);
     }
 
-   /* //single insert via intent
-    public void saveTalkToGoogleCalendarViaIntent(Talk talk){
-        try {
-            //set intent data to send to cal
-            Intent intent = new Intent(Intent.ACTION_INSERT);
-            intent.setData(CalendarContract.Events.CONTENT_URI);
-            intent.putExtra(CalendarContract.Events.TITLE, talk.title);
-            intent.putExtra(CalendarContract.Events.DESCRIPTION, talk.description);
-            intent.putExtra(CalendarContract.Events.EVENT_LOCATION, talk.roomId);
-
-            this.mContext.startActivity(intent);
-
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-        }
-    }*/
-
     private ContentValues buildNewCalContentValues() {
         final ContentValues cv = new ContentValues();
 
@@ -64,7 +48,7 @@ public class GoogleCalUtil {
         cv.put(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL);
         cv.put(CalendarContract.Calendars.NAME, mCalendarName);
         cv.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, mCalendarName);
-        cv.put(CalendarContract.Calendars.CALENDAR_COLOR, 0xEA8561);
+        cv.put(CalendarContract.Calendars.CALENDAR_COLOR, mContext.getResources().getColor(R.color.primaryColor));
         cv.put(CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, CalendarContract.Calendars.CAL_ACCESS_READ);
         cv.put(CalendarContract.Calendars.OWNER_ACCOUNT, accountName);
         cv.put(CalendarContract.Calendars.VISIBLE, 1);
@@ -86,16 +70,17 @@ public class GoogleCalUtil {
         cr.delete(calUri, null, null);
     }
 
-    public void addTalkList(List<Talk> talks){
+    public void addTalkList(List<ScheduleTalkVm> talks){
         for(int i = 0; i < talks.size(); i++){
             addTalk(talks.get(i));
         }
     }
+
     /** Adds a talk to the calendar
      * @param talk The context (e.g. activity)
      * @return returns the calEventId
      */
-    public long addTalk(Talk talk) {
+    public long addTalk(ScheduleTalkVm talk) {
         ContentResolver cr = mContext.getContentResolver();
         ContentValues cv = new ContentValues();
 
@@ -104,33 +89,33 @@ public class GoogleCalUtil {
         cv.put(CalendarContract.Events.TITLE, talk.title);
         cv.put(CalendarContract.Events.DTSTART, Utility.getDateInMillis(talk.from));
         cv.put(CalendarContract.Events.DTEND, Utility.getDateInMillis(talk.to));
-        cv.put(CalendarContract.Events.EVENT_LOCATION, talk.roomId);
+        cv.put(CalendarContract.Events.EVENT_LOCATION, talk.room);
         cv.put(CalendarContract.Events.DESCRIPTION, talk.description);
         cv.put(CalendarContract.Events.EVENT_TIMEZONE, Utility.getTimeZoneId());
 
-        Uri uri = buildEventUri();
-        cr.insert(uri, cv);
-        String derpyderp = uri.getLastPathSegment();
-        updateEvent(talk,Long.parseLong(uri.getLastPathSegment()));
+        long calEventId = Long.parseLong(cr.insert(buildEventUri(), cv).getLastPathSegment());
+        saveCalEventId(talk, calEventId);
 
-        return Long.parseLong(uri.getLastPathSegment());
+        return calEventId;
     }
 
-    private int updateEvent(Talk talk, long eventId) {
+    private int saveCalEventId(ScheduleTalkVm talk, long eventId) {
         ContentValues cv = new ContentValues();
         cv.put(MultimaniaContract.TalkEntry.CALEVENT_ID, eventId);
         return mContext.getContentResolver().update(
                 MultimaniaContract.TalkEntry.CONTENT_URI,
                 cv,
-                MultimaniaContract.TalkEntry._ID + "WHERE ?",
+                MultimaniaContract.TalkEntry._ID + "=?",
                 new String[] {String.valueOf(talk.id)}
         );
     }
 
-    public void deleteTalk(Talk talk){
-        ContentResolver cr = mContext.getContentResolver();
-        Uri deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, talk.calEventId);
-        cr.delete(deleteUri, null, null);
+    public int deleteTalk(Talk talk){
+        return mContext.getContentResolver().delete(
+                buildEventUri(),
+                "("+ CalendarContract.Events._ID+" = ?)",
+                new String[] {String.valueOf(talk.calEventId)}
+        );
     }
 
     public Uri buildCalUri() {
@@ -151,30 +136,5 @@ public class GoogleCalUtil {
                 .appendQueryParameter(CalendarContract.Calendars.ACCOUNT_TYPE,
                         CalendarContract.ACCOUNT_TYPE_LOCAL)
                 .build();
-    }
-
-    private Uri talkEntryUri(Cursor cursor){
-        return MultimaniaContract.TalkEntry.buildItemUri(
-                cursor.getLong(
-                        cursor.getColumnIndex(
-                                MultimaniaContract.TalkEntry._ID
-                        )
-                )
-        );
-    }
-
-    private class AddAllTask extends AsyncTask<Void, Void, Void> {
-
-        private List<Talk> mTalks;
-
-        private AddAllTask(List<Talk> talks) {
-            this.mTalks = talks;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            addTalkList(mTalks);
-            return null;
-        }
     }
 }
