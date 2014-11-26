@@ -256,11 +256,13 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
         public void addItem(ScheduleTalkVm vm) {
             updateItemValue(vm.id, true);
+            vm.isFavorite = true;
             mSettingsHelper.settingsHandler(vm);
         }
 
         public void removeItem(ScheduleTalkVm vm) {
             updateItemValue(vm.id, false);
+            vm.isFavorite = false;
             mSettingsHelper.settingsHandler(vm);
         }
 
