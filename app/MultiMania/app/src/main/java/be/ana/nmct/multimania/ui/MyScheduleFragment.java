@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private int mPosition;
     private MyScheduleAdapter mMyScheduleAdapter;
     private StaggeredGridView mGridview;
-    private UndoBarController mUndoBar;
+    public UndoBarController.UndoBar mUndoBar;
 
     private List<ScheduleTalkVm> mItems;
 
@@ -119,48 +120,48 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     }
 
     private void buildItems(Cursor c) throws ParseException {
-        if(c == null || mItems == null) return;
+        if (c == null || mItems == null) return;
         mItems.clear();
 
-        final int dateFromIndex     = c.getColumnIndex(MultimaniaContract.TalkEntry.DATE_FROM);
-        final int dateUntilIndex    = c.getColumnIndex(MultimaniaContract.TalkEntry.DATE_UNTIL);
-        final int isFavoriteIndex   = c.getColumnIndex(MultimaniaContract.TalkEntry.IS_FAVORITE);
-        final int titleIndex        = c.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
-        final int roomIndex         = c.getColumnIndex(MultimaniaContract.TalkEntry.ROOM_NAME);
-        final int idIndex           = c.getColumnIndex(MultimaniaContract.TalkEntry._ID);
+        final int dateFromIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.DATE_FROM);
+        final int dateUntilIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.DATE_UNTIL);
+        final int isFavoriteIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.IS_FAVORITE);
+        final int titleIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
+        final int roomIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.ROOM_NAME);
+        final int idIndex = c.getColumnIndex(MultimaniaContract.TalkEntry._ID);
 
-        if(c.moveToFirst()){
-            do{
+        if (c.moveToFirst()) {
+            do {
                 final ScheduleTalkVm vm = new ScheduleTalkVm();
-                final long talkId =     c.getLong(idIndex);
+                final long talkId = c.getLong(idIndex);
 
-                vm.isFavorite =         c.getInt(isFavoriteIndex) == 1;
-                vm.title =              c.getString(titleIndex);
-                vm.room =               c.getString(roomIndex);
-                vm.id =                 talkId;
-                vm.fromString =         Utility.getTimeString(c.getString(dateFromIndex));
-                vm.untilString =        Utility.getTimeString(c.getString(dateUntilIndex));
+                vm.isFavorite = c.getInt(isFavoriteIndex) == 1;
+                vm.title = c.getString(titleIndex);
+                vm.room = c.getString(roomIndex);
+                vm.id = talkId;
+                vm.fromString = Utility.getTimeString(c.getString(dateFromIndex));
+                vm.untilString = Utility.getTimeString(c.getString(dateUntilIndex));
 
 
-                getLoaderManager().initLoader(1000+(int)talkId,null,new LoaderManager.LoaderCallbacks<Cursor>() {
+                getLoaderManager().initLoader(1000 + (int) talkId, null, new LoaderManager.LoaderCallbacks<Cursor>() {
                     @Override
                     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
                         return new CursorLoader(getActivity(),
                                 ContentUris.appendId(MultimaniaContract.TagEntry.CONTENT_URI.buildUpon()
                                         .appendPath(MultimaniaContract.PATH_TALK), talkId).build()
-                                ,null,null,null,null);
+                                , null, null, null, null);
                     }
 
                     @Override
                     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
                         vm.tags = "";
-                        if(data.moveToFirst()){
+                        if (data.moveToFirst()) {
                             final int nameIndex = data.getColumnIndex(MultimaniaContract.TagEntry.NAME);
-                            do{
-                                vm.tags +=data.getString(nameIndex)+", ";
-                            }while(data.moveToNext());
-                            if(vm.tags.lastIndexOf(", ")>-1)
-                                vm.tags=vm.tags.substring(0,vm.tags.length()-2);
+                            do {
+                                vm.tags += data.getString(nameIndex) + ", ";
+                            } while (data.moveToNext());
+                            if (vm.tags.lastIndexOf(", ") > -1)
+                                vm.tags = vm.tags.substring(0, vm.tags.length() - 2);
                         }
                         loader.abandon();
                     }
@@ -171,9 +172,9 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                     }
                 });
                 mItems.add(vm);
-            } while(c.moveToNext());
+            } while (c.moveToNext());
         }
-        if(mGridview!=null){
+        if (mGridview != null) {
             mGridview.setAdapter(new MyScheduleAdapter(getActivity(), 0, mItems));
         }
     }
@@ -190,7 +191,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            if(convertView == null){
+            if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.row_myschedule, null);
                 convertView.setTag(new MyScheduleRowHolder(convertView));
             }
@@ -216,15 +217,22 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                 public void onClick(View v) {
 
                     removeItem(vm.id);
+
+                    //clear previous undobars when needed
+                    if(mUndoBar != null){
+                        mUndoBar.clear();
+                    }
+
                     //show undobar
-                    mUndoBar = new UndoBarController.UndoBar(getActivity())
-                            .message(getActivity().getString(R.string.unfavorite_undobar))
-                            .listener(new UndoBarController.UndoListener() {
-                                @Override
-                                public void onUndo(@Nullable Parcelable parcelable) {
-                                    addItem(vm.id);
-                                }
-                            }).show();
+                    mUndoBar = new UndoBarController.UndoBar(getActivity());
+                    mUndoBar.message(getActivity().getString(R.string.unfavorite_undobar));
+                    mUndoBar.listener(new UndoBarController.UndoListener() {
+                        @Override
+                        public void onUndo(@Nullable Parcelable parcelable) {
+                            addItem(vm.id);
+                        }
+                    });
+                    mUndoBar.show();
                 }
             });
         }

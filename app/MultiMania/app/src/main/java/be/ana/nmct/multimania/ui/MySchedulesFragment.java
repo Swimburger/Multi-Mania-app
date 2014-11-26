@@ -50,6 +50,20 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+
+        //clear the undobar if active
+        for(int i = 0; i < mViewPagerAdapter.getCount(); i++){
+            MyScheduleFragment frag = (MyScheduleFragment)mViewPagerAdapter.getItem(i);
+            if(frag.mUndoBar != null){
+                frag.mUndoBar.clear();
+                break;
+            }
+        }
+    }
+
+    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(getActivity(),MultimaniaContract.TalkEntry.DATE_CONTENT_URI,null,null,null,null);
     }
