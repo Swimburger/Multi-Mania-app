@@ -33,7 +33,7 @@ class TalkRepository{
      * @return array Returns all talks with an extra data member, isFavorite
      */
     public static function getTalksWithFavorites($userid){
-        $sql_query = "SELECT *, IF((SELECT COUNT(*) FROM user_talk WHERE user_id = :userid)>0,'true','false') as isFavorite FROM talk;";
+        $sql_query = "SELECT id, title, `from`, `to`, content, room_id, IF(isKeynote = 1,'true','false') as isKeynote, IF((SELECT COUNT(*) FROM user_talk WHERE user_id = :userid)>0,'true','false') as isFavorite FROM talk;";
         $con = Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         $stmt->execute(array(':userid'=>$userid));
@@ -46,7 +46,7 @@ class TalkRepository{
      */
     public static function getTalkById($id)
     {
-        $sql_query = "SELECT * FROM talk WHERE id=:id;";
+        $sql_query = "SELECT id, title, `from`, `to`, content, room_id, IF(isKeynote = 1,'true','false') as isKeynote FROM talk WHERE id=:id;";
         $con = Utilities::getConnection();
         $stmt = $con->prepare($sql_query);
         if($stmt->execute(array(':id'=>$id))){
