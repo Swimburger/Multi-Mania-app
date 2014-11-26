@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -90,7 +89,7 @@ public class NotificationSender {
                         .setContentTitle(talk.title)
                         .setContentText(context.getString(R.string.notification_text))
                         .setSound(getNotificationSoundUri())
-                        .setLights(Color.parseColor("#7fc28a"), 1000, 5000);
+                        .setLights(context.getResources().getColor(R.color.primaryColor), 1000, 5000);
 
 
         Intent targetIntent = new Intent(context, TalkActivity.class);

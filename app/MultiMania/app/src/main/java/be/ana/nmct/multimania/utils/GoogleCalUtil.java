@@ -10,6 +10,7 @@ import android.provider.CalendarContract;
 
 import java.util.List;
 
+import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
@@ -47,7 +48,7 @@ public class GoogleCalUtil {
         cv.put(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL);
         cv.put(CalendarContract.Calendars.NAME, mCalendarName);
         cv.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, mCalendarName);
-        cv.put(CalendarContract.Calendars.CALENDAR_COLOR, 0x7fc28a);
+        cv.put(CalendarContract.Calendars.CALENDAR_COLOR, mContext.getResources().getColor(R.color.primaryColor));
         cv.put(CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, CalendarContract.Calendars.CAL_ACCESS_READ);
         cv.put(CalendarContract.Calendars.OWNER_ACCOUNT, accountName);
         cv.put(CalendarContract.Calendars.VISIBLE, 1);
