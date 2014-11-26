@@ -28,14 +28,15 @@ public class AboutFragment extends Fragment {
             R.drawable.adobe,
             R.drawable.chili_publish,
             R.drawable.adobe_user_group,
-            R.drawable.howest,
-            R.drawable.kortrijk_xpo,
-            R.drawable.signpost,
-            R.drawable.design_express,
-            R.drawable.wacom,
             R.drawable.richting_morgen,
+            R.drawable.signpost,
+            R.drawable.wacom,
+            R.drawable.kortrijk_xpo,
+            R.drawable.design_express,
+            R.drawable.howest,
             R.drawable.wetenschap_maakt_knap,
             R.drawable.combell
+
     };
     private BulletStaggeredGridView mGrid;
 
