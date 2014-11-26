@@ -30,6 +30,8 @@ import java.util.List;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.model.Talk;
+import be.ana.nmct.multimania.utils.GoogleCalUtil;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.MyScheduleRowHolder;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
@@ -44,6 +46,9 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
     private String mDate;
     private int mPosition;
+    private String mCalendarName;
+    private GoogleCalUtil mCalUtil;
+
     private MyScheduleAdapter mMyScheduleAdapter;
     private StaggeredGridView mGridview;
     public UndoBarController.UndoBar mUndoBar;
@@ -51,7 +56,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private List<ScheduleTalkVm> mItems;
 
     public MyScheduleFragment() {
-
     }
 
     public static MyScheduleFragment newInstance(String date, int position) {
@@ -68,9 +72,11 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
-        mDate = args.getString(DATE_KEY);
-        mPosition = args.getInt(POSITION_KEY);
-        mItems = new ArrayList<ScheduleTalkVm>();
+        this.mDate = args.getString(DATE_KEY);
+        this.mPosition = args.getInt(POSITION_KEY);
+        this.mItems = new ArrayList<ScheduleTalkVm>();
+        this.mCalendarName = getActivity().getString(R.string.calendar_name);
+        this.mCalUtil = new GoogleCalUtil(getActivity(),mCalendarName);
     }
 
     @Override
@@ -88,9 +94,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
         return v;
     }
-
-
-
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
@@ -135,6 +138,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         final int titleIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
         final int roomIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.ROOM_NAME);
         final int idIndex = c.getColumnIndex(MultimaniaContract.TalkEntry._ID);
+        final int calEventIdIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.CALEVENT_ID);
+        final int descriptionIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.DESCRIPTION);
 
         if (c.moveToFirst()) {
             do {
@@ -148,6 +153,11 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                 vm.fromString = Utility.getTimeString(c.getString(dateFromIndex));
                 vm.untilString = Utility.getTimeString(c.getString(dateUntilIndex));
 
+                //stuff to store for the calendar actions
+                vm.calEventId = c.getLong(calEventIdIndex);
+                vm.from = Utility.convertStringToDate(c.getString(dateFromIndex));
+                vm.to = Utility.convertStringToDate(c.getString(dateFromIndex));
+                vm.description = c.getString(descriptionIndex);
 
                 getLoaderManager().initLoader(1000 + (int) talkId, null, new LoaderManager.LoaderCallbacks<Cursor>() {
                     @Override
@@ -224,7 +234,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                 @Override
                 public void onClick(View v) {
 
-                    removeItem(vm.id);
+                    removeItem(vm);
 
                     //clear previous undobars when needed
                     if(mUndoBar != null){
@@ -237,7 +247,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                     mUndoBar.listener(new UndoBarController.UndoListener() {
                         @Override
                         public void onUndo(@Nullable Parcelable parcelable) {
-                            addItem(vm.id);
+                            addItem(vm);
                         }
                     });
                     mUndoBar.show();
@@ -245,12 +255,14 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             });
         }
 
-        public void addItem(long id) {
-            updateItemValue(id, true);
+        public void addItem(ScheduleTalkVm vm) {
+            updateItemValue(vm.id, true);
+            mCalUtil.addTalk(vm);
         }
 
-        public void removeItem(long id) {
-            updateItemValue(id, false);
+        public void removeItem(ScheduleTalkVm vm) {
+            updateItemValue(vm.id, false);
+            mCalUtil.deleteTalk(vm);
         }
 
         private void updateItemValue(long id, boolean value) {

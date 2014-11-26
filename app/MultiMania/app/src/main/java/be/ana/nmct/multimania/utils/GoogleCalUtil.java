@@ -39,23 +39,6 @@ public class GoogleCalUtil {
         this.mUtil = new SettingsUtil(mContext, PREFERENCE_NAME);
     }
 
-   /* //single insert via intent
-    public void saveTalkToGoogleCalendarViaIntent(Talk talk){
-        try {
-            //set intent data to send to cal
-            Intent intent = new Intent(Intent.ACTION_INSERT);
-            intent.setData(CalendarContract.Events.CONTENT_URI);
-            intent.putExtra(CalendarContract.Events.TITLE, talk.title);
-            intent.putExtra(CalendarContract.Events.DESCRIPTION, talk.description);
-            intent.putExtra(CalendarContract.Events.EVENT_LOCATION, talk.roomId);
-
-            this.mContext.startActivity(intent);
-
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-        }
-    }*/
-
     private ContentValues buildNewCalContentValues() {
         final ContentValues cv = new ContentValues();
 
@@ -110,7 +93,6 @@ public class GoogleCalUtil {
 
         Uri uri = buildEventUri();
         cr.insert(uri, cv);
-        String derpyderp = uri.getLastPathSegment();
         updateEvent(talk,Long.parseLong(uri.getLastPathSegment()));
 
         return Long.parseLong(uri.getLastPathSegment());

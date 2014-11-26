@@ -17,8 +17,6 @@ public class MyScheduleRowHolder{
     public TextView txtTag;
     public ImageView btnRemoveTalk;
 
-    public long TalkId;
-
     public MyScheduleRowHolder(View v) {
         this.txtTalkTitle = (TextView)v.findViewById(R.id.txtTalkTitle);
         this.txtRoom = (TextView)v.findViewById(R.id.txtRoom);
