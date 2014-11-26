@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +71,11 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         mDate = args.getString(DATE_KEY);
         mPosition = args.getInt(POSITION_KEY);
         mItems = new ArrayList<ScheduleTalkVm>();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         this.getLoaderManager().initLoader(MainActivity.LOADER_MYSCHEDULE_TALK_ID + mPosition, null, this);
     }
 
@@ -85,6 +88,9 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
         return v;
     }
+
+
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
@@ -193,6 +199,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.row_myschedule, null);
+                Utility.enlargeTouchArea(convertView.findViewById(R.id.myscheduleRowRoot), convertView.findViewById(R.id.btnRemoveTalk), 10);
+
                 convertView.setTag(new MyScheduleRowHolder(convertView));
             }
 

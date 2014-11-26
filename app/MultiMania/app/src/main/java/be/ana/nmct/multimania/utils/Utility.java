@@ -2,8 +2,11 @@ package be.ana.nmct.multimania.utils;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.util.DisplayMetrics;
+import android.view.TouchDelegate;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 
 import java.text.ParseException;
@@ -96,4 +99,28 @@ public final class Utility {
         int dp = Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
         return dp;
     }
+
+    public static void enlargeTouchArea(View root, final View viewToExpand, final int padding) {
+        root.post(new Runnable() {
+            @Override
+            public void run() {
+                Rect delegateArea = new Rect();
+                View delegate = viewToExpand;
+
+                delegate.getHitRect(delegateArea);
+                delegateArea.top -= padding;
+                delegateArea.bottom += padding;
+                delegateArea.left -= padding;
+                delegateArea.right += padding;
+
+                TouchDelegate expandedArea = new TouchDelegate(delegateArea, delegate);
+
+                if(View.class.isInstance(delegate.getParent())){
+                    ((View)delegate.getParent()).setTouchDelegate(expandedArea);
+                }
+
+            }
+        });
+    }
+
 }
