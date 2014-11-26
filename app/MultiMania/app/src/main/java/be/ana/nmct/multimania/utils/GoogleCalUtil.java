@@ -47,7 +47,7 @@ public class GoogleCalUtil {
         cv.put(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL);
         cv.put(CalendarContract.Calendars.NAME, mCalendarName);
         cv.put(CalendarContract.Calendars.CALENDAR_DISPLAY_NAME, mCalendarName);
-        cv.put(CalendarContract.Calendars.CALENDAR_COLOR, 0xEA8561);
+        cv.put(CalendarContract.Calendars.CALENDAR_COLOR, 0x7fc28a);
         cv.put(CalendarContract.Calendars.CALENDAR_ACCESS_LEVEL, CalendarContract.Calendars.CAL_ACCESS_READ);
         cv.put(CalendarContract.Calendars.OWNER_ACCOUNT, accountName);
         cv.put(CalendarContract.Calendars.VISIBLE, 1);

@@ -4,9 +4,11 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
+import android.view.WindowManager;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.utils.SettingsUtil;
@@ -50,6 +52,13 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
             launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
         }
+
+        //Beautify for Lollipop users
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.primaryColorDark));
+        }
+
     }
     
     @Override
