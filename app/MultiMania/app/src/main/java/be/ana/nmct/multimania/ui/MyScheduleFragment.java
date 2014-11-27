@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -157,6 +158,13 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                 vm.to = Utility.convertStringToDate(c.getString(dateFromIndex));
                 vm.description = c.getString(descriptionIndex);
 
+                for(int i = 0; i < mItems.size(); i++){
+                    if(mItems.get(i).from.equals(vm.from)){
+                        vm.isDoubleBooked = true;
+                        break;
+                    }
+                }
+
                 getLoaderManager().initLoader(1000 + (int) talkId, null, new LoaderManager.LoaderCallbacks<Cursor>() {
                     @Override
                     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -225,6 +233,16 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             vh.txtRoom.setText(vm.room);
             vh.txtTag.setText(vm.tags);
             vh.txtTime.setText(vm.fromString + " - " + vm.untilString);
+
+            if(vm.isDoubleBooked){
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN){
+                    vh.root.setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.double_booking_myschedule));
+                } else {
+                    vh.root.setBackground(getActivity().getResources().getDrawable((R.drawable.double_booking_myschedule)));
+                }
+                //TODO: find out why this crashes for no reason
+                //vh.bottomBorder.setBackgroundColor(getActivity().getResources().getColor(R.color.orange));
+            }
 
 
             //remove button
