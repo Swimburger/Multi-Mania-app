@@ -4,6 +4,13 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
+import android.view.View;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -19,11 +26,12 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     public static final String PREFERENCE_NAME = "launch_values";
     public static final String PREFERENCE_FIRSTTIMELAUNCH = "first_time_launch";
 
-    public static final int LOADER_SCHEDULE_DATES_ID =0;
-    public static final int LOADER_SCHEDULE_TALK_ID=10;
-    public static final int LOADER_MYSCHEDULE_TALK_ID=20;
-    public static final int LOADER_NEWS_ID=3;
-    public static final int LOADER_SETTINGS=5;
+    public static final int LOADER_SCHEDULE_DATES_ID    = 0;
+    public static final int LOADER_SCHEDULE_TALK_ID     = 10;
+    public static final int LOADER_MYSCHEDULE_TALK_ID   = 20;
+    public static final int LOADER_NEWS_ID              = 3;
+    public static final int LOADER_TAGS_ID              = 4;
+    public static final int LOADER_SETTINGS             = 5;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
@@ -36,11 +44,16 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+        Configuration configuration = getResources().getConfiguration();
+        if ((configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_SMALL||
+            (configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_NORMAL||
+            (configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE){
+            // Set up the drawer.
+            mNavigationDrawerFragment.setUp(
+                    R.id.navigation_drawer,
+                    (DrawerLayout) findViewById(R.id.drawer_layout));
+        }
 
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
 
         //Handle first time launching
         SettingsUtil launchUtil = new SettingsUtil(this, PREFERENCE_NAME);
@@ -148,5 +161,19 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void openTwitter(View v){
+        launchUrlIntent(getString(R.string.twitter_url));
+    }
+    public void openFacebook(View v){
+        launchUrlIntent(getString(R.string.facebook_url));
+    }
+    public void openSite(View v){
+        launchUrlIntent(getString(R.string.site_url));
+    }
 
+    public void launchUrlIntent(String url){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
+        startActivity(intent);
+    }
 }

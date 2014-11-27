@@ -3,9 +3,9 @@ package be.ana.nmct.multimania.ui;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -15,9 +15,9 @@ public class TalkActivity extends Activity implements TalkFragment.TitleLoadList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-        if(dpWidth>=820){
+        Configuration configuration = getResources().getConfiguration();
+        if ((configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE||
+                (configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_LARGE){
             showAsPopup(this);
         }
 

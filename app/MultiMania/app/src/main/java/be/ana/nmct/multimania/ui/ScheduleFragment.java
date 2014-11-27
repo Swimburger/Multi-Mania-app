@@ -17,6 +17,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -49,6 +51,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     private int mPosition;
     private String mAccountName;
     private List<Object> mItems;
+    private String mFilterTag;
     private SettingsHelper mSettingsHelper;
 
     public ScheduleFragment() {}
@@ -210,15 +213,26 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         }
     }
 
+    public void onFilterChanged(String tag) {
+        mFilterTag = tag;
+        if(mScheduleGrid!=null){
+            mScheduleGrid.setAdapter(mAdapter);
+        }
+    }
+
     private class ScheduleAdapter extends ArrayAdapter<Object> {
 
         private static final int SCHEDULE_GRID_HEADER_TYPE = 0;
         private static final int SCHEDULE_GRID_ITEM_TYPE = 1;
         private final LayoutInflater mInflater;
+        private final Animation mFadeOutAnim;
+        private final Animation mFadeInAnim;
 
         public ScheduleAdapter(Context context, List<Object> objects) {
             super(context,0,objects);
             mInflater = LayoutInflater.from(getActivity());
+            mFadeOutAnim = AnimationUtils.loadAnimation(getActivity(),R.anim.fade_out_partially);
+            mFadeInAnim = AnimationUtils.loadAnimation(getActivity(),R.anim.fade_in_partially);
         }
 
         @Override
@@ -288,6 +302,14 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
             imgButton.setImageResource(getStarDrawable(item.isFavorite));
             ((TextView) view.findViewById(R.id.txtRoom)).setText(item.room);
             ((TextView) view.findViewById(R.id.txtTag)).setText(item.tags);
+
+            if(mFilterTag!=null){
+                if(!item.tags.toLowerCase().contains(mFilterTag.toLowerCase())) {
+                    view.setAnimation(mFadeOutAnim);
+                }else{
+                    view.setAnimation(mFadeInAnim);
+                }
+            }
 
             BulletStaggeredGridView.LayoutParams lp = new BulletStaggeredGridView.LayoutParams(view.getLayoutParams());
             if(item.isKeynote){

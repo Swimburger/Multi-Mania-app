@@ -114,8 +114,12 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
-        mItems.clear();
-        mMyScheduleAdapter.notifyDataSetChanged();
+        if(mItems!=null){
+            mItems.clear();
+        }
+        if(mMyScheduleAdapter!=null){
+            mMyScheduleAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
