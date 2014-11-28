@@ -1,10 +1,29 @@
-<com.etsy.android.grid.StaggeredGridView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:staggered="http://schemas.android.com/apk/res-auto"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="be.ana.nmct.multimania.ui.MyScheduleFragment"
-    android:id="@+id/gridViewMySchedule"
-    staggered:item_margin="8dp"
-    staggered:column_count="@integer/myschedule_column_count"/>
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/placeholder"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="@string/myschedule_placeholder"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:visibility="invisible"
+        />
+
+    <com.etsy.android.grid.StaggeredGridView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:staggered="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/gridViewMySchedule"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        staggered:column_count="@integer/myschedule_column_count"
+        staggered:item_margin="8dp"
+        tools:context="be.ana.nmct.multimania.ui.MyScheduleFragment" />
+
+</RelativeLayout>
