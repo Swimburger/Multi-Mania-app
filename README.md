@@ -4,7 +4,7 @@
 
 The Multi-Mania project is a backend and application for the [Multi-Mania conference](http://multi-mania.be/).
 
-The multimania project exists out of 2 big parts.
+The multimania project exists out of 3 big parts.
 
  1. The backend
  2. Wireframes for all major platforms (Android, iOS, Windows Phone 8, Windows Store)
