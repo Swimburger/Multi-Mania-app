@@ -8,6 +8,7 @@ import android.app.FragmentManager;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
@@ -129,10 +130,12 @@ public class SchedulesFragment extends Fragment implements LoaderManager.LoaderC
     private class SchedulesPagerAdapter extends FragmentStatePagerAdapter {
 
         private final String mDayString;
+        private Configuration configuration;
 
         public SchedulesPagerAdapter(FragmentManager fm) {
             super(fm);
             mDayString = getString(R.string.day);
+            configuration = getResources().getConfiguration();
         }
 
         @Override
@@ -150,6 +153,12 @@ public class SchedulesFragment extends Fragment implements LoaderManager.LoaderC
             return mDayString+ " "+(position+1);
         }
 
-
+        @Override
+        public float getPageWidth(int position) {
+            if ((configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE){//TODO:test on tablet
+                return 0.5f;
+            }
+            return super.getPageWidth(position);
+        }
     }
 }
