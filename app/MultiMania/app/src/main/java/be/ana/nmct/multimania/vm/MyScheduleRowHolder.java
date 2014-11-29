@@ -1,7 +1,9 @@
 package be.ana.nmct.multimania.vm;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import be.ana.nmct.multimania.R;
@@ -16,6 +18,8 @@ public class MyScheduleRowHolder{
     public TextView txtTime;
     public TextView txtTag;
     public ImageView btnRemoveTalk;
+    public RelativeLayout root;
+    public View bottomBorder;
 
     public MyScheduleRowHolder(View v) {
         this.txtTalkTitle = (TextView)v.findViewById(R.id.txtTalkTitle);
@@ -23,5 +27,7 @@ public class MyScheduleRowHolder{
         this.txtTime = (TextView)v.findViewById(R.id.txtTime);
         this.txtTag = (TextView)v.findViewById(R.id.txtTag);
         this.btnRemoveTalk = (ImageView)v.findViewById(R.id.btnRemoveTalk);
+        this.root = (RelativeLayout)v.findViewById(R.id.myscheduleRowRoot);
+        this.bottomBorder = v.findViewById(R.id.borderBottom);
     }
 }

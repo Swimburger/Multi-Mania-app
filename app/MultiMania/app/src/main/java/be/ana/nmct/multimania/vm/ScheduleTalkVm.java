@@ -10,4 +10,5 @@ public class ScheduleTalkVm extends Talk {
     public String room;
     public String fromString;
     public String untilString;
+    public boolean isDoubleBooked;
 }

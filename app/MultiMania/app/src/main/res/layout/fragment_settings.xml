@@ -9,6 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="left|top"
+        android:layout_marginLeft="10dp"
         >
 
         <CheckBox android:id="@+id/checkbox_sync"
@@ -17,6 +18,7 @@
             android:layout_height="55dp"
             android:text="@string/settings_sync"
             android:textColor="@color/white"
+            android:button="@drawable/checkbox"
             android:checked="false" />
             />
         <View
@@ -27,6 +29,7 @@
         <CheckBox android:id="@+id/checkbox_notify"
             android:layout_width="fill_parent"
             android:layout_height="55dp"
+            android:button="@drawable/checkbox"
             android:text="@string/settings_notify"
             android:textColor="@color/white" />
 

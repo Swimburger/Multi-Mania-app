@@ -22,6 +22,7 @@ android {
 }
 repositories {
     maven { url 'https://github.com/felipecsl/m2repository/raw/master/' }
+    mavenCentral()
 }
 
 dependencies {
@@ -38,4 +39,7 @@ dependencies {
     compile 'com.etsy.android.grid:library:1.0.5'
     compile 'joda-time:joda-time:2.3'
     compile 'com.cocosw:undobar:1.6'
+    compile 'com.nhaarman.listviewanimations:lib-core:3.0.0@aar'
+    compile 'com.nhaarman.listviewanimations:lib-manipulation:3.0.0@aar'
+    compile 'com.nineoldandroids:library:2.4.0'
 }

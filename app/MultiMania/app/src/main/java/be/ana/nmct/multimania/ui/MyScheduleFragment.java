@@ -12,17 +12,22 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.cocosw.undobar.UndoBarController;
 import com.etsy.android.grid.StaggeredGridView;
+import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
+import com.nhaarman.listviewanimations.util.Insertable;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -50,6 +55,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private StaggeredGridView mGridview;
     public UndoBarController.UndoBar mUndoBar;
     private SettingsHelper mSettingsHelper;
+    private TextView mPlaceholder;
 
     private List<ScheduleTalkVm> mItems;
 
@@ -85,6 +91,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_my_schedule, container, false);
+
+        mPlaceholder = (TextView)v.findViewById(R.id.placeholder);
         mGridview = (StaggeredGridView) v.findViewById(R.id.gridViewMySchedule);
         mGridview.setAdapter(mMyScheduleAdapter);
         mGridview.setOnItemClickListener(this);
@@ -109,6 +117,11 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        if(mItems == null || mItems.size() <= 0){
+            mPlaceholder.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -161,6 +174,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                 vm.to = Utility.convertStringToDate(c.getString(dateFromIndex));
                 vm.description = c.getString(descriptionIndex);
 
+                vm.isDoubleBooked = checkDoubleBookings(vm);
+
                 getLoaderManager().initLoader(1000 + (int) talkId, null, new LoaderManager.LoaderCallbacks<Cursor>() {
                     @Override
                     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -193,11 +208,24 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             } while (c.moveToNext());
         }
         if (mGridview != null) {
-            mGridview.setAdapter(new MyScheduleAdapter(getActivity(), 0, mItems));
+            mMyScheduleAdapter = new MyScheduleAdapter(getActivity(), 0, mItems);
+            ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(mMyScheduleAdapter);
+            animationAdapter.setAbsListView(mGridview);
+            mGridview.setAdapter(animationAdapter);
         }
     }
 
-    private class MyScheduleAdapter extends ArrayAdapter<ScheduleTalkVm> {
+    private boolean checkDoubleBookings(ScheduleTalkVm vm) {
+        for(int i = 0; i < mItems.size(); i++){
+            if(mItems.get(i).from.equals(vm.from)){
+                mItems.get(i).isDoubleBooked = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private class MyScheduleAdapter extends ArrayAdapter<ScheduleTalkVm> implements Insertable<ScheduleTalkVm> {
 
         private LayoutInflater mInflater;
 
@@ -230,6 +258,20 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             vh.txtTag.setText(vm.tags);
             vh.txtTime.setText(vm.fromString + " - " + vm.untilString);
 
+            if(vm.isDoubleBooked){
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN){
+                    vh.root.setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.double_booking_myschedule));
+                } else {
+                    vh.root.setBackground(getActivity().getResources().getDrawable((R.drawable.double_booking_myschedule)));
+                }
+                vh.txtTime.setTextColor(getActivity().getResources().getColor(R.color.danger));
+                vh.bottomBorder.setBackgroundColor(getActivity().getResources().getColor(R.color.danger));
+            } else {
+                vh.root.setBackgroundColor(getActivity().getResources().getColor((R.color.white)));
+                vh.txtTime.setTextColor(getActivity().getResources().getColor(R.color.fontcolor));
+                vh.bottomBorder.setBackgroundColor(getActivity().getResources().getColor(R.color.primaryColor));
+            }
+
 
             //remove button
             vh.btnRemoveTalk.setOnClickListener(new View.OnClickListener() {
@@ -239,7 +281,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                     removeItem(vm);
 
                     //clear previous undobars when needed
-                    if(mUndoBar != null){
+                    if (mUndoBar != null) {
                         mUndoBar.clear();
                     }
 
@@ -249,7 +291,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                     mUndoBar.listener(new UndoBarController.UndoListener() {
                         @Override
                         public void onUndo(@Nullable Parcelable parcelable) {
-                            addItem(vm);
+                            add(0, vm);
                         }
                     });
                     mUndoBar.show();
@@ -257,15 +299,10 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             });
         }
 
-        public void addItem(ScheduleTalkVm vm) {
-            updateItemValue(vm.id, true);
-            vm.isFavorite = true;
-            mSettingsHelper.settingsHandler(vm);
-        }
-
         public void removeItem(ScheduleTalkVm vm) {
             updateItemValue(vm.id, false);
             vm.isFavorite = false;
+            vm.isDoubleBooked = checkDoubleBookings(vm);
             mSettingsHelper.settingsHandler(vm);
         }
 
@@ -283,6 +320,14 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             );
         }
 
+        @Override
+        public void add(int i, @NonNull ScheduleTalkVm vm) {
+            updateItemValue(vm.id, true);
+            vm.isFavorite = true;
+            vm.isDoubleBooked = checkDoubleBookings(vm);
+            mPlaceholder.setVisibility(View.INVISIBLE);
+            mSettingsHelper.settingsHandler(vm);
+        }
     }
 
     private class MyScheduleAsyncQueryHandler extends AsyncQueryHandler {
