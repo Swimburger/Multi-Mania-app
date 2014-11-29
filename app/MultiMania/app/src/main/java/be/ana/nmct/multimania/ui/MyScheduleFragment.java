@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ import android.widget.TextView;
 
 import com.cocosw.undobar.UndoBarController;
 import com.etsy.android.grid.StaggeredGridView;
+import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
+import com.nhaarman.listviewanimations.util.Insertable;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -205,7 +208,10 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             } while (c.moveToNext());
         }
         if (mGridview != null) {
-            mGridview.setAdapter(new MyScheduleAdapter(getActivity(), 0, mItems));
+            mMyScheduleAdapter = new MyScheduleAdapter(getActivity(), 0, mItems);
+            ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(mMyScheduleAdapter);
+            animationAdapter.setAbsListView(mGridview);
+            mGridview.setAdapter(animationAdapter);
         }
     }
 
@@ -219,7 +225,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         return false;
     }
 
-    private class MyScheduleAdapter extends ArrayAdapter<ScheduleTalkVm> {
+    private class MyScheduleAdapter extends ArrayAdapter<ScheduleTalkVm> implements Insertable<ScheduleTalkVm> {
 
         private LayoutInflater mInflater;
 
@@ -285,19 +291,12 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                     mUndoBar.listener(new UndoBarController.UndoListener() {
                         @Override
                         public void onUndo(@Nullable Parcelable parcelable) {
-                            addItem(vm);
+                            add(0, vm);
                         }
                     });
                     mUndoBar.show();
                 }
             });
-        }
-
-        public void addItem(ScheduleTalkVm vm) {
-            updateItemValue(vm.id, true);
-            vm.isFavorite = true;
-            vm.isDoubleBooked = checkDoubleBookings(vm);
-            mSettingsHelper.settingsHandler(vm);
         }
 
         public void removeItem(ScheduleTalkVm vm) {
@@ -321,6 +320,14 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             );
         }
 
+        @Override
+        public void add(int i, @NonNull ScheduleTalkVm vm) {
+            updateItemValue(vm.id, true);
+            vm.isFavorite = true;
+            vm.isDoubleBooked = checkDoubleBookings(vm);
+            mPlaceholder.setVisibility(View.INVISIBLE);
+            mSettingsHelper.settingsHandler(vm);
+        }
     }
 
     private class MyScheduleAsyncQueryHandler extends AsyncQueryHandler {
