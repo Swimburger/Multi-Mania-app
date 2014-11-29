@@ -4,4 +4,10 @@
     <integer name="schedule_column_count">1</integer>
     <integer name="myschedule_column_count">1</integer>
     <integer name="about_column_count">2</integer>
+
+    <integer name="card_flip_time_full">300</integer>
+    <integer name="card_flip_time_half">150</integer>
+    <integer name="slide_up_down_duration">200</integer>
+    <integer name="half_slide_up_down_duration">150</integer>
+    <integer name="slide_up_down_final_value">150</integer>
 </resources>

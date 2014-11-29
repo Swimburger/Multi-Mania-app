@@ -42,6 +42,9 @@ public class SettingsUtil {
 
     //string preferences
     public String getStringPreference(String settingName){
+        return getStringPreference(settingName,null);
+    }
+    public String getStringPreference(String settingName,String defaultValue){
         SharedPreferences prefs = mContext.getSharedPreferences(mPreferenceName, Context.MODE_PRIVATE);
         return prefs.getString(settingName, null);
     }

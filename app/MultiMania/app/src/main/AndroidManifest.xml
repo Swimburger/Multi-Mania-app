@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
 
     <application
         android:allowBackup="true"
@@ -60,6 +63,15 @@
             <meta-data
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/sync_adapter" />
+        </service>
+        <service
+            android:name=".service.AuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
         </service>
         <receiver android:name=".service.NotificationReceiver" android:enabled="true" android:process=":remote">
             <intent-filter>

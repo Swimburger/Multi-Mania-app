@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <sync-adapter
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:userVisible="true"
-android:supportsUploading="false"
-android:allowParallelSyncs="false"
-android:isAlwaysSyncable="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:contentAuthority="be.ana.nmct.multimania"
+    android:accountType="multi-mania.be"
+    android:userVisible="false"
+    android:supportsUploading="true"
+    android:allowParallelSyncs="false"
+    android:isAlwaysSyncable="true"
 />

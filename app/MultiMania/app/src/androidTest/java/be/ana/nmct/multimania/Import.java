@@ -37,13 +37,13 @@ public class Import extends ApplicationTestCase<Application> {
     public void testImport() throws RemoteException {
         List<IData> models = new ArrayList<IData>();
 
-        List<NewsItem> news = new GsonLoader<NewsItem>(mContext,"news",new TypeToken<List<NewsItem>>(){}).loadInBackground();
-        List<Tag> tags = new GsonLoader<Tag>(mContext,"tags",new TypeToken<List<Tag>>(){}).loadInBackground();
-        List<Room> rooms = new GsonLoader<Room>(mContext,"rooms",new TypeToken<List<Room>>(){}).loadInBackground();
-        List<Speaker> speakers = new GsonLoader<Speaker>(mContext,"speakers",new TypeToken<List<Speaker>>(){}).loadInBackground();
-        List<Talk> talks = new GsonLoader<Talk>(mContext,"talks",new TypeToken<List<Talk>>(){}).loadInBackground();
-        List<TalkTag> talktags = new GsonLoader<TalkTag>(mContext,"talk_tags",new TypeToken<List<TalkTag>>(){}).loadInBackground();
-        List<TalkSpeaker> talkspeakers = new GsonLoader<TalkSpeaker>(mContext,"talk_speakers",new  TypeToken<List<TalkSpeaker>>(){}).loadInBackground();
+        List<NewsItem> news = new GsonLoader<NewsItem>(mContext,NewsItem.SEGMENT,new TypeToken<List<NewsItem>>(){}).loadInBackground();
+        List<Tag> tags = new GsonLoader<Tag>(mContext,Tag.SEGMENT,new TypeToken<List<Tag>>(){}).loadInBackground();
+        List<Room> rooms = new GsonLoader<Room>(mContext, Room.SEGMENT,new TypeToken<List<Room>>(){}).loadInBackground();
+        List<Speaker> speakers = new GsonLoader<Speaker>(mContext,Speaker.SEGMENT,new TypeToken<List<Speaker>>(){}).loadInBackground();
+        List<Talk> talks = new GsonLoader<Talk>(mContext,Talk.SEGMENT,new TypeToken<List<Talk>>(){}).loadInBackground();
+        List<TalkTag> talktags = new GsonLoader<TalkTag>(mContext,TalkTag.SEGMENT,new TypeToken<List<TalkTag>>(){}).loadInBackground();
+        List<TalkSpeaker> talkspeakers = new GsonLoader<TalkSpeaker>(mContext,TalkSpeaker.SEGMENT,new  TypeToken<List<TalkSpeaker>>(){}).loadInBackground();
 
         models.addAll(news);
         models.addAll(tags);

@@ -1,23 +1,26 @@
 package be.ana.nmct.multimania.ui;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
-import android.view.View;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
+import android.view.View;
 import android.view.WindowManager;
 
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 
 
@@ -32,6 +35,18 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     public static final int LOADER_NEWS_ID              = 3;
     public static final int LOADER_TAGS_ID              = 4;
     public static final int LOADER_SETTINGS             = 5;
+
+    // The authority for the sync adapter's content provider
+    public static final String AUTHORITY = MultimaniaContract.CONTENT_AUTHORITY;
+    // An account type, in the form of a domain name
+    public static final String ACCOUNT_TYPE = "multi-mania.be";
+    // The account name
+    public static final String ACCOUNT = "Mult-Mania";
+    // Instance fields
+    Account mAccount;
+
+    // Sync interval constants
+    public static final long SYNC_INTERVAL = 60L*60L*24;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
@@ -59,11 +74,15 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         SettingsUtil launchUtil = new SettingsUtil(this, PREFERENCE_NAME);
         boolean firstTimeLaunch = launchUtil.getBooleanPreference(PREFERENCE_FIRSTTIMELAUNCH, true);
 
+        mAccount = CreateSyncAccount(this);
+
         if(firstTimeLaunch){
             SettingsUtil settingsUtil = new SettingsUtil(this, SettingsFragment.PREFERENCE_NAME);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_NOTIFY, true);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
             launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
+
+            requestSync();
         }
 
         //Beautify for Lollipop users
@@ -72,8 +91,22 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             getWindow().setStatusBarColor(getResources().getColor(R.color.primaryColorDark));
         }
 
+        ContentResolver.addPeriodicSync(
+                mAccount,
+                AUTHORITY,
+                Bundle.EMPTY,
+                SYNC_INTERVAL);
     }
-    
+
+    private void requestSync() {
+        Bundle settingsBundle = new Bundle();
+        settingsBundle.putBoolean(
+                ContentResolver.SYNC_EXTRAS_MANUAL, true);
+        settingsBundle.putBoolean(
+                ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+        ContentResolver.requestSync(mAccount, AUTHORITY, settingsBundle);
+    }
+
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
@@ -111,7 +144,9 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                 break;
         }
         if(isNotRetained){
-            fragmentManager.beginTransaction().replace(R.id.container,fragment).commit();
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+            ft.setCustomAnimations(R.anim.fade_in_object,R.anim.fade_out_object);
+            ft.replace(R.id.container,fragment).commit();
         }
         onSectionAttached(position);
     }
@@ -175,5 +210,38 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(url));
         startActivity(intent);
+    }
+
+    /**
+     * Create a new dummy account for the sync adapter
+     *
+     * @param context The application context
+     */
+    public static Account CreateSyncAccount(Context context) {
+        // Create the account type and default account
+        Account newAccount = new Account(
+                ACCOUNT, ACCOUNT_TYPE);
+        // Get an instance of the Android account manager
+        AccountManager accountManager =
+                (AccountManager) context.getSystemService(
+                        ACCOUNT_SERVICE);
+        /*
+         * Add the account and account type, no password or user data
+         * If successful, return the Account object, otherwise report an error.
+         */
+        if (accountManager.addAccountExplicitly(newAccount, null, null)) {
+            /*
+             * If you don't set android:syncable="true" in
+             * in your <provider> element in the manifest,
+             * then call context.setIsSyncable(account, AUTHORITY, 1)
+             * here.
+             */
+        } else {
+            /*
+             * The account exists or some other error occurred. Log this, report it,
+             * or handle it internally.
+             */
+        }
+        return newAccount;
     }
 }
