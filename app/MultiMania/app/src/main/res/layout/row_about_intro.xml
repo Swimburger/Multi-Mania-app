@@ -28,7 +28,8 @@
             android:textColor="@color/white"
             android:background="@color/darkTransparent"
             android:padding="8dp"
-            android:clickable="false" />
+            android:clickable="false"
+            android:textSize="25dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,7 +38,8 @@
             android:id="@+id/txtAboutInfo"
             android:layout_below="@+id/imgAbout"
             android:padding="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            android:textSize="15dp" />
         <View
             android:layout_gravity="bottom"
             android:layout_width="match_parent"

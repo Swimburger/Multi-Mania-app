@@ -27,19 +27,19 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/adobe"
+                android:src="@drawable/twitter"
                 android:onClick="openTwitter"/>
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/adobe"
+                android:src="@drawable/facebook"
                 android:onClick="openFacebook"/>
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/adobe"
+                android:src="@drawable/multimania"
                 android:onClick="openSite"/>
             </LinearLayout>
         <ImageView

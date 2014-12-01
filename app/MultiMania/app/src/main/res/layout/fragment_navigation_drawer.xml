@@ -28,20 +28,23 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/adobe"
-                android:onClick="openTwitter"/>
+                android:src="@drawable/twitter"
+                android:onClick="openTwitter"
+                android:layout_marginBottom="10dp" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/adobe"
-                android:onClick="openFacebook"/>
+                android:src="@drawable/facebook"
+                android:onClick="openFacebook"
+                android:layout_marginBottom="10dp" />
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/adobe"
-                android:onClick="openSite"/>
+                android:src="@drawable/multimania"
+                android:onClick="openSite"
+                android:layout_marginBottom="10dp" />
             </LinearLayout>
         <ImageView
             android:background="@color/white"
