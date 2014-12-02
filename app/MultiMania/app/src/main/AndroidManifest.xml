@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -76,6 +77,11 @@
         <receiver android:name=".service.NotificationReceiver" android:enabled="true" android:process=":remote">
             <intent-filter>
                 <action android:name="be.ana.nmct.multimania.ALARMRECEIVER" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".service.BootListener">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
     </application>
