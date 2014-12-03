@@ -88,8 +88,15 @@ public final class Utility {
             int idIndex = c.getColumnIndex(MultimaniaContract.TalkEntry._ID);
             int titleIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
             int isFavoriteIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.IS_FAVORITE);
+            int fromIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.DATE_FROM);
 
-            Talk talk =  new Talk(c.getInt(idIndex), c.getString(titleIndex), null, null, "", 0, false);
+
+            Talk talk = null;
+            try {
+                talk = new Talk(c.getInt(idIndex), c.getString(titleIndex), convertStringToDate(c.getString(fromIndex)), null, "", 0, false);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             talk.isFavorite = c.getInt(isFavoriteIndex) == 1;
 
             return talk;

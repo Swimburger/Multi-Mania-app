@@ -28,7 +28,7 @@ public class NotificationReceiver extends BroadcastReceiver {
             Talk talk = Utility.getTalkFromUri(context, uri);
             ScheduleTalkVm vm = Utility.convertTalkToScheduleTalkVm(talk);
 
-            if(talk.isFavorite){
+            if(talk.isFavorite && System.currentTimeMillis() < Utility.getDateInMillis(talk.from)){
                 NotificationSender.sendNotification(context, vm);
             }
         }
