@@ -9,12 +9,17 @@ android {
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
+        versionName "0.9alpha"
         buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
     }
     buildTypes {
-        release {
+        alpha {
             runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
+        }
+        release {
+            runProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
         }
