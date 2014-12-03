@@ -71,6 +71,25 @@ Features:
 * An indoor map to find the right rooms
 * News
 
+### Play Store ###
+
+We have deployed an alpha apk to the play store.   
+You can try and test the app out only if you are part of the google group or google plus community and opted in for it.   
+Follow the links below to achieve alpha access.   
+
+[Play store link](https://play.google.com/store/apps/details?id=be.ana.nmct.multimania)   
+This link might not work as long as there is no production app and you are not in the beta or alpha program.
+
+#### Alpha ####
+
+* [Google group](https://groups.google.com/d/forum/multi-mania-android-alpha)
+* [Google+ community](https://plus.google.com/communities/114637708619233859276)
+* [Opt in for alpha](https://play.google.com/apps/testing/be.ana.nmct.multimania)
+
+#### Beta ####
+
+To come
+
 ### Set-up ###
 
 The application is build with Android Studio and makes use of the gradle plug-in.  
