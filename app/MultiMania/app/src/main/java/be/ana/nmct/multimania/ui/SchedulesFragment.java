@@ -60,11 +60,11 @@ public class SchedulesFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ActionBar bar = getActivity().getActionBar();
+        /*ActionBar bar = getActivity().getActionBar();
         if(bar!=null){
             bar.setListNavigationCallbacks(mListAdapter,this);
             bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        }
+        }*/
     }
 
     @Override
@@ -151,14 +151,6 @@ public class SchedulesFragment extends Fragment implements LoaderManager.LoaderC
         @Override
         public CharSequence getPageTitle(int position) {
             return mDayString+ " "+(position+1);
-        }
-
-        @Override
-        public float getPageWidth(int position) {
-            if ((configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) == Configuration.SCREENLAYOUT_SIZE_XLARGE){//TODO:test on tablet
-                return 0.5f;
-            }
-            return super.getPageWidth(position);
         }
     }
 }

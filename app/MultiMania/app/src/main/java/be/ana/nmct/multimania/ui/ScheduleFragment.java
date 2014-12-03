@@ -53,6 +53,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     private List<Object> mItems;
     private String mFilterTag;
     private SettingsHelper mSettingsHelper;
+    private TextView mDayTextView;
 
     public ScheduleFragment() {}
 
@@ -90,6 +91,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         mScheduleGrid.setOnItemClickListener(this);
 
         getLoaderManager().initLoader(MainActivity.LOADER_SCHEDULE_TALK_ID+mPosition, null, this);
+
         //buildItems(mCursor);
         return v;
     }
