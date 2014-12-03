@@ -6,23 +6,22 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.SET_DEBUG_APP" />
-    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
-    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -30,7 +29,7 @@
             android:name=".ui.NewsItemActivity"
             android:label="@string/title_news"
             android:parentActivityName=".ui.MainActivity"
-            android:theme="@style/DialogThemeOnTabletTranslucentActionBar">
+            android:theme="@style/DialogThemeOnTabletTranslucentActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="be.ana.nmct.multimania.ui.MainActivity" />
@@ -39,12 +38,19 @@
             android:name=".ui.TalkActivity"
             android:label="@string/title_activity_talk"
             android:parentActivityName=".ui.MainActivity"
-            android:theme="@style/DialogThemeOnTablet">
+            android:theme="@style/DialogThemeOnTablet" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="be.ana.nmct.multimania.ui.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".ui.LoadActivity"
+            android:label="@string/title_activity_load"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="be.ana.nmct.multimania.SYNCCOMPLETE"/>
+            </intent-filter>
+        </activity>
         <provider
             android:name=".data.MultimaniaProvider"
             android:authorities="be.ana.nmct.multimania"
@@ -56,7 +62,7 @@
             android:name=".service.SyncService"
             android:enabled="true"
             android:exported="true"
-            android:process=":sync">
+            android:process=":sync" >
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
             </intent-filter>
@@ -65,23 +71,27 @@
                 android:name="android.content.SyncAdapter"
                 android:resource="@xml/sync_adapter" />
         </service>
-        <service
-            android:name=".service.AuthenticatorService">
+        <service android:name=".service.AuthenticatorService" >
             <intent-filter>
-                <action android:name="android.accounts.AccountAuthenticator"/>
+                <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
-        <receiver android:name=".service.NotificationReceiver" android:enabled="true" android:process=":remote">
+
+        <receiver
+            android:name=".service.NotificationReceiver"
+            android:enabled="true"
+            android:process=":remote" >
             <intent-filter>
                 <action android:name="be.ana.nmct.multimania.ALARMRECEIVER" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".service.BootListener">
+        <receiver android:name=".service.BootListener" >
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
     </application>

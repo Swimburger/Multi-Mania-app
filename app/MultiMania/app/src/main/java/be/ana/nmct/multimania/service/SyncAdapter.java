@@ -5,8 +5,13 @@ import android.content.AbstractThreadedSyncAdapter;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SyncResult;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
+
+import be.ana.nmct.multimania.ui.LoadActivity;
+import be.ana.nmct.multimania.ui.MainActivity;
 
 /**
  * Created by Astrid on 16/11/2014.
@@ -16,6 +21,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     // Global variables
     // Define a variable to contain a content resolver instance
     ContentResolver mContentResolver;
+
     /**
      * Set up the sync adapter
      */
@@ -82,5 +88,14 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         }catch(Exception e){
             e.printStackTrace();
         }
+
+        /*Intent intent = new Intent(getContext(), MainActivity.class);
+        intent.setAction(MainActivity.LOAD_SYNC);
+        getContext().startActivity(intent);*/
+
+        Intent intent = new Intent(getContext(), LoadActivity.class);
+        intent.setAction(LoadActivity.LOAD_SYNC);
+        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+        System.out.println("action: " + intent.getAction());
     }
 }

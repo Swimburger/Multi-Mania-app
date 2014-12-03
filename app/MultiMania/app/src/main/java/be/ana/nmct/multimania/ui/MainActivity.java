@@ -7,13 +7,16 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.View;
@@ -69,21 +72,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                     (DrawerLayout) findViewById(R.id.drawer_layout));
         }
 
-
-        //Handle first time launching
-        SettingsUtil launchUtil = new SettingsUtil(this, PREFERENCE_NAME);
-        boolean firstTimeLaunch = launchUtil.getBooleanPreference(PREFERENCE_FIRSTTIMELAUNCH, true);
-
         mAccount = CreateSyncAccount(this);
-
-        if(firstTimeLaunch){
-            SettingsUtil settingsUtil = new SettingsUtil(this, SettingsFragment.PREFERENCE_NAME);
-            settingsUtil.setPreference(SettingsFragment.PREFERENCE_NOTIFY, true);
-            settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
-            launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
-
-            requestSync();
-        }
 
         //Beautify for Lollipop users
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
@@ -96,6 +85,28 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                 AUTHORITY,
                 Bundle.EMPTY,
                 SYNC_INTERVAL);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //Handle first time launching
+        SettingsUtil launchUtil = new SettingsUtil(this, PREFERENCE_NAME);
+        boolean firstTimeLaunch = launchUtil.getBooleanPreference(PREFERENCE_FIRSTTIMELAUNCH, true);
+
+        if(firstTimeLaunch){
+            SettingsUtil settingsUtil = new SettingsUtil(this, SettingsFragment.PREFERENCE_NAME);
+            settingsUtil.setPreference(SettingsFragment.PREFERENCE_NOTIFY, true);
+            settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
+            //launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
+
+            requestSync();
+
+          //  Intent loadintent = new Intent(this, LoadActivity.class);
+          //  startActivity(loadintent);
+        }
+
     }
 
     private void requestSync() {

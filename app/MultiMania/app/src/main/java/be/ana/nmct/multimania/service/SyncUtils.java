@@ -4,7 +4,9 @@ import android.content.ContentProvider;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.RemoteException;
 import android.provider.BaseColumns;
 import android.util.Log;
@@ -26,6 +28,8 @@ import be.ana.nmct.multimania.model.Tag;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.model.TalkSpeaker;
 import be.ana.nmct.multimania.model.TalkTag;
+import be.ana.nmct.multimania.ui.LoadActivity;
+import be.ana.nmct.multimania.ui.MainActivity;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
 
@@ -177,6 +181,7 @@ public class SyncUtils {
     }
 
     public static void syncData(ContentResolver resolver,List<IData> models) throws RemoteException {
+
         for(IData model: models){
             boolean exists = false;
             if(model.getId()!=-1){
@@ -192,6 +197,6 @@ public class SyncUtils {
                         model.getContentValues());
             }
         }
-    }
 
+    }
 }
