@@ -31,15 +31,12 @@ public class SettingsHelper {
 
         //handle alarms
         if(settings.getBooleanPreference(SettingsFragment.PREFERENCE_NOTIFY, true)){
-
-            Uri uri = MultimaniaContract.TalkEntry.buildItemUri(item.id);
-            Talk talk = Utility.getTalkFromUri(mContext, uri);
             NotificationSender notSender = new NotificationSender(mContext);
 
             if(item.isFavorite){
-                notSender.setAlarmForTalk(talk);
+                notSender.setAlarmForTalk(item);
             } else{
-                notSender.cancelAlarmForTalk(talk);
+                notSender.cancelAlarmForTalk(item);
             }
         }
 

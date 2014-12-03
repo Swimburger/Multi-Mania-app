@@ -27,6 +27,7 @@ import java.util.List;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.service.NotificationSender;
 import be.ana.nmct.multimania.utils.GoogleCalUtil;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
@@ -48,6 +49,7 @@ public class SettingsFragment extends Fragment implements LoaderManager.LoaderCa
     private static CheckBox mChkSync;
     private static SettingsUtil mUtil;
     private static GoogleCalUtil mCalUtil;
+    private static NotificationSender mNotificationSender;
 
     private List<ScheduleTalkVm> mTalkList;
 
@@ -62,6 +64,7 @@ public class SettingsFragment extends Fragment implements LoaderManager.LoaderCa
         this.mUtil = new SettingsUtil(this.getActivity(), PREFERENCE_NAME);
         this.mCalUtil = new GoogleCalUtil(this.getActivity(), mCalendarName);
         this.mTalkList = new ArrayList<ScheduleTalkVm>();
+        this.mNotificationSender = new NotificationSender(getActivity());
         this.getLoaderManager().initLoader(MainActivity.LOADER_SETTINGS, null, this);
     }
 
@@ -81,9 +84,11 @@ public class SettingsFragment extends Fragment implements LoaderManager.LoaderCa
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
                 if(isChecked){
-                    //TODO: add all alarms
+                    if(mTalkList != null && mTalkList.size() > 0){
+                        mNotificationSender.setAlarmForTalkList(mTalkList);
+                    }
                 } else {
-                    //TODO: cancel all alarms
+                        mNotificationSender.cancelAlarmForTalkList(mTalkList);
                 }
 
                 mUtil.setPreference(PREFERENCE_NOTIFY, isChecked);

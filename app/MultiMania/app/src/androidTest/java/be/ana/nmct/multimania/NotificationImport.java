@@ -21,7 +21,6 @@ import be.ana.nmct.multimania.model.Tag;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.model.TalkSpeaker;
 import be.ana.nmct.multimania.model.TalkTag;
-import be.ana.nmct.multimania.service.NotificationSender;
 import be.ana.nmct.multimania.service.SyncUtils;
 
 /**
@@ -49,9 +48,8 @@ public class NotificationImport extends ApplicationTestCase<Application> {
         int i = 0;
         for (Talk talk : talks){
             DateTime from = new DateTime();
-            talk.from = from.plusMinutes(NOTIFY_INTERVAL + i).toDate();
-            talk.to = from.plusMinutes(NOTIFY_INTERVAL + (i + NOTIFY_INTERVAL)).toDate();
-            talk.isFavorite = true;
+            talk.from = from.plusMinutes((NOTIFY_INTERVAL + i) + 10).toDate();
+            talk.to = from.plusMinutes((NOTIFY_INTERVAL + (i + NOTIFY_INTERVAL)) + 10).toDate();    //10 refers to 10 minutes from now
             i++;
         }
 
@@ -65,10 +63,6 @@ public class NotificationImport extends ApplicationTestCase<Application> {
 
         ContentResolver resolver = mContext.getContentResolver();
         SyncUtils.syncData(resolver,models);
-
-        NotificationSender ns = new NotificationSender(getContext());
-        ns.setAlarmForTalkList(talks);
     }
-
 
 }

@@ -16,6 +16,7 @@ import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.ui.TalkActivity;
 import be.ana.nmct.multimania.utils.Utility;
+import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
 /**
  * Created by Axel on 18/11/2014.
@@ -34,39 +35,39 @@ public class NotificationSender {
         this.sContext = context;
     }
 
-    public void setAlarmForTalkList(List<Talk> talks){
-        for(Talk talk : talks){
+    public void setAlarmForTalkList(List<ScheduleTalkVm> talks){
+        for(ScheduleTalkVm talk : talks){
             setAlarmForTalk(talk);
         }
     }
 
-    public void setAlarmForTalk(Talk talk){
+    public void setAlarmForTalk(ScheduleTalkVm talk){
         Intent intent = new Intent(sContext, NotificationReceiver.class);
         intent.putExtra(NOTIF_TALKID, talk.id);
         intent.setAction(INTENT_ALARMRECEIVER);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(sContext, (int)talk.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager)sContext.getSystemService(Context.ALARM_SERVICE);
-        long millis = Utility.getDateInMillis(talk.from);       //TODO: subtract 10 minutes
+        long millis = Utility.getDateInMillis(talk.from) - 600000;      //600.000 = 10 minutes
         if(millis > 0){
             alarmManager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);
         }
 
     }
 
-    public void cancelAlarmForTalkList(List<Talk> talks){
-        for(Talk talk : talks){
+    public void cancelAlarmForTalkList(List<ScheduleTalkVm> talks){
+        for(ScheduleTalkVm talk : talks){
             cancelAlarmForTalk(talk);
         }
     }
 
-    public void cancelAlarmForTalk(Talk talk){
+    public void cancelAlarmForTalk(ScheduleTalkVm talk){
         Intent intent = new Intent(sContext, NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(sContext, (int)talk.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(sContext, (int)talk.id, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         AlarmManager alarmManager = (AlarmManager)sContext.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
     }
 
-    public static void sendNotification(Context context, Talk talk){
+    public static void sendNotification(Context context, ScheduleTalkVm talk){
 
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context)
