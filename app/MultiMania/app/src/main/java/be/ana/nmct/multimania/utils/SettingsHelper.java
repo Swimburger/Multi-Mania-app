@@ -25,6 +25,10 @@ public class SettingsHelper {
         this.mCalUtil = new GoogleCalUtil(context, mCalendarName);
     }
 
+    /**
+     * Helper method for handling talk behaviour (e.g. enable/disable notification for the talk)
+     * @param item The talk for which the settings need to be changed
+     */
     public void settingsHandler(ScheduleTalkVm item) {
 
         SettingsUtil settings = new SettingsUtil(mContext, SettingsFragment.PREFERENCE_NAME);

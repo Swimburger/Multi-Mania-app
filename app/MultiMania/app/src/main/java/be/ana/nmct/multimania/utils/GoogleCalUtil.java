@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
 
@@ -32,7 +31,6 @@ public class GoogleCalUtil {
     private Context mContext;
     private static String mCalendarName;
     private SettingsUtil mUtil;
-    private Cursor mCursor;
 
     public GoogleCalUtil(Context context, String calendarName) {
         this.mContext = context;
@@ -40,9 +38,12 @@ public class GoogleCalUtil {
         this.mUtil = new SettingsUtil(mContext, PREFERENCE_NAME);
     }
 
+    /**
+     * Creates instance of ContentValues with all calendar properties set
+     * @return ContentValues from CalendarContract
+     */
     private ContentValues buildNewCalContentValues() {
         final ContentValues cv = new ContentValues();
-
         String accountName = mUtil.getStringPreference(PREFERENCE_ACCOUNTNAME);
         cv.put(CalendarContract.Calendars.ACCOUNT_NAME, accountName);
         cv.put(CalendarContract.Calendars.ACCOUNT_TYPE, CalendarContract.ACCOUNT_TYPE_LOCAL);
@@ -56,6 +57,9 @@ public class GoogleCalUtil {
         return cv;
     }
 
+    /**
+     * Creates a Calendar entry in the users calendar (Google Cal or other cal app)
+     */
     public void createCalendar() {
         ContentResolver cr = mContext.getContentResolver();
         final ContentValues cv = buildNewCalContentValues();
@@ -63,6 +67,10 @@ public class GoogleCalUtil {
         mUtil.setPreference(PREFERENCE_CALENDER_ID, Long.parseLong(newUri.getLastPathSegment()));
     }
 
+
+    /**
+     * Deletes a Calendar entry in the users calendar (Google Cal or other cal app)
+     */
     public void deleteCalendar() {
         ContentResolver cr = mContext.getContentResolver();
         long calId = mUtil.getLongPreference(PREFERENCE_CALENDER_ID);
@@ -70,6 +78,10 @@ public class GoogleCalUtil {
         cr.delete(calUri, null, null);
     }
 
+    /**
+     * Adds a list of talks to the calendar
+     * @param talks The list of talks to add
+     */
     public void addTalkList(List<ScheduleTalkVm> talks){
         for(int i = 0; i < talks.size(); i++){
             addTalk(talks.get(i));
@@ -99,6 +111,12 @@ public class GoogleCalUtil {
         return calEventId;
     }
 
+    /**
+     *  Saves the calendar event Id to the SQLite db for future reference
+     * @param talk The talk to save the caleventId to
+     * @param eventId The eventId to save
+     * @return an integer indicating how many rows were updated (should be 1 row)
+     */
     private int saveCalEventId(ScheduleTalkVm talk, long eventId) {
         ContentValues cv = new ContentValues();
         cv.put(MultimaniaContract.TalkEntry.CALEVENT_ID, eventId);
@@ -110,6 +128,11 @@ public class GoogleCalUtil {
         );
     }
 
+    /**
+     * Deletes a talk from the users calendar (in Google Cal or other calendar app)
+     * @param talk The talk to delete
+     * @return The amount of rows that were affected
+     */
     public int deleteTalk(Talk talk){
         return mContext.getContentResolver().delete(
                 buildEventUri(),
@@ -118,6 +141,10 @@ public class GoogleCalUtil {
         );
     }
 
+    /**
+     * Gets the Uri needed to CRUD the calendar
+     * @return Uri that enables CRUD actions on the calendar
+     */
     public Uri buildCalUri() {
         return CAL_URI
                 .buildUpon()
@@ -128,6 +155,10 @@ public class GoogleCalUtil {
                 .build();
     }
 
+    /**
+     * Gets the Uri needed to CRUD an event
+     * @return Uri that enables CRUD actions on an event
+     */
     private Uri buildEventUri() {
         return EVENT_URI
                 .buildUpon()

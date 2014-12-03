@@ -7,6 +7,10 @@ import be.ana.nmct.multimania.model.Talk;
 /**
  * Created by Niels on 19/11/2014.
  */
+
+/**
+ * The viewmodel for a Talk
+ */
 public class ScheduleTalkVm extends Talk {
     public String tags;
     public String room;

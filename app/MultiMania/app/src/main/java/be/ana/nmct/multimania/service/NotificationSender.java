@@ -13,13 +13,17 @@ import java.util.List;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
-import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.ui.TalkActivity;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
 /**
  * Created by Axel on 18/11/2014.
+ */
+
+/**
+ * This class handles sending the sending of notifications as well as planning when notifications
+ * should be send to the user.
  */
 public class NotificationSender {
 
@@ -35,12 +39,20 @@ public class NotificationSender {
         this.sContext = context;
     }
 
+    /**
+     * Sets an alarm for a bunch of talks
+     * @param talks The List<Talk> we need to set the alarms for
+     */
     public void setAlarmForTalkList(List<ScheduleTalkVm> talks){
         for(ScheduleTalkVm talk : talks){
             setAlarmForTalk(talk);
         }
     }
 
+    /**
+     * Sets an alarm to trigger a notification for a Talk
+     * @param talk The talk we need to set the alarm for
+     */
     public void setAlarmForTalk(ScheduleTalkVm talk){
         Intent intent = new Intent(sContext, NotificationReceiver.class);
         intent.putExtra(NOTIF_TALKID, talk.id);
@@ -54,12 +66,20 @@ public class NotificationSender {
 
     }
 
+    /**
+     * Cancels a bunch of alarms for each Talk in talks
+     * @param talks The List<Talk> we need to cancel the alarms for
+     */
     public void cancelAlarmForTalkList(List<ScheduleTalkVm> talks){
         for(ScheduleTalkVm talk : talks){
             cancelAlarmForTalk(talk);
         }
     }
 
+    /**
+     * Cancels an alarm set to trigger a notification
+     * @param talk The Talk we need to cancel the alarm for
+     */
     public void cancelAlarmForTalk(ScheduleTalkVm talk){
         Intent intent = new Intent(sContext, NotificationReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(sContext, (int)talk.id, intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -67,6 +87,11 @@ public class NotificationSender {
         alarmManager.cancel(pendingIntent);
     }
 
+    /**
+     * Sends a notification containing a reminder for the user
+     * @param context The context (e.g. an Activity)
+     * @param talk The Talk we need to make a notification for
+     */
     public static void sendNotification(Context context, ScheduleTalkVm talk){
 
         NotificationCompat.Builder builder =
@@ -87,6 +112,10 @@ public class NotificationSender {
         nManager.notify(NOTIFICATION_ID, builder.build());
     }
 
+    /**
+     * Gets the default notification sound
+     * @return A Uri indicating the default notification sound
+     */
     private static Uri getNotificationSoundUri(){
         return RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
     }

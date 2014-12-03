@@ -20,44 +20,61 @@ import be.ana.nmct.multimania.utils.Utility;
 /**
  * Created by Axel on 22/10/2014.
  */
+
+/**
+ * Abstract class to create models from JSON files
+ * @param <T> The model to create from a JSON file
+ */
 public class GsonLoader<T> extends AsyncTaskLoader<List<T>> {
 
     private static final String BASE_URL = be.ana.nmct.multimania.BuildConfig.API_URL;
-    private final TypeToken token;
-    private String apiPath;
+
+    private final TypeToken mToken;
+    private String mApiPath;
+
     private Object lock = new Object();
 
-    public GsonLoader(Context context, String apiPath,TypeToken token) {
+    public GsonLoader(Context context, String apiPath, TypeToken token) {
         super(context);
-        this.apiPath = apiPath;
-        this.token=token;
+        this.mApiPath = apiPath;
+        this.mToken = token;
     }
 
+    /**
+     * Loads the parseJson() method in a background thread
+     * @return A list of the requested model
+     */
     @Override
     public List<T> loadInBackground() {
         return parseJson();
     }
 
+    /**
+     * Forces loading just in case it won't start automagically
+     */
     @Override
     protected void onStartLoading() {
         forceLoad();
     }
 
+    /**
+     * Parses the JSON file from an online source
+     * @return A List of the requested model
+     */
     public List<T> parseJson() {
         synchronized (lock) {
             List<T> result = new ArrayList<T>();
 
             InputStream source = null;
             try {
-                source = new URL(BASE_URL + apiPath).openStream();
+                source = new URL(BASE_URL + mApiPath).openStream();
                 Gson gson = new GsonBuilder()
                         .setDateFormat(Utility.getDateFormat())
                         .create();
 
                 Reader reader = new InputStreamReader(source);
-                //Type collectionType = new TypeToken<List<T>>(){}.getRawType();
 
-                result = gson.fromJson(reader,token.getType());  //collectionType);
+                result = gson.fromJson(reader, mToken.getType());  //collectionType);
                 reader.close();
                 source.close();
             } catch (IOException e) {

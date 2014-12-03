@@ -16,8 +16,18 @@ import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 /**
  * Created by Axel on 2/12/2014.
  */
+
+/**
+ * This class listens to the broadcast received if a device boots.
+ * This is to re-enable all alarms set so the user will still receive notifications.
+ */
 public class BootListener extends BroadcastReceiver{
 
+    /**
+     * Sets all the alarms back after device boot
+     * @param context The context (e.g.: an Activity)
+     * @param intent The intent received from the Android system telling the device booted
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         Cursor c = context.getContentResolver().query(
@@ -42,6 +52,12 @@ public class BootListener extends BroadcastReceiver{
         }
     }
 
+    /**
+     * Builds ScheduleTalkVm's from a Cursor
+     * @param c The cursor to build items from
+     * @return A List<ScheduleTalkVm> created from the Cursor
+     * @throws ParseException Throws an exception if something went wrong parsing the java.util.Date from a String
+     */
     private List<ScheduleTalkVm> buildItems(Cursor c) throws ParseException {
         List<ScheduleTalkVm> talkList = new ArrayList<ScheduleTalkVm>();
 

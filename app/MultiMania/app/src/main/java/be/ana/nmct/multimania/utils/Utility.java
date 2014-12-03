@@ -31,19 +31,39 @@ public final class Utility {
 
     private Utility(){}
 
+    /**
+     * Converts a java.util.Date to a String
+     * @param date The Date to convert
+     * @return The converted date into a String
+     */
     public static String convertDateToString(Date date){
         return sFormatter.format(date);
     }
 
+    /**
+     * Converts a String to java.util.Date
+     * @param date The String to convert
+     * @return A java.util.Date converted from the passed String
+     * @throws ParseException Exception when the String date wasn't correctly formatted
+     */
     public static Date convertStringToDate(String date) throws ParseException {
         return sFormatter.parse(date);
     }
 
+    /**
+     * Gets the default TimeZone id (e.g. UTC)
+     * @return The default TimeZone id
+     */
     public static String getTimeZoneId(){
         TimeZone tz = TimeZone.getDefault();
         return tz.getID();
     }
 
+    /**
+     * Converts a java.util.Date into millis
+     * @param date The Date to convert
+     * @return The date in millis (stored in a long)
+     */
     public static long getDateInMillis(Date date){
         if(date != null){
             return date.getTime();
@@ -117,6 +137,12 @@ public final class Utility {
         return dp;
     }
 
+    /**
+     * Enlarges the Touchable area of a view
+     * @param root The root view of the param viewToExpand
+     * @param viewToExpand The view that needs a larger touch area
+     * @param padding The amount of padding that will be applied to the view
+     */
     public static void enlargeTouchArea(View root, final View viewToExpand, final int padding) {
         root.post(new Runnable() {
             @Override
@@ -140,6 +166,11 @@ public final class Utility {
         });
     }
 
+    /**
+     * Converts a List<Talk> to a List<ScheduleTalkVm>
+     * @param talkList The List<Talk> to convert
+     * @return A List<ScheduleTalkVm> converted from List<Talk>
+     */
     public static List<ScheduleTalkVm> convertTalkListToScheduleTalkVmList(List<Talk> talkList){
         List<ScheduleTalkVm> result = new ArrayList<ScheduleTalkVm>();
 
@@ -150,6 +181,11 @@ public final class Utility {
         return result;
     }
 
+    /**
+     * Converts a Talk to a ScheduleTalkVm
+     * @param talk The Talk to convert
+     * @return A ScheduleTalkVm converted from a Talk
+     */
     public static ScheduleTalkVm convertTalkToScheduleTalkVm(Talk talk){
         return new ScheduleTalkVm((int) talk.id, talk.title, talk.from, talk.to, talk.description, talk.roomId, talk.isKeynote);
     }

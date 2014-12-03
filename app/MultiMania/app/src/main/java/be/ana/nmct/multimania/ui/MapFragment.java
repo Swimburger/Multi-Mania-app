@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import be.ana.nmct.multimania.R;
 import uk.co.senab.photoview.PhotoView;
 
-
+/**
+ * The Fragment taking care of the indoor map
+ */
 public class MapFragment extends Fragment {
 
     public MapFragment() {}

@@ -15,8 +15,18 @@ import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 /**
  * Created by Axel on 19/11/2014.
  */
+
+/**
+ * This class receives PendingIntents to send a notification to the user
+ */
 public class NotificationReceiver extends BroadcastReceiver {
 
+    /**
+     * Handles the sending of a notification if certain conditions are met
+     * (user enabled notifications in settings and the Talk is a favorite of the user)
+     * @param context The context (e.g.: an Activity)
+     * @param intent The PendingIntent received
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         SettingsUtil util = new SettingsUtil(context, SettingsFragment.PREFERENCE_NAME);

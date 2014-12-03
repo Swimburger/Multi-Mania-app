@@ -21,6 +21,10 @@ public class MyScheduleRowHolder{
     public RelativeLayout root;
     public View bottomBorder;
 
+    /**
+     * The constructor method
+     * @param v The view to get the inner views from
+     */
     public MyScheduleRowHolder(View v) {
         this.txtTalkTitle = (TextView)v.findViewById(R.id.txtTalkTitle);
         this.txtRoom = (TextView)v.findViewById(R.id.txtRoom);
