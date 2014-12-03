@@ -67,6 +67,22 @@ public class Talk implements IData {
     }
 
     @Override
+    public String toString() {
+        return "Talk{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", from=" + from +
+                ", to=" + to +
+                ", description='" + description + '\'' +
+                ", roomId=" + roomId +
+                ", isKeynote=" + isKeynote +
+                ", isFavorite=" + isFavorite +
+                ", calEventId=" + calEventId +
+                ", tags=" + tags +
+                '}';
+    }
+
+    @Override
     public Uri getContentUri() {
         return MultimaniaContract.TalkEntry.CONTENT_URI;
     }

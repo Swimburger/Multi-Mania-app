@@ -20,7 +20,7 @@
     <string name="talk_info">Info</string>
     <string name="newsitem_info">Info</string>
     <string name="settings_sync">Sync My Schedule with Google Calendar</string>
-    <string name="settings_notify">Notify me before my favorite talks</string>
+    <string name="settings_notify">Notify me when my favorite keynote begins</string>
     <string name="talk_title">Talk</string>
     <string name="calendar_name">Multi-Mania 2015</string>
     <string name="calendar_account_name">Calendar</string>
@@ -45,5 +45,5 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="site_url">http://multi-mania.be/</string>
     <string name="unfavorite_undobar">Removed from favorites</string>
     <string name="notification_text">Will begin in 10 minutes.</string>
-    <string name="myschedule_placeholder">All your favorited keynotes will appear here.</string>
+    <string name="myschedule_placeholder">Your favorited keynotes will appear here.</string>
 </resources>

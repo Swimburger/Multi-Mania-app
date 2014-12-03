@@ -11,11 +11,14 @@ import android.view.animation.AlphaAnimation;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.model.Talk;
+import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
 /**
  * Created by Niels on 28/10/2014.
@@ -84,8 +87,19 @@ public final class Utility {
         if(c.moveToFirst()){
             int idIndex = c.getColumnIndex(MultimaniaContract.TalkEntry._ID);
             int titleIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
+            int isFavoriteIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.IS_FAVORITE);
+            int fromIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.DATE_FROM);
 
-            return new Talk(c.getInt(idIndex), c.getString(titleIndex), null, null, "", 0, false);
+
+            Talk talk = null;
+            try {
+                talk = new Talk(c.getInt(idIndex), c.getString(titleIndex), convertStringToDate(c.getString(fromIndex)), null, "", 0, false);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            talk.isFavorite = c.getInt(isFavoriteIndex) == 1;
+
+            return talk;
         } else {
             return null;
         }
@@ -125,5 +139,20 @@ public final class Utility {
             }
         });
     }
+
+    public static List<ScheduleTalkVm> convertTalkListToScheduleTalkVmList(List<Talk> talkList){
+        List<ScheduleTalkVm> result = new ArrayList<ScheduleTalkVm>();
+
+        for(Talk talk : talkList){
+            result.add(convertTalkToScheduleTalkVm(talk));
+        }
+
+        return result;
+    }
+
+    public static ScheduleTalkVm convertTalkToScheduleTalkVm(Talk talk){
+        return new ScheduleTalkVm((int) talk.id, talk.title, talk.from, talk.to, talk.description, talk.roomId, talk.isKeynote);
+    }
+
 
 }
