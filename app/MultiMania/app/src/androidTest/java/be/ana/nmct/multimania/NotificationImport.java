@@ -21,7 +21,7 @@ import be.ana.nmct.multimania.model.Tag;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.model.TalkSpeaker;
 import be.ana.nmct.multimania.model.TalkTag;
-import be.ana.nmct.multimania.service.SyncUtils;
+import be.ana.nmct.multimania.utils.SyncUtils;
 
 /**
  * Created by Axel on 20/11/2014.

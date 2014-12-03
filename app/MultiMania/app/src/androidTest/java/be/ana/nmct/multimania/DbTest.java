@@ -27,6 +27,7 @@ import be.ana.nmct.multimania.model.TalkTag;
 import be.ana.nmct.multimania.utils.Utility;
 
 /**
+ * DbTest contains all test regarding the SQLite database
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
 public class DbTest extends ApplicationTestCase<Application> {

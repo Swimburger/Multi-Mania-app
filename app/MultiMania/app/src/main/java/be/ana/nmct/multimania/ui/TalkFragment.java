@@ -34,6 +34,11 @@ import be.ana.nmct.multimania.utils.GoogleCalUtil;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
 
+/**
+ * The TalkFragment shows the data of a talk
+ * The TalkFragment lives inside the TalkActivity
+ * @see be.ana.nmct.multimania.ui.TalkActivity
+ */
 public class TalkFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
     public static final String URI_KEY = "uri_key";

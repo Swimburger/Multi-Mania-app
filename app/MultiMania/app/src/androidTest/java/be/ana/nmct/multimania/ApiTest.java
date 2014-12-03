@@ -21,6 +21,7 @@ import be.ana.nmct.multimania.model.TalkSpeaker;
 import be.ana.nmct.multimania.model.TalkTag;
 
 /**
+ * ApiTest contains all test to regarding communication with the online API
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
 public class ApiTest extends ApplicationTestCase<Application> {

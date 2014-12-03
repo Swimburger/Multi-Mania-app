@@ -25,6 +25,9 @@ import com.koushikdutta.ion.Ion;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 
+/**
+ * The NewsFragment shows all NewsItems
+ */
 public class NewsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
 
     private static final String TAG = NewsFragment.class.getSimpleName();
@@ -41,7 +44,6 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
         setRetainInstance(true);
         mAdapter=new NewsCursorAdapter(getActivity(),null,0);
         //setListAdapter(mAdapter);
-
     }
 
     @Override

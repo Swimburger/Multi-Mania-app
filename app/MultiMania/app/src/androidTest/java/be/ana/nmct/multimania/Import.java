@@ -20,9 +20,10 @@ import be.ana.nmct.multimania.model.Tag;
 import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.model.TalkSpeaker;
 import be.ana.nmct.multimania.model.TalkTag;
-import be.ana.nmct.multimania.service.SyncUtils;
+import be.ana.nmct.multimania.utils.SyncUtils;
 
 /**
+ * A test you can use to import data, used when we did not have a SyncProvider yet
  * Created by Niels on 3/11/2014.
  */
 public class Import extends ApplicationTestCase<Application> {

@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+/**
+ * NewsItemActivity shows the NewsItemFragment
+ * @see be.ana.nmct.multimania.ui.NewsItemFragment
+ */
 public class NewsItemActivity extends Activity implements NewsItemFragment.TitleLoadListener {
 
     private Uri mUri;

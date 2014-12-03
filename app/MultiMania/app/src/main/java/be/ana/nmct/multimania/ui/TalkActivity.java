@@ -9,6 +9,10 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+/**
+ * The TalkActivity show the talkFragment
+ * @see be.ana.nmct.multimania.ui.TalkFragment
+ */
 public class TalkActivity extends Activity implements TalkFragment.TitleLoadListener{
 
     private Uri mUri;

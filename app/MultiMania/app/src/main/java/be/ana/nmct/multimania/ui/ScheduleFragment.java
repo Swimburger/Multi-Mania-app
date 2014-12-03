@@ -39,6 +39,9 @@ import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
+/**
+ * The ScheduleFragment shows the schedule for a specific date
+ */
 public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, BulletStaggeredGridView.OnItemClickListener {
     public static final String TAG = ScheduleFragment.class.getSimpleName();
     public static final String DATE_KEY = "date_key";
@@ -53,7 +56,6 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     private List<Object> mItems;
     private String mFilterTag;
     private SettingsHelper mSettingsHelper;
-    private TextView mDayTextView;
 
     public ScheduleFragment() {}
 
@@ -114,6 +116,11 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         loader.abandon();
     }
 
+    /**
+     * Builds all the ViewModels
+     * @param cursor A Cursor with talk data
+     * @throws ParseException
+     */
     private void buildItems(Cursor cursor) throws ParseException {
         if(cursor==null||mItems==null)return;
         mItems.clear();

@@ -24,7 +24,7 @@ public class TagLoader extends AsyncTaskLoader<Cursor> {
 
         Cursor cursor = database.query(
                 MultimaniaContract.TagEntry.TABLE_NAME,
-                new String[]{MultimaniaContract.TagEntry.TAG_ID,
+                new String[]{MultimaniaContract.TagEntry._ID,
                         MultimaniaContract.TagEntry.NAME},
                 null,
                 null,

@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 
 import be.ana.nmct.multimania.ui.LoadActivity;
-import be.ana.nmct.multimania.ui.MainActivity;
+import be.ana.nmct.multimania.utils.SyncUtils;
 
 /**
  * Created by Astrid on 16/11/2014.

@@ -28,6 +28,11 @@ import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.utils.Utility;
 
+/**
+ * NewsItemFragment shows the data for one NewsItem
+ * The NewsItemFragment lives inside the NewsItemActivity
+ * @see be.ana.nmct.multimania.ui.NewsItemActivity
+ */
 public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
     public static final String URI_KEY = "uri_key";

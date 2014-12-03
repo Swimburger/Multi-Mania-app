@@ -21,6 +21,7 @@ import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
 /**
+ * A utility class containing static helper methods
  * Created by Niels on 28/10/2014.
  */
 public final class Utility {
@@ -72,22 +73,46 @@ public final class Utility {
         }
     }
 
+    /**
+     * Gets the DateFormat string
+     * @return Returns the DateFormat string
+     */
     public static String getDateFormat() {
         return sDateFormat;
     }
 
+    /**
+     * Gets the TimeFormat string
+     * @return Returns the TimeFormat string
+     */
     public static String getTimeFormat() {
         return sTimeFormat;
     }
 
+    /**
+     * Converts a DateString to a TimeString
+     * @return Returns the TimeString
+     */
     public static String getTimeString(String date) throws ParseException {
         return  sTimeFormatter.format(convertStringToDate(date));
     }
 
+    /**
+     * Converts a Date to a TimeString
+     * @return Returns the TimeString
+     */
     public static String getTimeString(Date date) throws ParseException {
         return  sTimeFormatter.format(date);
     }
 
+    /**
+     * Creates an AlphaAnimation
+     * @param from Start alpha value
+     * @param to Stop alpha value
+     * @param duration Time the animation should last in milliseconds
+     * @param offset The amount of time the animation should wait after being started in milliseconds
+     * @return Returns an AlphAnimation
+     */
     public static AlphaAnimation getAlphaAnimation(float from, float to, long duration, long offset) {
         AlphaAnimation anim = new AlphaAnimation(from,to);
         anim.setDuration(duration);
@@ -96,11 +121,17 @@ public final class Utility {
         return anim;
     }
 
+    /**
+     * Inserts content into a HTML5 snippet
+     * @param info Content to insert into the HTML5 snippet
+     * @return Returns a HTML5 snippet with the content inside the body
+     */
     public static String getHtml(String info) {
         return  "<html><head><link rel=\"stylesheet\" type\"text/css\" href=\"style.css\" /></head><body>" +
                 info +
                 "</body></html>";
     }
+
 
     public static Talk getTalkFromUri(Context context, Uri uri){
         Cursor c = context.getContentResolver().query(uri, null, null, null, null);
@@ -125,12 +156,23 @@ public final class Utility {
         }
     }
 
+    /**
+     * Converts dp values to px values
+     * @param context The application or activity Android context
+     * @param dp The dp value
+     * @return Returns the pixel value
+     */
     public static int dpToPx(Context context,int dp) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-        return px;
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
+    /**
+     * Converts px values to dp values
+     * @param context The application or activity Android context
+     * @param px The pixel value
+     * @return Returns the dp value
+     */
     public static int pxToDp(Context context,int px) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         int dp = Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));

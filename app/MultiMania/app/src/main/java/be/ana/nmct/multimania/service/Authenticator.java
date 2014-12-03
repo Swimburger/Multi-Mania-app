@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 /**
+ * Stub authenticator, necessary for a working SyncAdapter
  * Created by Niels on 29/11/2014.
  */
 public class Authenticator extends AbstractAccountAuthenticator {

@@ -1,6 +1,5 @@
 package be.ana.nmct.multimania.vm;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -11,6 +10,7 @@ import be.ana.nmct.multimania.R;
 /**
  * Created by Axel on 19/11/2014.
  */
+//TODO: Move it somewhere else, not in the ViewModel directory ;-)
 public class MyScheduleRowHolder{
 
     public TextView txtTalkTitle;

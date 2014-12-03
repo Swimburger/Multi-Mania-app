@@ -30,6 +30,7 @@ import be.ana.nmct.multimania.model.TalkTag;
 import be.ana.nmct.multimania.utils.Utility;
 
 /**
+ * ProviderTest is a class that contains all tests regarding the communication with the ContentProvider
  * Created by Niels on 29/10/2014.
  */
 public class ProviderTest extends ApplicationTestCase<Application> {

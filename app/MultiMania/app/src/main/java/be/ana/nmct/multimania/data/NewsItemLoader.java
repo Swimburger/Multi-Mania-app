@@ -23,7 +23,7 @@ public class NewsItemLoader extends AsyncTaskLoader<Cursor> {
 
         Cursor cursor = database.query(
                 MultimaniaContract.NewsItemEntry.TABLE_NAME,
-                new String[]{MultimaniaContract.NewsItemEntry.NEWSITEM_ID,
+                new String[]{MultimaniaContract.NewsItemEntry._ID,
                             MultimaniaContract.NewsItemEntry.TITLE,
                             MultimaniaContract.NewsItemEntry.IMAGE,
                             MultimaniaContract.NewsItemEntry.SHORT_DESCRIPTION,

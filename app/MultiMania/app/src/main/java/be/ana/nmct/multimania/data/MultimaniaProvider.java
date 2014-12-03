@@ -24,29 +24,100 @@ public class MultimaniaProvider extends ContentProvider {
     public static final UriMatcher sUriMatcher = buildUriMatcher();
     private DbHelper mDbHelper;
 
+    /**
+     * Id for querying all NewsItems
+     * @see be.ana.nmct.multimania.model.NewsItem
+     */
     public static final int NEWS                    = 100;
+    /**
+     * Id for querying one NewsItem by Id
+     * @see be.ana.nmct.multimania.model.NewsItem
+     */
     public static final int NEWS_ID                 = 101;
 
+    /**
+     * Id for querying all Talks
+     * @see be.ana.nmct.multimania.model.Talk
+     */
     public static final int TALK                    = 200;
+    /**
+     * Id for querying one Talk by Id
+     * @see be.ana.nmct.multimania.model.Talk
+     */
     public static final int TALK_ID                 = 201;
+    /**
+     * Id for querying all Talks for a certain Room by the RoomId
+     * @see be.ana.nmct.multimania.model.Talk
+     * @see be.ana.nmct.multimania.model.Room
+     */
     public static final int TALK_BY_ROOM_ID         = 202;
+    /**
+     * Id for querying all Talks for a certain Tag by the TagId
+     * @see be.ana.nmct.multimania.model.Talk
+     * @see be.ana.nmct.multimania.model.Tag
+     */
     public static final int TALK_BY_TAG_ID          = 203;
 
+    /**
+     * Id for querying all dates that talks are on
+     * @see be.ana.nmct.multimania.model.Talk
+     */
     public static final int TALK_DATE               = 300;
 
+    /**
+     * Id for querying all Rooms
+     * @see be.ana.nmct.multimania.model.Room
+     */
     public static final int ROOM                    = 400;
+    /**
+     * Id for querying one Room by Id
+     * @see be.ana.nmct.multimania.model.Room
+     */
     public static final int ROOM_ID                 = 401;
 
+    /**
+     * Id for querying all Tags
+     * @see be.ana.nmct.multimania.model.Tag
+     */
     public static final int TAG                     = 500;
+    /**
+     * Id for querying one Tag by Id
+     * @see be.ana.nmct.multimania.model.Tag
+     */
     public static final int TAG_ID                  = 501;
+    /**
+     * Id for querying all Tags for a certain Talk by the TalkId
+     * @see be.ana.nmct.multimania.model.Tag
+     * @see be.ana.nmct.multimania.model.Talk
+     */
     public static final int TAG_BY_TALK_ID          = 502;
 
+    /**
+     * Id for querying all Speakers
+     * @see be.ana.nmct.multimania.model.Speaker
+     */
     public static final int SPEAKER                 = 600;
+    /**
+     * Id for querying one Speaker by Id
+     * @see be.ana.nmct.multimania.model.Speaker
+     */
     public static final int SPEAKER_ID              = 601;
+    /**
+     * Id for querying all Speakers for a certain Talk by the TalkId
+     * @see be.ana.nmct.multimania.model.Speaker
+     * @see be.ana.nmct.multimania.model.Talk
+     */
     public static final int SPEAKER_BY_TALK_ID      = 602;
 
-
+    /**
+     * Id for querying all TalkTags
+     * @see be.ana.nmct.multimania.model.TalkTag
+     */
     public static final int TALK_TAG                = 700;
+    /**
+     * Id for querying all TalkSpeakers
+     * @see be.ana.nmct.multimania.model.TalkSpeaker
+     */
     public static final int TALK_SPEAKER            = 800;
 
     private static final SQLiteQueryBuilder sTalksWithRoomAndTagsQueryBuilder;
@@ -122,30 +193,46 @@ public class MultimaniaProvider extends ContentProvider {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = MultimaniaContract.CONTENT_AUTHORITY;
 
-
+        //news
         matcher.addURI(authority, MultimaniaContract.PATH_NEWS, NEWS);
+        //news/:newsId
         matcher.addURI(authority, MultimaniaContract.PATH_NEWS + "/#", NEWS_ID);
 
+        //talks
         matcher.addURI(authority, MultimaniaContract.PATH_TALK, TALK);
+        //talks/:talkId
         matcher.addURI(authority, MultimaniaContract.PATH_TALK+"/#", TALK_ID);
+        //talks/rooms/:roomId
         matcher.addURI(authority, MultimaniaContract.PATH_TALK+"/"+MultimaniaContract.PATH_ROOM+"/#", TALK_BY_ROOM_ID);
+        //talks/tags/:tagId
         matcher.addURI(authority, MultimaniaContract.PATH_TALK+"/"+MultimaniaContract.PATH_TAG+"/#", TALK_BY_TAG_ID);
 
+        //talks/dates
         matcher.addURI(authority, MultimaniaContract.PATH_TALK+"/"+MultimaniaContract.PATH_DATE,TALK_DATE);
 
+        //rooms
         matcher.addURI(authority, MultimaniaContract.PATH_ROOM, ROOM);
+        //rooms/:roomId
         matcher.addURI(authority, MultimaniaContract.PATH_ROOM+"/#", ROOM_ID);
 
+        //tags
         matcher.addURI(authority, MultimaniaContract.PATH_TAG, TAG);
+        //tags/:tagId
         matcher.addURI(authority, MultimaniaContract.PATH_TAG+"/#", TAG_ID);
+        //tags/talks/:talkId
         matcher.addURI(authority, MultimaniaContract.PATH_TAG+"/"+MultimaniaContract.PATH_TALK+"/#", TAG_BY_TALK_ID);
 
+        //speakers
         matcher.addURI(authority, MultimaniaContract.PATH_SPEAKER, SPEAKER);
+        //speakers/:speakerId
         matcher.addURI(authority, MultimaniaContract.PATH_SPEAKER+"/#", SPEAKER_ID);
+        //speakers/talks/:talkId
         matcher.addURI(authority, MultimaniaContract.PATH_SPEAKER+"/"+MultimaniaContract.PATH_TALK+"/#", SPEAKER_BY_TALK_ID);
 
+        //talk_tags
         matcher.addURI(authority, MultimaniaContract.PATH_TALK_TAG, TALK_TAG);
 
+        //talk_speakers
         matcher.addURI(authority, MultimaniaContract.PATH_TALK_SPEAKER, TALK_SPEAKER);
 
         return matcher;
