@@ -22,6 +22,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cocosw.undobar.UndoBarController;
@@ -37,9 +39,11 @@ import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.utils.SettingsHelper;
 import be.ana.nmct.multimania.utils.Utility;
-import be.ana.nmct.multimania.vm.MyScheduleRowHolder;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
+/**
+ * This fragment show the favorited talks of the user, sorted in a pageradapter per day
+ */
 public class MyScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
 
     private final String TAG = this.getClass().getCanonicalName();
@@ -330,8 +334,28 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         }
     }
 
-    private class MyScheduleAsyncQueryHandler extends AsyncQueryHandler {
+    private class MyScheduleRowHolder{
 
+        public TextView txtTalkTitle;
+        public TextView txtRoom;
+        public TextView txtTime;
+        public TextView txtTag;
+        public ImageView btnRemoveTalk;
+        public RelativeLayout root;
+        public View bottomBorder;
+
+        public MyScheduleRowHolder(View v) {
+            this.txtTalkTitle = (TextView)v.findViewById(R.id.txtTalkTitle);
+            this.txtRoom = (TextView)v.findViewById(R.id.txtRoom);
+            this.txtTime = (TextView)v.findViewById(R.id.txtTime);
+            this.txtTag = (TextView)v.findViewById(R.id.txtTag);
+            this.btnRemoveTalk = (ImageView)v.findViewById(R.id.btnRemoveTalk);
+            this.root = (RelativeLayout)v.findViewById(R.id.myscheduleRowRoot);
+            this.bottomBorder = v.findViewById(R.id.borderBottom);
+        }
+    }
+
+    private class MyScheduleAsyncQueryHandler extends AsyncQueryHandler {
         public MyScheduleAsyncQueryHandler(ContentResolver cr) {
             super(cr);
         }

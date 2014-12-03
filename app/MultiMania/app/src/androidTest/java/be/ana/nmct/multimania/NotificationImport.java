@@ -26,6 +26,11 @@ import be.ana.nmct.multimania.utils.SyncUtils;
 /**
  * Created by Axel on 20/11/2014.
  */
+
+/**
+ * This class imports all Talks and sets their Talk.from to 10 minutes from the current time.
+ * This way we can play around with the notifications at the current time.
+ */
 public class NotificationImport extends ApplicationTestCase<Application> {
 
     private final static int NOTIFY_INTERVAL = 1;
@@ -34,6 +39,10 @@ public class NotificationImport extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 
+    /**
+     * This method gets all models from the online API but sets the talk.from & talk.to to the current time + 10 minutes
+     * @throws RemoteException An exception raised when there was a problem connecting to the server
+     */
     public void testImportNotificationTalks() throws RemoteException {
         List<IData> models = new ArrayList<IData>();
 

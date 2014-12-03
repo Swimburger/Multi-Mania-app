@@ -18,6 +18,10 @@ import be.ana.nmct.multimania.utils.Utility;
 /**
  * Created by Axel on 12/11/2014.
  */
+
+/**
+ * This class tests the Calendar functionality
+ */
 public class CalendarTest extends ApplicationTestCase<Application> {
 
     private final String TAG = this.getClass().getSimpleName();
@@ -48,6 +52,10 @@ public class CalendarTest extends ApplicationTestCase<Application> {
         mContentResolver = context.getContentResolver();
     }
 
+    /**
+     * This method gets the account set in SharedPreferences by the user
+     * @throws Exception An unknown exception
+     */
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -57,6 +65,10 @@ public class CalendarTest extends ApplicationTestCase<Application> {
         util.setPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME, ACCOUNT_NAME);
     }
 
+    /**
+     * Gets the Calendar via CalendarContract
+     * @return A Cursor containing the Calendar
+     */
     private Cursor getCalendarCursor() {
         ContentResolver cr = mContentResolver;
         Uri uri = CalendarContract.Calendars.CONTENT_URI;
@@ -67,6 +79,11 @@ public class CalendarTest extends ApplicationTestCase<Application> {
         return cr.query(uri, null, selection, selectionArgs, null);
     }
 
+    /**
+     * Gets an event by id
+     * @param id the id of the event to get
+     * @return A Cursor containing the id
+     */
     public Cursor getEventByID(long id) {
         ContentResolver cr = mContentResolver;
 
@@ -84,6 +101,9 @@ public class CalendarTest extends ApplicationTestCase<Application> {
         return cr.query(sCalUtil.buildCalUri(), PROJECTION, selection, selectionArgs, null);
     }
 
+    /**
+     * This method tests if a Calendar was successfully created
+     */
     public void testCalendarCreated() {
 
         //Create the calendar
@@ -120,6 +140,10 @@ public class CalendarTest extends ApplicationTestCase<Application> {
         assertTrue(title.equals(sTestTalk.title));
     }
 */
+
+    /**
+     * This method tests if a Calendar was successfully deleted
+     */
     public void testCalendarDeleted() {
         //Delete the calendar
         sCalUtil = new GoogleCalUtil(this.getContext(), CALENDAR_NAME);

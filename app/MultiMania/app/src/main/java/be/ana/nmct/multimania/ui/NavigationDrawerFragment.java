@@ -18,15 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import be.ana.nmct.multimania.R;
-import be.ana.nmct.multimania.model.NavigationItem;
+import be.ana.nmct.multimania.vm.NavigationItem;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.

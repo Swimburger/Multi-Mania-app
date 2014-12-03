@@ -1,4 +1,4 @@
-package be.ana.nmct.multimania.model;
+package be.ana.nmct.multimania.vm;
 
 /**
  * Created by Astrid on 3/12/2014.

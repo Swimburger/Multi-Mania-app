@@ -22,7 +22,7 @@ import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 
 /**
- * A simple {@link android.app.Fragment} subclass.
+ * This fragment takes care of the PagerAdapter for My Schedule
  */
 public class MySchedulesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     public static final String TAG = MySchedulesFragment.class.getSimpleName();
