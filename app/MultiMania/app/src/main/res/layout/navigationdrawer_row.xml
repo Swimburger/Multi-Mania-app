@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/text1"
-    android:layout_height="40dp"
-    android:layout_width="match_parent"
-    android:textColor="@color/white"
-    android:textSize="17sp"
-    android:paddingLeft="10dp"
-    android:paddingTop="7dp" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="7dp"
+        android:padding="3dp"
+        android:id="@+id/imageIcon" />
+
+    <TextView
+
+        android:id="@+id/txtNav"
+        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:paddingLeft="10dp"
+        android:paddingTop="7dp"
+        android:layout_toRightOf="@+id/imageIcon"
+        android:layout_toEndOf="@+id/imageIcon" />
+</RelativeLayout>

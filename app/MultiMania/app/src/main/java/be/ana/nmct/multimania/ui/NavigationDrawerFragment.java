@@ -4,6 +4,7 @@ package be.ana.nmct.multimania.ui;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -17,9 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.model.NavigationItem;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -49,6 +56,7 @@ public class NavigationDrawerFragment extends Fragment {
      */
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
@@ -56,6 +64,8 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+    private DrawerItemCustomAdapter adapter;
+
 
     public NavigationDrawerFragment() {
     }
@@ -65,6 +75,7 @@ public class NavigationDrawerFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         setRetainInstance(true);
+
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
         // drawer. See PREF_USER_LEARNED_DRAWER for details.
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -89,27 +100,31 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
         View v = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
-        mDrawerListView = (ListView)  v.findViewById(R.id.navigationList);
+
+        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.nav_drawer_titles);
+        mDrawerLayout = (DrawerLayout) v.findViewById(R.layout.fragment_navigation_drawer);
+        mDrawerListView = (ListView) v.findViewById(R.id.navigationList);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                R.layout.navigationdrawer_row,
-                R.id.text1,
-                new String[]{
-                        getString(R.string.title_schedule),
-                        getString(R.string.title_myschedule),
-                        getString(R.string.title_map),
-                        getString(R.string.title_news),
-                        getString(R.string.title_about),
-                        getString(R.string.title_settings)
-                }));
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        NavigationItem[] items = new NavigationItem[6];
+
+        items[0] = new NavigationItem(R.drawable.ic_action_event, "Schedule");
+        items[1] = new NavigationItem(R.drawable.ic_action_event, "My schedule");
+        items[2] = new NavigationItem(R.drawable.ic_action_map, "Map");
+        items[3] = new NavigationItem(R.drawable.ic_action_map, "News");
+        items[4] = new NavigationItem(R.drawable.ic_action_about, "About");
+        items[5] = new NavigationItem(R.drawable.ic_action_settings, "Settings");
+
+
+        adapter = new DrawerItemCustomAdapter(getActivity(), R.layout.navigationdrawer_row, items);
+        mDrawerListView.setAdapter(adapter);
+
         return v;
     }
 
@@ -265,5 +280,41 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+    }
+
+    public class DrawerItemCustomAdapter extends ArrayAdapter<NavigationItem> {
+
+        Context mContext;
+        int layoutResourceId;
+        NavigationItem data[] = null;
+
+        public DrawerItemCustomAdapter(Context mContext, int layoutResourceId, NavigationItem[] data) {
+
+            super(mContext, layoutResourceId, data);
+            this.layoutResourceId = layoutResourceId;
+            this.mContext = mContext;
+            this.data = data;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            View listItem = convertView;
+
+            LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
+            listItem = inflater.inflate(layoutResourceId, parent, false);
+
+            ImageView imageViewIcon = (ImageView) listItem.findViewById(R.id.imageIcon);
+            TextView textViewName = (TextView) listItem.findViewById(R.id.txtNav);
+
+            NavigationItem folder = data[position];
+
+
+            imageViewIcon.setImageResource(folder.icon);
+            textViewName.setText(folder.name);
+
+            return listItem;
+        }
+
     }
 }
