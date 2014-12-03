@@ -13,7 +13,7 @@
         android:duration="700"
         android:propertyName="scaleX"
         android:valueFrom="1.0"
-        android:valueTo="1.5"
+        android:valueTo="0.7"
         android:valueType="floatType"
         android:interpolator="@android:anim/accelerate_interpolator"/>
 
@@ -22,7 +22,7 @@
         android:duration="700"
         android:propertyName="scaleY"
         android:valueFrom="1.0"
-        android:valueTo="1.5"
+        android:valueTo="0.7"
         android:valueType="floatType"
         android:interpolator="@android:anim/accelerate_interpolator"/>
 </set>
