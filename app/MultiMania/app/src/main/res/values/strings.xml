@@ -48,7 +48,7 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="myschedule_placeholder">Your favorited keynotes will appear here.</string>
     <string name="title_activity_load">LoadActivity</string>
     <string name="loading">Loading</string>
-
+    <string name="stardescription">Favorite Icon</string>
     <!--Nav drawer menu items-->
     <string-array name="nav_drawer_titles">
         <item >Schedule</item>

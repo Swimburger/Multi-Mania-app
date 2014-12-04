@@ -60,6 +60,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     public UndoBarController.UndoBar mUndoBar;
     private SettingsHelper mSettingsHelper;
     private TextView mPlaceholder;
+    private ImageView mPlaceholderImg;
 
     private List<ScheduleTalkVm> mItems;
 
@@ -97,6 +98,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         View v = inflater.inflate(R.layout.fragment_my_schedule, container, false);
 
         mPlaceholder = (TextView)v.findViewById(R.id.placeholder);
+        mPlaceholderImg = (ImageView)v.findViewById(R.id.placeholderIcon);
         mGridview = (StaggeredGridView) v.findViewById(R.id.gridViewMySchedule);
         mGridview.setAdapter(mMyScheduleAdapter);
         mGridview.setOnItemClickListener(this);
@@ -124,6 +126,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
         if(mItems == null || mItems.size() <= 0){
             mPlaceholder.setVisibility(View.VISIBLE);
+            mPlaceholderImg.setVisibility(View.VISIBLE);
         }
 
     }
@@ -330,6 +333,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             vm.isFavorite = true;
             vm.isDoubleBooked = checkDoubleBookings(vm);
             mPlaceholder.setVisibility(View.INVISIBLE);
+            mPlaceholderImg.setVisibility(View.INVISIBLE);
             mSettingsHelper.settingsHandler(vm);
         }
     }
