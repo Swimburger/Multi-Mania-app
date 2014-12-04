@@ -10,18 +10,23 @@
         android:layout_height="200dp"
         android:contentDescription="@string/stardescription"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/ic_star_placeholder" />
+        android:layout_marginTop="75dp"
+        android:src="@drawable/ic_star_placeholder"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/placeholder"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:text="@string/myschedule_placeholder"
-        android:textSize="20sp"
+        android:gravity="center"
+        android:textSize="18sp"
         android:textColor="@color/white"
         android:visibility="invisible"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_below="@id/placeholderIcon"
         />
 
     <com.etsy.android.grid.StaggeredGridView
