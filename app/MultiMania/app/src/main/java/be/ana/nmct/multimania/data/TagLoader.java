@@ -16,7 +16,9 @@ public class TagLoader extends AsyncTaskLoader<Cursor> {
         super(context);
     }
 
-
+    /**
+     * Loads the tags in a background thread
+     */
     @Override
     public Cursor loadInBackground() {
         DbHelper helper = DbHelper.getInstance(getContext());
@@ -52,10 +54,13 @@ public class TagLoader extends AsyncTaskLoader<Cursor> {
         }
 
         if(oldData != null && oldData != data && !oldData.isClosed()){
-            oldData.close();;
+            oldData.close();
         }
     }
 
+    /**
+     * Starts loading the tags
+     */
     @Override
     protected void onStartLoading() {
         if(mData != null){
@@ -67,6 +72,9 @@ public class TagLoader extends AsyncTaskLoader<Cursor> {
         }
     }
 
+    /**
+     * Stop loading
+     */
     @Override
     protected void onStopLoading() {
         cancelLoad();
@@ -79,6 +87,9 @@ public class TagLoader extends AsyncTaskLoader<Cursor> {
         }
     }
 
+    /**
+     * Reset loading off the tags
+     */
     @Override
     protected void onReset() {
         super.onReset();

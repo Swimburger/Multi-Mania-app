@@ -11,7 +11,6 @@
         android:id="@+id/imageIcon" />
 
     <TextView
-
         android:id="@+id/txtNav"
         android:layout_height="40dp"
         android:layout_width="match_parent"

@@ -58,14 +58,4 @@ The Multi-Mania conference has become the annual event that brings together desi
         <item >About</item>
         <item >Settings</item>
     </string-array>
-
-    <!--Nav drawer menu icons-->
- <!-- <array name="nav_drawer_icons">
-        <item>@drawable/ic_action_event</item>
-        <item>@drawable/ic_action_event</item>
-        <item>@drawable/ic_action_map</item>
-        <item>@drawable/ic_action_map</item>
-        <item>@drawable/ic_action_about</item>
-        <item>@drawable/ic_action_settings</item>
-    </array>-->
 </resources>

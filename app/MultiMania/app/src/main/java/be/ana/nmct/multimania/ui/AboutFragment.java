@@ -17,7 +17,10 @@ import com.bulletnoid.android.widget.StaggeredGridView.BulletStaggeredGridView;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.utils.Utility;
 
-
+/*
+* This fragment show details about the event
+* info about location, sponsors, what it is
+* */
 public class AboutFragment extends Fragment {
 
     private AboutAdapter mAdapter;

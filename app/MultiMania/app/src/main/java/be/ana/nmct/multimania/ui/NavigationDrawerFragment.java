@@ -112,9 +112,9 @@ public class NavigationDrawerFragment extends Fragment {
         NavigationItem[] items = new NavigationItem[6];
 
         items[0] = new NavigationItem(R.drawable.ic_action_event, "Schedule");
-        items[1] = new NavigationItem(R.drawable.ic_action_event, "My schedule");
+        items[1] = new NavigationItem(R.drawable.ic_action_myevent, "My schedule");
         items[2] = new NavigationItem(R.drawable.ic_action_map, "Map");
-        items[3] = new NavigationItem(R.drawable.ic_action_map, "News");
+        items[3] = new NavigationItem(R.drawable.ic_action_news, "News");
         items[4] = new NavigationItem(R.drawable.ic_action_about, "About");
         items[5] = new NavigationItem(R.drawable.ic_action_settings, "Settings");
 
