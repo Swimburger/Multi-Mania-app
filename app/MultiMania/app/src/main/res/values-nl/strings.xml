@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Multi-Mania</string>
+    <string name="title_schedule">Tijdschema</string>
+    <string name="title_myschedule">Mijn Tijdschema</string>
+    <string name="title_map">Kaart</string>
+    <string name="title_news">Nieuws</string>
+    <string name="title_about">Over Multi-Mania</string>
+    <string name="title_settings">Instellingen</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="talk_room">Kamer</string>
+    <string name="talk_speaker">Spreker</string>
+    <string name="talk_info">Info</string>
+    <string name="newsitem_info">Info</string>
+    <string name="settings_sync">Sync mijn tijdschema met Google Calendar</string>
+    <string name="settings_notify">Meldt mij als één van mijn favoriete keynotes gaat beginnen</string>
+    <string name="calendar_name">Multi-Mania 2015</string>
+    <string name="calendar_account_name">Kalender</string>
+    <string name="about_title">Multi-Mania</string>
+    <string name="about_info">Wordt geïnspireerd, deel kennis en verbind jezelf met de creative community!
+De Multi-Mania conferentie is het jaarlijkse evenement geworden dat designers, developers, entrepeneurs en creatieve new media studenten tesamen brengt. Het enthousiasme rond het evenement is opwindend en inspirerend.
+Elk jaar groeit de conferentie een klein beetje en elk jaar is de ervaring iets beter.</string>
+    <string name="country">België</string>
+    <string name="day">dag</string>
+    <string name="speakers">Sprekers</string>
+    <string name="from">Van</string>
+    <string name="time">Tijd</string>
+    <string name="favorite">Favoriet</string>
+    <string name="close">Sluiten</string>
+    <string name="unfavorite_undobar">Verwijderd uit favorieten</string>
+    <string name="notification_text">Zal beginnen in 10 minuten.</string>
+    <string name="myschedule_placeholder">Jouw favoriete keynotes zullen hier verschijnen.</string>
+    <string name="loading">Laden</string>
+    <string name="stardescription">Favoriet Icoon</string>
+    <string name="nav_schedule">Tijdschema</string>
+    <string name="nav_my_schedule">Mijn Tijdschema</string>
+    <string name="nav_map">Kaart</string>
+    <string name="nav_news">Nieuws</string>
+    <string name="nav_about">Over Multi-Mania</string>
+    <string name="nav_settings">Instellingen</string>
+    <string name="navigation_drawer_close">Sluit navigatie</string>
+    <string name="navigation_drawer_open">Open navigatie</string>
+    <string name="undo_item">Ongedaan maken</string>
+</resources>

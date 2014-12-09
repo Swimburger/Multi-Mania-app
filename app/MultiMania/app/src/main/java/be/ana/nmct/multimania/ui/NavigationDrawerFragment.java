@@ -53,7 +53,6 @@ public class NavigationDrawerFragment extends Fragment {
      */
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
@@ -100,7 +99,6 @@ public class NavigationDrawerFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
-        mNavigationDrawerItemTitles = getResources().getStringArray(R.array.nav_drawer_titles);
         mDrawerLayout = (DrawerLayout) v.findViewById(R.layout.fragment_navigation_drawer);
         mDrawerListView = (ListView) v.findViewById(R.id.navigationList);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -111,12 +109,12 @@ public class NavigationDrawerFragment extends Fragment {
         });
         NavigationItem[] items = new NavigationItem[6];
 
-        items[0] = new NavigationItem(R.drawable.ic_action_event, "Schedule");
-        items[1] = new NavigationItem(R.drawable.ic_action_myevent, "My schedule");
-        items[2] = new NavigationItem(R.drawable.ic_action_map, "Map");
-        items[3] = new NavigationItem(R.drawable.ic_action_news, "News");
-        items[4] = new NavigationItem(R.drawable.ic_action_about, "About");
-        items[5] = new NavigationItem(R.drawable.ic_action_settings, "Settings");
+        items[0] = new NavigationItem(R.drawable.ic_action_event, getString(R.string.nav_schedule));
+        items[1] = new NavigationItem(R.drawable.ic_action_myevent, getString(R.string.nav_my_schedule));
+        items[2] = new NavigationItem(R.drawable.ic_action_map, getString(R.string.nav_map));
+        items[3] = new NavigationItem(R.drawable.ic_action_news, getString(R.string.nav_news));
+        items[4] = new NavigationItem(R.drawable.ic_action_about, getString(R.string.nav_about));
+        items[5] = new NavigationItem(R.drawable.ic_action_settings, getString(R.string.nav_settings));
 
 
         adapter = new DrawerItemCustomAdapter(getActivity(), R.layout.navigationdrawer_row, items);
