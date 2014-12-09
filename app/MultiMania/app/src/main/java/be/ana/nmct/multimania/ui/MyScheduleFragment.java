@@ -119,7 +119,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         try {
             buildItems(cursor);
-            //loader.abandon();
+            loader.abandon();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -235,6 +235,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private class MyScheduleAdapter extends ArrayAdapter<ScheduleTalkVm> implements Insertable<ScheduleTalkVm> {
 
         private LayoutInflater mInflater;
+        private ScheduleTalkVm mRemovedItem;
 
         public MyScheduleAdapter(Context context, int resource, List<ScheduleTalkVm> objects) {
             super(context, resource, objects);
@@ -298,7 +299,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                     mUndoBar.listener(new UndoBarController.UndoListener() {
                         @Override
                         public void onUndo(@Nullable Parcelable parcelable) {
-                            add(0, vm);
+                            add(0, mRemovedItem);
                         }
                     });
                     mUndoBar.show();
@@ -308,6 +309,9 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
         public void removeItem(ScheduleTalkVm vm) {
             updateItemValue(vm.id, false);
+            mRemovedItem = vm;
+            mItems.remove(vm);
+            remove(vm);
             vm.isFavorite = false;
             vm.isDoubleBooked = checkDoubleBookings(vm);
             mSettingsHelper.settingsHandler(vm);
@@ -335,6 +339,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             mPlaceholder.setVisibility(View.INVISIBLE);
             mPlaceholderImg.setVisibility(View.INVISIBLE);
             mSettingsHelper.settingsHandler(vm);
+
+            super.add(vm);
         }
     }
 

@@ -71,6 +71,7 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mData=data;
         mAdapter.swapCursor(mData);
+        loader.abandon();
     }
 
     @Override

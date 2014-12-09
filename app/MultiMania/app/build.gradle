@@ -14,12 +14,12 @@ android {
     }
     buildTypes {
         alpha {
-            runProguard false
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
         }
         release {
-            runProguard true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
         }

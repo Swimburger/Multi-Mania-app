@@ -71,6 +71,7 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         AddDates(cursor);
+        loader.abandon();
     }
 
     private void AddDates(Cursor cursor) {

@@ -88,6 +88,7 @@ public class SchedulesFragment extends Fragment implements LoaderManager.LoaderC
                 break;
             }*/
         }
+        loader.abandon();
     }
 
     /*private void addTags(Cursor cursor) {

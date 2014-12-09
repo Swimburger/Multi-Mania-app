@@ -99,6 +99,7 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mData = data;
         BindData(data);
+        loader.abandon();
     }
 
     private void BindData(Cursor cursor) {
