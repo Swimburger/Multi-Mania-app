@@ -11,4 +11,5 @@
     <color name="primaryColorDark">#ff549a51</color>
     <color name="danger">#d9534f</color>
     <color name="fontcolor">#000000</color>
+    <color name="drawercolor">#646664</color>
 </resources>
