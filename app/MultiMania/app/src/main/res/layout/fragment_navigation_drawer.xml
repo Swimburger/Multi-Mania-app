@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ccc"
+    android:background="@color/white"
     android:fillViewport="true">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ListView
+            android:layout_marginTop="10dp"
             android:id="@+id/navigationList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -50,6 +51,7 @@
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:src="@drawable/adobe"/>
+            android:src="@drawable/adobe"
+            />
     </LinearLayout>
 </ScrollView>
