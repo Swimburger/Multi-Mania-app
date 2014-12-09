@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Multi-Mania</string>
+    <string name="app_name" translatable="false">Multi-Mania</string>
     <string name="title_schedule">Schedule</string>
     <string name="title_myschedule">My Schedule</string>
     <string name="title_map">Map</string>
@@ -20,9 +20,9 @@
     <string name="settings_sync">Sync My Schedule with Google Calendar</string>
     <string name="settings_notify">Notify me when my favorite keynote begins</string>
     <string name="talk_title" translatable="false">Talk</string>
-    <string name="calendar_name">Multi-Mania 2015</string>
+    <string name="calendar_name" translatable="false">Multi-Mania 2015</string>
     <string name="calendar_account_name">Calendar</string>
-    <string name="about_title">Multi-Mania</string>
+    <string name="about_title" translatable="false">Multi-Mania</string>
     <string name="about_info">Get inspired, share knowledge and connect with the creative community!
 The Multi-Mania conference has become the annual event that brings together designers, developers, entrepreneurs and creative new media students. The enthusiasm surrounding this event is exciting and inspiring. Each year the conference grows a little bigger and each year the experience gets a little better.</string>
     <string name="name_venue" translatable="false">Kortrijk Xpo Meeting Center</string>
