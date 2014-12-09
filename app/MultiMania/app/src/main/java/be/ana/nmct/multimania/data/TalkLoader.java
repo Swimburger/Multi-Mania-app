@@ -18,6 +18,9 @@ public class TalkLoader extends AsyncTaskLoader<Cursor>{
         this.mRoomId = roomId;
     }
 
+    /**
+     * Loads the talks in a background thread
+     */
     @Override
     public Cursor loadInBackground() {
 
@@ -59,10 +62,14 @@ public class TalkLoader extends AsyncTaskLoader<Cursor>{
         }
 
         if(oldData != null && oldData != data && !oldData.isClosed()){
-            oldData.close();;
+            oldData.close();
         }
     }
 
+
+    /**
+     * Starts loading the talks
+     */
     @Override
     protected void onStartLoading() {
         if(mData != null){
@@ -74,6 +81,10 @@ public class TalkLoader extends AsyncTaskLoader<Cursor>{
         }
     }
 
+
+    /**
+     * Stop loading the talks
+     */
     @Override
     protected void onStopLoading() {
         cancelLoad();
@@ -86,6 +97,10 @@ public class TalkLoader extends AsyncTaskLoader<Cursor>{
         }
     }
 
+
+    /**
+     * Reset loading off the talks
+     */
     @Override
     protected void onReset() {
         super.onReset();

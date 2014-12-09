@@ -16,6 +16,9 @@ public class RoomLoader extends AsyncTaskLoader<Cursor>{
         super(context);
     }
 
+    /**
+     * Loads the rooms in a background thread
+     */
     @Override
     public Cursor loadInBackground() {
         DbHelper helper = DbHelper.getInstance(getContext());
@@ -51,10 +54,13 @@ public class RoomLoader extends AsyncTaskLoader<Cursor>{
         }
 
         if(oldData != null && oldData != data && !oldData.isClosed()){
-            oldData.close();;
+            oldData.close();
         }
     }
 
+    /**
+     * Starts loading the rooms
+     */
     @Override
     protected void onStartLoading() {
         if(mData != null){
@@ -66,6 +72,9 @@ public class RoomLoader extends AsyncTaskLoader<Cursor>{
         }
     }
 
+    /**
+     * Stop loading
+     */
     @Override
     protected void onStopLoading() {
         cancelLoad();
@@ -78,6 +87,9 @@ public class RoomLoader extends AsyncTaskLoader<Cursor>{
         }
     }
 
+    /**
+     * Reset loading off the rooms
+     */
     @Override
     protected void onReset() {
         super.onReset();

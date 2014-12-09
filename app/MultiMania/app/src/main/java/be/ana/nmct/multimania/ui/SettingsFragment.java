@@ -33,6 +33,9 @@ import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
+/**
+ * This fragment handles the Settings for the application based on user preferences
+ */
 public class SettingsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private final static String TAG = SettingsFragment.class.getCanonicalName();

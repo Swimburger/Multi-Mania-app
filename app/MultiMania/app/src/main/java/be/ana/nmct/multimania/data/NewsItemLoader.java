@@ -16,6 +16,9 @@ public class NewsItemLoader extends AsyncTaskLoader<Cursor> {
         super(context);
     }
 
+    /**
+     * Loads the newsitems in a background thread
+     */
     @Override
     public Cursor loadInBackground() {
         DbHelper helper = DbHelper.getInstance(getContext());
@@ -56,10 +59,13 @@ public class NewsItemLoader extends AsyncTaskLoader<Cursor> {
         }
 
         if(oldData != null && oldData != data && !oldData.isClosed()){
-            oldData.close();;
+            oldData.close();
         }
     }
 
+    /**
+     * Starts loading the newsitems
+    */
     @Override
     protected void onStartLoading() {
         if(mData != null){
@@ -71,6 +77,9 @@ public class NewsItemLoader extends AsyncTaskLoader<Cursor> {
         }
     }
 
+    /**
+     * Stop loading
+     */
     @Override
     protected void onStopLoading() {
         cancelLoad();
@@ -83,6 +92,9 @@ public class NewsItemLoader extends AsyncTaskLoader<Cursor> {
         }
     }
 
+    /**
+     * Reset loading off the newsitems
+     */
     @Override
     protected void onReset() {
         super.onReset();

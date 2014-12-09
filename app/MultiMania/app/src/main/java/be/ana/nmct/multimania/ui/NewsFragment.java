@@ -150,13 +150,7 @@ public class NewsFragment extends Fragment implements LoaderManager.LoaderCallba
 
             holder.txtTitle.setText(title);
             holder.txtShortDescription.setText(shortDescription);
-           // holder.imgNews.setImageURI(Uri.parse(img));
             Ion.with(holder.imgNews)
-                    //.animateLoad()
-
-                    //.resize(view.getMeasuredWidth(),
-                    //        holder.imgNews.getHeight())
-                    //.centerCrop()
                     .smartSize(true)
                     .animateIn(animFadeIn)
                     .load(img);

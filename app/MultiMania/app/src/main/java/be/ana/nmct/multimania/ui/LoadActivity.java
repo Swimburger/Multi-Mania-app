@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import be.ana.nmct.multimania.R;
 
+/**
+ * This activity is to see when the application for the first time startup
+ */
 public class LoadActivity extends Activity {
 
     AnimationDrawable animation;
