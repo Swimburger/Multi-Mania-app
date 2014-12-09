@@ -2478,7 +2478,7 @@ public class BulletStaggeredGridView extends ViewGroup {
                         child.setPressed(true);
 
                         setPressed(true);
-                        layoutChildren(true);
+                        //layoutChildren(true);
                         positionSelector(mMotionPosition, child);
                         refreshDrawableState();
 
