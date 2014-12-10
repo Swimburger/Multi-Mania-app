@@ -27,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cocosw.undobar.UndoBarController;
+import com.cocosw.undobar.UndoBarStyle;
 import com.etsy.android.grid.StaggeredGridView;
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nhaarman.listviewanimations.util.Insertable;
@@ -58,6 +59,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private MyScheduleAdapter mMyScheduleAdapter;
     private StaggeredGridView mGridview;
     public UndoBarController.UndoBar mUndoBar;
+    private UndoBarStyle mUndoBarStyle;
     private SettingsHelper mSettingsHelper;
     private TextView mPlaceholder;
     private ImageView mPlaceholderImg;
@@ -79,12 +81,12 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Bundle args = getArguments();
         this.mDate = args.getString(DATE_KEY);
         this.mPosition = args.getInt(POSITION_KEY);
         this.mItems = new ArrayList<ScheduleTalkVm>();
         this.mSettingsHelper = new SettingsHelper(getActivity());
+        this.mUndoBarStyle = new UndoBarStyle(0,R.string.undo_item, 0,2000);
     }
 
     @Override
@@ -295,6 +297,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
                     //show undobar
                     mUndoBar = new UndoBarController.UndoBar(getActivity());
+                    mUndoBar.style(mUndoBarStyle);
                     mUndoBar.message(getActivity().getString(R.string.unfavorite_undobar));
                     mUndoBar.listener(new UndoBarController.UndoListener() {
                         @Override
