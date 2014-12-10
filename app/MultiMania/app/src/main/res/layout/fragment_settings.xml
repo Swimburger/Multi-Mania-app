@@ -13,30 +13,36 @@
         >
 
         <CheckBox android:id="@+id/checkbox_sync"
-
             android:layout_width="fill_parent"
             android:layout_height="55dp"
             android:text="@string/settings_sync"
             android:textColor="@color/white"
             android:button="@drawable/checkbox"
-            android:checked="false" />
+            android:checked="false"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
             />
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            android:layout_marginRight="10dp"/>
 
         <CheckBox android:id="@+id/checkbox_notify"
             android:layout_width="fill_parent"
             android:layout_height="55dp"
             android:button="@drawable/checkbox"
             android:text="@string/settings_notify"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            />
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            android:layout_marginRight="10dp"/>
 
         </LinearLayout>
 </FrameLayout>
