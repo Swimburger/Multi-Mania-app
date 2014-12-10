@@ -40,7 +40,7 @@ public class SettingsFragment extends Fragment implements LoaderManager.LoaderCa
 
     private final static String TAG = SettingsFragment.class.getCanonicalName();
 
-    private static final int REQUEST_CODE_EMAIL = 1;
+    public static final int REQUEST_CODE_EMAIL = 1;
 
     private static String mCalendarName;
 

@@ -4,20 +4,32 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.common.AccountPicker;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
@@ -28,6 +40,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     public static final String PREFERENCE_NAME = "launch_values";
     public static final String PREFERENCE_FIRSTTIMELAUNCH = "first_time_launch";
+    public static final String PREFERENCE_ACCOUNT = "account_name";
 
     public static final int LOADER_SCHEDULE_DATES_ID    = 0;
     public static final int LOADER_SCHEDULE_TALK_ID     = 10;
@@ -45,10 +58,13 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     // Instance fields
     Account mAccount;
 
+    private MenuItem mAddAccountMenuItem;
+
     // Sync interval constants
     public static final long SYNC_INTERVAL = 60L*60L*24;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    private SettingsUtil mAccountSettings;
     private CharSequence mTitle;
 
     @Override
@@ -70,6 +86,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         }
 
         mAccount = CreateSyncAccount(this);
+        mAccountSettings = new SettingsUtil(this, PREFERENCE_NAME);
 
         //Beautify for Lollipop users
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
@@ -184,24 +201,47 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         getActionBar().setTitle(mTitle);
     }
 
-    public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
-        if(actionBar!=null){
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-            actionBar.setDisplayShowTitleEnabled(true);
-        }
-        //actionBar.setTitle(mTitle);
-        actionBar.setIcon(R.drawable.ic_actionbar);
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            restoreActionBar();
-            return true;
-        }
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        mAddAccountMenuItem = menu.findItem(R.id.action_account);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.action_account:
+
+                TextView txtDialogMessage = new TextView(this);
+                txtDialogMessage.setText(R.string.login_description);
+                txtDialogMessage.setGravity(Gravity.CENTER_HORIZONTAL);
+                txtDialogMessage.setPadding(20, 10, 20, 15);
+                txtDialogMessage.setTextAppearance(this,android.R.style.TextAppearance_Medium);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setView(txtDialogMessage)
+                        .setTitle(R.string.action_account)
+                        .setCancelable(true)
+                        .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                askUserEmail();
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void openTwitter(View v){
@@ -252,4 +292,30 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         }
         return newAccount;
     }
+
+    private void askUserEmail() {
+        try {
+            Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{GoogleAuthUtil.GOOGLE_ACCOUNT_TYPE}, false, null, null, null, null);
+            startActivityForResult(intent, SettingsFragment.REQUEST_CODE_EMAIL);
+        } catch (ActivityNotFoundException e) {
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SettingsFragment.REQUEST_CODE_EMAIL && data != null && resultCode == Activity.RESULT_OK) {
+
+            String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+
+            if (accountName != "") {
+                mAccountSettings.setPreference(PREFERENCE_ACCOUNT, accountName);
+                Toast.makeText(this, getString(R.string.account_success), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, getString(R.string.account_picker_invalid), Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(this, getString(R.string.account_picker_none), Toast.LENGTH_LONG).show();
+        }
+    }
+
 }
