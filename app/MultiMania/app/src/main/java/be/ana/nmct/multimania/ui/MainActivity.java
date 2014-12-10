@@ -62,10 +62,22 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private SettingsUtil mAccountSettings;
     private CharSequence mTitle;
+    private Boolean mFirstTimeLaunch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Handle first time launching
+        SettingsUtil launchUtil = new SettingsUtil(this, PREFERENCE_NAME);
+        mFirstTimeLaunch = launchUtil.getBooleanPreference(PREFERENCE_FIRSTTIMELAUNCH, true);
+
+        if(mFirstTimeLaunch){
+            super.onResume();
+            startActivity(new Intent(this,LoadActivity.class));
+            //return;
+        }
+
         setContentView(R.layout.activity_main);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -101,31 +113,20 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     protected void onResume() {
         super.onResume();
 
-        //Handle first time launching
-        SettingsUtil launchUtil = new SettingsUtil(this, PREFERENCE_NAME);
-        boolean firstTimeLaunch = launchUtil.getBooleanPreference(PREFERENCE_FIRSTTIMELAUNCH, true);
 
-        if(firstTimeLaunch){
+
+        if(mFirstTimeLaunch){
             SettingsUtil settingsUtil = new SettingsUtil(this, SettingsFragment.PREFERENCE_NAME);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_NOTIFY, true);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
             //launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
 
-            requestSync();
+            //requestSync();
 
             //Intent loadintent = new Intent(this, LoadActivity.class);
             //startActivity(loadintent);
         }
 
-    }
-
-    private void requestSync() {
-        Bundle settingsBundle = new Bundle();
-        settingsBundle.putBoolean(
-                ContentResolver.SYNC_EXTRAS_MANUAL, true);
-        settingsBundle.putBoolean(
-                ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
-        ContentResolver.requestSync(mAccount, AUTHORITY, settingsBundle);
     }
 
     @Override

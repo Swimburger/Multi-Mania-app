@@ -245,8 +245,10 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
+        if(mDrawerToggle != null) {
+            if (mDrawerToggle.onOptionsItemSelected(item)) {
+                return true;
+            }
         }
         return super.onOptionsItemSelected(item);
     }

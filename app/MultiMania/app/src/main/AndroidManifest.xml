@@ -47,9 +47,6 @@
             android:name=".ui.LoadActivity"
             android:label="@string/title_activity_load"
             android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="be.ana.nmct.multimania.SYNCCOMPLETE"/>
-            </intent-filter>
         </activity>
         <provider
             android:name=".data.MultimaniaProvider"
