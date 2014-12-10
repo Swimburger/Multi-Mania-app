@@ -199,6 +199,11 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         mAddAccountMenuItem = menu.findItem(R.id.action_account);
+
+        if(mAccountSettings.getStringPreference(PREFERENCE_ACCOUNT) == null){
+            mAddAccountMenuItem.setIcon(R.drawable.ic_action_add_person);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -209,12 +214,31 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             case R.id.action_account:
 
                 TextView txtDialogMessage = new TextView(this);
-                txtDialogMessage.setText(R.string.login_description);
                 txtDialogMessage.setGravity(Gravity.CENTER_HORIZONTAL);
                 txtDialogMessage.setPadding(20, 10, 20, 15);
                 txtDialogMessage.setTextAppearance(this,android.R.style.TextAppearance_Medium);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+                if(mAccountSettings.getStringPreference(PREFERENCE_ACCOUNT) == null){
+                    txtDialogMessage.setText(R.string.login_description);
+                    builder.setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            askUserEmail();
+                        }
+                    });
+                } else {
+                    txtDialogMessage.setText(R.string.login_loggedin_description);
+                    builder.setPositiveButton(R.string.login_button_other_email, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            askUserEmail();
+                        }
+                    });
+                }
+
+
                 builder.setView(txtDialogMessage)
                         .setTitle(R.string.action_account)
                         .setCancelable(true)
@@ -222,12 +246,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                            }
-                        })
-                        .setPositiveButton(R.string.dialog_confirm, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                askUserEmail();
                             }
                         });
                 AlertDialog dialog = builder.create();
