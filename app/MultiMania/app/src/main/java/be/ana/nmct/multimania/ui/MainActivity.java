@@ -74,7 +74,9 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
         if(mFirstTimeLaunch){
             super.onResume();
-            startActivity(new Intent(this,LoadActivity.class));
+            Intent intent = new Intent(this,LoadActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
             //return;
         }
 
@@ -119,12 +121,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             SettingsUtil settingsUtil = new SettingsUtil(this, SettingsFragment.PREFERENCE_NAME);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_NOTIFY, true);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
-            //launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
-
-            //requestSync();
-
-            //Intent loadintent = new Intent(this, LoadActivity.class);
-            //startActivity(loadintent);
         }
 
     }

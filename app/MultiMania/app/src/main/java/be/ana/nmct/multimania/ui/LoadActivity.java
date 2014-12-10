@@ -91,6 +91,7 @@ public class LoadActivity extends Activity {
             launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
 
             Intent mainIntent = new Intent(LoadActivity.this, MainActivity.class);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(mainIntent);
         }
     };
