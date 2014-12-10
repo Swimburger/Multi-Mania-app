@@ -12,7 +12,7 @@
     <string name="talk_info">Info</string>
     <string name="newsitem_info">Info</string>
     <string name="settings_sync">Sync mijn tijdschema met Google Calendar</string>
-    <string name="settings_notify">Meldt mij als één van mijn favoriete keynotes gaat beginnen</string>
+    <string name="settings_notify">Herinner mij als één van mijn favoriete keynotes gaat beginnen</string>
     <string name="calendar_account_name">Kalender</string>
     <string name="about_info">Wordt geïnspireerd, deel kennis en verbind jezelf met de creative community!
 De Multi-Mania conferentie is het jaarlijkse evenement geworden dat designers, developers, entrepeneurs en creatieve new media studenten tesamen brengt. Het enthousiasme rond het evenement is opwindend en inspirerend.
@@ -26,7 +26,7 @@ Elk jaar groeit de conferentie een klein beetje en elk jaar is de ervaring iets 
     <string name="close">Sluiten</string>
     <string name="unfavorite_undobar">Verwijderd uit favorieten</string>
     <string name="notification_text">Zal beginnen in 10 minuten.</string>
-    <string name="myschedule_placeholder">Jouw favoriete keynotes zullen hier verschijnen.</string>
+    <string name="myschedule_placeholder">Je favoriete keynotes zullen hier verschijnen.</string>
     <string name="loading">Laden</string>
     <string name="stardescription">Favoriet Icoon</string>
     <string name="nav_schedule">Tijdschema</string>
@@ -35,7 +35,11 @@ Elk jaar groeit de conferentie een klein beetje en elk jaar is de ervaring iets 
     <string name="nav_news">Nieuws</string>
     <string name="nav_about">Over Multi-Mania</string>
     <string name="nav_settings">Instellingen</string>
-    <string name="navigation_drawer_close">Sluit navigatie</string>
-    <string name="navigation_drawer_open">Open navigatie</string>
+    <string name="navigation_drawer_close">Navigatie sluiten</string>
+    <string name="navigation_drawer_open">Navigatie openen</string>
     <string name="undo_item">Ongedaan maken</string>
+    <string name="title_location">Locatie</string>
+    <string name="account_picker_invalid">Geen geldige account geselecteerd</string>
+    <string name="account_picker_none">Geen account geselecteerd</string>
+    <string name="account_picker_select">Kies uw Google Account</string>
 </resources>

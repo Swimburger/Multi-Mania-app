@@ -105,7 +105,7 @@ public class SettingsFragment extends Fragment implements LoaderManager.LoaderCa
                 mUtil.setPreference(PREFERENCE_SYNC, isChecked);
 
                 if (isChecked) {
-                    Toast.makeText(getActivity(), "Please choose your Google Account", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), getString(R.string.account_picker_select), Toast.LENGTH_LONG).show();
                     askUserEmail();
 
                     if(mTalkList != null && mTalkList.size() > 0){
@@ -178,11 +178,11 @@ public class SettingsFragment extends Fragment implements LoaderManager.LoaderCa
                 util.setPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME, accountName);
                 mCalUtil.createCalendar();
             } else {
-                Toast.makeText(getActivity(), "No valid account selected", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.account_picker_invalid), Toast.LENGTH_LONG).show();
                 mChkSync.setChecked(false);
             }
         } else {
-            Toast.makeText(getActivity(), "No account selected", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), getString(R.string.account_picker_none), Toast.LENGTH_LONG).show();
             mChkSync.setChecked(false);
         }
     }
