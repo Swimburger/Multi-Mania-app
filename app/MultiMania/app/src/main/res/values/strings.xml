@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name" translatable="false">Multi-Mania</string>
     <string name="title_schedule">Schedule</string>
     <string name="title_myschedule">My Schedule</string>
