@@ -24,8 +24,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
+
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.utils.SettingsUtil;
@@ -322,6 +324,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             if (accountName != "") {
                 mAccountSettings.setPreference(PREFERENCE_ACCOUNT, accountName);
                 Toast.makeText(this, getString(R.string.account_success), Toast.LENGTH_SHORT).show();
+                mAddAccountMenuItem.setIcon(R.drawable.ic_action_person);
             } else {
                 Toast.makeText(this, getString(R.string.account_picker_invalid), Toast.LENGTH_LONG).show();
             }

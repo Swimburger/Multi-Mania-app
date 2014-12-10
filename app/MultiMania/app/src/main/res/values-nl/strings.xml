@@ -7,7 +7,6 @@
     <string name="title_about">Over Multi-Mania</string>
     <string name="title_settings">Instellingen</string>
     <string name="action_settings">Instellingen</string>
-    <string name="talk_room">Kamer</string>
     <string name="talk_speaker">Spreker</string>
     <string name="talk_info">Info</string>
     <string name="newsitem_info">Info</string>
@@ -51,4 +50,5 @@ Elk jaar groeit de conferentie een klein beetje en elk jaar is de ervaring iets 
     <string name="account_success">Account is opgeslaan!</string>
     <string name="login_loggedin_description">Je hebt je e-mailadres al opgegeven</string>
     <string name="login_button_other_email">Kies een ander e-mailadres</string>
+    <string name="myschedule_timegap_info">We hebben een gaatje gevonden in je tijdschema.</string>
 </resources>

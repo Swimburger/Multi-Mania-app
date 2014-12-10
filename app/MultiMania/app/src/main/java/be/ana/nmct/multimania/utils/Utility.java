@@ -9,6 +9,9 @@ import android.view.TouchDelegate;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 
+import org.joda.time.LocalTime;
+
+import java.security.InvalidParameterException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,6 +52,25 @@ public final class Utility {
      */
     public static Date convertStringToDate(String date) throws ParseException {
         return sFormatter.parse(date);
+    }
+
+    /**
+     * Converts a String formatted like 00:00:00 to a Joda LocalTime object
+     * @param time The String containing the Time to convert
+     * @return A valid LocalTime object
+     * @throws InvalidParameterException if an invalid String was passed
+     */
+    public static LocalTime convertStringToLocalTime(String time) throws InvalidParameterException{
+        String[] split = time.split(":");
+
+        if(split.length != 2){
+            try{
+                return new LocalTime(Integer.parseInt(split[0]), Integer.parseInt(split[1]), Integer.parseInt(split[2]));
+            } catch(Exception ex){
+                throw new InvalidParameterException("The parameter passed is not in a valid format, format should be like 00:00:00");
+            }
+        }
+        throw new InvalidParameterException("The parameter passed is not in a valid format, format should be like 00:00:00");
     }
 
     /**
@@ -209,9 +231,9 @@ public final class Utility {
     }
 
     /**
-     * Converts a List<Talk> to a List<ScheduleTalkVm>
-     * @param talkList The List<Talk> to convert
-     * @return A List<ScheduleTalkVm> converted from List<Talk>
+     * Converts a List of Talks to a List of ScheduleTalkVm's
+     * @param talkList The List of Talks to convert
+     * @return A List ScheduleTalkVm's converted from List of Talk
      */
     public static List<ScheduleTalkVm> convertTalkListToScheduleTalkVmList(List<Talk> talkList){
         List<ScheduleTalkVm> result = new ArrayList<ScheduleTalkVm>();

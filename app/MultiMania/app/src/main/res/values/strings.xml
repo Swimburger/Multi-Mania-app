@@ -12,7 +12,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="talk_tag" translatable="false">Tags</string>
-    <string name="talk_room">Room</string>
+    <string name="talk_room" translatable="false">Room</string>
     <string name="talk_time" translatable="false">from ...</string>
     <string name="talk_speaker">Speaker</string>
     <string name="talk_info">Info</string>
@@ -65,5 +65,8 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="account_success">Account succesfully set!</string>
     <string name="login_loggedin_description">You\'ve already entered your e-mailaddress.</string>
     <string name="login_button_other_email">Pick other address</string>
+    <string name="lunchbreak_starttime" translatable="false">12:30:00</string>
+    <string name="lunchbreak_endtime" translatable="false">14:00:00</string>
+    <string name="myschedule_timegap_info">We found a gap in your schedule.</string>
 
 </resources>
