@@ -42,4 +42,11 @@ Elk jaar groeit de conferentie een klein beetje en elk jaar is de ervaring iets 
     <string name="account_picker_invalid">Geen geldige account geselecteerd</string>
     <string name="account_picker_none">Geen account geselecteerd</string>
     <string name="account_picker_select">Kies uw Google Account</string>
+    <string name="nav_account">Inloggen</string>
+    <string name="login_description">Als je je e-mailadres opgeeft zorgen wij ervoor dat je favorieten gesynchroniseerd zijn op al je Android toestellen</string>
+    <string name="login_button">Kies e-mailadres</string>
+    <string name="action_account">Voeg je account toe</string>
+    <string name="dialog_cancel">Annuleren</string>
+    <string name="dialog_confirm">Kies e-mailadres</string>
+    <string name="account_success">Account is opgeslaan!</string>
 </resources>

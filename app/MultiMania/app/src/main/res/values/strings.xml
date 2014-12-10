@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name" translatable="false">Multi-Mania</string>
     <string name="title_schedule">Schedule</string>
     <string name="title_myschedule">My Schedule</string>
@@ -55,4 +56,12 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="account_picker_invalid">No valid account selected</string>
     <string name="account_picker_none">No account selected</string>
     <string name="account_picker_select">Please choose your Google Account</string>
+    <string name="nav_account">Login</string>
+    <string name="login_description">If you enter your email address we will make sure your favorites are synced across your Android devices.</string>
+    <string name="login_button">Pick emailaddress</string>
+    <string name="action_account">Add account</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_confirm">Pick email</string>
+    <string name="account_success">Account succesfully set!</string>
+
 </resources>

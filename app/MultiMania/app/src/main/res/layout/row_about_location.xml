@@ -46,17 +46,18 @@
             android:text="@string/country"
             android:id="@+id/txtCountry"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp"/>
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"/>
 
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:layout_marginBottom="8dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
             android:id="@+id/imgAboutMap"
             android:src="@drawable/ic_aboutmap"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            />
         <View
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
