@@ -99,8 +99,8 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
             requestSync();
 
-          //  Intent loadintent = new Intent(this, LoadActivity.class);
-          //  startActivity(loadintent);
+            //Intent loadintent = new Intent(this, LoadActivity.class);
+            //startActivity(loadintent);
         }
 
     }

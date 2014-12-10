@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/mm_card"
-    android:id="@+id/myscheduleRowRoot">
+    android:id="@+id/myscheduleRowRoot"
+    >
 
     <TextView
         android:id="@+id/txtTalkTitle"
