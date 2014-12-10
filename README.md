@@ -55,7 +55,7 @@ There is an xml file under backend/data.xml that will be processed and will upda
 Please beware that this /import path should be removed when you are done importing to ensure nobody else can browse to it.  
 
    
-For detailed documentation about the backend you can go to this generated PHP  [documentation](http://sniels.bitbucket.org/multi-mania/backend).
+For more info go to the [wiki](wiki/Backend) or for detailed documentation about the backend you can go to this generated PHP  [documentation](http://sniels.bitbucket.org/multi-mania/backend).
 
 ## Android ##
 
@@ -107,7 +107,7 @@ In the build.gradle app file you can set the url that you're api is hosted on.
         }
     }
 
-For more details please visit the wiki or the [javadocs](http://sniels.bitbucket.org/multi-mania/android/).  
+For more details please visit the [wiki](wiki/Android)or the [javadocs](http://sniels.bitbucket.org/multi-mania/android/).  
 
 ## Contact ##
 
