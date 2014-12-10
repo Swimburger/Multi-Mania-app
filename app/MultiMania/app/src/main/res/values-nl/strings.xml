@@ -49,4 +49,6 @@ Elk jaar groeit de conferentie een klein beetje en elk jaar is de ervaring iets 
     <string name="dialog_cancel">Annuleren</string>
     <string name="dialog_confirm">Kies e-mailadres</string>
     <string name="account_success">Account is opgeslaan!</string>
+    <string name="login_loggedin_description">Je hebt je e-mailadres al opgegeven</string>
+    <string name="login_button_other_email">Kies een ander e-mailadres</string>
 </resources>

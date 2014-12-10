@@ -96,6 +96,7 @@ public class SyncUtils {
 
             syncData(provider , talks);
         }else{
+            ApiActions.postUser(mContext, userId);
             Date date = Utility.convertStringToDate(ApiActions.getLastUpdated(mContext, userId).get());
             SettingsUtil util = new SettingsUtil(mContext,"sync");
             Date localDate = Utility.convertStringToDate(util.getStringPreference("lastUpdated",null));

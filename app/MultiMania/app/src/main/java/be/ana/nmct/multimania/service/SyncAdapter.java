@@ -10,7 +10,9 @@ import android.content.SyncResult;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-
+import be.ana.nmct.multimania.ui.LoadActivity;
+import be.ana.nmct.multimania.ui.MainActivity;
+import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.SyncUtils;
 
 /**
@@ -22,7 +24,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
     private static final String TAG = SyncAdapter.class.getSimpleName();
     // Global variables
     // Define a variable to contain a content resolver instance
-    ContentResolver mContentResolver;
+    private ContentResolver mContentResolver;
+    private SettingsUtil mAccountSettings;
 
     /**
      * Set up the sync adapter
@@ -34,6 +37,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
          * from the incoming Context
          */
         mContentResolver = context.getContentResolver();
+        mAccountSettings = new SettingsUtil(context, MainActivity.PREFERENCE_NAME);
     }
     /**
      * Set up the sync adapter. This form of the
@@ -71,7 +75,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
             e.printStackTrace();
         }
         try{
-            utils.syncTalks(provider,null);//TODO:get the user id
+            utils.syncTalks(provider, mAccountSettings.getStringPreference(MainActivity.PREFERENCE_ACCOUNT));
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -97,7 +101,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
         Intent intent = new Intent();
         intent.setAction(SYNC_READY_BROADCAST);
-        LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+        //LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
         getContext().sendBroadcast(intent);
         Log.d(TAG,"Sync ready in adapter");
     }
