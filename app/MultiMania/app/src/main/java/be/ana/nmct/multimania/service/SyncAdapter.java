@@ -8,9 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SyncResult;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import be.ana.nmct.multimania.ui.LoadActivity;
+
 import be.ana.nmct.multimania.ui.MainActivity;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.SyncUtils;

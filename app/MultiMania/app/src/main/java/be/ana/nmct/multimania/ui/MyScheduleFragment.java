@@ -22,9 +22,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cocosw.undobar.UndoBarController;
 import com.cocosw.undobar.UndoBarStyle;
@@ -216,6 +218,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                 if (!start.equals(end) && start.toLocalTime() != mLunchbreakStart) {
                     ScheduleTalkVm vm = new ScheduleTalkVm();
                     vm.isSuggestionItem = true;
+                    vm.fromString = mItems.get(i).fromString;
+                    vm.untilString = mItems.get(i).untilString;
                     mItems.add(i + 1, vm);
                     break;
                 }
@@ -259,7 +263,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                     convertView.setTag(new MyScheduleSuggestionRowHolder(convertView));
                 }
             }
-
 
             bindView(convertView, vm);
             return convertView;
@@ -321,9 +324,17 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                 mRowHeight = view.getMeasuredHeight();
 
             } else {
-                //TODO: inflate suggestion item
+                //TODO: fix height issue
                 MyScheduleSuggestionRowHolder vh = (MyScheduleSuggestionRowHolder)view.getTag();
                 vh.root.setMinimumHeight(mRowHeight);
+                vh.btnAddItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "This is not the suggestion you are looking for", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                vh.txtTime.setText(String.format(getString(R.string.myschedule_suggestion_time), vm.fromString, vm.untilString));
+
             }
 
         }
@@ -389,9 +400,13 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private class MyScheduleSuggestionRowHolder {
 
         private RelativeLayout root;
+        private Button btnAddItem;
+        private TextView txtTime;
 
         public MyScheduleSuggestionRowHolder(View v) {
             this.root = (RelativeLayout)v.findViewById(R.id.suggestionContainer);
+            this.btnAddItem = (Button)v.findViewById(R.id.btnAddSuggestion);
+            this.txtTime = (TextView)v.findViewById(R.id.txtTimegapTime);
         }
 
     }

@@ -10,11 +10,39 @@
         android:id="@+id/txtTimegapInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:lines="2"
         android:maxLines="2"
         android:gravity="center"
         android:text="@string/myschedule_timegap_info"/>
+
+    <TextView
+        android:id="@+id/txtTimegapTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="@string/myschedule_suggestion_time"
+        android:lines="2"
+        android:maxLines="2"
+        android:layout_below="@id/txtTimegapInfo"/>
+
+    <Button
+        android:id="@+id/btnAddSuggestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtTimegapTime"
+        android:layout_alignParentRight="true"
+        android:drawableLeft="@drawable/ic_action_new"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:padding="10dp"
+        android:text="@string/action_add"
+        android:background="@color/white" />
 
     <View
         android:id="@+id/borderBottom"
@@ -24,11 +52,5 @@
         android:layout_alignParentBottom="true"
         android:background="@color/primaryColor"
         />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_action_new"
-        android:layout_below="@id/txtTimegapInfo" />
 
 </RelativeLayout>

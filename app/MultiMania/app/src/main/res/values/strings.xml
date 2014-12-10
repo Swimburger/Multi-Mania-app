@@ -68,5 +68,7 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="lunchbreak_starttime" translatable="false">12:30:00</string>
     <string name="lunchbreak_endtime" translatable="false">14:00:00</string>
     <string name="myschedule_timegap_info">We found a gap in your schedule.</string>
+    <string name="myschedule_suggestion_time">You can follow another keynote at %1$s to %2$s.</string>
+    <string name="action_add">Add</string>
 
 </resources>
