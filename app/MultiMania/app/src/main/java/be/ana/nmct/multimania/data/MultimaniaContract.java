@@ -92,6 +92,7 @@ public final class MultimaniaContract {
         public static final String ROOM_NAME    = "room_name";
         public static final String DAY          = "days";
         public static final String CALEVENT_ID  = "calevent_id";
+        public static final String TAGS         = "tags";
 
 
         public static final String CONTENT_TYPE      = CURSOR_DIR+CONTENT_AUTHORITY+"/"+PATH_TALK;

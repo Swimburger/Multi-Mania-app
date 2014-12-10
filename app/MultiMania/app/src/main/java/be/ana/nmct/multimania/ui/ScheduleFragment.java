@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -136,7 +135,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         final int idIndex           = cursor.getColumnIndex(MultimaniaContract.TalkEntry._ID);
         final int calEventIdIndex   = cursor.getColumnIndex(MultimaniaContract.TalkEntry.CALEVENT_ID);
         final int descriptionIndex  = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DESCRIPTION);
-
+        final int tagsIndex         = cursor.getColumnIndex(MultimaniaContract.TalkEntry.TAGS);
         if(cursor.moveToFirst()){
             do{
                 final ScheduleTalkVm vm = new ScheduleTalkVm();
@@ -153,7 +152,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                 vm.description = cursor.getString(descriptionIndex);
                 vm.from = Utility.convertStringToDate(dateFrom);
                 vm.to = Utility.convertStringToDate(dateUntil);
-
+                vm.tags = cursor.getString(tagsIndex);
                 if(!dates.contains(dateFrom)){
                         mItems.add(
                                 Utility.getTimeString(dateFrom)
@@ -163,7 +162,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                     dates.add(dateFrom);
                 }
 
-                getLoaderManager().initLoader(1000+(int)vm.id,null,new LoaderManager.LoaderCallbacks<Cursor>() {
+                /*getLoaderManager().initLoader(1000+(int)vm.id,null,new LoaderManager.LoaderCallbacks<Cursor>() {
                     @Override
                     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
                         return new CursorLoader(getActivity(),
@@ -190,7 +189,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                     public void onLoaderReset(Loader<Cursor> loader) {
 
                     }
-                });
+                });*/
                 mItems.add(vm);
             }while(cursor.moveToNext());
         }

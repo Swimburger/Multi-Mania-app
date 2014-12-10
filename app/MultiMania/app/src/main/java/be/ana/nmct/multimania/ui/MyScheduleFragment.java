@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -164,7 +163,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         final int idIndex = c.getColumnIndex(MultimaniaContract.TalkEntry._ID);
         final int calEventIdIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.CALEVENT_ID);
         final int descriptionIndex = c.getColumnIndex(MultimaniaContract.TalkEntry.DESCRIPTION);
-
+        final int tagsIndex         = c.getColumnIndex(MultimaniaContract.TalkEntry.TAGS);
         if (c.moveToFirst()) {
             do {
                 final ScheduleTalkVm vm = new ScheduleTalkVm();
@@ -183,36 +182,9 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                 vm.to = Utility.convertStringToDate(c.getString(dateFromIndex));
                 vm.description = c.getString(descriptionIndex);
 
+                vm.tags = c.getString(tagsIndex);
+
                 vm.isDoubleBooked = checkDoubleBookings(vm);
-
-                getLoaderManager().initLoader(1000 + (int) talkId, null, new LoaderManager.LoaderCallbacks<Cursor>() {
-                    @Override
-                    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-                        return new CursorLoader(getActivity(),
-                                ContentUris.appendId(MultimaniaContract.TagEntry.CONTENT_URI.buildUpon()
-                                        .appendPath(MultimaniaContract.PATH_TALK), talkId).build()
-                                , null, null, null, null);
-                    }
-
-                    @Override
-                    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-                        vm.tags = "";
-                        if (data.moveToFirst()) {
-                            final int nameIndex = data.getColumnIndex(MultimaniaContract.TagEntry.NAME);
-                            do {
-                                vm.tags += data.getString(nameIndex) + ", ";
-                            } while (data.moveToNext());
-                            if (vm.tags.lastIndexOf(", ") > -1)
-                                vm.tags = vm.tags.substring(0, vm.tags.length() - 2);
-                        }
-                        loader.abandon();
-                    }
-
-                    @Override
-                    public void onLoaderReset(Loader<Cursor> loader) {
-
-                    }
-                });
                 mItems.add(vm);
             } while (c.moveToNext());
         }

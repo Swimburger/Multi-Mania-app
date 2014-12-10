@@ -15,8 +15,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
@@ -30,6 +28,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
+
+import com.google.android.gms.internal.os.Build;
+import com.google.android.gms.internal.os.Bundle;
 
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
@@ -46,7 +47,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     public static final int LOADER_SCHEDULE_TALK_ID     = 10;
     public static final int LOADER_MYSCHEDULE_TALK_ID   = 20;
     public static final int LOADER_NEWS_ID              = 3;
-    public static final int LOADER_TAGS_ID              = 4;
     public static final int LOADER_SETTINGS             = 5;
 
     // The authority for the sync adapter's content provider
