@@ -314,9 +314,26 @@ public class MultimaniaProvider extends ContentProvider {
                 );
                 break;
             case TALK:
+                String prefix = TalkEntry.TABLE_NAME + ".";
                 retCursor = sTalksWithRoomAndTagsQueryBuilder.query(
                         mDbHelper.getReadableDatabase(),
-                        projection,
+                        new String[]{
+                                prefix + TalkEntry._ID,
+                                prefix + TalkEntry.TITLE,
+                                prefix + TalkEntry.DATE_FROM,
+                                prefix + TalkEntry.DATE_UNTIL,
+                                prefix + TalkEntry.DESCRIPTION,
+                                prefix + TalkEntry.ROOM_ID,
+                                prefix + TalkEntry.IS_KEYNOTE,
+                                prefix + TalkEntry.IS_FAVORITE,
+                                prefix + TalkEntry.CALEVENT_ID,
+                                RoomEntry.TABLE_NAME + "." + RoomEntry.NAME,
+                                "(SELECT GROUP_CONCAT("+TagEntry.TABLE_NAME+"."+TagEntry.NAME+",', ') " +
+                                "FROM "+TagEntry.TABLE_NAME + " " +
+                                "JOIN "+TalkTagEntry.TABLE_NAME+" ON "+TagEntry.TABLE_NAME+"."+TagEntry._ID+" = "+TalkTagEntry.TABLE_NAME+"."+TalkTagEntry.TAG_ID+" " +
+                                "JOIN "+TalkEntry.TABLE_NAME+" tk ON tk."+TalkEntry._ID+ " = " + TalkTagEntry.TABLE_NAME+"."+TalkTagEntry.TALK_ID+ " " +
+                                "WHERE tk."+TalkEntry._ID+"="+prefix+TalkEntry._ID
+                                        +") AS "+TalkEntry.TAGS},
                         selection,
                         selectionArgs,
                         null,
