@@ -9,8 +9,8 @@ import android.content.Intent;
 import android.content.SyncResult;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
-import be.ana.nmct.multimania.ui.LoadActivity;
 import be.ana.nmct.multimania.utils.SyncUtils;
 
 /**
@@ -18,6 +18,8 @@ import be.ana.nmct.multimania.utils.SyncUtils;
  */
 public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
+    public static final String SYNC_READY_BROADCAST = "be.ana.nmct.multimania.sync_ready";
+    private static final String TAG = SyncAdapter.class.getSimpleName();
     // Global variables
     // Define a variable to contain a content resolver instance
     ContentResolver mContentResolver;
@@ -93,9 +95,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
         intent.setAction(MainActivity.LOAD_SYNC);
         getContext().startActivity(intent);*/
 
-        Intent intent = new Intent(getContext(), LoadActivity.class);
-        intent.setAction(LoadActivity.LOAD_SYNC);
+        Intent intent = new Intent();
+        intent.setAction(SYNC_READY_BROADCAST);
         LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
-        System.out.println("action: " + intent.getAction());
+        getContext().sendBroadcast(intent);
+        Log.d(TAG,"Sync ready in adapter");
     }
 }
