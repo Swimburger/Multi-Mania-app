@@ -107,7 +107,7 @@ In the build.gradle app file you can set the url that you're api is hosted on.
         }
     }
 
-For more details please visit the [wiki](wiki/Android)or the [javadocs](http://sniels.bitbucket.org/multi-mania/android/).  
+For more details please visit the [wiki](wiki/Android) or the [javadocs](http://sniels.bitbucket.org/multi-mania/android/).  
 
 ## Contact ##
 
