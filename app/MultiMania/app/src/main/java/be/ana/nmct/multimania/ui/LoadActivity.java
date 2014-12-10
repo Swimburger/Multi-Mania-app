@@ -61,9 +61,6 @@ public class LoadActivity extends Activity {
             animation.stop();
             Intent mainIntent = new Intent(mContext, MainActivity.class);
             startActivity(mainIntent);
-
         }
     };
-    //checken of internet aanligt
-    //checken of data gesyncd is
 }
