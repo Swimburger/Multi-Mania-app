@@ -55,7 +55,7 @@ There is an xml file under backend/data.xml that will be processed and will upda
 Please beware that this /import path should be removed when you are done importing to ensure nobody else can browse to it.  
 
    
-For more info go to the [wiki](multi-mania/wiki/Backend) or for detailed documentation about the backend you can go to this generated PHP  [documentation](http://sniels.bitbucket.org/multi-mania/backend).
+For more info go to the [wiki](wiki/Backend) or for detailed documentation about the backend you can go to this generated PHP  [documentation](http://sniels.bitbucket.org/multi-mania/backend).
 
 ## Android ##
 
