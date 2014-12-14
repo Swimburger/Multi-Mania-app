@@ -1,13 +1,16 @@
 package be.ana.nmct.multimania.ui;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.AsyncQueryHandler;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -16,6 +19,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +40,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.ana.nmct.multimania.R;
+import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.MultimaniaContract;
+import be.ana.nmct.multimania.service.SyncAdapter;
+import be.ana.nmct.multimania.utils.GoogleCalUtil;
 import be.ana.nmct.multimania.utils.SettingsHelper;
+import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
@@ -64,6 +72,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private ImageView mPlaceholderImg;
 
     private List<ScheduleTalkVm> mItems;
+    private String mAccountName;
 
     public MyScheduleFragment() {
     }
@@ -81,17 +90,32 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
-        this.mDate = args.getString(DATE_KEY);
-        this.mPosition = args.getInt(POSITION_KEY);
-        this.mItems = new ArrayList<ScheduleTalkVm>();
-        this.mSettingsHelper = new SettingsHelper(getActivity());
-        this.mUndoBarStyle = new UndoBarStyle(0,R.string.undo_item, 0,2000);
+        mDate = args.getString(DATE_KEY);
+        mPosition = args.getInt(POSITION_KEY);
+        mItems = new ArrayList<ScheduleTalkVm>();
+        mSettingsHelper = new SettingsHelper(getActivity());
+        mUndoBarStyle = new UndoBarStyle(0,R.string.undo_item, 0,2000);
+        mAccountName = new SettingsUtil(getActivity(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(SyncAdapter.SYNC_READY_BROADCAST);
+        activity.registerReceiver(syncCompleteReceiver, intentFilter);
+    }
+
+    @Override
+    public void onDetach() {
+        getActivity().unregisterReceiver(syncCompleteReceiver);
+        super.onDetach();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        this.getLoaderManager().initLoader(MainActivity.LOADER_MYSCHEDULE_TALK_ID + mPosition, null, this);
+        this.getLoaderManager().initLoader(MainActivity.LOADER_MY_SCHEDULE_TALK_ID + mPosition, null, this);
     }
 
     @Override
@@ -304,6 +328,13 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                     MultimaniaContract.TalkEntry._ID + "=?",
                     new String[]{"" + id}
             );
+            if(mAccountName!=null){
+                if(value){
+                    ApiActions.postFavoriteTalk(getActivity(), mAccountName, id);
+                }else{
+                    ApiActions.deleteFavoriteTalk(getActivity(), mAccountName, id);
+                }
+            }
         }
 
         @Override
@@ -345,5 +376,13 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             super(cr);
         }
     }
+
+    private BroadcastReceiver syncCompleteReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "Sync ready received");
+            getLoaderManager().restartLoader(MainActivity.LOADER_MY_SCHEDULE_TALK_ID,null,MyScheduleFragment.this);
+        }
+    };
 }
 

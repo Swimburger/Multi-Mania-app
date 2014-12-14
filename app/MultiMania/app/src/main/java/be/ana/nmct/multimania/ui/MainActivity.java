@@ -29,6 +29,7 @@ import com.google.android.gms.common.AccountPicker;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.utils.SettingsUtil;
+import be.ana.nmct.multimania.utils.Utility;
 
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -39,7 +40,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     public static final int LOADER_SCHEDULE_DATES_ID    = 0;
     public static final int LOADER_SCHEDULE_TALK_ID     = 10;
-    public static final int LOADER_MYSCHEDULE_TALK_ID   = 20;
+    public static final int LOADER_MY_SCHEDULE_TALK_ID = 20;
     public static final int LOADER_NEWS_ID              = 3;
     public static final int LOADER_SETTINGS             = 5;
 
@@ -92,7 +93,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         }
 
         mAccount = CreateSyncAccount(this);
-        mAccountSettings = new SettingsUtil(this, PREFERENCE_NAME);
+        mAccountSettings = new SettingsUtil(getApplicationContext(), PREFERENCE_NAME);
 
         //Beautify for Lollipop users
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
@@ -323,6 +324,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             if (accountName != "") {
                 mAccountSettings.setPreference(PREFERENCE_ACCOUNT, accountName);
                 Toast.makeText(this, getString(R.string.account_success), Toast.LENGTH_SHORT).show();
+                Utility.requestSync(Utility.getSyncAccount(this),true);
             } else {
                 Toast.makeText(this, getString(R.string.account_picker_invalid), Toast.LENGTH_LONG).show();
             }

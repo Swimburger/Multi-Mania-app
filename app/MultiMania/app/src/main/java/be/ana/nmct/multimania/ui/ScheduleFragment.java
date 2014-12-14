@@ -1,18 +1,22 @@
 package be.ana.nmct.multimania.ui;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.AsyncQueryHandler;
+import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bulletnoid.android.widget.StaggeredGridView.BulletStaggeredGridView;
+import com.koushikdutta.async.future.FutureCallback;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -32,7 +37,7 @@ import java.util.List;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.MultimaniaContract;
-import be.ana.nmct.multimania.utils.GoogleCalUtil;
+import be.ana.nmct.multimania.service.SyncAdapter;
 import be.ana.nmct.multimania.utils.SettingsHelper;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
@@ -71,12 +76,26 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.mDate = getArguments().getString(DATE_KEY);
-        this.mPosition = getArguments().getInt(POSITION_KEY);
-        this.mSettingsHelper = new SettingsHelper(getActivity());
-        this.mAccountName = new SettingsUtil(getActivity(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
+        mDate = getArguments().getString(DATE_KEY);
+        mPosition = getArguments().getInt(POSITION_KEY);
+        mSettingsHelper = new SettingsHelper(getActivity());
+        mAccountName = new SettingsUtil(getActivity(),MainActivity.PREFERENCE_NAME).getStringPreference(MainActivity.PREFERENCE_ACCOUNT);
         //setRetainInstance(true);
-        this.mItems = new ArrayList<Object>();
+        mItems = new ArrayList<>();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(SyncAdapter.SYNC_READY_BROADCAST);
+        activity.registerReceiver(syncCompleteReceiver, intentFilter);
+    }
+
+    @Override
+    public void onDetach() {
+        getActivity().unregisterReceiver(syncCompleteReceiver);
+        super.onDetach();
     }
 
     @Override
@@ -161,35 +180,6 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                         );
                     dates.add(dateFrom);
                 }
-
-                /*getLoaderManager().initLoader(1000+(int)vm.id,null,new LoaderManager.LoaderCallbacks<Cursor>() {
-                    @Override
-                    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-                        return new CursorLoader(getActivity(),
-                                ContentUris.appendId(MultimaniaContract.TagEntry.CONTENT_URI.buildUpon()
-                                        .appendPath(MultimaniaContract.PATH_TALK), vm.id).build()
-                                ,null,null,null,null);
-                    }
-
-                    @Override
-                    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-                        vm.tags = "";
-                        if(data.moveToFirst()){
-                            final int nameIndex = data.getColumnIndex(MultimaniaContract.TagEntry.NAME);
-                            do{
-                                vm.tags +=data.getString(nameIndex)+", ";
-                            }while(data.moveToNext());
-                            if(vm.tags.lastIndexOf(", ")>-1)
-                                vm.tags=vm.tags.substring(0,vm.tags.length()-2);
-                        }
-                        loader.abandon();
-                    }
-
-                    @Override
-                    public void onLoaderReset(Loader<Cursor> loader) {
-
-                    }
-                });*/
                 mItems.add(vm);
             }while(cursor.moveToNext());
         }
@@ -197,7 +187,8 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
             mAdapter.notifyDataSetChanged();//bug in staggeredgridview with updates
         }*/
         if(mScheduleGrid!=null){
-            mScheduleGrid.setAdapter(new ScheduleAdapter(getActivity(),mItems));
+            mAdapter=new ScheduleAdapter(getActivity(),mItems);
+            mScheduleGrid.setAdapter(mAdapter);
         }
     }
 
@@ -302,7 +293,16 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
                             new String[]{""+ item.id}
                     );
                     if(mAccountName!=null){
-                        ApiActions.postFavoriteTalk(getActivity(),mAccountName, item.id);
+                        if( item.isFavorite){
+                            ApiActions.postFavoriteTalk(getActivity(), mAccountName,item.id);
+                        }else{
+                            ApiActions.deleteFavoriteTalk(getActivity(), mAccountName, item.id).setCallback(new FutureCallback<String>() {
+                                @Override
+                                public void onCompleted(Exception e, String result) {
+                                    Log.d(TAG,"Favorite deleted status:"+result);
+                                }
+                            });
+                        }
                     }
                     mSettingsHelper.settingsHandler(item);
                 }
@@ -375,4 +375,12 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
             super(cr);
         }
     }
+
+    private BroadcastReceiver syncCompleteReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "Sync ready received");
+            getLoaderManager().restartLoader(MainActivity.LOADER_SCHEDULE_TALK_ID,null,ScheduleFragment.this);
+        }
+    };
 }

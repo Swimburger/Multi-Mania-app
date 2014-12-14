@@ -63,6 +63,7 @@ public class Talk implements IData {
         values.put(MultimaniaContract.TalkEntry.DATE_UNTIL,Utility.convertDateToString(to));
         values.put(MultimaniaContract.TalkEntry.ROOM_ID,roomId);
         values.put(MultimaniaContract.TalkEntry.IS_KEYNOTE,isKeynote);
+        values.put(MultimaniaContract.TalkEntry.IS_FAVORITE,isFavorite);
         return values;
     }
 

@@ -8,9 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SyncResult;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import be.ana.nmct.multimania.ui.LoadActivity;
+
 import be.ana.nmct.multimania.ui.MainActivity;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.SyncUtils;
@@ -22,10 +21,10 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     public static final String SYNC_READY_BROADCAST = "be.ana.nmct.multimania.sync_ready";
     private static final String TAG = SyncAdapter.class.getSimpleName();
+    public static final java.lang.String FORCE_DOWNLOAD_FAVORITES = "force_download_favorites";
     // Global variables
     // Define a variable to contain a content resolver instance
     private ContentResolver mContentResolver;
-    private SettingsUtil mAccountSettings;
 
     /**
      * Set up the sync adapter
@@ -37,7 +36,7 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
          * from the incoming Context
          */
         mContentResolver = context.getContentResolver();
-        mAccountSettings = new SettingsUtil(context, MainActivity.PREFERENCE_NAME);
+
     }
     /**
      * Set up the sync adapter. This form of the
@@ -58,39 +57,60 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
+        SettingsUtil accountSettings = new SettingsUtil(getContext().getApplicationContext(), MainActivity.PREFERENCE_NAME);
+        getContext().getApplicationInfo().loadDescription(getContext().getPackageManager());
+        boolean forceDownloadFavorites = extras.getBoolean(FORCE_DOWNLOAD_FAVORITES,false);
         SyncUtils utils = new SyncUtils(getContext());
+        String startSync = "Sync starts for ";
+        String endSync = "Sync end for ";
         try{
+            Log.d(TAG,startSync + "rooms");
             utils.syncRooms(provider);
+            Log.d(TAG,endSync + "rooms");
         }catch(Exception e){
             e.printStackTrace();
         }
         try{
+            Log.d(TAG,startSync + "tags");
             utils.syncTags(provider);
+            Log.d(TAG, endSync + "tags");
         }catch(Exception e){
             e.printStackTrace();
         }
         try{
+            Log.d(TAG,startSync + "speakers");
             utils.syncSpeakers(provider);
+            Log.d(TAG, endSync + "speakers");
         }catch(Exception e){
             e.printStackTrace();
         }
         try{
-            utils.syncTalks(provider, mAccountSettings.getStringPreference(MainActivity.PREFERENCE_ACCOUNT));
+            Log.d(TAG,startSync + "talks");
+            String id = accountSettings.getStringPreference(MainActivity.PREFERENCE_ACCOUNT);
+            Log.d(TAG,"User id:"+id);
+            utils.syncTalks(provider,id, forceDownloadFavorites);
+            Log.d(TAG, endSync + "talks");
         }catch(Exception e){
             e.printStackTrace();
         }
         try{
+            Log.d(TAG,startSync + "talkTags");
             utils.syncTalkTags(provider);
+            Log.d(TAG, endSync + "talkTags");
         }catch(Exception e){
             e.printStackTrace();
         }
         try{
+            Log.d(TAG,startSync + "talkSpeakers");
             utils.syncTalkSpeakers(provider);
+            Log.d(TAG, endSync + "talkSpeakers");
         }catch(Exception e){
             e.printStackTrace();
         }
         try{
+            Log.d(TAG,startSync + "news");
             utils.syncNews(provider);
+            Log.d(TAG, endSync + "news");
         }catch(Exception e){
             e.printStackTrace();
         }

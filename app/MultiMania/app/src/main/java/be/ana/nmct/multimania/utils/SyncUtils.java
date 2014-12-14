@@ -88,7 +88,7 @@ public class SyncUtils {
      * @param userId The id/email of the user
      * @throws Exception
      */
-    public void syncTalks(ContentProviderClient provider, String userId)throws Exception{
+    public void syncTalks(ContentProviderClient provider, String userId,boolean forceDownloadFavorites)throws Exception{
         List<IData> talks;
         if(userId==null){
             talks = new ArrayList<IData>(
@@ -96,21 +96,35 @@ public class SyncUtils {
 
             syncData(provider , talks);
         }else{
-            ApiActions.postUser(mContext, userId);
+            Log.d(TAG,"userId:"+userId);
+            ApiActions.postUser(mContext, userId).get();//get forces it to run sync
             Date date = Utility.convertStringToDate(ApiActions.getLastUpdated(mContext, userId).get());
             SettingsUtil util = new SettingsUtil(mContext,"sync");
-            Date localDate = Utility.convertStringToDate(util.getStringPreference("lastUpdated",null));
+            String stringDate = util.getStringPreference("lastUpdated",null);
+            Date localDate = null;
+            if(stringDate!=null){
+                localDate =Utility.convertStringToDate(stringDate);
+            }
 
             boolean onlineDateIsMoreRecent = localDate==null|| date.compareTo(localDate)>0;
-            if(onlineDateIsMoreRecent){
-                talks = new ArrayList<IData>(
-                        new GsonLoader<Talk>(mContext, "users/" + userId + "/" + TalkSpeaker.SEGMENT, new TypeToken<List<Talk>>(){}).loadInBackground());
-                syncData(provider , talks);
-                util.setPreference("lastUpdated",Utility.convertDateToString(new Date()));
+            if(onlineDateIsMoreRecent||forceDownloadFavorites){
+                Log.d(TAG,"before download");
+                downloadFavorites(provider, userId, util);
+                Log.d(TAG,"download completed");
             }else{
-                UploadFavorites(provider,userId);
+                Log.d(TAG,"before upload");
+                uploadFavorites(provider, userId);
+                Log.d(TAG,"upload completed");
             }
         }
+    }
+
+    private void downloadFavorites(ContentProviderClient provider, String userId, SettingsUtil util) throws RemoteException {
+        List<IData> talks;
+        talks = new ArrayList<IData>(
+                new GsonLoader<Talk>(mContext, "users/" + userId + "/" + Talk.SEGMENT, new TypeToken<List<Talk>>(){}).loadInBackground());
+        syncData(provider , talks);
+        util.setPreference("lastUpdated", Utility.convertDateToString(new Date()));
     }
 
     /**
@@ -118,7 +132,7 @@ public class SyncUtils {
      * @param provider A class that has the same query functionality as a ContentProvider
      * @param userId The id/email of the user
      */
-    private void UploadFavorites(ContentProviderClient provider, String userId) {
+    private void uploadFavorites(ContentProviderClient provider, String userId) {
         try {
             Cursor cursor = provider.query(TalkEntry.CONTENT_URI, null, null, null, null);
             final int idIndex = cursor.getColumnIndex(TalkEntry._ID);
