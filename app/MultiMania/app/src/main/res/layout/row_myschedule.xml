@@ -17,6 +17,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_margin="8dp"
         android:layout_toLeftOf="@+id/btnRemoveTalk"
+        android:lines="2"
+        android:maxLines="2"
         />
 
     <ImageView

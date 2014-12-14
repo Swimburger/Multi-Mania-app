@@ -24,8 +24,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
+
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.utils.SettingsUtil;
@@ -73,7 +75,9 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
         if(mFirstTimeLaunch){
             super.onResume();
-            startActivity(new Intent(this,LoadActivity.class));
+            Intent intent = new Intent(this,LoadActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
             //return;
         }
 
@@ -118,12 +122,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             SettingsUtil settingsUtil = new SettingsUtil(this, SettingsFragment.PREFERENCE_NAME);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_NOTIFY, true);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
-            //launchUtil.setPreference(PREFERENCE_FIRSTTIMELAUNCH, false);
-
-            //requestSync();
-
-            //Intent loadintent = new Intent(this, LoadActivity.class);
-            //startActivity(loadintent);
         }
 
     }
@@ -325,6 +323,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                 mAccountSettings.setPreference(PREFERENCE_ACCOUNT, accountName);
                 Toast.makeText(this, getString(R.string.account_success), Toast.LENGTH_SHORT).show();
                 Utility.requestSync(Utility.getSyncAccount(this),true);
+                mAddAccountMenuItem.setIcon(R.drawable.ic_action_person);
             } else {
                 Toast.makeText(this, getString(R.string.account_picker_invalid), Toast.LENGTH_LONG).show();
             }

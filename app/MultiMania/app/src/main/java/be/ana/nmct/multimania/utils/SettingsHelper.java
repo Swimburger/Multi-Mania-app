@@ -1,11 +1,8 @@
 package be.ana.nmct.multimania.utils;
 
 import android.content.Context;
-import android.net.Uri;
 
 import be.ana.nmct.multimania.R;
-import be.ana.nmct.multimania.data.MultimaniaContract;
-import be.ana.nmct.multimania.model.Talk;
 import be.ana.nmct.multimania.service.NotificationSender;
 import be.ana.nmct.multimania.ui.SettingsFragment;
 import be.ana.nmct.multimania.vm.ScheduleTalkVm;

@@ -18,6 +18,7 @@
             android:choiceMode="singleChoice"
             android:divider="@android:color/transparent"
             android:dividerHeight="0dp"
+            android:background="@drawable/drawer_background"
             android:listSelector="@drawable/drawer_background"
             tools:context=".NavigationDrawerFragment"/>
         <LinearLayout
