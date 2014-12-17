@@ -45,6 +45,7 @@ import org.joda.time.LocalTime;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import be.ana.nmct.multimania.R;
@@ -245,14 +246,14 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         for (int i = 0; i < mItems.size(); i++) {
             if(sSuggestionMatchers.size() > mItems.size()){
                 if(sSuggestionMatchers.get(i + 1).fromString.equals(mItems.get(i).fromString)){
-                    showSuggestionDialog(sSuggestionMatchers.get(i));
+                    showSuggestionDialog(sSuggestionMatchers.get(i), mItems.get(i).from);
                     break;
                 }
             }
         }
     }
 
-    private void showSuggestionDialog(ScheduleTalkVm suggestItem) {
+    private void showSuggestionDialog(ScheduleTalkVm suggestItem, Date day) {
 
         final SettingsUtil suggestionSettings = new SettingsUtil(getActivity(), SettingsFragment.PREFERENCE_NAME);
 
@@ -262,12 +263,12 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             CheckBox chkShowAgain = (CheckBox)v.findViewById(R.id.chkShowAgain);
             TextView txtTimeInfo = (TextView)v.findViewById(R.id.txtSuggestionInfo);
 
-            //TODO: make list
+            //TODO: make listadapter & get items from date
             ListView listview = (ListView)v.findViewById(R.id.suggestion_list);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                    //TODO: add item to my schedule
                 }
             });
 
@@ -423,12 +424,21 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
     private class SuggestionRowAdapter extends ArrayAdapter<ScheduleTalkVm>{
 
+        private LayoutInflater mInflater;
+
         public SuggestionRowAdapter(Context context, int resource, List<ScheduleTalkVm> objects) {
             super(context, resource, objects);
+            mInflater = LayoutInflater.from(context);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+
+            if(convertView == null){
+                //mInflater.inflate(R.layout.row)
+
+            }
+
             return super.getView(position, convertView, parent);
         }
     }
@@ -451,6 +461,15 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             this.btnRemoveTalk = (ImageView) v.findViewById(R.id.btnRemoveTalk);
             this.root = (RelativeLayout) v.findViewById(R.id.myscheduleRowRoot);
             this.bottomBorder = v.findViewById(R.id.borderBottom);
+        }
+    }
+
+    private class SuggestionRowHolder{
+
+        public TextView txtTalkTitle;
+        public TextView txtTalkTags;
+
+        private SuggestionRowHolder(View v) {
         }
     }
 
