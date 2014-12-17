@@ -247,7 +247,10 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     }
 
     private void showSuggestionDialog(ScheduleTalkVm vm, Date from) {
-        //TODO: start suggestionfragment and pass parameters
+        Bundle bundle = new Bundle();
+        //TODO: add params to bundle
+        SuggestionFragment fragment = new SuggestionFragment();
+        fragment.setArguments(bundle);
     }
 
     private boolean checkDoubleBookings(ScheduleTalkVm vm) {
