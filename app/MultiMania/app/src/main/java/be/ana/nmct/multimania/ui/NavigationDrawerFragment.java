@@ -61,7 +61,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
     private DrawerItemCustomAdapter adapter;
-
+    private NavigationItem[] items;
 
     public NavigationDrawerFragment() {
     }
@@ -93,6 +93,7 @@ public class NavigationDrawerFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -107,7 +108,7 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        NavigationItem[] items = new NavigationItem[6];
+        items = new NavigationItem[6];
 
         items[0] = new NavigationItem(R.drawable.ic_action_event, getString(R.string.nav_schedule));
         items[1] = new NavigationItem(R.drawable.ic_action_myevent, getString(R.string.nav_my_schedule));
@@ -305,9 +306,14 @@ public class NavigationDrawerFragment extends Fragment {
 
             NavigationItem folder = data[position];
 
-
             imageViewIcon.setImageResource(folder.icon);
             textViewName.setText(folder.name);
+
+            if(position == mCurrentSelectedPosition){
+                listItem.setBackgroundColor(getResources().getColor(R.color.selectedDrawerItem));
+                textViewName.setTextColor(getResources().getColor(R.color.white));
+            }
+
 
             return listItem;
         }
