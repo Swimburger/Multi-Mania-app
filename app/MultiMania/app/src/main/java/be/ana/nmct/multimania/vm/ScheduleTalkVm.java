@@ -15,7 +15,6 @@ public class ScheduleTalkVm extends Talk {
     public String fromString;
     public String untilString;
     public boolean isDoubleBooked;
-    public boolean isSuggestionItem;
 
     public ScheduleTalkVm() {
     }
@@ -28,5 +27,10 @@ public class ScheduleTalkVm extends Talk {
         this.description = description;
         this.roomId = roomId;
         this.isKeynote = isKeynote;
+    }
+
+    public ScheduleTalkVm(String fromString, String untilString) {
+        this.fromString = fromString;
+        this.untilString = untilString;
     }
 }

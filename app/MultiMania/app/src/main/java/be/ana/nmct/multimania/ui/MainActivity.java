@@ -116,12 +116,12 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     protected void onResume() {
         super.onResume();
 
-
-
+        //set default settings
         if(mFirstTimeLaunch){
             SettingsUtil settingsUtil = new SettingsUtil(this, SettingsFragment.PREFERENCE_NAME);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_NOTIFY, true);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
+            settingsUtil.setPreference(SettingsFragment.PREFERENCE_SUGGESTIONS, true);
         }
 
     }
