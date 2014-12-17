@@ -77,4 +77,6 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="hashtag_mm" translatable="false">#multimania</string>
     <string name="settings_suggestion">Suggest keynotes</string>
     <string name="suggestion_show_again">Don\'t show again</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

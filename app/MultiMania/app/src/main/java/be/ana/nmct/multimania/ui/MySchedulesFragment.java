@@ -70,11 +70,11 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        AddDates(cursor);
+        addDates(cursor);
         loader.abandon();
     }
 
-    private void AddDates(Cursor cursor) {
+    private void addDates(Cursor cursor) {
         int dayIndex = cursor.getColumnIndex(MultimaniaContract.TalkEntry.DAY);
         mDates.clear();
         while(cursor.moveToNext()){

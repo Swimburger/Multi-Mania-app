@@ -1,7 +1,6 @@
 package be.ana.nmct.multimania.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.AsyncQueryHandler;
@@ -27,12 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.cocosw.undobar.UndoBarController;
@@ -40,8 +35,6 @@ import com.cocosw.undobar.UndoBarStyle;
 import com.etsy.android.grid.StaggeredGridView;
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nhaarman.listviewanimations.util.Insertable;
-
-import org.joda.time.LocalTime;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -253,40 +246,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         }
     }
 
-    private void showSuggestionDialog(ScheduleTalkVm suggestItem, Date day) {
-
-        final SettingsUtil suggestionSettings = new SettingsUtil(getActivity(), SettingsFragment.PREFERENCE_NAME);
-
-        if (suggestionSettings.getBooleanPreference(SettingsFragment.PREFERENCE_SUGGESTIONS, true)) {
-
-            View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_suggestion, null);
-            CheckBox chkShowAgain = (CheckBox)v.findViewById(R.id.chkShowAgain);
-            TextView txtTimeInfo = (TextView)v.findViewById(R.id.txtSuggestionInfo);
-
-            //TODO: make listadapter & get items from date
-            ListView listview = (ListView)v.findViewById(R.id.suggestion_list);
-            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //TODO: add item to my schedule
-                }
-            });
-
-            txtTimeInfo.setText(String.format(getString(R.string.myschedule_suggestion_time),suggestItem.fromString, suggestItem.untilString));
-            chkShowAgain.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    suggestionSettings.setPreference(SettingsFragment.PREFERENCE_SUGGESTIONS, isChecked);
-                }
-            });
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setView(v);
-            builder.setTitle(R.string.myschedule_timegap_info);
-
-            builder.create();
-            builder.show();
-        }
+    private void showSuggestionDialog(ScheduleTalkVm vm, Date from) {
+        //TODO: start suggestionfragment and pass parameters
     }
 
     private boolean checkDoubleBookings(ScheduleTalkVm vm) {
@@ -422,27 +383,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         }
     }
 
-    private class SuggestionRowAdapter extends ArrayAdapter<ScheduleTalkVm>{
-
-        private LayoutInflater mInflater;
-
-        public SuggestionRowAdapter(Context context, int resource, List<ScheduleTalkVm> objects) {
-            super(context, resource, objects);
-            mInflater = LayoutInflater.from(context);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-
-            if(convertView == null){
-                //mInflater.inflate(R.layout.row)
-
-            }
-
-            return super.getView(position, convertView, parent);
-        }
-    }
-
     private class MyScheduleRowHolder {
 
         public TextView txtTalkTitle;
@@ -461,15 +401,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             this.btnRemoveTalk = (ImageView) v.findViewById(R.id.btnRemoveTalk);
             this.root = (RelativeLayout) v.findViewById(R.id.myscheduleRowRoot);
             this.bottomBorder = v.findViewById(R.id.borderBottom);
-        }
-    }
-
-    private class SuggestionRowHolder{
-
-        public TextView txtTalkTitle;
-        public TextView txtTalkTags;
-
-        private SuggestionRowHolder(View v) {
         }
     }
 
