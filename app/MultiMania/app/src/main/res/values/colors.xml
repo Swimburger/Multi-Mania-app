@@ -13,4 +13,5 @@
     <color name="danger">#d9534f</color>
     <color name="fontcolor">#000000</color>
     <color name="drawercolor">#646664</color>
+    <color name="selectedDrawerItem">#726c64</color>
 </resources>

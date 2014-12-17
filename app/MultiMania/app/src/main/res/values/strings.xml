@@ -75,5 +75,5 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="imattending">"I'm attending "</string>
     <string name="readmoreatmm">Read more at http://multi-mania.be/</string>
     <string name="hashtag_mm" translatable="false">#multimania</string>
-
+    <string name="settings_suggestion">Suggest keynotes</string>
 </resources>
