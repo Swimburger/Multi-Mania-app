@@ -46,7 +46,7 @@ public class LoadActivity extends Activity {
 
         txtLoading = (TextView)findViewById(R.id.txtLoading);
 
-        txtLoading.setText("Loading...");
+        txtLoading.setText(getString(R.string.loading));
 
         animation = (AnimationDrawable)image.getBackground();
         animation.start();

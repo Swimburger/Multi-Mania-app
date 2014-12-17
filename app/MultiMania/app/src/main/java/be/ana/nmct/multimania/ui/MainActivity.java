@@ -42,9 +42,10 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
     public static final int LOADER_SCHEDULE_DATES_ID    = 0;
     public static final int LOADER_SCHEDULE_TALK_ID     = 10;
-    public static final int LOADER_MY_SCHEDULE_TALK_ID = 20;
+    public static final int LOADER_MY_SCHEDULE_TALK_ID  = 20;
     public static final int LOADER_NEWS_ID              = 3;
     public static final int LOADER_SETTINGS             = 5;
+    public static final int LOADER_SUGGESTIONS          = 15;
 
     // The authority for the sync adapter's content provider
     public static final String AUTHORITY = MultimaniaContract.CONTENT_AUTHORITY;
@@ -121,7 +122,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
             SettingsUtil settingsUtil = new SettingsUtil(this, SettingsFragment.PREFERENCE_NAME);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_NOTIFY, true);
             settingsUtil.setPreference(SettingsFragment.PREFERENCE_SYNC, false);
-            settingsUtil.setPreference(SettingsFragment.PREFERENCE_SUGGESTIONS, true);
         }
 
     }
@@ -237,7 +237,6 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
                         }
                     });
                 }
-
 
                 builder.setView(txtDialogMessage)
                         .setTitle(R.string.action_account)

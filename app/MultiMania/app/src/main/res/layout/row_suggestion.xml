@@ -4,21 +4,24 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceMedium"
-        android:text="tittle"
+        android:text="@string/talk_title"
         android:padding="8dp"
         android:id="@+id/txtSuggestionTitle"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginRight="100dp"
+        android:minLines="2"
+        android:maxLines="2" />
 
     <TextView
         android:textAppearance="?android:textAppearanceMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="tag"
+        android:text="@string/talk_tag"
         android:padding="8dp"
         android:id="@+id/txtSuggestionTag"
         android:layout_alignParentTop="true"

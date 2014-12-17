@@ -47,11 +47,9 @@ public class SettingsFragment extends Fragment implements LoaderManager.LoaderCa
     public static final String PREFERENCE_NAME = "setting_values";
     public static final String PREFERENCE_NOTIFY = "setting_notify";
     public static final String PREFERENCE_SYNC = "setting_sync";
-    public static final String PREFERENCE_SUGGESTIONS ="setting_suggestion";
 
     private static CheckBox mChkNotify;
     private static CheckBox mChkSync;
-    private static CheckBox mChkSuggest;
     private static SettingsUtil mUtil;
     private static GoogleCalUtil mCalUtil;
     private static NotificationSender mNotificationSender;
@@ -82,9 +80,6 @@ public class SettingsFragment extends Fragment implements LoaderManager.LoaderCa
 
         mChkSync = (CheckBox) v.findViewById(R.id.checkbox_sync);
         mChkSync.setChecked(mUtil.getBooleanPreference(PREFERENCE_SYNC, false));
-
-        mChkSuggest = (CheckBox) v.findViewById(R.id.checkbox_suggestion);
-        mChkSuggest.setChecked(mUtil.getBooleanPreference(PREFERENCE_SUGGESTIONS, false));
 
         mChkNotify.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -119,13 +114,6 @@ public class SettingsFragment extends Fragment implements LoaderManager.LoaderCa
                 } else {
                     mCalUtil.deleteCalendar();
                 }
-            }
-        });
-
-        mChkSuggest.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mUtil.setPreference(PREFERENCE_SUGGESTIONS, isChecked);
             }
         });
 

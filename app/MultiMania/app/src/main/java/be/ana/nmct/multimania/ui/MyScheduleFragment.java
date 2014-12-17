@@ -17,11 +17,16 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -73,7 +78,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private ImageView mPlaceholderImg;
 
     private List<ScheduleTalkVm> mItems;
-    private List<ScheduleTalkVm> mSuggestionItems;
     private static List<ScheduleTalkVm> sSuggestionMatchers;
     private String mAccountName;
 
@@ -144,7 +148,29 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         mGridView.setAdapter(mMyScheduleAdapter);
         mGridView.setOnItemClickListener(this);
         getLoaderManager().initLoader(MainActivity.LOADER_MY_SCHEDULE_TALK_ID + mPosition, null, this);
+        setHasOptionsMenu(true);
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //TODO: hide the menu again when changing fragments
+        MenuItem item = menu.findItem(R.id.action_timegap);
+        item.setVisible(true);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.action_timegap:
+                checkForTimeGaps();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -152,8 +178,9 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         return new CursorLoader(getActivity(), MultimaniaContract.TalkEntry.CONTENT_URI,
                 null,
                 MultimaniaContract.TalkEntry.IS_FAVORITE + "=1 AND " +
-                        MultimaniaContract.TalkEntry.DATE_FROM + " LIKE ?"
-                , new String[]{mDate + "%"}, MultimaniaContract.TalkEntry.DATE_FROM);
+                        MultimaniaContract.TalkEntry.DATE_FROM + " LIKE ?",
+                new String[]{mDate + "%"},
+                MultimaniaContract.TalkEntry.DATE_FROM);
     }
 
     @Override
@@ -225,8 +252,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             } while (c.moveToNext());
         }
 
-        checkForTimeGaps();
-
         if (mGridView != null) {
             mMyScheduleAdapter = new MyScheduleAdapter(getActivity(), 0, mItems);
             ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(mMyScheduleAdapter);
@@ -237,6 +262,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
     private void checkForTimeGaps() {
         for (int i = 0; i < mItems.size(); i++) {
+            String x = sSuggestionMatchers.get(i + 1).fromString;
+            String y = mItems.get(i).fromString;
             if(sSuggestionMatchers.size() > mItems.size()){
                 if(sSuggestionMatchers.get(i + 1).fromString.equals(mItems.get(i).fromString)){
                     showSuggestionDialog(sSuggestionMatchers.get(i), mItems.get(i).from);
@@ -246,11 +273,20 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         }
     }
 
-    private void showSuggestionDialog(ScheduleTalkVm vm, Date from) {
-        Bundle bundle = new Bundle();
-        //TODO: add params to bundle
-        SuggestionFragment fragment = new SuggestionFragment();
-        fragment.setArguments(bundle);
+    private void showSuggestionDialog(final ScheduleTalkVm vm, final Date from) {
+        Handler h = new Handler() {         //workaround for loading a fragment in onLoadFinished
+            @Override
+            public void handleMessage(Message msg) {
+                Bundle bundle = new Bundle();
+                bundle.putString(SuggestionFragment.BUNDLE_FROMSTRING, vm.fromString);
+                bundle.putString(SuggestionFragment.BUNDLE_UNTILSTRING, vm.untilString);
+                bundle.putString(SuggestionFragment.BUNDLE_DATE, Utility.convertDateToString(from));
+                SuggestionFragment fragment = new SuggestionFragment();
+                fragment.setArguments(bundle);
+                fragment.show(getFragmentManager(), "");
+            }
+        };
+        h.sendEmptyMessage(0);
     }
 
     private boolean checkDoubleBookings(ScheduleTalkVm vm) {

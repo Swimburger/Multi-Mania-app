@@ -5,4 +5,9 @@
         android:title="@string/action_account"
         android:icon="@drawable/ic_action_person"
         android:showAsAction="always" />
+    <item android:id="@+id/action_timegap"
+        android:title="@string/action_suggestion"
+        android:icon="@drawable/ic_action_missing_item"
+        android:showAsAction="always"
+        android:visible="false" />
 </menu>
