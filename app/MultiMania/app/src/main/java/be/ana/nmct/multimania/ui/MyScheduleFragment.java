@@ -1,6 +1,7 @@
 package be.ana.nmct.multimania.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.AsyncQueryHandler;
@@ -26,11 +27,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cocosw.undobar.UndoBarController;
 import com.cocosw.undobar.UndoBarStyle;
@@ -38,7 +41,6 @@ import com.etsy.android.grid.StaggeredGridView;
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nhaarman.listviewanimations.util.Insertable;
 
-import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 
 import java.text.ParseException;
@@ -76,11 +78,24 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     private TextView mPlaceholder;
     private ImageView mPlaceholderImg;
 
-    private LocalTime mLunchbreakStart;
-    private int mRowHeight = 0;
-
     private List<ScheduleTalkVm> mItems;
+    private List<ScheduleTalkVm> mSuggestionItems;
+    private static List<ScheduleTalkVm> sSuggestionMatchers;
     private String mAccountName;
+
+    /**
+     * Will initialize dummy talks to match the users schedule to a complete schedule
+     * this way we can check for gaps in the schedule
+     */
+    static{
+        sSuggestionMatchers = new ArrayList<ScheduleTalkVm>();
+        sSuggestionMatchers.add(new ScheduleTalkVm("09:30","10:30"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("10:45","11:30"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("11:45","12:30"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("14:00","15:45"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("16:00","16:45"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("17:00","17:45"));
+    }
 
     public MyScheduleFragment() {
     }
@@ -102,8 +117,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         mPosition = args.getInt(POSITION_KEY);
         mItems = new ArrayList<ScheduleTalkVm>();
         mSettingsHelper = new SettingsHelper(getActivity());
-        mUndoBarStyle = new UndoBarStyle(0,R.string.undo_item, 0,2000);
-        this.mLunchbreakStart = Utility.convertStringToLocalTime(getString(R.string.lunchbreak_starttime));
+        mUndoBarStyle = new UndoBarStyle(0, R.string.undo_item, 0, 2000);
         mAccountName = new SettingsUtil(getActivity().getApplicationContext(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
     }
 
@@ -124,7 +138,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     @Override
     public void onResume() {
         super.onResume();
-        this.getLoaderManager().initLoader(MainActivity.LOADER_MY_SCHEDULE_TALK_ID + mPosition, null, this);
     }
 
     @Override
@@ -136,7 +149,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         mGridView = (StaggeredGridView) v.findViewById(R.id.gridViewMySchedule);
         mGridView.setAdapter(mMyScheduleAdapter);
         mGridView.setOnItemClickListener(this);
-
+        getLoaderManager().initLoader(MainActivity.LOADER_MY_SCHEDULE_TALK_ID + mPosition, null, this);
         return v;
     }
 
@@ -155,12 +168,10 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         task.doInBackground(cursor);
         loader.abandon();
 
-
         if (mItems == null || mItems.size() <= 0) {
             mPlaceholder.setVisibility(View.VISIBLE);
             mPlaceholderImg.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
@@ -176,12 +187,10 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         ScheduleTalkVm vm = mItems.get(position);
-        if(!vm.isSuggestionItem){
-            Uri uri = MultimaniaContract.TalkEntry.buildItemUri(vm.id);
-            Intent intent = new Intent(getActivity(), TalkActivity.class);
-            intent.setData(uri);
-            startActivity(intent);
-        }
+        Uri uri = MultimaniaContract.TalkEntry.buildItemUri(vm.id);
+        Intent intent = new Intent(getActivity(), TalkActivity.class);
+        intent.setData(uri);
+        startActivity(intent);
     }
 
     private void buildItems(Cursor c) throws ParseException {
@@ -234,21 +243,48 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
     private void checkForTimeGaps() {
         for (int i = 0; i < mItems.size(); i++) {
-            if (mItems.size() >= i + 1) {
-                DateTime start = new DateTime(mItems.get(i).to);
-                start = start.plusMinutes(getResources().getInteger(R.integer.time_gap_between_talks_in_minutes));
-                DateTime end = new DateTime(mItems.get(i + 1).from);
-
-                if (!start.equals(end) && start.toLocalTime() != mLunchbreakStart) {
-                    ScheduleTalkVm vm = new ScheduleTalkVm();
-                    vm.isSuggestionItem = true;
-                    vm.fromString = mItems.get(i).fromString;
-                    vm.untilString = mItems.get(i).untilString;
-                    mItems.add(i + 1, vm);
+            if(sSuggestionMatchers.size() > mItems.size()){
+                if(sSuggestionMatchers.get(i + 1).fromString.equals(mItems.get(i).fromString)){
+                    showSuggestionDialog(sSuggestionMatchers.get(i));
                     break;
                 }
-
             }
+        }
+    }
+
+    private void showSuggestionDialog(ScheduleTalkVm suggestItem) {
+
+        final SettingsUtil suggestionSettings = new SettingsUtil(getActivity(), SettingsFragment.PREFERENCE_NAME);
+
+        if (suggestionSettings.getBooleanPreference(SettingsFragment.PREFERENCE_SUGGESTIONS, true)) {
+
+            View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_suggestion, null);
+            CheckBox chkShowAgain = (CheckBox)v.findViewById(R.id.chkShowAgain);
+            TextView txtTimeInfo = (TextView)v.findViewById(R.id.txtSuggestionInfo);
+
+            //TODO: make list
+            ListView listview = (ListView)v.findViewById(R.id.suggestion_list);
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                }
+            });
+
+            txtTimeInfo.setText(String.format(getString(R.string.myschedule_suggestion_time),suggestItem.fromString, suggestItem.untilString));
+            chkShowAgain.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    suggestionSettings.setPreference(SettingsFragment.PREFERENCE_SUGGESTIONS, isChecked);
+                }
+            });
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setView(v);
+            builder.setTitle(R.string.myschedule_timegap_info);
+
+            builder.create();
+            builder.show();
         }
     }
 
@@ -278,14 +314,10 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             ScheduleTalkVm vm = mItems.get(position);
 
             if (convertView == null) {
-                if (!vm.isSuggestionItem) {
-                    convertView = mInflater.inflate(R.layout.row_myschedule, null);
-                    Utility.enlargeTouchArea(convertView.findViewById(R.id.myscheduleRowRoot), convertView.findViewById(R.id.btnRemoveTalk), 10);
-                    convertView.setTag(new MyScheduleRowHolder(convertView));
-                } else {
-                    convertView = mInflater.inflate(R.layout.row_myschedule_suggestion, null);
-                    convertView.setTag(new MyScheduleSuggestionRowHolder(convertView));
-                }
+                convertView = mInflater.inflate(R.layout.row_myschedule, null);
+                Utility.enlargeTouchArea(convertView.findViewById(R.id.myscheduleRowRoot), convertView.findViewById(R.id.btnRemoveTalk), 10);
+                convertView.setTag(new MyScheduleRowHolder(convertView));
+
             }
 
             bindView(convertView, vm);
@@ -294,73 +326,54 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
 
         public void bindView(View view, final ScheduleTalkVm vm) {
 
-            if (!vm.isSuggestionItem) {
 
-                MyScheduleRowHolder vh = (MyScheduleRowHolder) view.getTag();
+            MyScheduleRowHolder vh = (MyScheduleRowHolder) view.getTag();
 
-                //room + title
-                vh.txtTalkTitle.setText(vm.title);
-                vh.txtRoom.setText(vm.room);
-                vh.txtTag.setText(vm.tags);
-                vh.txtTime.setText(vm.fromString + " - " + vm.untilString);
+            //room + title
+            vh.txtTalkTitle.setText(vm.title);
+            vh.txtRoom.setText(vm.room);
+            vh.txtTag.setText(vm.tags);
+            vh.txtTime.setText(vm.fromString + " - " + vm.untilString);
 
-                if (vm.isDoubleBooked) {
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                        vh.root.setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.double_booking_myschedule));
-                    } else {
-                        vh.root.setBackground(getActivity().getResources().getDrawable((R.drawable.double_booking_myschedule)));
-                    }
-                    vh.txtTime.setTextColor(getActivity().getResources().getColor(R.color.danger));
-                    vh.bottomBorder.setBackgroundColor(getActivity().getResources().getColor(R.color.danger));
+            if (vm.isDoubleBooked) {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    vh.root.setBackgroundDrawable(getActivity().getResources().getDrawable(R.drawable.double_booking_myschedule));
                 } else {
-                    vh.root.setBackgroundColor(getActivity().getResources().getColor((R.color.white)));
-                    vh.txtTime.setTextColor(getActivity().getResources().getColor(R.color.fontcolor));
-                    vh.bottomBorder.setBackgroundColor(getActivity().getResources().getColor(R.color.primaryColor));
+                    vh.root.setBackground(getActivity().getResources().getDrawable((R.drawable.double_booking_myschedule)));
                 }
-
-                //remove button
-                vh.btnRemoveTalk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        removeItem(vm);
-
-                        //clear previous undobars when needed
-                        if (mUndoBar != null) {
-                            mUndoBar.clear();
-                        }
-
-                        //show undobar
-                        mUndoBar = new UndoBarController.UndoBar(getActivity());
-                        mUndoBar.style(mUndoBarStyle);
-                        mUndoBar.message(getActivity().getString(R.string.unfavorite_undobar));
-                        mUndoBar.listener(new UndoBarController.UndoListener() {
-                            @Override
-                            public void onUndo(@Nullable Parcelable parcelable) {
-                                add(0, mRemovedItem);
-                            }
-                        });
-                        mUndoBar.show();
-                    }
-                });
-
-                //get height of the view so we can use it for the suggestion items
-                mRowHeight = view.getMeasuredHeight();
-
+                vh.txtTime.setTextColor(getActivity().getResources().getColor(R.color.danger));
+                vh.bottomBorder.setBackgroundColor(getActivity().getResources().getColor(R.color.danger));
             } else {
-                //TODO: fix height issue
-                MyScheduleSuggestionRowHolder vh = (MyScheduleSuggestionRowHolder)view.getTag();
-                vh.root.setMinimumHeight(mRowHeight);
-                vh.btnAddItem.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getContext(), "This is not the suggestion you are looking for", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                vh.txtTime.setText(String.format(getString(R.string.myschedule_suggestion_time), vm.fromString, vm.untilString));
-
+                vh.root.setBackgroundColor(getActivity().getResources().getColor((R.color.white)));
+                vh.txtTime.setTextColor(getActivity().getResources().getColor(R.color.fontcolor));
+                vh.bottomBorder.setBackgroundColor(getActivity().getResources().getColor(R.color.primaryColor));
             }
 
+            //remove button
+            vh.btnRemoveTalk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    removeItem(vm);
+
+                    //clear previous undobars when needed
+                    if (mUndoBar != null) {
+                        mUndoBar.clear();
+                    }
+
+                    //show undobar
+                    mUndoBar = new UndoBarController.UndoBar(getActivity());
+                    mUndoBar.style(mUndoBarStyle);
+                    mUndoBar.message(getActivity().getString(R.string.unfavorite_undobar));
+                    mUndoBar.listener(new UndoBarController.UndoListener() {
+                        @Override
+                        public void onUndo(@Nullable Parcelable parcelable) {
+                            add(0, mRemovedItem);
+                        }
+                    });
+                    mUndoBar.show();
+                }
+            });
         }
 
         public void removeItem(ScheduleTalkVm vm) {
@@ -371,6 +384,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             vm.isFavorite = false;
             vm.isDoubleBooked = checkDoubleBookings(vm);
             mSettingsHelper.settingsHandler(vm);
+            checkDoubleBookings(vm);
         }
 
         private void updateItemValue(long id, boolean value) {
@@ -385,10 +399,10 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
                     MultimaniaContract.TalkEntry._ID + "=?",
                     new String[]{"" + id}
             );
-            if(mAccountName!=null){
-                if(value){
+            if (mAccountName != null) {
+                if (value) {
                     ApiActions.postFavoriteTalk(getActivity(), mAccountName, id);
-                }else{
+                } else {
                     ApiActions.deleteFavoriteTalk(getActivity(), mAccountName, id);
                 }
             }
@@ -402,8 +416,20 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             mPlaceholder.setVisibility(View.INVISIBLE);
             mPlaceholderImg.setVisibility(View.INVISIBLE);
             mSettingsHelper.settingsHandler(vm);
-
+            checkDoubleBookings(vm);
             super.add(vm);
+        }
+    }
+
+    private class SuggestionRowAdapter extends ArrayAdapter<ScheduleTalkVm>{
+
+        public SuggestionRowAdapter(Context context, int resource, List<ScheduleTalkVm> objects) {
+            super(context, resource, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return super.getView(position, convertView, parent);
         }
     }
 
@@ -428,20 +454,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         }
     }
 
-    private class MyScheduleSuggestionRowHolder {
-
-        private RelativeLayout root;
-        private Button btnAddItem;
-        private TextView txtTime;
-
-        public MyScheduleSuggestionRowHolder(View v) {
-            this.root = (RelativeLayout)v.findViewById(R.id.suggestionContainer);
-            this.btnAddItem = (Button)v.findViewById(R.id.btnAddSuggestion);
-            this.txtTime = (TextView)v.findViewById(R.id.txtTimegapTime);
-        }
-
-    }
-
     private class MyScheduleAsyncQueryHandler extends AsyncQueryHandler {
         public MyScheduleAsyncQueryHandler(ContentResolver cr) {
             super(cr);
@@ -452,9 +464,10 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "Sync ready received");
-            getLoaderManager().restartLoader(MainActivity.LOADER_MY_SCHEDULE_TALK_ID,null,MyScheduleFragment.this);
+            getLoaderManager().restartLoader(MainActivity.LOADER_MY_SCHEDULE_TALK_ID, null, MyScheduleFragment.this);
         }
     };
+
     private class BuildItemsAsync extends AsyncTask<Cursor, Void, Void> {
 
         @Override
