@@ -70,7 +70,11 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="myschedule_timegap_info">We found a gap in your schedule.</string>
     <string name="myschedule_suggestion_time">You can follow another keynote at %1$s to %2$s.</string>
     <string name="action_add">Add</string>
+    <string name="Share">Share</string>
+    <string name="share_with">Share with</string>
+    <string name="imattending">"I'm attending "</string>
+    <string name="readmoreatmm">Read more at http://multi-mania.be/</string>
+    <string name="hashtag_mm" translatable="false">#multimania</string>
     <string name="settings_suggestion">Suggest keynotes</string>
     <string name="suggestion_show_again">Don\'t show again</string>
-
 </resources>

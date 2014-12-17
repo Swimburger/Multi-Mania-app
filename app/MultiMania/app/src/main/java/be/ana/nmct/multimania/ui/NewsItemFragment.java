@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,6 +13,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -55,6 +59,7 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
             mUri = getArguments().getParcelable(URI_KEY);
         }
         getLoaderManager().initLoader(0, null, this);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -70,6 +75,25 @@ public class NewsItemFragment extends Fragment implements LoaderManager.LoaderCa
 
         BindData(mData);
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.news_item, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.action_share: {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, mNewsItemTitle.getText().toString() + ". " + getString(R.string.readmoreatmm)+ ". " + getString(R.string.hashtag_mm));
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_with)));
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
