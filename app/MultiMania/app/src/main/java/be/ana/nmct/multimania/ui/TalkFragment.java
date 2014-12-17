@@ -8,6 +8,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -63,6 +64,8 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
     private Animation mFadeInAnimation;
     private Animation mFadeInAnimationHtml;
     private MenuItem mFavoriteMenuItem;
+    private String mTitle;
+    private String mFrom;
 
     public TalkFragment(){}
 
@@ -197,6 +200,13 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
                 setActionIcon();
                 break;
             }
+            case R.id.action_share: {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.imattending) + mTitle + " @ Multimania. " + getString(R.string.readmoreatmm)+ ". " + getString(R.string.hashtag_mm));
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_with)));
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -223,9 +233,9 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
             int isFavoriteCol = cursor.getColumnIndex(MultimaniaContract.TalkEntry.IS_FAVORITE);
 
 
-            String title = cursor.getString(titleCol);
+            mTitle = cursor.getString(titleCol);
             String info = cursor.getString(infoCol);
-            String from = cursor.getString(timeFromCol);
+            mFrom = cursor.getString(timeFromCol);
             String until = cursor.getString(timeUntilCol);
             String room = cursor.getString(roomCol);
             mIsFavorite = cursor.getInt(isFavoriteCol)==1;
@@ -235,7 +245,7 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
 
 
             if(mTitleLoadListener != null) {
-                mTitleLoadListener.onTitleloaded(title);
+                mTitleLoadListener.onTitleloaded(mTitle);
             }
 
             String mime = "text/html";
@@ -245,7 +255,7 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
             webTalkInfo.loadDataWithBaseURL("file:///android_asset/", html, mime, encoding, null);
 
             try {
-                txtTalkTime.setText(Utility.getTimeString(from) + " - " + Utility.getTimeString(until));
+                txtTalkTime.setText(Utility.getTimeString(mFrom) + " - " + Utility.getTimeString(until));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
