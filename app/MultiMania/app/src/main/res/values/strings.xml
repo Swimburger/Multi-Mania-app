@@ -70,5 +70,6 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="myschedule_timegap_info">We found a gap in your schedule.</string>
     <string name="myschedule_suggestion_time">You can follow another keynote at %1$s to %2$s.</string>
     <string name="action_add">Add</string>
+    <string name="settings_suggestion">Suggest keynotes</string>
 
 </resources>
