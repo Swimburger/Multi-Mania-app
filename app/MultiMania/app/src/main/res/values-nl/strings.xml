@@ -60,4 +60,6 @@ Elk jaar groeit de conferentie een klein beetje en elk jaar is de ervaring iets 
     <string name="settings_suggestion">Geef mij keynote suggesties</string>
     <string name="suggestion_show_again">Niet meer weergeven</string>
     <string name="action_suggestion">Tijdgaten</string>
+    <string name="no_timegap_found">We hebben geen gaatjes gevonden in je planning.</string>
+    <string name="suggestion_added">Het item is  toegevoegd aan je planning.</string>
 </resources>

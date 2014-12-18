@@ -203,7 +203,7 @@ public class TalkFragment extends Fragment implements LoaderManager.LoaderCallba
             case R.id.action_share: {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.imattending) + mTitle + " @ Multimania. " + getString(R.string.readmoreatmm)+ ". " + getString(R.string.hashtag_mm));
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.imattending) + mTitle + " @multimania. " + getString(R.string.readmoreatmm)+ ". " + getString(R.string.hashtag_mm));
                 sendIntent.setType("text/plain");
                 startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_with)));
             }

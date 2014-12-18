@@ -78,5 +78,7 @@ The Multi-Mania conference has become the annual event that brings together desi
     <string name="settings_suggestion">Suggest keynotes</string>
     <string name="suggestion_show_again">Don\'t show again</string>
     <string name="action_suggestion">Timegaps</string>
+    <string name="no_timegap_found">We didn\'t find any timegaps in your schedule.</string>
+    <string name="suggestion_added">The item was added to your schedule.</string>
 
 </resources>

@@ -17,14 +17,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -32,6 +29,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cocosw.undobar.UndoBarController;
 import com.cocosw.undobar.UndoBarStyle;
@@ -57,7 +55,7 @@ import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 /**
  * This fragment show the favorited talks of the user, sorted in a pageradapter per day
  */
-public class MyScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
+public class MyScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, SuggestionFragment.onDialogDismissedListener {
 
     private final String TAG = this.getClass().getCanonicalName();
 
@@ -83,14 +81,14 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
      * Will initialize dummy talks to match the users schedule to a complete schedule
      * this way we can check for gaps in the schedule
      */
-    static{
+    static {
         sSuggestionMatchers = new ArrayList<ScheduleTalkVm>();
-        sSuggestionMatchers.add(new ScheduleTalkVm("09:30","10:30"));
-        sSuggestionMatchers.add(new ScheduleTalkVm("10:45","11:30"));
-        sSuggestionMatchers.add(new ScheduleTalkVm("11:45","12:30"));
-        sSuggestionMatchers.add(new ScheduleTalkVm("14:00","15:45"));
-        sSuggestionMatchers.add(new ScheduleTalkVm("16:00","16:45"));
-        sSuggestionMatchers.add(new ScheduleTalkVm("17:00","17:45"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("09:30", "10:30"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("10:45", "11:30"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("11:45", "12:30"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("14:00", "15:45"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("16:00", "16:45"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("17:00", "17:45"));
     }
 
     public MyScheduleFragment() {
@@ -147,18 +145,6 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         mGridView.setOnItemClickListener(this);
         getLoaderManager().initLoader(MainActivity.LOADER_MY_SCHEDULE_TALK_ID + mPosition, null, this);
         return v;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch(item.getItemId()){
-            case R.id.action_timegap:
-                checkForTimeGaps();
-                break;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -248,33 +234,38 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         }
     }
 
-    private void checkForTimeGaps() {
-        for (int i = 0; i < mItems.size(); i++) {
-            String x = sSuggestionMatchers.get(i + 1).fromString;
-            String y = mItems.get(i).fromString;
-            if(sSuggestionMatchers.size() > mItems.size()){
-                if(sSuggestionMatchers.get(i + 1).fromString.equals(mItems.get(i).fromString)){
-                    showSuggestionDialog(sSuggestionMatchers.get(i), mItems.get(i).from);
-                    break;
+    public boolean checkForTimeGaps() {
+
+        boolean foundGap = false;
+
+        if (mItems != null) {
+            for (int i = 0; i < mItems.size(); i++) {
+                if (sSuggestionMatchers.size() > mItems.size()) {
+                    if (sSuggestionMatchers.get(i + 1).fromString.equals(mItems.get(i).fromString)) {
+                        String suggestionDate = createSuggestionDate(sSuggestionMatchers.get(i).fromString);
+                        showSuggestionDialog(sSuggestionMatchers.get(i), suggestionDate);
+                        foundGap = true;
+                        break;
+                    }
                 }
             }
         }
+        return foundGap;
     }
 
-    private void showSuggestionDialog(final ScheduleTalkVm vm, final Date from) {
-        Handler h = new Handler() {         //workaround for loading a fragment in onLoadFinished
-            @Override
-            public void handleMessage(Message msg) {
-                Bundle bundle = new Bundle();
-                bundle.putString(SuggestionFragment.BUNDLE_FROMSTRING, vm.fromString);
-                bundle.putString(SuggestionFragment.BUNDLE_UNTILSTRING, vm.untilString);
-                bundle.putString(SuggestionFragment.BUNDLE_DATE, Utility.convertDateToString(from));
-                SuggestionFragment fragment = new SuggestionFragment();
-                fragment.setArguments(bundle);
-                fragment.show(getFragmentManager(), "");
-            }
-        };
-        h.sendEmptyMessage(0);
+    private String createSuggestionDate(String fromString) {
+        return mDate + " " + fromString + ":00";
+    }
+
+    private void showSuggestionDialog(final ScheduleTalkVm vm, final String from) {
+        Bundle bundle = new Bundle();
+        bundle.putString(SuggestionFragment.BUNDLE_FROMSTRING, vm.fromString);
+        bundle.putString(SuggestionFragment.BUNDLE_UNTILSTRING, vm.untilString);
+        bundle.putString(SuggestionFragment.BUNDLE_DATE, from);
+        SuggestionFragment fragment = new SuggestionFragment();
+        fragment.setTargetFragment(this, 0);
+        fragment.setArguments(bundle);
+        fragment.show(getFragmentManager(), "");
     }
 
     private boolean checkDoubleBookings(ScheduleTalkVm vm) {
@@ -285,6 +276,14 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
             }
         }
         return false;
+    }
+
+    @Override
+    public void onDialogDismissedListener(boolean wasItemAdded) {
+        if(wasItemAdded){
+            getLoaderManager().restartLoader(MainActivity.LOADER_MY_SCHEDULE_TALK_ID + mPosition, null, this);
+            Toast.makeText(getActivity(), getString(R.string.suggestion_added), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private class MyScheduleAdapter extends ArrayAdapter<ScheduleTalkVm> implements Insertable<ScheduleTalkVm> {

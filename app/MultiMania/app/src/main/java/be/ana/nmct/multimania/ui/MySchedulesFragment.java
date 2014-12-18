@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,9 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
     public static final String TAG = MySchedulesFragment.class.getSimpleName();
 
     public List<String> mDates = new ArrayList<String>();
+    private List<MyScheduleFragment> mFragmentList = new ArrayList<MyScheduleFragment>();
     private SchedulesPagerAdapter mViewPagerAdapter;
-    private MenuItem mTimeGapAction;
+    private ViewPager mPager;
 
     public MySchedulesFragment() {}
 
@@ -47,25 +49,31 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_schedules, container, false);
-        ViewPager pager = (ViewPager) v.findViewById(R.id.schedulesPager);
+        mPager = (ViewPager) v.findViewById(R.id.schedulesPager);
         mViewPagerAdapter = new SchedulesPagerAdapter(getFragmentManager());
-        pager.setAdapter(mViewPagerAdapter);
+        mPager.setAdapter(mViewPagerAdapter);
         setHasOptionsMenu(true);
         return v;
     }
 
-    //TODO: fix bug where onCreateOptionsMenu is called twice, which results in not showing the icon
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if(mTimeGapAction == null){
-            mTimeGapAction = menu.findItem(R.id.action_timegap);
+        inflater.inflate(R.menu.menu_my_schedule, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.action_timegap:
+                if(!mFragmentList.get(mPager.getCurrentItem()).checkForTimeGaps()){
+                    Toast.makeText(getActivity(), getString(R.string.no_timegap_found), Toast.LENGTH_LONG).show();
+                }
+                break;
         }
 
-        if(mTimeGapAction.isVisible()){
-            mTimeGapAction.setVisible(false);
-        } else {
-            mTimeGapAction.setVisible(true);
-        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -122,7 +130,9 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
         @Override
         public Fragment getItem(int i) {
             Log.d(TAG,"Date in schedules: "+mDates.get(i));
-            return MyScheduleFragment.newInstance(mDates.get(i),i);
+            MyScheduleFragment fragment = MyScheduleFragment.newInstance(mDates.get(i), i);
+            mFragmentList.add(fragment);
+            return fragment;
         }
 
         @Override
