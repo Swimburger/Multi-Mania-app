@@ -39,7 +39,6 @@ import com.nhaarman.listviewanimations.util.Insertable;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import be.ana.nmct.multimania.R;
@@ -86,7 +85,8 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         sSuggestionMatchers.add(new ScheduleTalkVm("09:30", "10:30"));
         sSuggestionMatchers.add(new ScheduleTalkVm("10:45", "11:30"));
         sSuggestionMatchers.add(new ScheduleTalkVm("11:45", "12:30"));
-        sSuggestionMatchers.add(new ScheduleTalkVm("14:00", "15:45"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("14:00", "14:45"));
+        sSuggestionMatchers.add(new ScheduleTalkVm("15:00", "15:45"));
         sSuggestionMatchers.add(new ScheduleTalkVm("16:00", "16:45"));
         sSuggestionMatchers.add(new ScheduleTalkVm("17:00", "17:45"));
     }
