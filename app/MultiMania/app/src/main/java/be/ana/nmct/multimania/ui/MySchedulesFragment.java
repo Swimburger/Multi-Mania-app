@@ -12,6 +12,9 @@ import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,6 +32,7 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
 
     public List<String> mDates = new ArrayList<String>();
     private SchedulesPagerAdapter mViewPagerAdapter;
+    private MenuItem mTimeGapAction;
 
     public MySchedulesFragment() {}
 
@@ -46,7 +50,22 @@ public class MySchedulesFragment extends Fragment implements LoaderManager.Loade
         ViewPager pager = (ViewPager) v.findViewById(R.id.schedulesPager);
         mViewPagerAdapter = new SchedulesPagerAdapter(getFragmentManager());
         pager.setAdapter(mViewPagerAdapter);
+        setHasOptionsMenu(true);
         return v;
+    }
+
+    //TODO: fix bug where onCreateOptionsMenu is called twice, which results in not showing the icon
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if(mTimeGapAction == null){
+            mTimeGapAction = menu.findItem(R.id.action_timegap);
+        }
+
+        if(mTimeGapAction.isVisible()){
+            mTimeGapAction.setVisible(false);
+        } else {
+            mTimeGapAction.setVisible(true);
+        }
     }
 
     @Override

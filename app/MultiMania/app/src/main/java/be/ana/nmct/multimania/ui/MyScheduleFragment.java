@@ -24,8 +24,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -148,17 +146,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         mGridView.setAdapter(mMyScheduleAdapter);
         mGridView.setOnItemClickListener(this);
         getLoaderManager().initLoader(MainActivity.LOADER_MY_SCHEDULE_TALK_ID + mPosition, null, this);
-        setHasOptionsMenu(true);
         return v;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        //TODO: hide the menu again when changing fragments
-        MenuItem item = menu.findItem(R.id.action_timegap);
-        item.setVisible(true);
-
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
