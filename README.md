@@ -93,7 +93,7 @@ To come
 ### Set-up ###
 
 The application is build with Android Studio and makes use of the gradle plug-in.  
-In the build.gradle app file you can set the url that you're api is hosted on.
+In the build.gradle app file you can set the url that your api is hosted on.
 
     defaultConfig {
             ...
