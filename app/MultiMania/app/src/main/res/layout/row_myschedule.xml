@@ -67,4 +67,5 @@
         android:layout_below="@id/txtTime"
         android:background="@color/primaryColor"
         />
+
 </RelativeLayout>

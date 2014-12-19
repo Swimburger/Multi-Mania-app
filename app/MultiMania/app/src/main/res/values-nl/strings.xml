@@ -62,4 +62,5 @@ Elk jaar groeit de conferentie een klein beetje en elk jaar is de ervaring iets 
     <string name="action_suggestion">Tijdgaten</string>
     <string name="no_timegap_found">We hebben geen gaatjes gevonden in je planning.</string>
     <string name="suggestion_added">Het item is  toegevoegd aan je planning.</string>
+    <string name="suggestion_subtitle">Hier zijn een paar suggesties:</string>
 </resources>
