@@ -55,6 +55,11 @@ public class SuggestionFragment extends DialogFragment implements LoaderManager.
     public SuggestionFragment() {
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -91,7 +96,6 @@ public class SuggestionFragment extends DialogFragment implements LoaderManager.
         txtTimeInfo.setText(String.format(getString(R.string.myschedule_suggestion_time), mFromString, mUntilString));
 
         builder.setView(v);
-        builder.setTitle(R.string.myschedule_timegap_info);
         builder.setNegativeButton(getString(R.string.dialog_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -212,7 +216,7 @@ public class SuggestionFragment extends DialogFragment implements LoaderManager.
         }
     }
 
-    public interface onDialogDismissedListener{
+    public interface OnDialogDismissedListener{
         void onDialogDismissedListener(boolean wasItemAdded);
     }
 

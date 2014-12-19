@@ -54,7 +54,7 @@ import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 /**
  * This fragment show the favorited talks of the user, sorted in a pageradapter per day
  */
-public class MyScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, SuggestionFragment.onDialogDismissedListener {
+public class MyScheduleFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, SuggestionFragment.OnDialogDismissedListener {
 
     private final String TAG = this.getClass().getCanonicalName();
 
