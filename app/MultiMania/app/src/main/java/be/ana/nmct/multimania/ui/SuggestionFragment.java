@@ -31,8 +31,10 @@ import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.utils.GoogleCalUtil;
+import be.ana.nmct.multimania.utils.SettingsHelper;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
+import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 
 /**
  * This fragment handles showing an AlertDialog containing suggestions for the user
@@ -51,6 +53,7 @@ public class SuggestionFragment extends DialogFragment implements LoaderManager.
     private SuggestionRowAdapter mAdapter;
     private String mAccountName;
     private boolean mWasItemAdded;
+    private SettingsHelper mSettingsHelper;
 
     public SuggestionFragment() {
     }
@@ -58,6 +61,7 @@ public class SuggestionFragment extends DialogFragment implements LoaderManager.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSettingsHelper = new SettingsHelper(getActivity());
     }
 
     @NonNull
@@ -82,11 +86,12 @@ public class SuggestionFragment extends DialogFragment implements LoaderManager.
         mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(mData.moveToPosition(position)){
+                if (mData.moveToPosition(position)) {
                     int talkIdIndex = mData.getColumnIndexOrThrow(MultimaniaContract.TalkEntry._ID);
                     long talkId = mData.getLong(talkIdIndex);
                     updateItemValue(talkId, true);
                     mWasItemAdded = true;
+                    updateSettings(position);
                     dismiss();
                 }
             }
@@ -109,7 +114,7 @@ public class SuggestionFragment extends DialogFragment implements LoaderManager.
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
         Fragment frag = getTargetFragment();
-        if(frag instanceof MyScheduleFragment){
+        if (frag instanceof MyScheduleFragment) {
             ((MyScheduleFragment) frag).onDialogDismissedListener(mWasItemAdded);
         }
     }
@@ -137,6 +142,37 @@ public class SuggestionFragment extends DialogFragment implements LoaderManager.
     public void onLoaderReset(Loader<Cursor> loader) {
         if (mAdapter != null) {
             mAdapter.swapCursor(null);
+        }
+    }
+
+    private void updateSettings(int position) {
+        if (mData.moveToPosition(position)) {
+            ScheduleTalkVm vm = new ScheduleTalkVm();
+
+            final int dateFromIndex = mData.getColumnIndex(MultimaniaContract.TalkEntry.DATE_FROM);
+            final int dateUntilIndex = mData.getColumnIndex(MultimaniaContract.TalkEntry.DATE_UNTIL);
+            final int titleIndex = mData.getColumnIndex(MultimaniaContract.TalkEntry.TITLE);
+            final int roomIndex = mData.getColumnIndex(MultimaniaContract.TalkEntry.ROOM_NAME);
+            final int idIndex = mData.getColumnIndex(MultimaniaContract.TalkEntry._ID);
+            final int calEventIdIndex = mData.getColumnIndex(MultimaniaContract.TalkEntry.CALEVENT_ID);
+            final int descriptionIndex = mData.getColumnIndex(MultimaniaContract.TalkEntry.DESCRIPTION);
+
+            try {
+                vm.fromString = Utility.getTimeString(mData.getString(dateFromIndex));
+                vm.untilString = Utility.getTimeString(mData.getString(dateUntilIndex));
+                vm.from = Utility.convertStringToDate(mData.getString(dateFromIndex));
+                vm.to = Utility.convertStringToDate(mData.getString(dateUntilIndex));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            vm.id = mData.getLong(idIndex);
+            vm.title = mData.getString(titleIndex);
+            vm.room = mData.getString(roomIndex);
+            vm.calEventId = mData.getLong(calEventIdIndex);
+            vm.description = mData.getString(descriptionIndex);
+
+            mSettingsHelper.settingsHandler(vm);
         }
     }
 
@@ -216,7 +252,7 @@ public class SuggestionFragment extends DialogFragment implements LoaderManager.
         }
     }
 
-    public interface OnDialogDismissedListener{
+    public interface OnDialogDismissedListener {
         void onDialogDismissedListener(boolean wasItemAdded);
     }
 

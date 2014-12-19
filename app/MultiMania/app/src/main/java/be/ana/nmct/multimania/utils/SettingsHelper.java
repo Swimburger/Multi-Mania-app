@@ -10,6 +10,12 @@ import be.ana.nmct.multimania.vm.ScheduleTalkVm;
 /**
  * Created by Axel on 26/11/2014.
  */
+
+/**
+ * The SettingsHelper helps updating all stuff the user has enabled in the Settings of the app.
+ * E.G.: Setting a Talk as a favorite and then calling this class will set the Talk in the users
+ * Google Calendar and Notification (if enabled in settings)
+ */
 public class SettingsHelper {
 
     private Context mContext;
