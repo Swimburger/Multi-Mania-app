@@ -14,3 +14,4 @@ backend/.idea/
 backend/Utilities/Params.php
 Thumbs.db
 app/MultiMania/app/manifest-merger-alpha-report.txt
+app/MultiMania/app/app.iml
