@@ -26,7 +26,7 @@ Elk jaar groeit de conferentie een klein beetje en elk jaar is de ervaring iets 
     <string name="unfavorite_undobar">Verwijderd uit favorieten</string>
     <string name="notification_text">Zal beginnen in 10 minuten.</string>
     <string name="myschedule_placeholder">Je favoriete keynotes zullen hier verschijnen.</string>
-    <string name="loading">Bezig met laden...</string>
+    <string name="loading">Bezig met laden</string>
     <string name="stardescription">Favoriet Icoon</string>
     <string name="nav_schedule">Tijdschema</string>
     <string name="nav_my_schedule">Mijn Tijdschema</string>
