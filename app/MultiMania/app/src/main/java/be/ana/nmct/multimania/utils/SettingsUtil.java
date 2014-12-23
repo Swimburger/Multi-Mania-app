@@ -6,6 +6,10 @@ import android.content.SharedPreferences;
 /**
  * Created by Axel on 10/11/2014.
  */
+
+/**
+ * Class that speeds up getting & setting SharedPreferences
+ */
 public class SettingsUtil {
 
     private Context mContext;
