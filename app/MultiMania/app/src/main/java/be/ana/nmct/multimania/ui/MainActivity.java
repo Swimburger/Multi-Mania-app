@@ -17,6 +17,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +37,8 @@ import be.ana.nmct.multimania.utils.Utility;
 
 
 public class MainActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String PREFERENCE_NAME = "launch_values";
     public static final String PREFERENCE_FIRSTTIMELAUNCH = "first_time_launch";
@@ -317,8 +321,8 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
         if (requestCode == SettingsFragment.REQUEST_CODE_EMAIL && data != null && resultCode == Activity.RESULT_OK) {
 
             String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-
-            if (accountName != "") {
+            Log.d(TAG,"AccountName:"+accountName);
+            if (!TextUtils.isEmpty(accountName)) {
                 mAccountSettings.setPreference(PREFERENCE_ACCOUNT, accountName);
                 Toast.makeText(this, getString(R.string.account_success), Toast.LENGTH_SHORT).show();
                 Utility.requestSync(Utility.getSyncAccount(this),true);
