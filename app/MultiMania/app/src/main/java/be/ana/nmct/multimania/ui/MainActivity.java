@@ -41,7 +41,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
     private static final String TAG = MainActivity.class.getSimpleName();
 
     public static final String PREFERENCE_NAME = "launch_values";
-    public static final String PREFERENCE_FIRSTTIMELAUNCH = "first_time_launch";
+    public static final String PREFERENCE_FIRST_TIME_LAUNCH = "first_time_launch";
     public static final String PREFERENCE_ACCOUNT = "account_name";
 
     public static final int LOADER_SCHEDULE_DATES_ID    = 0;
@@ -76,7 +76,7 @@ public class MainActivity extends Activity implements NavigationDrawerFragment.N
 
         //Handle first time launching
         SettingsUtil launchUtil = new SettingsUtil(this, PREFERENCE_NAME);
-        mFirstTimeLaunch = launchUtil.getBooleanPreference(PREFERENCE_FIRSTTIMELAUNCH, true);
+        mFirstTimeLaunch = launchUtil.getBooleanPreference(PREFERENCE_FIRST_TIME_LAUNCH, true);
 
         if(mFirstTimeLaunch){
             super.onResume();

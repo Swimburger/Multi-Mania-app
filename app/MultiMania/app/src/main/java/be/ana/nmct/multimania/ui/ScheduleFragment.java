@@ -197,7 +197,8 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         //mScheduleGrid.setAdapter(null);
         mCursor=null;
         mItems.clear();
-        mAdapter.notifyDataSetChanged();
+        mScheduleGrid.setAdapter(mAdapter);
+        //mAdapter.notifyDataSetChanged();
     }
 
     @Override
