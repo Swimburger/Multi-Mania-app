@@ -45,7 +45,6 @@ import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.MultimaniaContract;
 import be.ana.nmct.multimania.service.SyncAdapter;
-import be.ana.nmct.multimania.utils.GoogleCalUtil;
 import be.ana.nmct.multimania.utils.SettingsHelper;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
@@ -112,7 +111,7 @@ public class MyScheduleFragment extends Fragment implements LoaderManager.Loader
         mItems = new ArrayList<ScheduleTalkVm>();
         mSettingsHelper = new SettingsHelper(getActivity());
         mUndoBarStyle = new UndoBarStyle(0, R.string.undo_item, 0, 2000);
-        mAccountName = new SettingsUtil(getActivity().getApplicationContext(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
+        mAccountName =  new SettingsUtil(getActivity().getApplicationContext(), MainActivity.PREFERENCE_NAME).getStringPreference(MainActivity.PREFERENCE_ACCOUNT);
     }
 
     @Override

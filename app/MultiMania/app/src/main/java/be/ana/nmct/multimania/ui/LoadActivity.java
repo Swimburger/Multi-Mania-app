@@ -126,5 +126,9 @@ public class LoadActivity extends Activity {
         }
     };
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(syncCompleteReceiver);
+    }
 }

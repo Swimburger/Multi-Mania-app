@@ -30,7 +30,6 @@ import java.util.Date;
 import be.ana.nmct.multimania.R;
 import be.ana.nmct.multimania.data.ApiActions;
 import be.ana.nmct.multimania.data.MultimaniaContract;
-import be.ana.nmct.multimania.utils.GoogleCalUtil;
 import be.ana.nmct.multimania.utils.SettingsHelper;
 import be.ana.nmct.multimania.utils.SettingsUtil;
 import be.ana.nmct.multimania.utils.Utility;
@@ -76,7 +75,7 @@ public class SuggestionFragment extends DialogFragment implements LoaderManager.
             e.printStackTrace();
         }
 
-        mAccountName = new SettingsUtil(getActivity().getApplicationContext(), GoogleCalUtil.PREFERENCE_NAME).getStringPreference(GoogleCalUtil.PREFERENCE_ACCOUNTNAME);
+        mAccountName =  new SettingsUtil(getActivity().getApplicationContext(), MainActivity.PREFERENCE_NAME).getStringPreference(MainActivity.PREFERENCE_ACCOUNT);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_suggestion, null);

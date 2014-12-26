@@ -79,7 +79,7 @@ public class ScheduleFragment extends Fragment implements LoaderManager.LoaderCa
         mDate = getArguments().getString(DATE_KEY);
         mPosition = getArguments().getInt(POSITION_KEY);
         mSettingsHelper = new SettingsHelper(getActivity());
-        mAccountName = new SettingsUtil(getActivity(),MainActivity.PREFERENCE_NAME).getStringPreference(MainActivity.PREFERENCE_ACCOUNT);
+        mAccountName =  new SettingsUtil(getActivity().getApplicationContext(), MainActivity.PREFERENCE_NAME).getStringPreference(MainActivity.PREFERENCE_ACCOUNT);
         //setRetainInstance(true);
         mItems = new ArrayList<>();
     }
