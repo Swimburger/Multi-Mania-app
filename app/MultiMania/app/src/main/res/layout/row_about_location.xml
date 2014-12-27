@@ -58,11 +58,9 @@
             android:src="@drawable/ic_aboutmap"
             android:scaleType="centerCrop"
             />
-        <View
-            android:layout_gravity="bottom"
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/primaryColor"
-
-            />
+    <View
+        android:layout_gravity="bottom"
+        style="@style/CardBottomBorder"
+        android:layout_marginTop="0dp"
+        />
     </LinearLayout>

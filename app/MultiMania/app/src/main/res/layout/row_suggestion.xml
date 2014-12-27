@@ -33,11 +33,7 @@
         android:layout_alignParentBottom="true" />
 
     <View
+        style="@style/CardBottomBorder"
         android:id="@+id/borderBottom"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/primaryColor"
-        android:layout_alignBottom="@+id/txtSuggestionTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignBottom="@+id/txtSuggestionTitle"/>
 </RelativeLayout>

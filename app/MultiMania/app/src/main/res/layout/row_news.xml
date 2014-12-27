@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-xmlns:card_view="http://schemas.android.com/apk/res-auto"
-xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mm_card">
@@ -36,12 +35,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/txtNewsText"
         android:layout_below="@+id/imgNews"
         android:layout_margin="8dp"
-        android:textSize="15dp" />
+        android:textSize="15sp" />
     <View
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginTop="8dp"
         android:layout_below="@id/txtNewsText"
-        android:background="@color/primaryColor"
+        style="@style/CardBottomBorder"
         />
 </RelativeLayout>

@@ -41,10 +41,8 @@
             android:layout_marginBottom="8dp"
             android:textSize="15dp" />
         <View
-            android:layout_gravity="bottom"
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/primaryColor"
+            style="@style/CardBottomBorder"
+            android:layout_marginTop="0dp"
             android:layout_below="@id/txtAboutInfo"
             />
     </RelativeLayout>

@@ -61,11 +61,8 @@
 
     <View
         android:id="@+id/borderBottom"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginTop="8dp"
+        style="@style/CardBottomBorder"
         android:layout_below="@id/txtTime"
-        android:background="@color/primaryColor"
         />
 
 </RelativeLayout>
