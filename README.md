@@ -21,25 +21,30 @@ The backend is build in a typical MVC structure using the [SLIM framework](http:
 #### Parameters ####
 In the params class you can set whether you are in production mode or not.  
 If in production the production db will be returned from getConnectionParams().  
-If in production the app will not run in debug mode and give safe error messages.  
+If in production the app will not run in debug mode and give safe error messages. 
+ 
+```
+#!php
 
-    namespace Utilities;
+namespace Utilities;
 
-    class Params {
-        const PRODUCTION=false;
+class Params {
+    const PRODUCTION=false;
 
-        public static function getConnectionParams(){
-            if(Params::PRODUCTION){
-                return array("string"=>"mysql:dbname=productiondb;host=productionhost",
-                    "username"=>"productionuser",
-                    "pwd"=>"productionpwd");
-            }else{
-                return array("string"=>"mysql:host=localhost;dbname=multimania",
-                    "username"=>"root",
-                    "pwd"=>"root");
-            }
+    public static function getConnectionParams(){
+        if(Params::PRODUCTION){
+            return array("string"=>"mysql:dbname=productiondb;host=productionhost",
+                "username"=>"productionuser",
+                "pwd"=>"productionpwd");
+        }else{
+            return array("string"=>"mysql:host=localhost;dbname=multimania",
+                "username"=>"root",
+                "pwd"=>"root");
         }
-    } 
+    }
+}
+
+``` 
 
 This file is hidden for safety purposes.
 
@@ -95,17 +100,22 @@ To come
 The application is build with Android Studio and makes use of the gradle plug-in.  
 In the build.gradle app file you can set the url that your api is hosted on.
 
-    defaultConfig {
+```
+#!java
+
+defaultConfig {
+        ...
+        buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
+    }
+    buildTypes {
+        release {
             ...
             buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
         }
-        buildTypes {
-            release {
-                ...
-                buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
-            }
-        }
     }
+}
+
+```
 
 For more details please visit the [wiki](wiki/Android) or the [javadocs](http://sniels.bitbucket.org/multi-mania/android/).  
 
