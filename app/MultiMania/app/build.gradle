@@ -8,8 +8,8 @@ android {
         applicationId "be.ana.nmct.multimania"
         minSdkVersion 14
         targetSdkVersion 21
-        versionCode 5
-        versionName "0.9.5beta"
+        versionCode 6
+        versionName "0.9.6beta"
         buildConfigField "String", "API_URL", '"http://student.howest.be/niels.swimberghe/multimania/"'
     }
     buildTypes {
