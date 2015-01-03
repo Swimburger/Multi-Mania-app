@@ -8,7 +8,7 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:id="@+id/imageIcon" />
 
     <TextView
@@ -18,7 +18,7 @@
         android:textColor="@color/drawercolor"
         android:textSize="16dp"
         android:paddingLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_toRightOf="@+id/imageIcon"
         android:layout_toEndOf="@+id/imageIcon" />
 </RelativeLayout>
