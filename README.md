@@ -12,16 +12,16 @@ The multimania project exists out of 3 big parts.
 
 ## Backend ##
 
-The purpose of the backend is to provide a simple json api for the clients.  
-There is no CMS included but you can import data with an XML file.
-The backend is build in a typical MVC structure using the [SLIM framework](http://www.slimframework.com/).
+The purpose of the backend is to provide a simple json api for the clients.   
+There is no CMS included but you can import data with an XML file.   
+The backend is build in a typical MVC structure using the [SLIM framework](http://www.slimframework.com/).   
 
 ### Set-up ###
 
 #### Parameters ####
-In the params class you can set whether you are in production mode or not.  
-If in production the production db will be returned from getConnectionParams().  
-If in production the app will not run in debug mode and give safe error messages. 
+In the params class you can set whether you are in production mode or not.   
+If in production the production db will be returned from getConnectionParams().   
+If in production the app will not run in debug mode and give safe error messages.   
  
 ```
 #!php
@@ -46,25 +46,28 @@ class Params {
 
 ``` 
 
-This file is hidden for safety purposes.
+This file is hidden for safety purposes.   
 
 #### Database ####
 
 There is a sql query provided to reproduce the database.  
-You can find it at backend/createTables.sql.
+You can find it at backend/createTables.sql.  
 
 #### Data importing ####
 
-You can import data into the database manually or you can make use of the import functionality included in the app.  
-There is an xml file under backend/data.xml that will be processed and will update the data in the backend if you browse to the /import path.
-Please beware that this /import path should be removed when you are done importing to ensure nobody else can browse to it.  
+You can import data into the database manually or you can make use of the import functionality included in the app.   
+There is an xml file under backend/data.xml that will be processed and will update the data in the backend if you browse to the /import path.   
+Please beware that this /import path should be removed when you are done importing to ensure nobody else can browse to it.    
 
    
 For more info go to the [wiki](wiki/Backend) or for detailed documentation about the backend you can go to this generated PHP  [documentation](http://sniels.bitbucket.org/multi-mania/backend).
 
 ## Android ##
 
-The android application supports all devices that have at least Ice Cream Sandwich 4.0 sdk 14 on it.  
+The android application supports all devices that have at least Ice Cream Sandwich 4.0 sdk 14 on it.     
+ICS and up supports 92% of Android devices. The conference is a bit techy and nerdy, so this cipher will even be higher.   
+Thats why we chose not to support older versions and focus more on other things.   
+
 We support phones, small tablets and tablets.
 
 Features:
@@ -85,15 +88,11 @@ Follow the links below to achieve alpha access.
 [Play store link](https://play.google.com/store/apps/details?id=be.ana.nmct.multimania)   
 This link might not work as long as there is no production app and you are not in the beta or alpha program.
 
-#### Alpha ####
+#### Alpha & Beta ####
 
 * [Google group](https://groups.google.com/d/forum/multi-mania-android-alpha)
 * [Google+ community](https://plus.google.com/communities/114637708619233859276)
-* [Opt in for alpha](https://play.google.com/apps/testing/be.ana.nmct.multimania)
-
-#### Beta ####
-
-To come
+* [Opt in for testing](https://play.google.com/apps/testing/be.ana.nmct.multimania)
 
 ### Set-up ###
 
