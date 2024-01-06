@@ -117,11 +117,3 @@ defaultConfig {
 ```
 
 For more details please visit the [wiki](wiki/Android) or the [javadocs](http://sniels.bitbucket.org/multi-mania/android/).  
-
-## Contact ##
-
-You can contact us with any questions regarding the setup and bugs at the following email addresses.
-
-* [nielsswimberghe@gmail.com](mailto:nielsswimberghe@gmail.com)
-* [axel.jonckheere@student.howest.be](mailto:axel.jonckheere@student.howest.be)
-* [astrid.desmedt@student.howest.be](mailto:astrid.desmedt@student.howest.be)
